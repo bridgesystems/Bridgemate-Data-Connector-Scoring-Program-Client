@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.SectionDTO">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ACAAABBAAACAAAAEAAAAQYUAUAACAAAAAQAAIQAAgAA=</HashCode>
+      <FileName>SectionDTO.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Tables" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TableDTO">
+    <Position X="3.5" Y="0.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAACAEAAgAAAAAAAAEAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>TableDTO.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Rounds" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.RoundDTO">
+    <Position X="6.25" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ACgAAABAAICEEAAmAAAAQAAAEAAAABAAUAAAAgABABA=</HashCode>
+      <FileName>RoundDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

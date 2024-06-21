@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.PlayerDataDTO">
+    <Position X="1" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ACAAAEBAAACAAAAAABAAAAAAEAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>PlayerDataDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.ParticipationDTO">
+    <Position X="4.5" Y="0.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ACAAAEBAAACEEAAkADAAAAAAEAAAQAAAAAAAAAAAABg=</HashCode>
+      <FileName>ParticipationDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

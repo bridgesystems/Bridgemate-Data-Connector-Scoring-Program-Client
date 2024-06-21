@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="generator" content="HelpNDoc Professional Edition 9.1.0.198">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="favicon.ico"/>
+
+  <title>Data Transfer Objects</title>
+  <meta name="description" content="Document explaining how to use the Bridgemate Data Connector for exchange of results, player data and handrecords between Bridge scoring programs and the .Net version of Bridgemate Control Software (BCS.Net)" /> 
+  <meta name="keywords" content="">
+
+
+
+  
+  
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Data Transfer Objects">
+  <meta name="twitter:description" content="Document explaining how to use the Bridgemate Data Connector for exchange of results, player data and handrecords between Bridge scoring programs and the .Net version of Bridgemate Control Software (BCS.Net)">
+
+  <!-- Open Graph data -->
+  <meta property="og:title" content="Data Transfer Objects" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="Document explaining how to use the Bridgemate Data Connector for exchange of results, player data and handrecords between Bridge scoring programs and the .Net version of Bridgemate Control Software (BCS.Net)" />
+  <meta property="og:site_name" content="Bridgemate Data Connector developer's guide" /> 
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendors/bootstrap-3.4.1/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <link href="vendors/bootstrap-3.4.1/css/ie10-viewport-bug-workaround.css" rel="stylesheet"/>
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+      <script src="vendors/html5shiv-3.7.3/html5shiv.min.js"></script>
+      <script src="vendors/respond-1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <!-- JsTree styles -->
+  <link href="vendors/jstree-3.3.10/themes/default/style.min.css" rel="stylesheet"/>
+
+  <!-- Hnd styles -->
+  <link href="css/layout.min.css" rel="stylesheet" />
+  <link href="css/effects.min.css" rel="stylesheet" />
+  <link href="css/theme-light-blue.min.css" rel="stylesheet" />
+  <link href="css/print.min.css" rel="stylesheet" media="print" />
+  <style type="text/css">nav { width: 350px} @media screen and (min-width:769px) { body.md-nav-expanded div#main { margin-left: 350px} body.md-nav-expanded header { padding-left: 364px} }</style>
+  <style type="text/css">.navigation #inline-toc { width: auto !important}</style>
+
+  <!-- Content style -->
+  <link href="css/hnd.content.css" rel="stylesheet" />
+
+  
+
+
+
+</head>
+
+<body class="md-nav-expanded">
+
+
+
+  
+
+  <div id="skip-link">
+    <a href="#main-content" class="element-invisible">Skip to main content</a>
+  </div>
+
+  <header class="headroom">
+    <button class="hnd-toggle btn btn-default">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>        
+    </button>
+    <h1>Bridgemate Data Connector developer's guide</h1>
+    
+  </header>
+
+  <nav id="panel-left" class="md-nav-expanded">
+    <!-- Nav tabs -->
+    <ul class="tab-tabs nav nav-tabs" role="tablist">
+      <li id="nav-close" role="presentation"> 
+        <button class="hnd-toggle btn btn-default" aria-label="close">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </button>
+      </li>
+      
+	  
+        <li role="presentation" class="tab active">
+            <a href="#contents" id="tab-contents" aria-controls="contents" role="tab" data-toggle="tab">
+                <i class="glyphicon glyphicon-list"></i>
+                Contents
+            </a>
+        </li>
+      
+        <li role="presentation" class="tab">
+            <a href="#index" id="tab-index" aria-controls="index" role="tab" data-toggle="tab">
+                <i class="glyphicon glyphicon-asterisk"></i>
+                Index
+            </a>
+        </li>
+      
+        <li role="presentation" class="tab">
+            <a href="#search" id="tab-search" aria-controls="search" role="tab" data-toggle="tab">
+                <i class="glyphicon glyphicon-search"></i>
+                Search
+            </a>
+        </li>
+      
+    </ul>  <!-- /Nav tabs -->
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+	  
+      <div role="tabpanel" class="tab-pane active" id="contents">
+        <div id="toc" class="tree-container unselectable"
+            data-url="_toc.json"
+            data-openlvl="1"
+        >
+            
+        </div>
+      </div>  <!-- /contents-->
+      
+      <div role="tabpanel" class="tab-pane" id="index">
+        <div id="keywords" class="tree-container unselectable"
+            data-url="_keywords.json"
+            data-openlvl="1"
+        >
+            
+        </div>
+      </div>  <!-- /index-->
+      
+      <div role="tabpanel" class="tab-pane" id="search">
+        <div class="search-content">
+          <div class="search-input">
+            <form id="search-form">
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" id="input-search" name="input-search" placeholder="Search..." aria-label="Search..." />
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit" aria-label="Search...">
+                      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </form>
+          </div>  <!-- /search-input -->
+          <div class="search-result">
+            <div id="search-info"></div>
+            <div class="tree-container unselectable" id="search-tree"></div>
+          </div>  <!-- /search-result -->
+        </div>  <!-- /search-content -->
+      </div>  <!-- /search-->
+      
+    </div>  <!-- /Tab panes -->
+
+  </nav>
+
+  <div id="main">
+
+    <article>
+        <div id="topic-content" class="container-fluid" 
+		  data-hnd-id="DataTransferObjects"
+		  data-hnd-context="3"
+		  data-hnd-title="Data Transfer Objects"
+		>
+            
+                <div class="navigation">
+                    <ol class="breadcrumb">
+                        
+                    </ol>
+                    <div class="nav-arrows">
+                        <div class="btn-group btn-group" role="group"><a class="btn btn-default" href="Overviewofcommunication.html" title="Overview of communication" role="button"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a><a class="btn btn-default" href="Overview.html" title="Overview" role="button"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></div>
+                    </div>
+                </div> 
+            
+
+            <a id="main-content"></a>
+
+            <h2>Data Transfer Objects</h2>
+
+            <div class="main-content">
+                
+<h1 class="rvps5"><span class="rvts0"><span class="rvts14">Introduction</span></span></h1>
+<p class="rvps2"><span class="rvts6">All data exchange between the external scoring program and the </span><span class="rvts6">Data Connector</span><span class="rvts6"> is done using DTOs: Data Transfer Objects. How a DTO is strucured will be dependent on the programming language used. This document will use UML to show the structure of the DTOs. A DTO must be serialized as json when sent to the </span><span class="rvts6">Data Connector</span><span class="rvts6">. When the </span><span class="rvts6">Data Connector</span><span class="rvts6"> responds with data, this data will also be a json-serialized DTO.</span></p>
+<p class="rvps2"><span class="rvts6">Obviously a DTO can only have public properties and have no functions.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Mind: the requests to and the responsesn from the </span><span class="rvts6">Data Connector</span><span class="rvts6"> are layered and have two levels of json data. See the section on how to exchange data for a detailed explanation.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<h1 class="rvps5"><span class="rvts0"><span class="rvts14">Example</span></span></h1>
+<p class="rvps2"><span class="rvts6">This is a class diagram of the TableDTO, representing a table in the session's movement.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="width : 233px; height : 235px; padding : 1px;" src="lib/TableDTO%201.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps7"><span class="rvts6">In C# the TableDTO class or struct would be something like:</span><br/><span class="rvts6"><br/></span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; </span><span class="rvts21">public</span><span class="rvts16"> </span><span class="rvts21">class</span><span class="rvts16"> </span><span class="rvts22">TableDTO</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; {</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">public</span><span class="rvts16"> </span><span class="rvts21">string</span><span class="rvts16"> SessionGuid</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">get</span><span class="rvts16">; </span><span class="rvts21">set</span><span class="rvts16">;</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; }</span><br/><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">public</span><span class="rvts16"> </span><span class="rvts21">string</span><span class="rvts16"> SectionLetters</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">get</span><span class="rvts16">; </span><span class="rvts21">set</span><span class="rvts16">;</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; }</span><br/><span class="rvts16"><br/></span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">public</span><span class="rvts16"> </span><span class="rvts21">int</span><span class="rvts16"> TableNumber</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">get</span><span class="rvts16">; </span><span class="rvts21">set</span><span class="rvts16">;</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; }</span><br/><span class="rvts16"><br/></span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">public</span><span class="rvts16"> RoundDTO[] Rounds</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">get</span><span class="rvts16">; </span><span class="rvts21">set</span><span class="rvts16">;</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; }</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp;)</span></p>
+<p class="rvps7"><span class="rvts16"><br/></span></p>
+<p class="rvps7"><span class="rvts16">while in Java it would be something like:</span><br/><span class="rvts16"></span><br/><span class="rvts16">public class TableDTO {</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; private String sessionGuid;</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; private String sectionLetters;</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; private int tableNumber;</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; private RoundDTO[] rounds;</span><br/><span class="rvts16"><br/></span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; public String getSessionGuid() {</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; return sessionGuid;</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; }</span><br/><span class="rvts16"><br/></span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; public void setSessionGuid(String sessionGuid) {</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; this.sessionGuid = sessionGuid;</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; }</span><br/><span class="rvts16"><br/></span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; public String getSectionLetters() {</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; return sectionLetters;</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; }</span><br/><span class="rvts16"><br/></span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; public void setSectionLetters(String sectionLetters) {</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; this.sectionLetters = sectionLetters;</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; }</span><br/><span class="rvts16"><br/></span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; public int getTableNumber() {</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; return tableNumber;</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; }</span><br/><span class="rvts16"><br/></span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; public void setTableNumber(int tableNumber) {</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; this.tableNumber = tableNumber;</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; }</span><br/><span class="rvts16"><br/></span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; public RoundDTO[] getRounds() {</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; return rounds;</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; }</span><br/><span class="rvts16"><br/></span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; public void setRounds(RoundDTO[] rounds) {</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; this.rounds = rounds;</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; }</span></p>
+<p class="rvps7"><span class="rvts16">}</span></p>
+<p class="rvps7" style="break-before: always;"><span class="rvts16"><br/></span></p>
+<p class="rvps7"><span class="rvts16">The json serialized data for a TableDTO representing table A3 with two rounds would be something like:</span><br/><span class="rvts16">{</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; "SessionGuid": "4f24d8a2-2b6c-4a72-9e6a-8901a5a8b3c1",</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; "SectionLetters": "A",</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; "TableNumber": 3,</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; "Rounds": [</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; {</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "SessionGuid": "4f24d8a2-2b6c-4a72-9e6a-8901a5a8b3c1",</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "SectionLetters": "A",</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "TableNumber": 3,</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "RoundNumber": 1,</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "LowBoardNumber": 9,</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "HighBoardNumber": 12,</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "PairNS": 5,</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "PairEW": 6,</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; },</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; {</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "SessionGuid": "4f24d8a2-2b6c-4a72-9e6a-8901a5a8b3c1",</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "SectionLetters": "A",</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "TableNumber": 3,</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "RoundNumber": 2,</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "LowBoardNumber": 9,</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "HighBoardNumber": 12,</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "PairNS": 4,</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "PairEW": 8,</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; }</span></p>
+<p class="rvps7"><span class="rvts16">&nbsp; ]</span></p>
+<p class="rvps7"><span class="rvts16">}</span></p>
+<p class="rvps7" style="break-before: always;"><span class="rvts16"></span><span class="rvts6"></span></p>
+
+            </div>
+            
+            <div id="topic_footer"><div id="topic_footer_content">Copyright &copy; 2024 by Bridge Systems BV. All Rights Reserved.</div></div>
+        </div>  <!-- /#topic-content -->
+    </article>
+
+    <footer></footer>
+
+  </div>  <!-- /#main -->
+
+  <div class="mask" data-toggle="sm-nav-expanded"></div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="hndModal" tabindex="-1" role="dialog" aria-labelledby="hndModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="hndModalLabel"></h4>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary modal-btn-close" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Splitter -->
+  <div id="hnd-splitter" style="left: 350px"></div>  
+
+  <!-- Scripts -->
+  <script src="vendors/jquery-3.5.1/jquery.min.js"></script>
+  <script src="vendors/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+  <script src="vendors/bootstrap-3.4.1/js/ie10-viewport-bug-workaround.js"></script>
+  <script src="vendors/markjs-8.11.1/jquery.mark.min.js"></script>
+  <script src="vendors/uri-1.19.11/uri.min.js"></script>
+  <script src="vendors/imageMapResizer-1.0.10/imageMapResizer.min.js"></script>
+  <script src="vendors/headroom-0.11.0/headroom.min.js"></script>
+  <script src="vendors/jstree-3.3.10/jstree.min.js"></script>  
+  <script src="vendors/interactjs-1.9.22/interact.min.js"></script>  
+
+  <!-- HelpNDoc scripts -->
+  <script src="js/polyfill.object.min.js"></script>
+  <script src="_translations.js"></script>
+  <script src="js/hndsd.min.js"></script>
+  <script src="js/hndse.min.js"></script>
+  <script src="js/app.min.js"></script>
+
+  <!-- Init script -->
+  <script>
+    $(function() {
+      // Create the app
+      var app = new Hnd.App({
+        searchEngineMinChars: 3
+      });
+      // Update translations
+      hnd_ut(app);
+	  // Instanciate imageMapResizer
+	  imageMapResize();
+	  // Custom JS
+	  
+      // Boot the app
+      app.Boot();
+    });
+  </script>
+
+
+
+</body>
+
+</html>
+

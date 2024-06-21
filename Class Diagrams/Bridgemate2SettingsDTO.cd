@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.BridgemateSettingsDTO">
+    <Position X="0.5" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAEAAAAAAAAAAAEAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>BridgemateSettingsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate2SettingsDTO">
+    <Position X="2.75" Y="0.75" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>EAoCgCCADAYIoAABIcBwABAj0DJQAAAAhEAE8DAEIBA=</HashCode>
+      <FileName>Bridgemate2SettingsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm2ContractRepresentationOption">
+    <Position X="8.25" Y="0.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Bridgemate2SettingsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm2PointScorePerspectiveOption">
+    <Position X="11.25" Y="2.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Bridgemate2SettingsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.BM2ResultEntryMethod">
+    <Position X="11.25" Y="4" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJAQAAAAAAA=</HashCode>
+      <FileName>Bridgemate2SettingsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm2ResultsOverviewOption">
+    <Position X="5.75" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAACAAAAAAABAAAIBAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Bridgemate2SettingsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm2PairNumberEntryOption">
+    <Position X="8.25" Y="2.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAEAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Bridgemate2SettingsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm2NumberValidationOption">
+    <Position X="8.25" Y="5.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAEAAAAAAAAAACAAAAAAAAAAgI=</HashCode>
+      <FileName>Bridgemate2SettingsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm2NameSource">
+    <Position X="5.75" Y="2.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABgAAAAAAAAAIAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Bridgemate2SettingsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm2ShowPlayerNamesOption">
+    <Position X="11.25" Y="5.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAACAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Bridgemate2SettingsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm2ShowRankingOption">
+    <Position X="11.25" Y="7" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgQAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Bridgemate2SettingsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm2SummaryPointOption">
+    <Position X="5.75" Y="6" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAABAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Bridgemate2SettingsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm2EnterHandrecordWhenOption">
+    <Position X="11.25" Y="0.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAQAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Bridgemate2SettingsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm2ScoreRecapOption">
+    <Position X="8.25" Y="4" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAABAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Bridgemate2SettingsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm2AutoBoardNumberOption">
+    <Position X="5.75" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAEAAQAAAAAAAA=</HashCode>
+      <FileName>Bridgemate2SettingsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

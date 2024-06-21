@@ -1,0 +1,319 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="generator" content="HelpNDoc Professional Edition 9.1.0.198">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="favicon.ico"/>
+
+  <title>Bridgemate3SettingsDTO</title>
+  <meta name="description" content="Document explaining how to use the Bridgemate Data Connector for exchange of results, player data and handrecords between Bridge scoring programs and the .Net version of Bridgemate Control Software (BCS.Net)" /> 
+  <meta name="keywords" content="">
+
+
+
+  
+  
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Bridgemate3SettingsDTO">
+  <meta name="twitter:description" content="Document explaining how to use the Bridgemate Data Connector for exchange of results, player data and handrecords between Bridge scoring programs and the .Net version of Bridgemate Control Software (BCS.Net)">
+
+  <!-- Open Graph data -->
+  <meta property="og:title" content="Bridgemate3SettingsDTO" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="Document explaining how to use the Bridgemate Data Connector for exchange of results, player data and handrecords between Bridge scoring programs and the .Net version of Bridgemate Control Software (BCS.Net)" />
+  <meta property="og:site_name" content="Bridgemate Data Connector developer's guide" /> 
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendors/bootstrap-3.4.1/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <link href="vendors/bootstrap-3.4.1/css/ie10-viewport-bug-workaround.css" rel="stylesheet"/>
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+      <script src="vendors/html5shiv-3.7.3/html5shiv.min.js"></script>
+      <script src="vendors/respond-1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <!-- JsTree styles -->
+  <link href="vendors/jstree-3.3.10/themes/default/style.min.css" rel="stylesheet"/>
+
+  <!-- Hnd styles -->
+  <link href="css/layout.min.css" rel="stylesheet" />
+  <link href="css/effects.min.css" rel="stylesheet" />
+  <link href="css/theme-light-blue.min.css" rel="stylesheet" />
+  <link href="css/print.min.css" rel="stylesheet" media="print" />
+  <style type="text/css">nav { width: 350px} @media screen and (min-width:769px) { body.md-nav-expanded div#main { margin-left: 350px} body.md-nav-expanded header { padding-left: 364px} }</style>
+  <style type="text/css">.navigation #inline-toc { width: auto !important}</style>
+
+  <!-- Content style -->
+  <link href="css/hnd.content.css" rel="stylesheet" />
+
+  
+
+
+
+</head>
+
+<body class="md-nav-expanded">
+
+
+
+  
+
+  <div id="skip-link">
+    <a href="#main-content" class="element-invisible">Skip to main content</a>
+  </div>
+
+  <header class="headroom">
+    <button class="hnd-toggle btn btn-default">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>        
+    </button>
+    <h1>Bridgemate Data Connector developer's guide</h1>
+    
+  </header>
+
+  <nav id="panel-left" class="md-nav-expanded">
+    <!-- Nav tabs -->
+    <ul class="tab-tabs nav nav-tabs" role="tablist">
+      <li id="nav-close" role="presentation"> 
+        <button class="hnd-toggle btn btn-default" aria-label="close">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </button>
+      </li>
+      
+	  
+        <li role="presentation" class="tab active">
+            <a href="#contents" id="tab-contents" aria-controls="contents" role="tab" data-toggle="tab">
+                <i class="glyphicon glyphicon-list"></i>
+                Contents
+            </a>
+        </li>
+      
+        <li role="presentation" class="tab">
+            <a href="#index" id="tab-index" aria-controls="index" role="tab" data-toggle="tab">
+                <i class="glyphicon glyphicon-asterisk"></i>
+                Index
+            </a>
+        </li>
+      
+        <li role="presentation" class="tab">
+            <a href="#search" id="tab-search" aria-controls="search" role="tab" data-toggle="tab">
+                <i class="glyphicon glyphicon-search"></i>
+                Search
+            </a>
+        </li>
+      
+    </ul>  <!-- /Nav tabs -->
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+	  
+      <div role="tabpanel" class="tab-pane active" id="contents">
+        <div id="toc" class="tree-container unselectable"
+            data-url="_toc.json"
+            data-openlvl="1"
+        >
+            
+        </div>
+      </div>  <!-- /contents-->
+      
+      <div role="tabpanel" class="tab-pane" id="index">
+        <div id="keywords" class="tree-container unselectable"
+            data-url="_keywords.json"
+            data-openlvl="1"
+        >
+            
+        </div>
+      </div>  <!-- /index-->
+      
+      <div role="tabpanel" class="tab-pane" id="search">
+        <div class="search-content">
+          <div class="search-input">
+            <form id="search-form">
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" id="input-search" name="input-search" placeholder="Search..." aria-label="Search..." />
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit" aria-label="Search...">
+                      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </form>
+          </div>  <!-- /search-input -->
+          <div class="search-result">
+            <div id="search-info"></div>
+            <div class="tree-container unselectable" id="search-tree"></div>
+          </div>  <!-- /search-result -->
+        </div>  <!-- /search-content -->
+      </div>  <!-- /search-->
+      
+    </div>  <!-- /Tab panes -->
+
+  </nav>
+
+  <div id="main">
+
+    <article>
+        <div id="topic-content" class="container-fluid" 
+		  data-hnd-id="Bridgemate3SettingsDTO"
+		  data-hnd-context="21"
+		  data-hnd-title="Bridgemate3SettingsDTO"
+		>
+            
+                <div class="navigation">
+                    <ol class="breadcrumb">
+                        <li><a href="DataTransferObjects.html">Data Transfer Objects</a></li>
+                    </ol>
+                    <div class="nav-arrows">
+                        <div class="btn-group btn-group" role="group"><a class="btn btn-default" href="DataTransferObjects.html" title="Data Transfer Objects" role="button"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></a><a class="btn btn-default" href="Bridgemate2SettingsDTO.html" title="Bridgemate2SettingsDTO" role="button"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a><a class="btn btn-default" href="BCSManagementRequestDTO.html" title="BCSManagementRequestDTO" role="button"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></div>
+                    </div>
+                </div> 
+            
+
+            <a id="main-content"></a>
+
+            <h2>Bridgemate3SettingsDTO</h2>
+
+            <div class="main-content">
+                
+<p class="rvps2"><img alt="" style="width : 381px; height : 425px; padding : 1px;" src="lib/Bridgemate3SettingsDTO.png"><img alt="" style="width : 728px; height : 556px; padding : 1px;" src="lib/Bridgemate3SettingsOptions%201.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The Bridgemate3SettingsDTO contains all settings for the Bridgemate 3. It can be used as part of the </span><a class="rvts20" href="InitDTO.html">InitDTO</a><span class="rvts6"> for </span><a class="rvts20" href="Initializeanevent.html">the intitialization of an event</a><span class="rvts6">, or</span></p>
+<p class="rvps2"><span class="rvts6">it can be used as data for the </span><a class="rvts20" href="Overviewofcommunication.html#OverviewOfCommands">PutBridgemate3Settings command</a><span class="rvts6"> to update settings. When used all settings must be provided.For readability many of the settings are expressed as enum values. This is not necessary, the use of integer values is allowed as well. In the image above the enum values will always be consecutively numbered starting wit zero. So Bm3ViewResultsOption.Disabled equals to zero and &nbsp;Bm3ViewResultsOption.OwnResutlsAndOtherResults equals to two.&nbsp;</span></p>
+<p class="rvps2"><span class="rvts6">The settings will be applied to all Bridgemate 3s for a section.The settings must be provided for each section, even if they are the same.</span></p>
+<p class="rvps2"><span class="rvts11">Note</span></p>
+<p class="rvps2"><span class="rvts6">In the diagram the Bridgemate3SettingsDTO is depicted as a child of the abstract BridgemateSettingsDTO. The latter's properties can be considered to be part of the Bridgemate3SettingsDTO.&nbsp;</span></p>
+<h5 class="rvps12"><span class="rvts0"><span class="rvts28">SessionGuid property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Required. A guid uniquely defining the session. Must be exactly 32 character long, uppercase and cannot contaim dashes or curly braces.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">SectionLetters property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Required. Identifes the section that the settings pertain to.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">AudioVolume property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer (0-7). Currently not in use.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ConnectionMode property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3ConnectionModeOption). Specifies if the Bridgemates for this section will operate in offline mode. In offline mode the Bridgemate will not communicate with the Bridgemate 3 server during the session, but will try to send its results after the last board had been played.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">DimMode property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer (0-15). Defines the number of seconds (times 5) before the screen of the Bridgemate will dim. So the default value of 2 amounts to 10 seconds.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">EnterHandrecord property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3EnterHandrecordOption). Specifies if and when the players can enter the handrecord for a board if it is not present.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">Language property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3LanguageOption). Specifies which language the Bridgemate will use. The default is zero for English.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">LeadCardEntry property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3LeadCardEntryOption). Specifies if the leadcard must be enterd together with the contract and if the leadcard should be validated againts the handrecord.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">NextRoundSeating property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3NextRoundSeatingOption).Specifes if the seatings for the next round must be displayed after the last result has been entered for the round.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">PlayerRegistration property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3PlayerRegistrationOption). Specifies if and when the players can make themselves known by entering their playernumber and/or name on the Bridgemate.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">PlayerRegistrationDuringPlay property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3PlayerRegistrationOptionDuringPlay). Specifies if and when the players can make themselves known by entering their playernumber and/or name on the Bridgemate while the round is in progress (i.e.: after a board has been entered).</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">RankingDisplay property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3RankingDisplayOption). Specifies if and when the Bridgemate will show the current ranking for the players on the table.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ResultMethod property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3ResultMethodOption). Specifies how players can enter the result for a board: Up/Down tricks, total tricks or American style.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ResultReentry property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3ResultReentryOption). Specifies if players may reenter the result of the board after the original entry has been confirmed by the opponents.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ScoreRecap property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3ScoreRecapOption). Specifies if and when the Bridgemate will show a recap of the scores obtained on the table in the current round.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ScreenBrightness property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer (1-7) Defines the screen brightness.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ScreenOffMode property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer (0-15). Defines the number of seconds (times 5) before the screen of the Bridgemate will turn off. A value of zero, the default, means "never turn off".</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">SleepMode property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer (0-120). Defines the number of seconds (times 5) befote the Bridgemate will enter Sleepmode. Once the Bridgemate has entered sleepmode its powerbutton must be used to wake it up again.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">TdCall property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3TdCallOption). Specifies if players can call for the Tournament Director using the Bridgemate.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">TdPinCode property</span></span></h5>
+<p class="rvps2"><span class="rvts6">A string of four digits. The code the TD must enter to get access to the TD menu. Defaults to "0000".</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ViewHandrecord property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3ViewHandrecordOption). Specifies if players may view the handrecord after the result has been entered.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ViewOwnPercentage property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3ViewHandrecordOption). Specifies if the own percentage should be included in the results overview.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ViewResults property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3ViewResultsOption). Specifies if the Bridgemate will show the other results for the board that was just entered.</span></p>
+<p class="rvps2" style="break-before: always;"><span class="rvts6"></span><span class="rvts6"></span></p>
+
+            </div>
+            
+            <div id="topic_footer"><div id="topic_footer_content">Copyright &copy; 2024 by Bridge Systems BV. All Rights Reserved.</div></div>
+        </div>  <!-- /#topic-content -->
+    </article>
+
+    <footer></footer>
+
+  </div>  <!-- /#main -->
+
+  <div class="mask" data-toggle="sm-nav-expanded"></div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="hndModal" tabindex="-1" role="dialog" aria-labelledby="hndModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="hndModalLabel"></h4>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary modal-btn-close" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Splitter -->
+  <div id="hnd-splitter" style="left: 350px"></div>  
+
+  <!-- Scripts -->
+  <script src="vendors/jquery-3.5.1/jquery.min.js"></script>
+  <script src="vendors/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+  <script src="vendors/bootstrap-3.4.1/js/ie10-viewport-bug-workaround.js"></script>
+  <script src="vendors/markjs-8.11.1/jquery.mark.min.js"></script>
+  <script src="vendors/uri-1.19.11/uri.min.js"></script>
+  <script src="vendors/imageMapResizer-1.0.10/imageMapResizer.min.js"></script>
+  <script src="vendors/headroom-0.11.0/headroom.min.js"></script>
+  <script src="vendors/jstree-3.3.10/jstree.min.js"></script>  
+  <script src="vendors/interactjs-1.9.22/interact.min.js"></script>  
+
+  <!-- HelpNDoc scripts -->
+  <script src="js/polyfill.object.min.js"></script>
+  <script src="_translations.js"></script>
+  <script src="js/hndsd.min.js"></script>
+  <script src="js/hndse.min.js"></script>
+  <script src="js/app.min.js"></script>
+
+  <!-- Init script -->
+  <script>
+    $(function() {
+      // Create the app
+      var app = new Hnd.App({
+        searchEngineMinChars: 3
+      });
+      // Update translations
+      hnd_ut(app);
+	  // Instanciate imageMapResizer
+	  imageMapResize();
+	  // Custom JS
+	  
+      // Boot the app
+      app.Boot();
+    });
+  </script>
+
+
+
+</body>
+
+</html>
+
