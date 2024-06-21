@@ -190,51 +190,51 @@
                 
 <p class="rvps2"><span class="rvts6">Named pipes are used to send and receive data to and from the </span><span class="rvts6">Data Connector</span><span class="rvts6">. This section describes how to set up communication using named pipes.</span></p>
 <h1 class="rvps5"><span class="rvts0"><span class="rvts14">The Named Pipe server</span></span></h1>
-<p class="rvps2"><span class="rvts6">The server side Named Pipe is installed when installing the </span><span class="rvts6">Bridgemate Control Software</span><span class="rvts6">. It runs as a Windows service as soon as the computer has been started up. Its name is "</span><span class="rvts16">BridgeSystems.Bridgemate.DataConnectorService</span><span class="rvts6">".</span></p>
+<p class="rvps2"><span class="rvts6">The server side Named Pipe is installed when installing the </span><span class="rvts6">Bridgemate Control Software</span><span class="rvts6">. It runs as a Windows service as soon as the computer has been started up. Its name is "</span><span class="rvts17">BridgeSystems.Bridgemate.DataConnectorService</span><span class="rvts6">".</span></p>
 <p class="rvps2"><span class="rvts6">Mind that the pipe only accepts one connection.</span></p>
 <h1 class="rvps5"><span class="rvts0"><span class="rvts14">The Named Pipe client</span></span></h1>
-<p class="rvps2"><span class="rvts6">The Named Pipe client must be created by the scoring program and should connect to the "</span><span class="rvts16">BridgeSystems.Bridgemate.DataConnectorService.ScoringProgram</span><span class="rvts6">" Named Pipe. Note that the pipe only accepts one connection. The pipe server will detect when then pipe client dies and will then accept a new connection. Alternatively the client can issue a Disconnect command to free up the pipe. A full ScoringProgramPipeClient class is provided in the BridgeSystems.Bridgemate.DataConnector.ScoringProgram.dll written by Bridge Systems. This class provides functions to connect, ping and exchange data with the pipe server. To use it the external scoring progam must be written in .Net 4.5 or higher or it must be able to use an adapter for using .Net Standard 2.0 code for its programming platform.</span></p>
+<p class="rvps2"><span class="rvts6">The Named Pipe client must be created by the scoring program and should connect to the "</span><span class="rvts17">BridgeSystems.Bridgemate.DataConnectorService.ScoringProgram</span><span class="rvts6">" Named Pipe. Note that the pipe only accepts one connection. The pipe server will detect when then pipe client dies and will then accept a new connection. Alternatively the client can issue a Disconnect command to free up the pipe. A full ScoringProgramPipeClient class is provided in the BridgeSystems.Bridgemate.DataConnector.ScoringProgram.dll written by Bridge Systems. This class provides functions to connect, ping and exchange data with the pipe server. To use it the external scoring progam must be written in .Net 4.5 or higher or it must be able to use an adapter for using .Net Standard 2.0 code for its programming platform.</span></p>
 <p class="rvps2"><span class="rvts6"><br/></span></p>
-<h2 class="rvps6"><span class="rvts0"><span class="rvts17">Code examples</span></span></h2>
+<h2 class="rvps6"><span class="rvts0"><span class="rvts18">Code examples</span></span></h2>
 <p class="rvps2"><span class="rvts6">A typical procedure to connect to the pipe server and test communication with it would be in .Net:</span></p>
-<p class="rvps2"><span class="rvts16"><br/></span></p>
-<p class="rvps7"><span class="rvts16">private NamedPipeClientStream _pipeClient;</span></p>
-<p class="rvps7"><span class="rvts16">public StreamWriter Writer {get;set;};</span><br/><span class="rvts16">public StreamReader Reader {get;set);</span></p>
-<p class="rvps7"><span class="rvts16"><br/></span></p>
-<p class="rvps7"><span class="rvts16">public async Task&lt;bool&gt; TryConnect()</span></p>
-<p class="rvps7"><span class="rvts16">{</span></p>
-<p class="rvps8"><span class="rvts16">_pipeClient = new NamedPipeClientStream(".", </span><span class="rvts6">"</span><span class="rvts16">BridgeSystems.Bridgemate.DataConnectorService.ScoringProgram</span><span class="rvts6">"</span><span class="rvts16">,</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span><span class="rvts16"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts16">PipeDirection.InOut, PipeOptions.None,</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts16"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts16">TokenImpersonationLevel.Impersonation);</span></p>
-<p class="rvps8"><span class="rvts16">bool connected;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp;&nbsp;</span><span class="rvts16"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts16">try</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp;&nbsp;</span><span class="rvts16"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts16">{</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;await _pipeClient.ConnectAsync(TimeOutInMilliSeconds);</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;connected = true;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Reader = new StreamReader(_middleManStream);</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Writer = new StreamWriter(_middleManStream);</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Writer.AutoFlush = true;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;string message="Hello world!";</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;string serializedMessage=JsonSerializer.Serialize(message);</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp;</span><span class="rvts16"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts16"> &nbsp;await Writer.WriteLineAsync(serializedMessage);</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp;</span><span class="rvts16"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts16"> &nbsp;string response = await Reader.ReadLineAsync();</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp;&nbsp;</span><span class="rvts16"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts16">catch (TimeoutException ex)</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; {</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;connected=false;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp;</span><span class="rvts16"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts16">}</span></p>
-<p class="rvps7"><span class="rvts16"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts16">return connected;</span></p>
-<p class="rvps7"><span class="rvts16">}</span></p>
-<p class="rvps2"><span class="rvts16"><br/></span></p>
-<p class="rvps2"><span class="rvts16">In Java the code could be something like:</span></p>
-<p class="rvps2"><span class="rvts16"><br/></span></p>
-<p class="rvps7"><span class="rvts18">try {</span><br/><span class="rvts18"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts18">// Connect to the pipe</span><br/><span class="rvts18"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts18">RandomAccessFile pipe =</span></p>
-<p class="rvps7"><span class="rvts18">&nbsp;</span><span class="rvts18"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts18"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts18">new RandomAccessFile("\\\\.\\pipe\\</span><span class="rvts16">BridgeSystems.Bridgemate.DataConnectorService.ScoringProgram</span><span class="rvts18">", "rw");</span><br/><span class="rvts18"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts18">String echoText = "Hello word\n";</span><br/><span class="rvts18"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts18">// write to pipe</span><br/><span class="rvts18"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts18">pipe.write ( echoText.getBytes() );</span><br/><span class="rvts18"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts18">// read response</span><br/><span class="rvts18"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts18">String echoResponse = pipe.readLine();</span><br/><span class="rvts18"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts18">System.out.println("Response: " + echoResponse );</span><br/><span class="rvts18"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts18">pipe.close();</span><br/><span class="rvts18">&nbsp; &nbsp; &nbsp;} catch (Exception e) {</span><br/><span class="rvts18"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts18">// TODO Auto-generated catch block</span><br/><span class="rvts18"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts18">e.printStackTrace();</span></p>
-<p class="rvps7"><span class="rvts18">&nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps7" style="break-before: always;"><span class="rvts18"><br/></span></p>
-<p class="rvps2"><span class="rvts16">&nbsp;</span></p>
-<p class="rvps2"><span class="rvts16"></span><span class="rvts6"></span></p>
+<p class="rvps2"><span class="rvts17"><br/></span></p>
+<p class="rvps7"><span class="rvts17">private NamedPipeClientStream _pipeClient;</span></p>
+<p class="rvps7"><span class="rvts17">public StreamWriter Writer {get;set;};</span><br/><span class="rvts17">public StreamReader Reader {get;set);</span></p>
+<p class="rvps7"><span class="rvts17"><br/></span></p>
+<p class="rvps7"><span class="rvts17">public async Task&lt;bool&gt; TryConnect()</span></p>
+<p class="rvps7"><span class="rvts17">{</span></p>
+<p class="rvps8"><span class="rvts17">_pipeClient = new NamedPipeClientStream(".", </span><span class="rvts6">"</span><span class="rvts17">BridgeSystems.Bridgemate.DataConnectorService.ScoringProgram</span><span class="rvts6">"</span><span class="rvts17">,</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span><span class="rvts17"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17">PipeDirection.InOut, PipeOptions.None,</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17">TokenImpersonationLevel.Impersonation);</span></p>
+<p class="rvps8"><span class="rvts17">bool connected;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp;&nbsp;</span><span class="rvts17"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17">try</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp;&nbsp;</span><span class="rvts17"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17">{</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;await _pipeClient.ConnectAsync(TimeOutInMilliSeconds);</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;connected = true;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Reader = new StreamReader(_middleManStream);</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Writer = new StreamWriter(_middleManStream);</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Writer.AutoFlush = true;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;string message="Hello world!";</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;string serializedMessage=JsonSerializer.Serialize(message);</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp;</span><span class="rvts17"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17"> &nbsp;await Writer.WriteLineAsync(serializedMessage);</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp;</span><span class="rvts17"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17"> &nbsp;string response = await Reader.ReadLineAsync();</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp;&nbsp;</span><span class="rvts17"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17">catch (TimeoutException ex)</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; {</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;connected=false;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp;</span><span class="rvts17"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17">}</span></p>
+<p class="rvps7"><span class="rvts17"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17">return connected;</span></p>
+<p class="rvps7"><span class="rvts17">}</span></p>
+<p class="rvps2"><span class="rvts17"><br/></span></p>
+<p class="rvps2"><span class="rvts17">In Java the code could be something like:</span></p>
+<p class="rvps2"><span class="rvts17"><br/></span></p>
+<p class="rvps7"><span class="rvts19">try {</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">// Connect to the pipe</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">RandomAccessFile pipe =</span></p>
+<p class="rvps7"><span class="rvts19">&nbsp;</span><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">new RandomAccessFile("\\\\.\\pipe\\</span><span class="rvts17">BridgeSystems.Bridgemate.DataConnectorService.ScoringProgram</span><span class="rvts19">", "rw");</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">String echoText = "Hello word\n";</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">// write to pipe</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">pipe.write ( echoText.getBytes() );</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">// read response</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">String echoResponse = pipe.readLine();</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">System.out.println("Response: " + echoResponse );</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">pipe.close();</span><br/><span class="rvts19">&nbsp; &nbsp; &nbsp;} catch (Exception e) {</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">// TODO Auto-generated catch block</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">e.printStackTrace();</span></p>
+<p class="rvps7"><span class="rvts19">&nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps7" style="break-before: always;"><span class="rvts19"><br/></span></p>
+<p class="rvps2"><span class="rvts17">&nbsp;</span></p>
+<p class="rvps2"><span class="rvts17"></span><span class="rvts6"></span></p>
 
             </div>
             

@@ -189,7 +189,7 @@
             <div class="main-content">
                 
 <p class="rvps2"><img alt="" style="width : 270px; height : 499px; padding : 1px;" src="lib/InitDTO%201.png"></p>
-<p class="rvps2"><span class="rvts6">The InitDTO is used with the </span><a class="rvts20" href="Overviewofcommunication.html#OverviewOfCommands">InitializeEvent</a><span class="rvts6"> Command.</span></p>
+<p class="rvps2"><span class="rvts6">The InitDTO is used with the </span><a class="rvts16" href="Overviewofcommunication.html#OverviewOfCommands">InitializeEvent</a><span class="rvts6"> Command.</span></p>
 <h5 class="rvps10"><a name="Commands"></a><span class="rvts0"><span class="rvts24">Commands property</span></span></h5>
 <p class="rvps2"><span class="rvts6">The command property is the sum of actions that BCS should perform:</span></p>
 <div class="rvps2">
@@ -224,7 +224,7 @@
    <p class="rvps2"><span class="rvts6">Reset</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 979px;">
-   <p class="rvps2"><span class="rvts6">Instructs </span><span class="rvts6">BCS</span><span class="rvts6"> to create a new scoring file based on the provided data, clear the Bridgemate servers and upload new data to them. Always include. If the data in the Bridgemates should not be cleared then use the </span><a class="rvts20" href="ContinueDTO.html">ContinueDTO</a><span class="rvts6"> with the </span><a class="rvts20" href="Overviewofcommunication.html">ContinueEvent</a><span class="rvts6"> command.&nbsp;</span></p>
+   <p class="rvps2"><span class="rvts6">Instructs </span><span class="rvts6">BCS</span><span class="rvts6"> to create a new scoring file based on the provided data, clear the Bridgemate servers and upload new data to them. Always include. If the data in the Bridgemates should not be cleared then use the </span><a class="rvts16" href="ContinueDTO.html">ContinueDTO</a><span class="rvts6"> with the </span><a class="rvts16" href="Overviewofcommunication.html">ContinueEvent</a><span class="rvts6"> command.&nbsp;</span></p>
   </td>
  </tr>
  <tr style="vertical-align: top;">
@@ -300,17 +300,17 @@
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">EventGuid property</span></span></h5>
 <p class="rvps2"><span class="rvts6">This is required when there is more than one session. When there is one session, its SessionGuid property will be reused as the event guid. This property will help discern scoring groups with the same scoring group number between events.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">Sessions property</span></span></h5>
-<p class="rvps2"><span class="rvts6">At least one is required. See the details on the </span><a class="rvts20" href="SessionDTO.html">SessionDTO </a><span class="rvts6">for further details. The SessionDTO must contain the movement data.</span></p>
+<p class="rvps2"><span class="rvts6">At least one is required. See the details on the </span><a class="rvts16" href="SessionDTO.html">SessionDTO </a><span class="rvts6">for further details. The SessionDTO must contain the movement data.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">PlayerData property</span></span></h5>
-<p class="rvps2"><span class="rvts6">Optional. Can be sent seperately using the </span><a class="rvts20" href="Overviewofcommunication.html">PutPlayerData</a><span class="rvts6"> command as well. The first name, last name of each player that could participate in the event, uniquely defined by the combination of the SessionGuid of one of the event's sessions and a PlayerNumber defined by the organization, usually the Bridge league the player is a member of.</span></p>
+<p class="rvps2"><span class="rvts6">Optional. Can be sent seperately using the </span><a class="rvts16" href="Overviewofcommunication.html">PutPlayerData</a><span class="rvts6"> command as well. The first name, last name of each player that could participate in the event, uniquely defined by the combination of the SessionGuid of one of the event's sessions and a PlayerNumber defined by the organization, usually the Bridge league the player is a member of.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">Participations property</span></span></h5>
-<p class="rvps2"><span class="rvts6">Optional. Can be sent seperately using the </span><a class="rvts20" href="Overviewofcommunication.html">PutParticipations</a><span class="rvts6"> command as well. &nbsp;Starting positions for each player. The combination of SessionGuid and PlayerNumber must be present in the PlayerData.</span></p>
+<p class="rvps2"><span class="rvts6">Optional. Can be sent seperately using the </span><a class="rvts16" href="Overviewofcommunication.html">PutParticipations</a><span class="rvts6"> command as well. &nbsp;Starting positions for each player. The combination of SessionGuid and PlayerNumber must be present in the PlayerData.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">Handrecords property</span></span></h5>
-<p class="rvps2"><span class="rvts6">Optional. Can be sent seperately using the </span><a class="rvts20" href="Overviewofcommunication.html">PutHandrecords</a><span class="rvts6"> command as well.</span></p>
+<p class="rvps2"><span class="rvts6">Optional. Can be sent seperately using the </span><a class="rvts16" href="Overviewofcommunication.html">PutHandrecords</a><span class="rvts6"> command as well.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">Bridgemate2Settings property</span></span></h5>
-<p class="rvps2"><span class="rvts6">Optional. The settings for the Bridgemate II's. Can be sent seperately using the </span><a class="rvts20" href="Overviewofcommunication.html#OverviewOfCommands">PutBridgemate2Settings</a><span class="rvts6"> command as well.</span></p>
+<p class="rvps2"><span class="rvts6">Optional. The settings for the Bridgemate II's. Can be sent seperately using the </span><a class="rvts16" href="Overviewofcommunication.html#OverviewOfCommands">PutBridgemate2Settings</a><span class="rvts6"> command as well.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">Bridgemate3Settings property</span></span></h5>
-<p class="rvps2"><span class="rvts6">Optional. The settings for the Bridgemate III's.Can be sent seperately using the </span><a class="rvts20" href="Overviewofcommunication.html#OverviewOfCommands">PutBridgemate3Settings</a><span class="rvts6"> command as well.</span></p>
+<p class="rvps2"><span class="rvts6">Optional. The settings for the Bridgemate III's.Can be sent seperately using the </span><a class="rvts16" href="Overviewofcommunication.html#OverviewOfCommands">PutBridgemate3Settings</a><span class="rvts6"> command as well.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">AlternativeDataFolder</span></span></h5>
 <p class="rvps2"><span class="rvts6">Only used in advanced scenario's. Not documented here.</span></p>
 <p class="rvps2" style="break-before: always;"><span class="rvts6"></span><span class="rvts6"></span></p>

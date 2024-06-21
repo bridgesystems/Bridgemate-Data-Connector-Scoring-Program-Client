@@ -200,85 +200,85 @@
 <p class="rvps2"><img alt="" style="width : 233px; height : 235px; padding : 1px;" src="lib/TableDTO%201.png"></p>
 <p class="rvps2"><span class="rvts6"><br/></span></p>
 <p class="rvps7"><span class="rvts6">In C# the TableDTO class or struct would be something like:</span><br/><span class="rvts6"><br/></span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; </span><span class="rvts21">public</span><span class="rvts16"> </span><span class="rvts21">class</span><span class="rvts16"> </span><span class="rvts22">TableDTO</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; {</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">public</span><span class="rvts16"> </span><span class="rvts21">string</span><span class="rvts16"> SessionGuid</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">get</span><span class="rvts16">; </span><span class="rvts21">set</span><span class="rvts16">;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; }</span><br/><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">public</span><span class="rvts16"> </span><span class="rvts21">string</span><span class="rvts16"> SectionLetters</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">get</span><span class="rvts16">; </span><span class="rvts21">set</span><span class="rvts16">;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; }</span><br/><span class="rvts16"><br/></span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">public</span><span class="rvts16"> </span><span class="rvts21">int</span><span class="rvts16"> TableNumber</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">get</span><span class="rvts16">; </span><span class="rvts21">set</span><span class="rvts16">;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; }</span><br/><span class="rvts16"><br/></span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">public</span><span class="rvts16"> RoundDTO[] Rounds</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">get</span><span class="rvts16">; </span><span class="rvts21">set</span><span class="rvts16">;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; }</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp;)</span></p>
-<p class="rvps7"><span class="rvts16"><br/></span></p>
-<p class="rvps7"><span class="rvts16">while in Java it would be something like:</span><br/><span class="rvts16"></span><br/><span class="rvts16">public class TableDTO {</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; private String sessionGuid;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; private String sectionLetters;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; private int tableNumber;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; private RoundDTO[] rounds;</span><br/><span class="rvts16"><br/></span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; public String getSessionGuid() {</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; return sessionGuid;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; }</span><br/><span class="rvts16"><br/></span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; public void setSessionGuid(String sessionGuid) {</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; this.sessionGuid = sessionGuid;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; }</span><br/><span class="rvts16"><br/></span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; public String getSectionLetters() {</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; return sectionLetters;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; }</span><br/><span class="rvts16"><br/></span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; public void setSectionLetters(String sectionLetters) {</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; this.sectionLetters = sectionLetters;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; }</span><br/><span class="rvts16"><br/></span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; public int getTableNumber() {</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; return tableNumber;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; }</span><br/><span class="rvts16"><br/></span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; public void setTableNumber(int tableNumber) {</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; this.tableNumber = tableNumber;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; }</span><br/><span class="rvts16"><br/></span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; public RoundDTO[] getRounds() {</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; return rounds;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; }</span><br/><span class="rvts16"><br/></span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; public void setRounds(RoundDTO[] rounds) {</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; &nbsp; this.rounds = rounds;</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; }</span></p>
-<p class="rvps7"><span class="rvts16">}</span></p>
-<p class="rvps7" style="break-before: always;"><span class="rvts16"><br/></span></p>
-<p class="rvps7"><span class="rvts16">The json serialized data for a TableDTO representing table A3 with two rounds would be something like:</span><br/><span class="rvts16">{</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; "SessionGuid": "4f24d8a2-2b6c-4a72-9e6a-8901a5a8b3c1",</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; "SectionLetters": "A",</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; "TableNumber": 3,</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; "Rounds": [</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; {</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "SessionGuid": "4f24d8a2-2b6c-4a72-9e6a-8901a5a8b3c1",</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "SectionLetters": "A",</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "TableNumber": 3,</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "RoundNumber": 1,</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "LowBoardNumber": 9,</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "HighBoardNumber": 12,</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "PairNS": 5,</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "PairEW": 6,</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; },</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; {</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "SessionGuid": "4f24d8a2-2b6c-4a72-9e6a-8901a5a8b3c1",</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "SectionLetters": "A",</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "TableNumber": 3,</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "RoundNumber": 2,</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "LowBoardNumber": 9,</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "HighBoardNumber": 12,</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "PairNS": 4,</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; &nbsp; "PairEW": 8,</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; &nbsp; }</span></p>
-<p class="rvps7"><span class="rvts16">&nbsp; ]</span></p>
-<p class="rvps7"><span class="rvts16">}</span></p>
-<p class="rvps7" style="break-before: always;"><span class="rvts16"></span><span class="rvts6"></span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; </span><span class="rvts21">public</span><span class="rvts17"> </span><span class="rvts21">class</span><span class="rvts17"> </span><span class="rvts22">TableDTO</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; {</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">public</span><span class="rvts17"> </span><span class="rvts21">string</span><span class="rvts17"> SessionGuid</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">get</span><span class="rvts17">; </span><span class="rvts21">set</span><span class="rvts17">;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; }</span><br/><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">public</span><span class="rvts17"> </span><span class="rvts21">string</span><span class="rvts17"> SectionLetters</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">get</span><span class="rvts17">; </span><span class="rvts21">set</span><span class="rvts17">;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; }</span><br/><span class="rvts17"><br/></span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">public</span><span class="rvts17"> </span><span class="rvts21">int</span><span class="rvts17"> TableNumber</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">get</span><span class="rvts17">; </span><span class="rvts21">set</span><span class="rvts17">;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; }</span><br/><span class="rvts17"><br/></span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">public</span><span class="rvts17"> RoundDTO[] Rounds</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="rvts21">get</span><span class="rvts17">; </span><span class="rvts21">set</span><span class="rvts17">;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; }</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp;)</span></p>
+<p class="rvps7"><span class="rvts17"><br/></span></p>
+<p class="rvps7"><span class="rvts17">while in Java it would be something like:</span><br/><span class="rvts17"></span><br/><span class="rvts17">public class TableDTO {</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; private String sessionGuid;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; private String sectionLetters;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; private int tableNumber;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; private RoundDTO[] rounds;</span><br/><span class="rvts17"><br/></span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; public String getSessionGuid() {</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; return sessionGuid;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; }</span><br/><span class="rvts17"><br/></span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; public void setSessionGuid(String sessionGuid) {</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; this.sessionGuid = sessionGuid;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; }</span><br/><span class="rvts17"><br/></span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; public String getSectionLetters() {</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; return sectionLetters;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; }</span><br/><span class="rvts17"><br/></span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; public void setSectionLetters(String sectionLetters) {</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; this.sectionLetters = sectionLetters;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; }</span><br/><span class="rvts17"><br/></span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; public int getTableNumber() {</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; return tableNumber;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; }</span><br/><span class="rvts17"><br/></span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; public void setTableNumber(int tableNumber) {</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; this.tableNumber = tableNumber;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; }</span><br/><span class="rvts17"><br/></span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; public RoundDTO[] getRounds() {</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; return rounds;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; }</span><br/><span class="rvts17"><br/></span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; public void setRounds(RoundDTO[] rounds) {</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; this.rounds = rounds;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; }</span></p>
+<p class="rvps7"><span class="rvts17">}</span></p>
+<p class="rvps7" style="break-before: always;"><span class="rvts17"><br/></span></p>
+<p class="rvps7"><span class="rvts17">The json serialized data for a TableDTO representing table A3 with two rounds would be something like:</span><br/><span class="rvts17">{</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; "SessionGuid": "4f24d8a2-2b6c-4a72-9e6a-8901a5a8b3c1",</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; "SectionLetters": "A",</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; "TableNumber": 3,</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; "Rounds": [</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; {</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; "SessionGuid": "4f24d8a2-2b6c-4a72-9e6a-8901a5a8b3c1",</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; "SectionLetters": "A",</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; "TableNumber": 3,</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; "RoundNumber": 1,</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; "LowBoardNumber": 9,</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; "HighBoardNumber": 12,</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; "PairNS": 5,</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; "PairEW": 6,</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; },</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; {</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; "SessionGuid": "4f24d8a2-2b6c-4a72-9e6a-8901a5a8b3c1",</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; "SectionLetters": "A",</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; "TableNumber": 3,</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; "RoundNumber": 2,</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; "LowBoardNumber": 9,</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; "HighBoardNumber": 12,</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; "PairNS": 4,</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; "PairEW": 8,</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; }</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; ]</span></p>
+<p class="rvps7"><span class="rvts17">}</span></p>
+<p class="rvps7" style="break-before: always;"><span class="rvts17"></span><span class="rvts6"></span></p>
 
             </div>
             

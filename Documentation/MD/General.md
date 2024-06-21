@@ -14,7 +14,7 @@ When using the Bridgemate Data Connector data is exchanged by sending serialized
 
 # The Scoringprogram pipe client
 
-Bridge Systems provides the source code for a client dll, the BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.dll, that handles connect, disconnect, data exchange and management commands with the Bridgemate Data Connector. This client can either be accessed directly if the progamming platform for the external program supports it, or its code can be used as examples how to implement communication with the Data Connector. The client comes with its own documentation, available at github at&nbsp;
+Bridge Systems provides the source code for a client dll, the BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.dll, that handles connect, disconnect, data exchange and management commands with the Bridgemate Data Connector. This client can either be accessed directly if the progamming platform for the external program supports it, or its code can be used as examples how to implement communication with the Data Connector. The client comes with its own documentation, available at [the Bridgemate github space](<https://github.com/bridgesystems/BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient> "target=\"\_blank\"").
 
 # Data exchange format
 

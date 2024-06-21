@@ -86,35 +86,35 @@ a.rvts15, span.rvts15
  color: #0000ff;
  text-decoration: underline;
 }
-span.rvts16
+a.rvts16, span.rvts16
+{
+ color: #0000ff;
+ text-decoration: underline;
+}
+span.rvts17
 {
  font-size: 9.5pt;
  font-family: 'Cascadia Mono';
  color: #000000;
 }
-span.rvts17
+span.rvts18
 {
  font-size: 14pt;
  font-style: italic;
  font-weight: bold;
 }
-span.rvts18
+span.rvts19
 {
  font-size: 10.5pt;
  font-family: 'Helvetica Neue Light';
  color: #333333;
  background-color: #ffffff;
 }
-span.rvts19
+span.rvts20
 {
  font-size: 9pt;
  font-family: 'Cascadia Mono';
  color: #000000;
-}
-a.rvts20, span.rvts20
-{
- color: #0000ff;
- text-decoration: underline;
 }
 span.rvts21
 {

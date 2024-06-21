@@ -190,8 +190,8 @@
                 
 <p class="rvps2"><img alt="" style="width : 425px; height : 906px; padding : 1px;" src="lib/Bridgemate2SettingsDTO%201.png"></p>
 <p class="rvps2" style="break-before: always;"><img alt="" style="width : 834px; height : 777px; padding : 1px;" src="lib/Bridgemate2SettingsOptions.png"></p>
-<p class="rvps2"><span class="rvts6">The Bridgemate2SettingsDTO contains all settings for the Bridgemate 2. It can be used as part of the </span><a class="rvts20" href="InitDTO.html">InitDTO</a><span class="rvts6"> for </span><a class="rvts20" href="Initializeanevent.html">the intitialization of an event</a><span class="rvts6">, or</span></p>
-<p class="rvps2"><span class="rvts6">it can be used as data for the </span><a class="rvts20" href="Overviewofcommunication.html#OverviewOfCommands">PutBridgemate2Settings command</a><span class="rvts6"> to update settings. When used all settings must be provided.For readability many of the settings are expressed as enum values. This is not necessary, the use of integer values is allowed as well. In the image above the enum values will always be consecutively numbered starting wit zero. So Bm2ShowRankingOption.DoNotShow equals to zero and Bm2ShowRankingOption.ShowAfterLastRound equals to two.&nbsp;</span></p>
+<p class="rvps2"><span class="rvts6">The Bridgemate2SettingsDTO contains all settings for the Bridgemate 2. It can be used as part of the </span><a class="rvts16" href="InitDTO.html">InitDTO</a><span class="rvts6"> for </span><a class="rvts16" href="Initializeanevent.html">the intitialization of an event</a><span class="rvts6">, or</span></p>
+<p class="rvps2"><span class="rvts6">it can be used as data for the </span><a class="rvts16" href="Overviewofcommunication.html#OverviewOfCommands">PutBridgemate2Settings command</a><span class="rvts6"> to update settings. When used all settings must be provided.For readability many of the settings are expressed as enum values. This is not necessary, the use of integer values is allowed as well. In the image above the enum values will always be consecutively numbered starting wit zero. So Bm2ShowRankingOption.DoNotShow equals to zero and Bm2ShowRankingOption.ShowAfterLastRound equals to two.&nbsp;</span></p>
 <p class="rvps2"><span class="rvts6">The settings will be applied to all Bridgemate 2s for a section.The settings must be provided for each section, even if they are the same.</span></p>
 <p class="rvps2"><span class="rvts11">Note</span></p>
 <p class="rvps2"><span class="rvts6">In the diagram the Bridgemate2SettingsDTO is depicted as a child of the abstract BridgemateSettingsDTO. The latter's properties can be considered to be part of the Bridgemate2SettingsDTO.&nbsp;</span></p>
@@ -218,7 +218,7 @@
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM2GameSummary property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean.If "True" shows the summary of the session after the last board has been entered.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM2NameSource property</span></span></h5>
-<p class="rvps2"><span class="rvts6">Currently not supported. Player names for at least all competing players should be sent to the </span><span class="rvts6">Data Connector</span><span class="rvts6"> using </span><a class="rvts20" href="PlayerDataDTO.html">PlayerDataDTOs</a><span class="rvts6">.</span></p>
+<p class="rvps2"><span class="rvts6">Currently not supported. Player names for at least all competing players should be sent to the </span><span class="rvts6">Data Connector</span><span class="rvts6"> using </span><a class="rvts16" href="PlayerDataDTO.html">PlayerDataDTOs</a><span class="rvts6">.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM2NextSeating property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. Specifies it the Bridgemate should show the table for the next round after the last result has been entered for the current round.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM2NumberEntryEachRound property</span></span></h5>
@@ -254,7 +254,7 @@
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM2TDCall property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. If "True" specifies that the players can call the Tournament Director from the Bridgemate.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM2TextBasedNumber property</span></span></h5>
-<p class="rvps2"><span class="rvts6">Currently not supported. Player numbers can be set using the </span><a class="rvts20" href="PlayerDataDTO.html">PlayerDataDTO</a><span class="rvts6">. The player number is stored as a string.</span></p>
+<p class="rvps2"><span class="rvts6">Currently not supported. Player numbers can be set using the </span><a class="rvts16" href="PlayerDataDTO.html">PlayerDataDTO</a><span class="rvts6">. The player number is stored as a string.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM2ValidateLeadCard property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. If "True" The entered lead card will be checked against the handrecord.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM2ValidateRecording property</span></span></h5>
@@ -266,7 +266,7 @@
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">EnterResultsMethod property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (Bm2ResultsEntryOption). Specifies how the resulting tricks after play must be entered.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">GroupSections property</span></span></h5>
-<p class="rvps2"><span class="rvts6">Not supported. Use the </span><a class="rvts20" href="ScoringGroupDTO.html">ScoringGroupDTO</a><span class="rvts6"> to indiciate that sections should be scored together.</span></p>
+<p class="rvps2"><span class="rvts6">Not supported. Use the </span><a class="rvts16" href="ScoringGroupDTO.html">ScoringGroupDTO</a><span class="rvts6"> to indiciate that sections should be scored together.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">HandRecordValidation property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. Currently not supported.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">Intermediate results property</span></span></h5>

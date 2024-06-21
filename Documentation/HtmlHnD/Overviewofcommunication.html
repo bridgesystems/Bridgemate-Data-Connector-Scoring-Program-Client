@@ -191,14 +191,14 @@
 <p class="rvps2"><span class="rvts6">This section decribes how to exchange data with the </span><span class="rvts6">Bridgemate Data Connector</span><span class="rvts6">.</span></p>
 <p class="rvps2"><img alt="" style="width : 705px; height : 466px; padding : 1px;" src="lib/Data%20exchange%201.png"></p>
 <h1 class="rvps5"><a name="GeneralDescription"></a><span class="rvts0"><span class="rvts14">General description</span></span></h1>
-<h2 class="rvps6"><span class="rvts0"><span class="rvts17">Sending data</span></span></h2>
+<h2 class="rvps6"><span class="rvts0"><span class="rvts18">Sending data</span></span></h2>
 <p class="rvps2"><span class="rvts6">The scoring program wants to send a command to the </span><span class="rvts6">Data Connector</span><span class="rvts6"> with accompanying data. The scoring program constructs a DTO containing the data the </span><span class="rvts6">Data Connector</span><span class="rvts6"> needs to work with. The type of DTO depends on the requested action as expressed in the command. The DTO is serialized as JSON and added to a ScoringProgramRequest class.This request contains a command that specifies what </span><span class="rvts6">Data Connector</span><span class="rvts6"> should do. The request must contain the guid of the session that the request belongs to. The request is then serialized a second time and sent to the </span><span class="rvts6">Data Connector</span><span class="rvts6"> over the communication channel.The </span><span class="rvts6">Data Connector</span><span class="rvts6"> will always respond. The scoring program needs to wait for this response and consume it. Otherwise communication will stall. Mind that nearly all communications are scoped to a single session as expressed by the SessionGuid property of the request. So, say, a request for new board results must be done for each session that the scoring program currently administers.</span></p>
-<h2 class="rvps6"><span class="rvts0"><span class="rvts17">Receiving the response</span></span></h2>
+<h2 class="rvps6"><span class="rvts0"><span class="rvts18">Receiving the response</span></span></h2>
 <p class="rvps2"><span class="rvts6">The </span><span class="rvts6">Data Connector</span><span class="rvts6"> serializes its response data as JSON. Then it constructs a ScoringProgramResponse with this data. The response contains the original command from the request and the session guid that was sent with it in order to check if the response indeed is the answer to the request that was sent.The response has a DataType property that specifies to what DTO the JSON data can be deserialized. The scoring program waits for the response on the communication channel and deserializes it to a ScoringProgramResponse. Depending on the response's DataType the response's SerializedData can be deserialized from JSON to the appropriate DTO (or to a message).</span></p>
 <h1 class="rvps5"><a name="OverviewOfCommands"></a><span class="rvts0"><span class="rvts14">Overview of the commands for the ScoringProgramRequest</span></span></h1>
 <p class="rvps2"><span class="rvts6">The tables below give a short description of the available commands for the ScoringProgramRequest and the associated DTO that must be sent with it.</span></p>
 <p class="rvps2"><span class="rvts6"><br/></span></p>
-<h2 class="rvps6"><span class="rvts0"><span class="rvts17">Sending data to the </span></span><span class="rvts0"><span class="rvts17">Bridgemate Data Connector</span></span></h2>
+<h2 class="rvps6"><span class="rvts0"><span class="rvts18">Sending data to the </span></span><span class="rvts0"><span class="rvts18">Bridgemate Data Connector</span></span></h2>
 <div class="rvps2">
 <table width="100%" cellpadding="1" style="border-color: canvastext; border-style: solid; border-width: 1px; border-spacing: 0px; border-top: none; border-left: none;">
  <tr style="vertical-align: top;">
@@ -271,7 +271,7 @@
  </tr>
  <tr style="vertical-align: top;">
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 243px;">
-   <p class="rvps2"><span class="rvts16">InitializeEvent</span></p>
+   <p class="rvps2"><span class="rvts17">InitializeEvent</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 80px;">
    <p class="rvps2"><span class="rvts6">5</span></p>
@@ -280,7 +280,7 @@
    <p class="rvps2"><span class="rvts6">Sends start-up parameters for BCS and inititialization data&nbsp;</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 150px;">
-   <p class="rvps2"><a class="rvts20" href="InitDTO.html">InitDTO</a></p>
+   <p class="rvps2"><a class="rvts16" href="InitDTO.html">InitDTO</a></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 432px;">
    <p class="rvps2"><span class="rvts6">The InitDTO contains both start-up parameters for BCS and the data for the sessions like movements, player data and hand records. With this data a new scoring file will be created for internal use by BCS.</span></p>
@@ -288,7 +288,7 @@
  </tr>
  <tr style="vertical-align: top;">
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 243px;">
-   <p class="rvps2"><span class="rvts16">ContinueEvent</span></p>
+   <p class="rvps2"><span class="rvts17">ContinueEvent</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 80px;">
    <p class="rvps2"><span class="rvts6">30</span></p>
@@ -305,7 +305,7 @@
  </tr>
  <tr style="vertical-align: top;">
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 243px;">
-   <p class="rvps2"><span class="rvts16">ManageBCS</span></p>
+   <p class="rvps2"><span class="rvts17">ManageBCS</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 80px;">
    <p class="rvps2"><span class="rvts6">33</span></p>
@@ -314,7 +314,7 @@
    <p class="rvps2"><span class="rvts6">Can send a request asking </span><span class="rvts6">BCS</span><span class="rvts6"> to shut down immediately and can query information on administered events</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 150px;">
-   <p class="rvps2"><a class="rvts20" href="BCSManagementRequestDTO.html">BCSManagementRequestDTO</a></p>
+   <p class="rvps2"><a class="rvts16" href="BCSManagementRequestDTO.html">BCSManagementRequestDTO</a></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 432px;">
    <p class="rvps2"><span class="rvts6">Does not transfer any data.</span></p>
@@ -331,7 +331,7 @@
    <p class="rvps2"><span class="rvts6">Instructs BCS to change the movement for the given section, or to delete it.</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 150px;">
-   <p class="rvps2"><a class="rvts20" href="SectionDTO.html">SectionDTO</a></p>
+   <p class="rvps2"><a class="rvts16" href="SectionDTO.html">SectionDTO</a></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 432px;">
    <p class="rvps2"><span class="rvts6">The SectionDTO holds Tables as an array of TableDTOs. Each TableDTO holds Rounds as an array of RoundDTOs. Each RoundDTO contains data on the opponents and the boards played.</span><br/><span class="rvts6">The SectionDTO holds a IsDeleted property that can be set to 'True' if the section must be deleted.</span></p>
@@ -349,7 +349,7 @@
    <p class="rvps2"><span class="rvts6">Instructs BCS to update its scoring groups</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 150px;">
-   <p class="rvps2"><a class="rvts20" href="ScoringGroupDTO.html">Array of ScoringGroupDTO</a></p>
+   <p class="rvps2"><a class="rvts16" href="ScoringGroupDTO.html">Array of ScoringGroupDTO</a></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 432px;">
    <p class="rvps2"><span class="rvts6">All scoring groups for the session with their sections must be sent as all sections must have a parent scoring group. Mind to use this command before adding a new section using the UpdateMovement command that has a new scoring group.</span></p>
@@ -366,7 +366,7 @@
    <p class="rvps2"><span class="rvts6">Sends board results to the </span><span class="rvts6">Data Connector</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 150px;">
-   <p class="rvps2"><a class="rvts20" href="ResultDTO.html">Array of ResultDTO</a></p>
+   <p class="rvps2"><a class="rvts16" href="ResultDTO.html">Array of ResultDTO</a></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 432px;">
    <p class="rvps2"><span class="rvts6">Using this command new or modified board results from the scoring program can be sent to the Bridgemates.</span></p>
@@ -383,7 +383,7 @@
    <p class="rvps2"><span class="rvts6">Sends player data to the </span><span class="rvts6">Data Connector</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 150px;">
-   <p class="rvps2"><a class="rvts20" href="PlayerDataDTO.html">Array of PlayerDataDTO</a></p>
+   <p class="rvps2"><a class="rvts16" href="PlayerDataDTO.html">Array of PlayerDataDTO</a></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 432px;">
    <p class="rvps2"><span class="rvts6">Player data contains a person's &nbsp;first name, last name, organization id and playernumber. The player numbers must be known to BCS before players can make themselves be known by entering their number on the Bridgemate.&nbsp;</span></p>
@@ -401,7 +401,7 @@
    <p class="rvps2"><span class="rvts6">Sends participations to the </span><span class="rvts6">Data Connector</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 150px;">
-   <p class="rvps2"><a class="rvts20" href="ParticipationDTO.html">Array of ParticipationDTO</a></p>
+   <p class="rvps2"><a class="rvts16" href="ParticipationDTO.html">Array of ParticipationDTO</a></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 432px;">
    <p class="rvps2"><span class="rvts6">The participation contains information on the starting position of a player: section, table, round and seat direction. The player can either be identified by a player number, in which case the </span><span class="rvts6">Data Connector</span><span class="rvts6"> will look up the first and last names or by first name and last name only.</span></p>
@@ -419,7 +419,7 @@
    <p class="rvps2"><span class="rvts6">Sends handrecords to the </span><span class="rvts6">Data Connector</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 150px;">
-   <p class="rvps2"><span class="rvts20">Array of HandrecordDTO</span></p>
+   <p class="rvps2"><span class="rvts16">Array of HandrecordDTO</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 432px;">
    <p class="rvps2"><span class="rvts6">The handrecords must have a valid scoringgroup id. Make sure to add the scoringgroup first using the UpdateScoringGroup command if a new section was added.</span></p>
@@ -437,7 +437,7 @@
    <p class="rvps2"><span class="rvts6">Sends the Bridgemate 2 settings</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 150px;">
-   <p class="rvps2"><a class="rvts20" href="Bridgemate2SettingsDTO.html">Array of Bridgemate2SettingsDTO</a></p>
+   <p class="rvps2"><a class="rvts16" href="Bridgemate2SettingsDTO.html">Array of Bridgemate2SettingsDTO</a></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 432px;">
    <p class="rvps2"><span class="rvts6">The settings must be sent for each section seprately. The settings can be included in the InitDTO or sent seperately. The first method is more performant.</span></p>
@@ -454,7 +454,7 @@
    <p class="rvps2"><span class="rvts6">Sends the Bridgemate 2 settings</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 150px;">
-   <p class="rvps2"><a class="rvts20" href="Bridgemate3SettingsDTO.html">Array of Bridgemate3SettingsDTO</a></p>
+   <p class="rvps2"><a class="rvts16" href="Bridgemate3SettingsDTO.html">Array of Bridgemate3SettingsDTO</a></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 432px;">
    <p class="rvps2"><span class="rvts6">The settings must be sent for each section seprately. The settings can be included in the InitDTO or sent seperately. The first method is more performant.</span></p>
@@ -462,7 +462,7 @@
  </tr>
 </table>
 </div>
-<h2 class="rvps6"><span class="rvts0"><span class="rvts17">Polling data from the </span></span><span class="rvts0"><span class="rvts17">Bridgemate Data Connector</span></span></h2>
+<h2 class="rvps6"><span class="rvts0"><span class="rvts18">Polling data from the </span></span><span class="rvts0"><span class="rvts18">Bridgemate Data Connector</span></span></h2>
 <div class="rvps2">
 <table width="100%" cellpadding="1" style="border-color: canvastext; border-style: solid; border-width: 1px; border-spacing: 0px; border-top: none; border-left: none;">
  <tr style="vertical-align: top;">
@@ -493,7 +493,7 @@
    <p class="rvps2"><span class="rvts6">Polls for new board results</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 169px;">
-   <p class="rvps2"><span class="rvts6">returns: array of </span><a class="rvts20" href="ResultDTO.html">ResultDTO</a></p>
+   <p class="rvps2"><span class="rvts6">returns: array of </span><a class="rvts16" href="ResultDTO.html">ResultDTO</a></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 483px;">
    <p class="rvps2"><span class="rvts6">Returns the new board results since the last batch was acccepted.</span></p>
@@ -510,7 +510,7 @@
    <p class="rvps2"><span class="rvts6">Polls for new player data</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 169px;">
-   <p class="rvps2"><span class="rvts6">returns: array of </span><a class="rvts20" href="PlayerDataDTO.html">PlayerDataDTO</a></p>
+   <p class="rvps2"><span class="rvts6">returns: array of </span><a class="rvts16" href="PlayerDataDTO.html">PlayerDataDTO</a></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 483px;">
    <p class="rvps2"><span class="rvts6">Returns the new player data since the last batch was acccepted.</span></p>
@@ -527,7 +527,7 @@
    <p class="rvps2"><span class="rvts6">Polls for new participations</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 169px;">
-   <p class="rvps2"><span class="rvts6">returns: array of </span><a class="rvts20" href="ParticipationDTO.html">ParticipationDTO</a></p>
+   <p class="rvps2"><span class="rvts6">returns: array of </span><a class="rvts16" href="ParticipationDTO.html">ParticipationDTO</a></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 483px;">
    <p class="rvps2"><span class="rvts6">Returns the new participations since the last batch was acccepted.</span></p>
@@ -544,7 +544,7 @@
    <p class="rvps2"><span class="rvts6">Polls for new handrecords</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 169px;">
-   <p class="rvps2"><span class="rvts6">returns: array of </span><span class="rvts20">HandrecordDTO</span></p>
+   <p class="rvps2"><span class="rvts6">returns: array of </span><span class="rvts16">HandrecordDTO</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 483px;">
    <p class="rvps2"><span class="rvts6">Returns the new handrecords since the last batch was acccepted.</span></p>
@@ -561,7 +561,7 @@
    <p class="rvps2"><span class="rvts6">Requests all board results, irrespective of them having been accepted before.</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 169px;">
-   <p class="rvps2"><span class="rvts6">returns: array of </span><a class="rvts20" href="ResultDTO.html">ResultDTO</a></p>
+   <p class="rvps2"><span class="rvts6">returns: array of </span><a class="rvts16" href="ResultDTO.html">ResultDTO</a></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 483px;">
    <p class="rvps2"><span class="rvts6">Returns all board results that have been created by BCS.</span></p>
@@ -578,7 +578,7 @@
    <p class="rvps2"><span class="rvts6">Requests all player data, irrespective of them having been accepted before.</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 169px;">
-   <p class="rvps2"><span class="rvts6">returns: array of </span><a class="rvts20" href="PlayerDataDTO.html">PlayerDataDTO</a></p>
+   <p class="rvps2"><span class="rvts6">returns: array of </span><a class="rvts16" href="PlayerDataDTO.html">PlayerDataDTO</a></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 483px;">
    <p class="rvps2"><span class="rvts6">Returns all playerdata that has been created by BCS</span></p>
@@ -595,7 +595,7 @@
    <p class="rvps2"><span class="rvts6">Requests all participations, irrespective of them having been accepted before.</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 169px;">
-   <p class="rvps2"><span class="rvts6">returns: array of </span><a class="rvts20" href="ParticipationDTO.html">ParticipationDTO</a></p>
+   <p class="rvps2"><span class="rvts6">returns: array of </span><a class="rvts16" href="ParticipationDTO.html">ParticipationDTO</a></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 483px;">
    <p class="rvps2"><span class="rvts6">Returns all participations that have been created by BCS</span></p>
@@ -612,7 +612,7 @@
    <p class="rvps2"><span class="rvts6">Requests all handrecords results, irrespective of them having been accepted before.</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 169px;">
-   <p class="rvps2"><span class="rvts6">returns: array of </span><span class="rvts20">HandrecordDTO</span></p>
+   <p class="rvps2"><span class="rvts6">returns: array of </span><span class="rvts16">HandrecordDTO</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 483px;">
    <p class="rvps2"><span class="rvts6">Returns all handrecords that have been created by BCS.</span></p>
@@ -620,7 +620,7 @@
  </tr>
  <tr style="vertical-align: top;">
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 271px;">
-   <p class="rvps2"><span class="rvts16">AcceptResultQueueItems</span></p>
+   <p class="rvps2"><span class="rvts17">AcceptResultQueueItems</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 93px;">
    <p class="rvps2"><span class="rvts6">26</span></p>
@@ -637,7 +637,7 @@
  </tr>
  <tr style="vertical-align: top;">
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 271px;">
-   <p class="rvps2"><span class="rvts16">AcceptPlayerDataQueueItems</span></p>
+   <p class="rvps2"><span class="rvts17">AcceptPlayerDataQueueItems</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 93px;">
    <p class="rvps2"><span class="rvts6">27</span></p>
@@ -654,7 +654,7 @@
  </tr>
  <tr style="vertical-align: top;">
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 271px;">
-   <p class="rvps2"><span class="rvts16">AcceptParticipationQueueItems</span></p>
+   <p class="rvps2"><span class="rvts17">AcceptParticipationQueueItems</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 93px;">
    <p class="rvps2"><span class="rvts6">28</span></p>
@@ -671,7 +671,7 @@
  </tr>
  <tr style="vertical-align: top;">
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 271px;">
-   <p class="rvps2"><span class="rvts16">AcceptHandrecordQueueItems</span></p>
+   <p class="rvps2"><span class="rvts17">AcceptHandrecordQueueItems</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 93px;">
    <p class="rvps2"><span class="rvts6">29</span></p>
@@ -688,7 +688,7 @@
  </tr>
  <tr style="vertical-align: top;">
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 271px;">
-   <p class="rvps2"><span class="rvts16">GetMovement</span></p>
+   <p class="rvps2"><span class="rvts17">GetMovement</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 93px;">
    <p class="rvps2"><span class="rvts6">31</span></p>
@@ -697,7 +697,7 @@
    <p class="rvps2"><span class="rvts6">Requests the movement for a specific section</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 169px;">
-   <p class="rvps2"><span class="rvts6">sends: </span><a class="rvts20" href="SectionDTO.html">sectionDTO</a><span class="rvts6"> with the desired SessionGuid and Letters.</span></p>
+   <p class="rvps2"><span class="rvts6">sends: </span><a class="rvts16" href="SectionDTO.html">sectionDTO</a><span class="rvts6"> with the desired SessionGuid and Letters.</span></p>
    <p class="rvps2"><span class="rvts6">returns: sectionDTO</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 483px;">
@@ -706,7 +706,7 @@
  </tr>
  <tr style="vertical-align: top;">
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 271px;">
-   <p class="rvps2"><span class="rvts16">GetAllMovements</span></p>
+   <p class="rvps2"><span class="rvts17">GetAllMovements</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 93px;">
    <p class="rvps2"><span class="rvts6">32</span></p>
@@ -716,7 +716,7 @@
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 169px;">
    <p class="rvps2"><span class="rvts6">sends: n/a</span></p>
-   <p class="rvps2"><span class="rvts6">returns: an array of </span><a class="rvts20" href="SectionDTO.html">SectionDTO</a></p>
+   <p class="rvps2"><span class="rvts6">returns: an array of </span><a class="rvts16" href="SectionDTO.html">SectionDTO</a></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 483px;">
    <p class="rvps2"><span class="rvts6">Each sectionDTO has Tables as an array of TableDTO, eacht table has Rounds as an array of RoundDTO. The RoundDTO contains the opponents and the board numbers that they will play.</span></p>
@@ -724,7 +724,7 @@
  </tr>
 </table>
 </div>
-<h2 class="rvps6"><a name="OverviewOfDataTypes"></a><span class="rvts0"><span class="rvts17">Data types</span></span></h2>
+<h2 class="rvps6"><a name="OverviewOfDataTypes"></a><span class="rvts0"><span class="rvts18">Data types</span></span></h2>
 <p class="rvps2"><span class="rvts6">The ScoringProgramResponse has a DataType property which specifies which type of data can be expected to be in its SerializedData property.</span></p>
 <div class="rvps2">
 <table width="100%" cellpadding="1" style="border-color: canvastext; border-style: solid; border-width: 1px; border-spacing: 0px;">
@@ -846,7 +846,7 @@
    <p class="rvps2"><span class="rvts6">PlayerData</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 617px;">
-   <p class="rvps2"><span class="rvts6">The serialized data is an array of </span><a class="rvts20" href="PlayerDataDTO.html">PlayerDataDTO</a></p>
+   <p class="rvps2"><span class="rvts6">The serialized data is an array of </span><a class="rvts16" href="PlayerDataDTO.html">PlayerDataDTO</a></p>
   </td>
  </tr>
  <tr style="vertical-align: top;">
@@ -857,7 +857,7 @@
    <p class="rvps2"><span class="rvts6">Participations</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 617px;">
-   <p class="rvps2"><span class="rvts6">The serialized data is an array of </span><a class="rvts20" href="ParticipationDTO.html">ParticipationDTO</a></p>
+   <p class="rvps2"><span class="rvts6">The serialized data is an array of </span><a class="rvts16" href="ParticipationDTO.html">ParticipationDTO</a></p>
   </td>
  </tr>
  <tr style="vertical-align: top;">
@@ -868,7 +868,7 @@
    <p class="rvps2"><span class="rvts6">Results</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 617px;">
-   <p class="rvps2"><span class="rvts6">The serialized data is an array of </span><a class="rvts20" href="ResultDTO.html">ResultDTO</a></p>
+   <p class="rvps2"><span class="rvts6">The serialized data is an array of </span><a class="rvts16" href="ResultDTO.html">ResultDTO</a></p>
   </td>
  </tr>
  <tr style="vertical-align: top;">
@@ -879,7 +879,7 @@
    <p class="rvps2"><span class="rvts6">Handrecords</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 617px;">
-   <p class="rvps2"><span class="rvts6">The serialized data is an array of </span><span class="rvts20">HandrecordDTO</span></p>
+   <p class="rvps2"><span class="rvts6">The serialized data is an array of </span><span class="rvts16">HandrecordDTO</span></p>
   </td>
  </tr>
  <tr style="vertical-align: top;">
@@ -890,7 +890,7 @@
    <p class="rvps2"><span class="rvts6">Movement</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 617px;">
-   <p class="rvps2"><span class="rvts6">The serialized data is a </span><a class="rvts20" href="SectionDTO.html">SectionDTO</a></p>
+   <p class="rvps2"><span class="rvts6">The serialized data is a </span><a class="rvts16" href="SectionDTO.html">SectionDTO</a></p>
   </td>
  </tr>
  <tr style="vertical-align: top;">
@@ -901,7 +901,7 @@
    <p class="rvps2"><span class="rvts6">Sessions</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 617px;">
-   <p class="rvps2"><span class="rvts6">The serialized data is an array of </span><a class="rvts20" href="SectionDTO.html">SectionDTO</a></p>
+   <p class="rvps2"><span class="rvts6">The serialized data is an array of </span><a class="rvts16" href="SectionDTO.html">SectionDTO</a></p>
   </td>
  </tr>
  <tr style="vertical-align: top;">
@@ -950,7 +950,7 @@
  </tr>
 </table>
 </div>
-<h2 class="rvps6"><span class="rvts0"><span class="rvts17">Error codes</span></span></h2>
+<h2 class="rvps6"><span class="rvts0"><span class="rvts18">Error codes</span></span></h2>
 <p class="rvps2"><span class="rvts6">When the ScoringProgramResponse.DataType property is "Error" (4) then the ScoringProgramResponse.ErrorType property will hold a value further explaining what went wrong. Moreover the SerializedData property can be desierialized to a string to obtain detailed debugging information. This information is not meant to be shown to the end users of the external scoring program.</span></p>
 <div class="rvps2">
 <table width="100%" cellpadding="1" style="border-color: canvastext; border-style: solid; border-width: 1px; border-spacing: 0px;">
@@ -1105,7 +1105,7 @@
    <p class="rvps2"><span class="rvts6">WrongDataType</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 615px;">
-   <p class="rvps2"><span class="rvts16">The datatype of the dtos did not conform to the request command.</span></p>
+   <p class="rvps2"><span class="rvts17">The datatype of the dtos did not conform to the request command.</span></p>
   </td>
  </tr>
  <tr style="vertical-align: top;">
@@ -1116,7 +1116,7 @@
    <p class="rvps2"><span class="rvts6">UnexpectedCommand</span></p>
   </td>
   <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 615px;">
-   <p class="rvps2"><span class="rvts16">The response command did not conform to the request command.</span></p>
+   <p class="rvps2"><span class="rvts17">The response command did not conform to the request command.</span></p>
   </td>
  </tr>
  <tr style="vertical-align: top;">
@@ -1134,150 +1134,150 @@
 </div>
 <h1 class="rvps5" style="break-before: always;"><a name="CodeExamples"></a><span class="rvts0"><span class="rvts14">Code examples</span></span></h1>
 <p class="rvps2"><span class="rvts6">Below a typical piece of code to send a request to the </span><span class="rvts6">Data Connector</span><span class="rvts6"> and awaiting the response: using the Ping command</span></p>
-<p class="rvps2"><span class="rvts16">&nbsp; &nbsp; &nbsp;</span><span class="rvts19">/// &lt;summary&gt;</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp;/// Communicates to the DataConnector to see if it is responsive.</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp;/// The Ping command returns the exact data that was sent with it.</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp;/// &lt;/summary&gt;</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp;/// &lt;returns&gt;&lt;/returns&gt;</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp;public async Task&lt;ScoringProgramResponse&gt; Ping()</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var requestTicks = DateTime.Now.Ticks.ToString();</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var serializedTicks=JsonSerializer.Serialize(requestTicks);</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var response = await SendDataAsync(sessionGuid: string.Empty, ScoringProgramMiddleManCommands.Ping, serializedTicks);</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (response.RequestCommand != ScoringProgramMiddleManCommands.Ping)</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return new ScoringProgramResponse</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = ScoringProgramMiddleManCommands.Ping,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = MiddleManResponseData.Error,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ErrorType = ErrorType.Unknown,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = JsonSerializer.Serialize($"Invalid command in reponse to {nameof(ScoringProgramMiddleManCommands.Ping)}: " +</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;$"'{response.RequestCommand}'")</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (response.DataType != MiddleManResponseData.OK)</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return response;</span></p>
-<p class="rvps2"><span class="rvts19"><br/></span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var responseTicks = JsonSerializer.Deserialize&lt;string&gt;(response.SerializedData);</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var error = responseTicks != requestTicks;</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return new ScoringProgramResponse</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = ScoringProgramMiddleManCommands.Ping,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = requestTicks == responseTicks ? MiddleManResponseData.OK : MiddleManResponseData.Error,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ErrorType = error ? ErrorType.Validation : ErrorType.None,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = response.SerializedData</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts19"><br/></span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp;/// &lt;summary&gt;</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp;/// The code that handles the actual sending of requests and reading their reponses.</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp;/// &lt;/summary&gt;</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp;/// &lt;param name="sessionGuid"&gt;Specifies which session the request targets (if any)&lt;/param&gt;</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp;/// &lt;param name="command"&gt;The command to the middlleman&lt;/param&gt;</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp;/// &lt;param name="serializedData"&gt;The data to send to the middleman as json data. (If any)&lt;/param&gt;</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp;/// &lt;returns&gt;&lt;/returns&gt;</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp;private async Task&lt;ScoringProgramResponse&gt; SendDataAsync(string sessionGuid, ScoringProgramMiddleManCommands command, string serializedData)</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;//Construct the request to the Middleman.</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;var request = new ScoringProgramRequest</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Command = command,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SessionGuid = sessionGuid,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = serializedData</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
-<p class="rvps2"><span class="rvts19"><br/></span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;//Serialize it.</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;var requestSerialized = JsonSerializer.Serialize(request);</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;//Do not proceed if sending is already in progress (for an other request). There can be only on request be sent at the same time.</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;if (_isSending)</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return new ScoringProgramResponse</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = command,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SessionGuid = sessionGuid,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = MiddleManResponseData.Error,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ErrorType = ErrorType.Busy,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = JsonSerializer.Serialize($"Client is busy, please retry later.")</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;try</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;_isSending = true;</span></p>
-<p class="rvps2"><span class="rvts19"><br/></span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Do not continue if the connection has been broken. Call the Connect method again then resend.</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var errorResponse = CheckConnection(command);</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (errorResponse != null)</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return errorResponse;</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts19"><br/></span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Reconnect to the Middleman if needed.</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (!MiddleManStream.IsConnected)</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;await MiddleManStream.ConnectAsync(5000);</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts19"><br/></span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Send the request to the Middleman. Mind: as it is written now this is a blocking call.</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//However, in .Net an exception will be thrown if the connection has gone dead for whatever reason.</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;await MiddleManWriter.WriteLineAsync(requestSerialized);</span></p>
-<p class="rvps2"><span class="rvts19"><br/></span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Wait for the response. This too is a blocking call. But in .Net a broken connection will throw an exception.</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;string response = await MiddleManReader.ReadLineAsync();</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (response != null)</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var responseDeserialized = JsonSerializer.Deserialize&lt;ScoringProgramResponse&gt;(response);</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return responseDeserialized ??</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; new ScoringProgramResponse</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; RequestCommand = command,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DataType = MiddleManResponseData.Error,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SerializedData = JsonSerializer.Serialize("Empty response")</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; };</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;else</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return new ScoringProgramResponse</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; RequestCommand = command,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DataType = MiddleManResponseData.Error,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SerializedData = JsonSerializer.Serialize("Empty response")</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; };</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;catch (IOException)</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CloseConnection();</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;new ScoringProgramResponse</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = command,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = MiddleManResponseData.Error,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = JsonSerializer.Serialize("Pipe broken")</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;catch (Exception ex)</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CloseConnection();</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DebugLogger.Error(ex);</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ErrorLogger.Error(ex);</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;new ScoringProgramResponse</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = command,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = MiddleManResponseData.Error,</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = JsonSerializer.Serialize(ex.Message)</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts19"><br/></span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;finally</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Always signal that the client is free for the next items to send.</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Otherwise after an exception further communication will be blocked.</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;_isSending = false;</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts19">&nbsp; &nbsp;}</span></p>
-<p class="rvps2" style="break-before: always;"><span class="rvts19"></span><span class="rvts6"></span></p>
+<p class="rvps2"><span class="rvts17">&nbsp; &nbsp; &nbsp;</span><span class="rvts20">/// &lt;summary&gt;</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp;/// Communicates to the DataConnector to see if it is responsive.</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp;/// The Ping command returns the exact data that was sent with it.</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp;/// &lt;/summary&gt;</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp;/// &lt;returns&gt;&lt;/returns&gt;</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp;public async Task&lt;ScoringProgramResponse&gt; Ping()</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var requestTicks = DateTime.Now.Ticks.ToString();</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var serializedTicks=JsonSerializer.Serialize(requestTicks);</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var response = await SendDataAsync(sessionGuid: string.Empty, ScoringProgramMiddleManCommands.Ping, serializedTicks);</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (response.RequestCommand != ScoringProgramMiddleManCommands.Ping)</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return new ScoringProgramResponse</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = ScoringProgramMiddleManCommands.Ping,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = MiddleManResponseData.Error,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ErrorType = ErrorType.Unknown,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = JsonSerializer.Serialize($"Invalid command in reponse to {nameof(ScoringProgramMiddleManCommands.Ping)}: " +</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;$"'{response.RequestCommand}'")</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (response.DataType != MiddleManResponseData.OK)</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return response;</span></p>
+<p class="rvps2"><span class="rvts20"><br/></span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var responseTicks = JsonSerializer.Deserialize&lt;string&gt;(response.SerializedData);</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var error = responseTicks != requestTicks;</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return new ScoringProgramResponse</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = ScoringProgramMiddleManCommands.Ping,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = requestTicks == responseTicks ? MiddleManResponseData.OK : MiddleManResponseData.Error,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ErrorType = error ? ErrorType.Validation : ErrorType.None,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = response.SerializedData</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts20"><br/></span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;/// &lt;summary&gt;</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;/// The code that handles the actual sending of requests and reading their reponses.</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;/// &lt;/summary&gt;</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;/// &lt;param name="sessionGuid"&gt;Specifies which session the request targets (if any)&lt;/param&gt;</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;/// &lt;param name="command"&gt;The command to the middlleman&lt;/param&gt;</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;/// &lt;param name="serializedData"&gt;The data to send to the middleman as json data. (If any)&lt;/param&gt;</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;/// &lt;returns&gt;&lt;/returns&gt;</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;private async Task&lt;ScoringProgramResponse&gt; SendDataAsync(string sessionGuid, ScoringProgramMiddleManCommands command, string serializedData)</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;//Construct the request to the Middleman.</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;var request = new ScoringProgramRequest</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Command = command,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SessionGuid = sessionGuid,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = serializedData</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
+<p class="rvps2"><span class="rvts20"><br/></span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;//Serialize it.</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;var requestSerialized = JsonSerializer.Serialize(request);</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;//Do not proceed if sending is already in progress (for an other request). There can be only on request be sent at the same time.</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;if (_isSending)</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return new ScoringProgramResponse</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = command,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SessionGuid = sessionGuid,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = MiddleManResponseData.Error,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ErrorType = ErrorType.Busy,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = JsonSerializer.Serialize($"Client is busy, please retry later.")</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;try</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;_isSending = true;</span></p>
+<p class="rvps2"><span class="rvts20"><br/></span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Do not continue if the connection has been broken. Call the Connect method again then resend.</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var errorResponse = CheckConnection(command);</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (errorResponse != null)</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return errorResponse;</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts20"><br/></span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Reconnect to the Middleman if needed.</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (!MiddleManStream.IsConnected)</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;await MiddleManStream.ConnectAsync(5000);</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts20"><br/></span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Send the request to the Middleman. Mind: as it is written now this is a blocking call.</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//However, in .Net an exception will be thrown if the connection has gone dead for whatever reason.</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;await MiddleManWriter.WriteLineAsync(requestSerialized);</span></p>
+<p class="rvps2"><span class="rvts20"><br/></span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Wait for the response. This too is a blocking call. But in .Net a broken connection will throw an exception.</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;string response = await MiddleManReader.ReadLineAsync();</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (response != null)</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var responseDeserialized = JsonSerializer.Deserialize&lt;ScoringProgramResponse&gt;(response);</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return responseDeserialized ??</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; new ScoringProgramResponse</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; RequestCommand = command,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DataType = MiddleManResponseData.Error,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SerializedData = JsonSerializer.Serialize("Empty response")</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; };</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;else</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return new ScoringProgramResponse</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; RequestCommand = command,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DataType = MiddleManResponseData.Error,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SerializedData = JsonSerializer.Serialize("Empty response")</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; };</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;catch (IOException)</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CloseConnection();</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;new ScoringProgramResponse</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = command,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = MiddleManResponseData.Error,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = JsonSerializer.Serialize("Pipe broken")</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;catch (Exception ex)</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CloseConnection();</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DebugLogger.Error(ex);</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ErrorLogger.Error(ex);</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;new ScoringProgramResponse</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = command,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = MiddleManResponseData.Error,</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = JsonSerializer.Serialize(ex.Message)</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts20"><br/></span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;finally</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Always signal that the client is free for the next items to send.</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Otherwise after an exception further communication will be blocked.</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;_isSending = false;</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;}</span></p>
+<p class="rvps2" style="break-before: always;"><span class="rvts20"></span><span class="rvts6"></span></p>
 
             </div>
             
