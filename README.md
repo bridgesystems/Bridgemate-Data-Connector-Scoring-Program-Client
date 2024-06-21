@@ -1,0 +1,1 @@
+# BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
