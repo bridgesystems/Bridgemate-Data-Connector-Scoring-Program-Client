@@ -25,6 +25,11 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     /// to the ErrorLogger is expected to be written to the DebugLogger as well.
     /// <br/>
     /// All public functions have synchronous and asynchronous implementation (ending in "Async").
+    /// <br/>
+    /// To get started inspect the following functions:<br/>
+    /// <see cref="ScoringProgramPipeClient.Connect">Connect</see> and <see cref="ScoringProgramPipeClient.ConnectAsync">ConnectAsync</see>: Connection to the Data Connector.<br/>
+    /// <see cref="ScoringProgramPipeClient.Initialize(InitDTO)">Initialize</see> and <see cref="ScoringProgramPipeClient.InitializeAsync(InitDTO)">InitializeAsync</see>: Initialization of a new event. <br/>
+    /// <see cref="IssueManagementCommand(BCSManagementRequestDTO)">IssueManagementCommand</see> and <see cref="IssueManagementCommandAsync(BCSManagementRequestDTO)">IssueManagementCommandAsync</see>: Query the Bridgemate Control Software.
     /// </summary>
     public class ScoringProgramPipeClient : DataConnectorPipeClient
     {
@@ -367,9 +372,9 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// Instructs BCS to create new sessions with the provided table domain data (scoring groups, sections, tables, rounds). 
         /// Player names, Results and Handrecords can be included or can be uploaded later. The latter option is considerably less performant.
         /// </summary>
-        /// <param name="sessionGraph"></param>
+        /// <param name="initDTO">Carries the initialization data.</param>
         /// <returns></returns>
-        public Task<ScoringProgramResponse> InitiaLizeAsync(InitDTO initDTO)
+        public Task<ScoringProgramResponse> InitializeAsync(InitDTO initDTO)
         {
 
             var serializedData = JsonSerializer.Serialize(initDTO);
@@ -381,9 +386,9 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// Instructs BCS to create a new sessions with the provided table domain data (scoring groups, sections, tables, rounds). 
         /// Player names, Results and Handrecords can be included or can be uploaded later. The latter option is considerably less performant.
         /// </summary>
-        /// <param name="sessionGraph"></param>
+        /// <param name="initDTO">Carries the initialization data.</param>
         /// <returns></returns>
-        public ScoringProgramResponse InitiaLize(InitDTO initDTO)
+        public ScoringProgramResponse Initialize(InitDTO initDTO)
         {
 
             var serializedData = JsonSerializer.Serialize(initDTO);
