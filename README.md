@@ -1,7 +1,7 @@
 # BridgeSystems Bridgemate DataConnector ScoringProgramClient
-Welcome to the Source code for the scoring program client to the Bridgemate Data Conector.
+Welcome to the source code for the scoring program client to the Bridgemate Data Conector.
 Communication through the Bridgemate Data Connector is the preferred way for communication between bridge scoring programs and the Bridgemate 3, the Bridgemate 2 and the Bridgemate App back end.
-In this repository you will find the documenation on how to write a client yourself as well as the source code for a scoring program client, written in C# for .Net Standard 2.0, provided by Bridge Systems BV. This client takes care of connecting, reconnecting and communication with the Data Connector. You can either use the source code as a reference to write your own code, or you can interface with the compiled BridgeSystems.Bridgemaet.DataConnector.ScoringProgram.dll.
+In this repository you will find the documentation on how to write a client yourself as well as the source code for a scoring program client, written in C# for .Net Standard 2.0, provided by Bridge Systems BV. This client takes care of connecting, reconnecting and communication with the Data Connector. You can either use the source code as a reference to write your own code, or you can interface with the compiled BridgeSystems.Bridgemaet.DataConnector.ScoringProgram.dll.
 
 ## Documentation
 There are two main sources of documentation:
