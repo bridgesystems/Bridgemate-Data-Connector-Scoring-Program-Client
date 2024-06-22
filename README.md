@@ -4,7 +4,7 @@ Communication through the Bridgemate Data Connector is the preferred way for com
 In this repository you will find the documentation on how to write a client yourself as well as the source code for a scoring program client, written in C# for .Net Standard 2.0, provided by Bridge Systems BV. This client takes care of connecting, reconnecting and communication with the Data Connector. You can either use the source code as a reference to write your own code, or you can interface with the compiled BridgeSystems.Bridgemaet.DataConnector.ScoringProgram.dll.
 
 ## The compiled libraries
-The compiled libraries can be found in the Dll folder. The client resides in the BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.dll, but is has dependencies on NLog and on some other .Net components. 
+The compiled libraries can be found in the Dll folder. The client resides in the BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.dll, but it has dependencies on NLog and on some other .Net components. 
 Make sure to copy all *.dll files. The .pdb file can be useful when debugging. The .deps file may make it possible that the dlls other than the main one do not need to be copied. This may be the case when the programming environment can parse it and know where to find the dependencies.
 
 ## Documentation
