@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Docsold\" />
     <Folder Include="Documentation\MD\" />
   </ItemGroup>
 
