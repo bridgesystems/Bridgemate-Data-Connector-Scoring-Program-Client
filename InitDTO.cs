@@ -6,7 +6,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
 {
     /// <summary>
     /// Contains information on how to construct a new event, with its sessions, sections, tables and rounds.
-    /// Optionally player data, participations and handrecords can be added. Doing this more performant than adding them later.
+    /// Optionally player data, participations and handrecords can be added. Doing this is more performant than adding them later.
     /// </summary>
     public class InitDTO
     {
@@ -93,7 +93,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
 
         /// <summary>
         /// Optional: the data of at least the players that will participate in the sessions.
-        /// Player data is required for every participation that specifies an OrganizationId-PlayerNumber identification.
+        /// <see cref="PlayerDataDTO">Player data</see> is required for every <see cref="ParticipationDTO">participation</see> that has its a SessionGuid and PlayerNumber properties set.
         /// </summary>
         public PlayerDataDTO[] PlayerData
         {
@@ -101,8 +101,8 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Optional. Each participation with an OrganizationId-PlayerNumber must have a corresponding
-        /// PlayerData element that specifies at least its name.
+        /// Optional. Each <see cref="ParticipationDTO">participation</see> with its SessionGuid and PlayerNumber properties set must have a corresponding
+        /// <see cref="PlayerDataDTO">player data</see> element that specifies at least its name.
         /// </summary>
         public ParticipationDTO[] Participations
         {
