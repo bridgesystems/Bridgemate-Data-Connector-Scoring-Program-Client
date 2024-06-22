@@ -5,7 +5,7 @@ In this repository you will find the documentation on how to write a client your
 
 ## The compiled libraries
 The compiled libraries can be found in the Dll folder. The client resides in the BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.dll, but it has dependencies on NLog and on some other .Net components. 
-Make sure to copy all *.dll files. The .pdb file can be useful when debugging. The .deps file may make it possible that the dlls other than the main one do not need to be copied. This may be the case when the programming environment can parse it and know where to find the dependencies.
+Make sure to copy all *.dll files. The .pdb file can be useful when debugging. The .deps file may make it possible that the dlls other than the main one do not need to be copied. This may be the case when the programming environment can parse it and knows where to find the dependencies.
 
 ## Documentation
 There are two main sources of documentation:
