@@ -9,7 +9,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 {
 
     /// <summary>
-    /// The base class for the ScoringProgram pipe client and the BCS pipe client (not in this code base).
+    /// The base class for the <see cref="ScoringProgramPipeClient">ScoringProgram pipe client</see> and the BCS pipe client (not in this code base).
     /// Used to connect to and disconnect from the Data Connector.
     /// </summary>
     public abstract class DataConnectorPipeClient : IDisposable
