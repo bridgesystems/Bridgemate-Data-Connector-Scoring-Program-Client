@@ -5,7 +5,7 @@ using System.Linq;
 namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
 {
     /// <summary>
-    /// Tells BCS to continue working with a previously created scoring file.
+    /// Tells BCS to continue working with a previously created event.
     /// </summary>
     public class ContinueDTO
     {
