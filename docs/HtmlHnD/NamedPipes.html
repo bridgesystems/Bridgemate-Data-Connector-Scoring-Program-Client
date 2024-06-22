@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="generator" content="HelpNDoc Professional Edition 9.1.0.198">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="favicon.ico"/>
+
+  <title>Named Pipes</title>
+  <meta name="description" content="Document explaining how to use the Bridgemate Data Connector for exchange of results, player data and handrecords between Bridge scoring programs and the .Net version of Bridgemate Control Software (BCS.Net)" /> 
+  <meta name="keywords" content="">
+
+
+
+  
+  
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Named Pipes">
+  <meta name="twitter:description" content="Document explaining how to use the Bridgemate Data Connector for exchange of results, player data and handrecords between Bridge scoring programs and the .Net version of Bridgemate Control Software (BCS.Net)">
+
+  <!-- Open Graph data -->
+  <meta property="og:title" content="Named Pipes" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="Document explaining how to use the Bridgemate Data Connector for exchange of results, player data and handrecords between Bridge scoring programs and the .Net version of Bridgemate Control Software (BCS.Net)" />
+  <meta property="og:site_name" content="Bridgemate Data Connector developer's guide" /> 
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendors/bootstrap-3.4.1/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <link href="vendors/bootstrap-3.4.1/css/ie10-viewport-bug-workaround.css" rel="stylesheet"/>
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+      <script src="vendors/html5shiv-3.7.3/html5shiv.min.js"></script>
+      <script src="vendors/respond-1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <!-- JsTree styles -->
+  <link href="vendors/jstree-3.3.10/themes/default/style.min.css" rel="stylesheet"/>
+
+  <!-- Hnd styles -->
+  <link href="css/layout.min.css" rel="stylesheet" />
+  <link href="css/effects.min.css" rel="stylesheet" />
+  <link href="css/theme-light-blue.min.css" rel="stylesheet" />
+  <link href="css/print.min.css" rel="stylesheet" media="print" />
+  <style type="text/css">nav { width: 350px} @media screen and (min-width:769px) { body.md-nav-expanded div#main { margin-left: 350px} body.md-nav-expanded header { padding-left: 364px} }</style>
+  <style type="text/css">.navigation #inline-toc { width: auto !important}</style>
+
+  <!-- Content style -->
+  <link href="css/hnd.content.css" rel="stylesheet" />
+
+  
+
+
+
+</head>
+
+<body class="md-nav-expanded">
+
+
+
+  
+
+  <div id="skip-link">
+    <a href="#main-content" class="element-invisible">Skip to main content</a>
+  </div>
+
+  <header class="headroom">
+    <button class="hnd-toggle btn btn-default">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>        
+    </button>
+    <h1>Bridgemate Data Connector developer's guide</h1>
+    
+  </header>
+
+  <nav id="panel-left" class="md-nav-expanded">
+    <!-- Nav tabs -->
+    <ul class="tab-tabs nav nav-tabs" role="tablist">
+      <li id="nav-close" role="presentation"> 
+        <button class="hnd-toggle btn btn-default" aria-label="close">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </button>
+      </li>
+      
+	  
+        <li role="presentation" class="tab active">
+            <a href="#contents" id="tab-contents" aria-controls="contents" role="tab" data-toggle="tab">
+                <i class="glyphicon glyphicon-list"></i>
+                Contents
+            </a>
+        </li>
+      
+        <li role="presentation" class="tab">
+            <a href="#index" id="tab-index" aria-controls="index" role="tab" data-toggle="tab">
+                <i class="glyphicon glyphicon-asterisk"></i>
+                Index
+            </a>
+        </li>
+      
+        <li role="presentation" class="tab">
+            <a href="#search" id="tab-search" aria-controls="search" role="tab" data-toggle="tab">
+                <i class="glyphicon glyphicon-search"></i>
+                Search
+            </a>
+        </li>
+      
+    </ul>  <!-- /Nav tabs -->
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+	  
+      <div role="tabpanel" class="tab-pane active" id="contents">
+        <div id="toc" class="tree-container unselectable"
+            data-url="_toc.json"
+            data-openlvl="1"
+        >
+            
+        </div>
+      </div>  <!-- /contents-->
+      
+      <div role="tabpanel" class="tab-pane" id="index">
+        <div id="keywords" class="tree-container unselectable"
+            data-url="_keywords.json"
+            data-openlvl="1"
+        >
+            
+        </div>
+      </div>  <!-- /index-->
+      
+      <div role="tabpanel" class="tab-pane" id="search">
+        <div class="search-content">
+          <div class="search-input">
+            <form id="search-form">
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" id="input-search" name="input-search" placeholder="Search..." aria-label="Search..." />
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit" aria-label="Search...">
+                      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </form>
+          </div>  <!-- /search-input -->
+          <div class="search-result">
+            <div id="search-info"></div>
+            <div class="tree-container unselectable" id="search-tree"></div>
+          </div>  <!-- /search-result -->
+        </div>  <!-- /search-content -->
+      </div>  <!-- /search-->
+      
+    </div>  <!-- /Tab panes -->
+
+  </nav>
+
+  <div id="main">
+
+    <article>
+        <div id="topic-content" class="container-fluid" 
+		  data-hnd-id="NamedPipes"
+		  data-hnd-context="7"
+		  data-hnd-title="Named Pipes"
+		>
+            
+                <div class="navigation">
+                    <ol class="breadcrumb">
+                        <li><a href="Dataexchange.html">Data exchange</a></li>
+                    </ol>
+                    <div class="nav-arrows">
+                        <div class="btn-group btn-group" role="group"><a class="btn btn-default" href="Dataexchange.html" title="Data exchange" role="button"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></a><a class="btn btn-default" href="Dataexchange.html" title="Data exchange" role="button"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a><a class="btn btn-default" href="Overviewofcommunication.html" title="Overview of communication" role="button"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></div>
+                    </div>
+                </div> 
+            
+
+            <a id="main-content"></a>
+
+            <h2>Named Pipes</h2>
+
+            <div class="main-content">
+                
+<p class="rvps2"><span class="rvts6">Named pipes are used to send and receive data to and from the </span><span class="rvts6">Data Connector</span><span class="rvts6">. This section describes how to set up communication using named pipes.</span></p>
+<h1 class="rvps5"><span class="rvts0"><span class="rvts14">The Named Pipe server</span></span></h1>
+<p class="rvps2"><span class="rvts6">The server side Named Pipe is installed when installing the </span><span class="rvts6">Bridgemate Control Software</span><span class="rvts6">. It runs as a Windows service as soon as the computer has been started up. Its name is "</span><span class="rvts17">BridgeSystems.Bridgemate.DataConnectorService</span><span class="rvts6">".</span></p>
+<p class="rvps2"><span class="rvts6">Mind that the pipe only accepts one connection.</span></p>
+<h1 class="rvps5"><span class="rvts0"><span class="rvts14">The Named Pipe client</span></span></h1>
+<p class="rvps2"><span class="rvts6">The Named Pipe client must be created by the scoring program and should connect to the "</span><span class="rvts17">BridgeSystems.Bridgemate.DataConnectorService.ScoringProgram</span><span class="rvts6">" Named Pipe. Note that the pipe only accepts one connection. The pipe server will detect when then pipe client dies and will then accept a new connection. Alternatively the client can issue a Disconnect command to free up the pipe. A full ScoringProgramPipeClient class is provided in the BridgeSystems.Bridgemate.DataConnector.ScoringProgram.dll written by Bridge Systems. This class provides functions to connect, ping and exchange data with the pipe server. To use it the external scoring progam must be written in .Net 4.5 or higher or it must be able to use an adapter for using .Net Standard 2.0 code for its programming platform.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<h2 class="rvps6"><span class="rvts0"><span class="rvts18">Code examples</span></span></h2>
+<p class="rvps2"><span class="rvts6">A typical procedure to connect to the pipe server and test communication with it would be in .Net:</span></p>
+<p class="rvps2"><span class="rvts17"><br/></span></p>
+<p class="rvps7"><span class="rvts17">private NamedPipeClientStream _pipeClient;</span></p>
+<p class="rvps7"><span class="rvts17">public StreamWriter Writer {get;set;};</span><br/><span class="rvts17">public StreamReader Reader {get;set);</span></p>
+<p class="rvps7"><span class="rvts17"><br/></span></p>
+<p class="rvps7"><span class="rvts17">public async Task&lt;bool&gt; TryConnect()</span></p>
+<p class="rvps7"><span class="rvts17">{</span></p>
+<p class="rvps8"><span class="rvts17">_pipeClient = new NamedPipeClientStream(".", </span><span class="rvts6">"</span><span class="rvts17">BridgeSystems.Bridgemate.DataConnectorService.ScoringProgram</span><span class="rvts6">"</span><span class="rvts17">,</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span><span class="rvts17"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17">PipeDirection.InOut, PipeOptions.None,</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17">TokenImpersonationLevel.Impersonation);</span></p>
+<p class="rvps8"><span class="rvts17">bool connected;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp;&nbsp;</span><span class="rvts17"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17">try</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp;&nbsp;</span><span class="rvts17"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17">{</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;await _pipeClient.ConnectAsync(TimeOutInMilliSeconds);</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;connected = true;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Reader = new StreamReader(_middleManStream);</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Writer = new StreamWriter(_middleManStream);</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Writer.AutoFlush = true;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;string message="Hello world!";</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;string serializedMessage=JsonSerializer.Serialize(message);</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp;</span><span class="rvts17"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17"> &nbsp;await Writer.WriteLineAsync(serializedMessage);</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp;</span><span class="rvts17"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17"> &nbsp;string response = await Reader.ReadLineAsync();</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp;&nbsp;</span><span class="rvts17"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17">catch (TimeoutException ex)</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; {</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;connected=false;</span></p>
+<p class="rvps7"><span class="rvts17">&nbsp; &nbsp; &nbsp;</span><span class="rvts17"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17">}</span></p>
+<p class="rvps7"><span class="rvts17"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts17">return connected;</span></p>
+<p class="rvps7"><span class="rvts17">}</span></p>
+<p class="rvps2"><span class="rvts17"><br/></span></p>
+<p class="rvps2"><span class="rvts17">In Java the code could be something like:</span></p>
+<p class="rvps2"><span class="rvts17"><br/></span></p>
+<p class="rvps7"><span class="rvts19">try {</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">// Connect to the pipe</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">RandomAccessFile pipe =</span></p>
+<p class="rvps7"><span class="rvts19">&nbsp;</span><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">new RandomAccessFile("\\\\.\\pipe\\</span><span class="rvts17">BridgeSystems.Bridgemate.DataConnectorService.ScoringProgram</span><span class="rvts19">", "rw");</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">String echoText = "Hello word\n";</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">// write to pipe</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">pipe.write ( echoText.getBytes() );</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">// read response</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">String echoResponse = pipe.readLine();</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">System.out.println("Response: " + echoResponse );</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">pipe.close();</span><br/><span class="rvts19">&nbsp; &nbsp; &nbsp;} catch (Exception e) {</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">// TODO Auto-generated catch block</span><br/><span class="rvts19"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="rvts19">e.printStackTrace();</span></p>
+<p class="rvps7"><span class="rvts19">&nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps7" style="break-before: always;"><span class="rvts19"><br/></span></p>
+<p class="rvps2"><span class="rvts17">&nbsp;</span></p>
+<p class="rvps2"><span class="rvts17"></span><span class="rvts6"></span></p>
+
+            </div>
+            
+            <div id="topic_footer"><div id="topic_footer_content">Copyright &copy; 2024 by Bridge Systems BV. All Rights Reserved.</div></div>
+        </div>  <!-- /#topic-content -->
+    </article>
+
+    <footer></footer>
+
+  </div>  <!-- /#main -->
+
+  <div class="mask" data-toggle="sm-nav-expanded"></div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="hndModal" tabindex="-1" role="dialog" aria-labelledby="hndModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="hndModalLabel"></h4>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary modal-btn-close" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Splitter -->
+  <div id="hnd-splitter" style="left: 350px"></div>  
+
+  <!-- Scripts -->
+  <script src="vendors/jquery-3.5.1/jquery.min.js"></script>
+  <script src="vendors/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+  <script src="vendors/bootstrap-3.4.1/js/ie10-viewport-bug-workaround.js"></script>
+  <script src="vendors/markjs-8.11.1/jquery.mark.min.js"></script>
+  <script src="vendors/uri-1.19.11/uri.min.js"></script>
+  <script src="vendors/imageMapResizer-1.0.10/imageMapResizer.min.js"></script>
+  <script src="vendors/headroom-0.11.0/headroom.min.js"></script>
+  <script src="vendors/jstree-3.3.10/jstree.min.js"></script>  
+  <script src="vendors/interactjs-1.9.22/interact.min.js"></script>  
+
+  <!-- HelpNDoc scripts -->
+  <script src="js/polyfill.object.min.js"></script>
+  <script src="_translations.js"></script>
+  <script src="js/hndsd.min.js"></script>
+  <script src="js/hndse.min.js"></script>
+  <script src="js/app.min.js"></script>
+
+  <!-- Init script -->
+  <script>
+    $(function() {
+      // Create the app
+      var app = new Hnd.App({
+        searchEngineMinChars: 3
+      });
+      // Update translations
+      hnd_ut(app);
+	  // Instanciate imageMapResizer
+	  imageMapResize();
+	  // Custom JS
+	  
+      // Boot the app
+      app.Boot();
+    });
+  </script>
+
+
+
+</body>
+
+</html>
+
