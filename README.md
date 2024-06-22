@@ -8,7 +8,7 @@ There are two main sources of documentation:
 ### 1. The general description of how to implement communication with the Bridgemate Data Connector.
 Help documents that describe en detail how to connect to and communicate with the Data Connector, enabling creation of your own client on the programming platform of your choice:
 1. Pdf: [Bridgemate Data Connector developer's guide](https://github.com/bridgesystems/BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient/blob/master/Documentation/Doc/Bridgemate%20Data%20Connector%20developers%20guide.pdf)
-2. Html: [Bridgemate Data Connector developer's guide](https://github.com/bridgesystems/BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient/blob/master/Documentation/HtmlHnD/Bridgemate%20Data%20Connector%20developers%20guide.html)
+2. Html: [Bridgemate Data Connector developer's guide](https://github.com/bridgesystems/Bridgemate-Data-Connector-Scoring-Program-Client/blob/master/docs/MD/Bridgemate%20Data%20Connector%20developers%20guide.md)(https://github.com/bridgesystems/BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient/blob/master/Documentation/HtmlHnD/Bridgemate%20Data%20Connector%20developers%20guide.html)
 
 ### 2. The context sensitive help for the source code of the BridgeSystems.Bridgemate.DataConnector.ScoringProgram.dll.
 A help file that describes the methods and properties of the scoring program client provided by Bridge Systems BV.
