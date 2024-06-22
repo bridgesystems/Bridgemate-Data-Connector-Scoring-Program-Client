@@ -8,13 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Scoring Program Client Documentation\**" />
+    <EmbeddedResource Remove="Scoring Program Client Documentation\**" />
+    <None Remove="Scoring Program Client Documentation\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="NLog" Version="5.3.2" />
     <PackageReference Include="System.Text.Json" Version="8.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Documentation\MD\" />
-    <Folder Include="Scoring Program Client Documentation\" />
   </ItemGroup>
 
 </Project>
