@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Folder Include="Documentation\MD\" />
-    <Folder Include="docs\" />
   </ItemGroup>
 
 </Project>
