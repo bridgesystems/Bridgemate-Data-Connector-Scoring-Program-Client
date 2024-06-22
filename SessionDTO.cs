@@ -39,7 +39,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Required
+        /// Required. The name of the session.
         /// </summary>
         public string Name
         {
@@ -47,7 +47,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Required
+        /// Required. The year in which the session is played.
         /// </summary>
         public int Year
         {
@@ -55,7 +55,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Required
+        /// Required. The month in which the session is played.
         /// </summary>
         public int Month
         {
@@ -63,16 +63,24 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Required
+        /// Required. The day on which the session is played.
         /// </summary>
         public int Day
         {
             get; set;
         }
+
+        /// <summary>
+        /// Optional. The starting hour for the session.
+        /// </summary>
         public int Hour
         {
             get; set;
         }
+
+        /// <summary>
+        /// Optional. The starting minutes for the session.
+        /// </summary>
         public int Minute
         {
             get; set;
