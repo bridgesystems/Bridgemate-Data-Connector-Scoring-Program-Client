@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <Folder Include="Documentation\MD\" />
-    <Folder Include="Docs\" />
     <Folder Include="Scoring Program Client Documentation\" />
   </ItemGroup>
 
