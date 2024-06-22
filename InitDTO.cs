@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient;
 
 namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
 {
     /// <summary>
     /// Contains information on how to construct a new event, with its sessions, sections, tables and rounds.
     /// Optionally player data, participations and handrecords can be added. Doing this is more performant than adding them later.
+    /// Is used as a parameter for the <see cref="ScoringProgramPipeClient.Initialize(InitDTO)">ScoringProgramPipeClient.Initialize</see> or the 
+    /// <see cref="ScoringProgramPipeClient.InitializeAsync(InitDTO)">ScoringProgramPipeClient.InitializeAsync</see> method.
     /// </summary>
     public class InitDTO
     {

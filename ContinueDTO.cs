@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient;
 
 namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
 {
     /// <summary>
-    /// Tells BCS to continue working with a previously created event.
+    /// Instructs BCS to continue working with a previously created event using the <see cref="ScoringProgramPipeClient.Continue(ContinueDTO)">ScoringProgramPipeClient.Continue</see> method 
+    /// or the <see cref="ScoringProgramPipeClient.ContinueAsync(ContinueDTO)">ScoringProgramPipeClient.ContinueAsync</see> method.
     /// </summary>
     public class ContinueDTO
     {

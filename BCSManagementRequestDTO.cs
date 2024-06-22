@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient;
 
 namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
 {
     /// <summary>
     /// Carries information on a management request for BCS.
+    /// Is used as a parameter for the <see cref="ScoringProgramPipeClient.IssueManagementCommand(BCSManagementRequestDTO)">ScoringProgramPipeClient.IssueManagementCommand</see> method 
+    /// or the <see cref="ScoringProgramPipeClient.IssueManagementCommandAsync(BCSManagementRequestDTO)">ScoringProgramPipeClient.IssueManagementCommandAsync</see> method.
     /// </summary>
     public class BCSManagementRequestDTO
     {
