@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-	  <Version>1.0.855.1</Version>
-	  <FileVersion>1.0.855.1</FileVersion>
+	  <Version>1.0.856.1</Version>
+	  <FileVersion>1.0.856.1</FileVersion>
 	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Folder Include="Documentation\MD\" />
+    <Folder Include="Dll\" />
   </ItemGroup>
 
 </Project>
