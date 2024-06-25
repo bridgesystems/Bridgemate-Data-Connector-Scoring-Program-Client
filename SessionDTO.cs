@@ -116,7 +116,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// Validates the DTO. Produces validation messages if there are problems. 
         /// </summary>
         /// <returns>True if there are no validation errors.</returns>
-        public bool Validate()
+        public bool Validate(bool forAdding)
         {
             var validationMessages=new List<string>();
 
@@ -125,9 +125,15 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                 validationMessages.Add("The guid must be exactly 32 character long and can only contain capital A to F or digits 0 to 9.");
             }
 
-            if (EventGuid != null && (SessionGuid.Length != 32 || SessionGuid.Any(c => !(c >= 'A' && c <= 'F' || c >= '0' && c <= '9'))))
+            if(forAdding)
             {
-                validationMessages.Add("The venture guid, if used, must be exactly 32 character long and can only contain capital A to F or digits 0 to 9.");
+                if (string.IsNullOrEmpty(EventGuid))
+                    validationMessages.Add($"When adding a session the {nameof(EventGuid)} must not be empty.");
+            }
+
+            if (EventGuid != null && (EventGuid.Length != 32 || EventGuid.Any(c => !(c >= 'A' && c <= 'F' || c >= '0' && c <= '9'))))
+            {
+                validationMessages.Add("The event guid, if used, must be exactly 32 character long and can only contain capital A to F or digits 0 to 9.");
             }
             if (ScoringGroups == null || ScoringGroups.Length == 0)
             {

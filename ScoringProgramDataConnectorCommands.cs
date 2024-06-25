@@ -10,6 +10,7 @@
         /// Invalid, never use
         /// </summary>
         None = 0,                               //Invalid
+
         /// <summary>
         /// Connect to the Data Connector
         /// </summary>
@@ -26,18 +27,22 @@
         /// Checks if the Data Connnector responds
         /// </summary>
         Ping,
+
         /// <summary>
         /// Initialize an event with at least one session, its scoringgroups, sections, tables and rounds.
         /// </summary>
         InitializeEvent = 5,                    //InitDTO
+
         /// <summary>
         /// Update the movement for a section, or delete the section.
         /// </summary>
         UpdateMovement,                         //SectionDTO
+
         /// <summary>
         /// Update the scoringmethod of the scoringgroups and/or rearrange the assignment of the sections to them.
         /// </summary>
         UpdateScoringGroups,                    //ScoringGroupDTO[]
+
         /// <summary>
         /// Not supported
         /// </summary>

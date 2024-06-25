@@ -1410,6 +1410,13 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             return SendData(updatedSection.SessionGuid, ScoringProgramDataConnectorCommands.UpdateMovement, serializedData);
         }
 
+        public async Task<ScoringProgramResponse> AddSessionAsync(SessionDTO addedSession)
+        {
+            var serializedData = JsonSerializer.Serialize(addedSession);
+            Logger.Info($"{nameof(SessionDTO)}: {serializedData}");
+            return SendData(addedSession.SessionGuid, ScoringProgramDataConnectorCommands.UpdateSession, serializedData);
+        }
+
         /// <summary>
         /// Issue a management command to BCS asynchronously. This command can either be a query for information on the location of its scoring file, which sessions
         /// it is currently administering or which sessions are know to it, or it can be an instruction to shut down.
