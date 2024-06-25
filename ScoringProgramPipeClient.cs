@@ -1410,11 +1410,31 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             return SendData(updatedSection.SessionGuid, ScoringProgramDataConnectorCommands.UpdateMovement, serializedData);
         }
 
+        /// <summary>
+        /// Adds the given session to a known event asynchronously.
+        /// This event must have been sent to the Data Connector previously using an <see cref="InitDTO">InitDTO</see>.
+        /// </summary>
+        /// <param name="addedSession"></param>
+        /// <returns></returns>
         public async Task<ScoringProgramResponse> AddSessionAsync(SessionDTO addedSession)
         {
             var serializedData = JsonSerializer.Serialize(addedSession);
             Logger.Info($"{nameof(SessionDTO)}: {serializedData}");
-            return SendData(addedSession.SessionGuid, ScoringProgramDataConnectorCommands.UpdateSession, serializedData);
+            return await  SendDataAsync(addedSession.EventGuid, ScoringProgramDataConnectorCommands.AddSession, serializedData);
+        }
+
+
+        /// <summary>
+        /// Adds the given session to a known event synchronously.
+        /// This event must have been sent to the Data Connector previously using an <see cref="InitDTO">InitDTO</see>.
+        /// </summary>
+        /// <param name="addedSession"></param>
+        /// <returns></returns>
+        public ScoringProgramResponse AddSession(SessionDTO addedSession)
+        {
+            var serializedData = JsonSerializer.Serialize(addedSession);
+            Logger.Info($"{nameof(SessionDTO)}: {serializedData}");
+            return SendData(addedSession.SessionGuid, ScoringProgramDataConnectorCommands.AddSession, serializedData);
         }
 
         /// <summary>

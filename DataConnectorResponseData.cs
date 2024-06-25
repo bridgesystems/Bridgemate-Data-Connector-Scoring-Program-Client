@@ -83,9 +83,15 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         Movement,
 
         /// <summary>
-        /// Sessions, their scoringroups and their sections.
+        /// Data for a new session. A <see cref="SessionDTO">SectionDTO</see>.
         /// </summary>
-        Sessions = 15,
+        Session = 15,
+
+        /// <summary>
+        /// Sessions, their scoringroups and their sections. A <see cref="BCSManagementResponseDTO">BCSManagementResponseDTO</see> 
+        /// with an array of <see cref="SessionInfoDTO">SessionInfoDTO</see>s as its <see cref="BCSManagementResponseDTO.SessionInformation">SessionInformation</see> property.
+        /// </summary>
+        Sessions,
 
         /// <summary>
         /// Guid-name pairs of the sessions currently being administered.
