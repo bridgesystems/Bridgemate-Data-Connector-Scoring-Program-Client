@@ -35,5 +35,6 @@
   - [Update player data](<Updateplayerdata.md>)
   - [Update participations](<Updateparticipations.md>)
   - [Update handrecords](<Updatehandrecords.md>)
+  - [Add a session](<Addasession.md>)
   - [Manage BCS](<ManageBCS.md>)
 - [Explanation of used terms](<Explanationofusedterms.md>)

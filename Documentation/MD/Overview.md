@@ -28,6 +28,12 @@ Below you find all Data Transfer Objects (DTOs) and their relation according to 
 
 ![Image](<lib/handrecordDTOClosed.png>)
 
+### [Add session](<Addasession.md>)
+
+![Image](<lib/AddSection.png>)
+
+&nbsp;
+
 ### [BCS Management](<ManageBCS.md>)
 
 ![Image](<lib/BCSManagementDTOClosed 1.png>)

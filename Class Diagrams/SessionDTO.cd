@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.SessionDTO">
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.SessionDTO" Collapsed="true">
     <Position X="0.5" Y="0.5" Width="2" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
@@ -9,6 +9,46 @@
     <TypeIdentifier>
       <HashCode>AgABAABAJACAAAAAAAAAAAQAEQAAgCIUAAAAAAAAAAA=</HashCode>
       <FileName>SessionDTO.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ScoringGroups" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.ScoringGroupDTO" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgEAAABAAACAAAAAAAAAAAQAEgACIAACoEAAAQAQAAA=</HashCode>
+      <FileName>ScoringGroupDTO.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Sections" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.SectionDTO" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAABBAAACAAAAEAAAAQYUAUAACAAAAAQAAIQAAgAA=</HashCode>
+      <FileName>SectionDTO.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Tables" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TableDTO" Collapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAACAEAAgAAAAAAAAEAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>TableDTO.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Rounds" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.RoundDTO" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACgAAABAAICEEAAmAAAAQAAAEAAAABAAUAAAAgABABA=</HashCode>
+      <FileName>RoundDTO.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

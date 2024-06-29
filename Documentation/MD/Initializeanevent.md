@@ -14,9 +14,13 @@
 
 An event can be initialized with one or more sessions.Initialization is done using the [InitializeEvent](<Overviewofcommunication.md>) command and an [InitDTO](<InitDTO.md>). The SessionGuid must not be set in the [ScoringProgramRequest](<Overviewofcommunication.md#Diagram>). This DTO must at least contain information on the scoring method, the scoring group for each section and the movement.
 
-Player data, starting posititons and handrecords are optional. Board results are no part of initialization data but can be sent later.
+Player data, starting posititons and handrecords are optional. Board results are no part of initialization data but can be sent later.N
 
 Furthermore, the InitDTO contains a [Commands](<InitDTO.md#Commands>) property that specifies which actions the Bridgemate Control Software must undertake&nbsp; when it has been launched.
+
+**Note**
+
+A player, as identified by his playernumber, may only exist once in the event. In the case that a player participates in both events make sure to duplicate the player with a different playernumber.
 
 ### Example json code
 

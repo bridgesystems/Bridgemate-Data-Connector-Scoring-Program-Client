@@ -22,6 +22,7 @@ Adding a section works the same way. The Bridgemate Data Connector will detect t
 
 **Note**
 
-* Do not forget to send PlayerDataDTos and ParticipationDTOs for&nbsp; new players that have been added to the event.
+* Do not forget to send [PlayerDataDTos](<PlayerDataDTO.md>) and [ParticipationDTOs](<ParticipationDTO.md>) (in that order) for&nbsp; new players that have been added to the event.
+* Likewise send a Bridgemate2SettingsDTO or a Bridgemate3SettingsDTO for a new section.
 * Boardresults will be deleted from the first round where the round data for a table has changed. The ScoringProgramResponse contains the rounds (as a SectionDTO) for which this is the case. If applicable send the results for these rounds again (but as a rule it should not apply).
 

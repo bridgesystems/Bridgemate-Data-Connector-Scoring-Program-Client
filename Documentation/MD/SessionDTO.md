@@ -4,11 +4,13 @@
 
 &nbsp;
 
-The SessionDTO can be used with the InitializeEvent command and will then be added to the InitDTO.Sessions property.
+The SessionDTO can be used with the [InitializeEvent command](<Overviewofcommunication.md>) and will then be added to the InitDTO.Sessions property.
+
+Apart from that the SessionDTO can be used as data together with [AddSession command](<Overviewofcommunication.md>) to [add a session to a previously initialized event](<Addasession.md>).
 
 ### EventGuid property
 
-Optional. Must be present if there is more than one session.
+Optional. Must be present if there is more than one session at initialization or when the session is added to an existing event.
 
 ##### SessionGuid property
 
