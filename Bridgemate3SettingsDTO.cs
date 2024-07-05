@@ -247,7 +247,38 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Italian
         /// </summary>
-        Italian
+        Italian,
+
+        /// <summary>
+        /// Danish
+        /// </summary>
+        Danish,
+
+        /// <summary>
+        /// Spanish
+        /// </summary>
+        Spanish,
+
+        /// <summary>
+        /// Norwegian
+        /// </summary>
+        Norwegian,
+
+        /// <summary>
+        /// Polish
+        /// </summary>
+        Polish,
+
+        /// <summary>
+        /// Swedish
+        /// </summary>
+        Swedish,
+
+        /// <summary>
+        /// Turkish
+        /// </summary>
+        Tukish
+
     }
 
     /// <summary>
@@ -301,12 +332,12 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// The Bridgemates for the section will work in online mode (continuous communication with the Bridgemate 3 server). 
         /// </summary>
-        Online,
+        Offline,
 
         /// <summary>
         /// The Bridgemates for the section will work in offline mode (communication only at the start and the end of the session).
         /// </summary>
-        Offline
+        Online
     }
 
     /// <summary>
