@@ -1,6 +1,8 @@
 # Bridgemate3SettingsDTO
 
-![Image](<lib/Bridgemate3SettingsDTO.png>)![Image](<lib/Bridgemate3SettingsOptions 1.png>)
+![Image](<lib/Bridgemate3SettingsDTO.png>)
+
+![Image](<lib/Bridgemate3SettingsOptions.png>)
 
 &nbsp;
 

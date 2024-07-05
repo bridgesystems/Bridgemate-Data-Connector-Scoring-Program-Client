@@ -327,17 +327,12 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Not specified.
         /// </summary>
-        NotSet,
+        Online,
 
         /// <summary>
         /// The Bridgemates for the section will work in online mode (continuous communication with the Bridgemate 3 server). 
         /// </summary>
-        Offline,
-
-        /// <summary>
-        /// The Bridgemates for the section will work in offline mode (communication only at the start and the end of the session).
-        /// </summary>
-        Online
+        Offline
     }
 
     /// <summary>

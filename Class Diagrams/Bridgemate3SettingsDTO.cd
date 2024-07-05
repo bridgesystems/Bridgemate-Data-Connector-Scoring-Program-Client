@@ -6,14 +6,14 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAACAEAAAAAAAAAAAEAAAAAEAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAABAAACAEAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>BridgemateSettingsDTO.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate3SettingsDTO" Collapsed="true">
     <Position X="2.75" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAACACALoAIARAAAIAAEBhQAAAAAAQACAACCAQAA=</HashCode>
+      <HashCode>AAAAAQwABACAAEAAAIAQEBFgkAiAAAAAgAAMAAEAABA=</HashCode>
       <FileName>Bridgemate3SettingsDTO.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -32,7 +32,7 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm3PlayerRegistrationOption">
-    <Position X="11.5" Y="2.25" Width="2.25" />
+    <Position X="10.75" Y="0.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>BAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Bridgemate3SettingsDTO.cs</FileName>
@@ -67,7 +67,7 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm3NextRoundSeatingOption">
-    <Position X="9" Y="2.25" Width="2.25" />
+    <Position X="9" Y="2" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAIAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Bridgemate3SettingsDTO.cs</FileName>
@@ -95,9 +95,9 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm3LanguageOption">
-    <Position X="10.75" Y="0.5" Width="2" />
+    <Position X="13.25" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>QAAAAACQAAAAAAAAQAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>YgAAAACQAACAAAAAQAAAAAAABAAAAAAQgAAAACAAAAA=</HashCode>
       <FileName>Bridgemate3SettingsDTO.cs</FileName>
     </TypeIdentifier>
   </Enum>
@@ -118,7 +118,7 @@
   <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm3ConnectionModeOption">
     <Position X="5.75" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAgAEAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Bridgemate3SettingsDTO.cs</FileName>
     </TypeIdentifier>
   </Enum>
