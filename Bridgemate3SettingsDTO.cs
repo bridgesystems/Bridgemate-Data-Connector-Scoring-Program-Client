@@ -318,7 +318,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Valid values 0-15. Defines the number of seconds(times 5) before the screen of the Bridgemate will dim.So the default value of 2 amounts to 10 seconds.
         /// </summary>
-        public byte DimMode
+        public byte BM3ScreenDimMode
         {
             get; set;
         }
@@ -327,7 +327,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// Valid values 0-15. Defines the number of seconds (times 5) before the screen of the Bridgemate will turn off. 
         /// A value of zero, the default, means "never turn off".
         /// </summary>
-        public byte ScreenOffMode
+        public byte BM3ScreenOffMode
         {
             get; set;
         }
@@ -336,7 +336,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// Valid values 0-120. Defines the number of seconds (times 5) before the Bridgemate will enter Sleepmode. 
         /// Once the Bridgemate has entered sleepmode its powerbutton must be used to wake it up again.
         /// </summary>
-        public byte SleepMode
+        public byte BM3SleepMode
         {
             get; set;
         }
@@ -344,7 +344,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Valid values 0-7. Currently not in use.
         /// </summary>
-        public byte AudioVolume
+        public byte BM3AudioVolume
         {
             get; set;
         }
@@ -352,7 +352,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Valid values 1-7. Defines the screen brightness.
         /// </summary>
-        public byte ScreenBrightness
+        public byte BM3ScreenBrightness
         {
             get; set;
         }
@@ -360,7 +360,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Must be four digits. The code the TD must enter to get access to the TD menu. Defaults to "0000".
         /// </summary>
-        public string TdPinCode
+        public string BM3PINcode
         {
             get; set;
         }
@@ -368,7 +368,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Specifies how players can enter the result for a board: Up/Down tricks, total tricks or American style.
         /// </summary>
-        public Bm3ResultEntryMethod ResultMethod
+        public Bm3ResultEntryMethod BM3ResultMethod
         {
             get; set;
         }
@@ -376,7 +376,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Specifies if the leadcard must be enterd together with the contract and if the leadcard should be validated againts the handrecord.
         /// </summary>
-        public Bm3LeadCardEntryOption LeadcardEntry
+        public Bm3LeadCardEntryOption BM3LeadCardEntry
         {
             get; set;
         }
@@ -384,7 +384,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Specifies if and when the players can make themselves known by entering their playernumber and/or name on the Bridgemate.
         /// </summary>
-        public Bm3PlayerRegistrationOption PlayerRegistration
+        public Bm3PlayerRegistrationOption BM3PlayerNumberEntry
         {
             get; set;
         }
@@ -392,7 +392,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Specifies if and when the players can make themselves known by entering their playernumber and/or name on the Bridgemate while the round is in progress (i.e.: after a board has been entered).
         /// </summary>
-        public Bm3PlayerRegistrationOptionDuringPlay PlayerRegistrationDuringPlay
+        public Bm3PlayerRegistrationOptionDuringPlay BM3PlayerNumberEntryDuringPlay
         {
             get; set;
         }
@@ -400,7 +400,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Specifies if players can call for the Tournament Director using the Bridgemate.
         /// </summary>
-        public Bm3TdCallOption TdCall
+        public Bm3TdCallOption BM3TDCall
         {
             get; set;
         }
@@ -408,7 +408,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Specifies if and when the Bridgemate will show the current ranking for the players on the table.
         /// </summary>
-        public Bm3RankingDisplayOption RankingDisplay
+        public Bm3RankingDisplayOption BM3Ranking
         {
             get; set;
         }
@@ -416,7 +416,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Specifies if players may reenter the result of the board after the original entry has been confirmed by the opponents.
         /// </summary>
-        public Bm3ResultReentryOption ResultReentry
+        public Bm3ResultReentryOption BM3BoardResultReentry
         {
             get; set;
         }
@@ -424,7 +424,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Specifes if the seatings for the next round must be displayed after the last result has been entered for the round.
         /// </summary>
-        public Bm3NextRoundSeatingOption NextRoundSeating
+        public Bm3NextRoundSeatingOption BM3NextSeatings
         {
             get; set;
         }
@@ -432,7 +432,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Specifies if and when the Bridgemate will show a recap of the scores obtained on the table in the current round.
         /// </summary>
-        public Bm3ScoreRecapOption ScoreRecap
+        public Bm3ScoreRecapOption BM3ScoreRecap
         {
             get; set;
         }
@@ -440,7 +440,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Specifies if the own percentage should be included in the results overview.
         /// </summary>
-        public Bm3ViewOwnPercentageOption ViewOwnPercentage
+        public Bm3ViewOwnPercentageOption BM3OwnPercentage
         {
             get; set;
         }
@@ -448,7 +448,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Specifies if the Bridgemate will show the other results for the board that was just entered.
         /// </summary>
-        public Bm3ViewResultsOption ViewResults
+        public Bm3ViewResultsOption BM3ViewResults
         {
             get; set;
         }
@@ -456,7 +456,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Specifies which language the Bridgemate will use. The default is zero for English.
         /// </summary>
-        public Bm3LanguageOption Language
+        public Bm3LanguageOption BM3Language
         {
             get; set;
         }
@@ -464,7 +464,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Specifies if players may view the handrecord after the result has been entered.
         /// </summary>
-        public Bm3ViewHandrecordOption ViewHandrecord
+        public Bm3ViewHandrecordOption BM3ViewHandrecord
         {
             get; set;
         }
@@ -472,7 +472,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Specifies if and when the players can enter the handrecord for a board if it is not present.
         /// </summary>
-        public Bm3EnterHandrecordOption EnterHandrecord
+        public Bm3EnterHandrecordOption BM3EnterHandrecord
         {
             get; set;
         }
@@ -482,7 +482,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// In offline mode the Bridgemate will not communicate with the Bridgemate 3 server during the session, 
         /// but will try to send its results after the last board had been played.
         /// </summary>
-        public Bm3ConnectionModeOption ConnectionMode
+        public Bm3ConnectionModeOption BM3ConnectionMode
         {
             get; set;
         }
@@ -495,16 +495,16 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         {         
             base.Validate();
             var validationMessages = new List<string>(ValidationMessages);
-            if (DimMode < 0 || DimMode > 15)
-                validationMessages.Add($"Invalid {nameof(DimMode)} ({DimMode}). Value must be between 0 and 15");
-            if (ScreenBrightness < 1 || DimMode > 7)
-                validationMessages.Add($"Invalid {nameof(ScreenBrightness)} ({ScreenBrightness}). Value must be between 1 and 7");
-            if (SleepMode < 0 || SleepMode > 120)
-                validationMessages.Add($"Invalid {nameof(SleepMode)} ({SleepMode}). Value must be between 0 and 120");
-            if (AudioVolume < 0 || AudioVolume > 7)
-                validationMessages.Add($"Invalid {nameof(AudioVolume)} ({AudioVolume}). Value must be between 0 and 7");
-            if (string.IsNullOrWhiteSpace(TdPinCode) || TdPinCode.Length != 4 || !int.TryParse(TdPinCode, out _))
-                validationMessages.Add($"Invalid {nameof(TdPinCode)} ('{TdPinCode}'). The pincode must be four digits.");
+            if (BM3ScreenDimMode < 0 || BM3ScreenDimMode > 15)
+                validationMessages.Add($"Invalid {nameof(BM3ScreenDimMode)} ({BM3ScreenDimMode}). Value must be between 0 and 15");
+            if (BM3ScreenBrightness < 1 || BM3ScreenDimMode > 7)
+                validationMessages.Add($"Invalid {nameof(BM3ScreenBrightness)} ({BM3ScreenBrightness}). Value must be between 1 and 7");
+            if (BM3SleepMode < 0 || BM3SleepMode > 120)
+                validationMessages.Add($"Invalid {nameof(BM3SleepMode)} ({BM3SleepMode}). Value must be between 0 and 120");
+            if (BM3AudioVolume < 0 || BM3AudioVolume > 7)
+                validationMessages.Add($"Invalid {nameof(BM3AudioVolume)} ({BM3AudioVolume}). Value must be between 0 and 7");
+            if (string.IsNullOrWhiteSpace(BM3PINcode) || BM3PINcode.Length != 4 || !int.TryParse(BM3PINcode, out _))
+                validationMessages.Add($"Invalid {nameof(BM3PINcode)} ('{BM3PINcode}'). The pincode must be four digits.");
 ;
 
             ValidationMessages = validationMessages.ToArray();
