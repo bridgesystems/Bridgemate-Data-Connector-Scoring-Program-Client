@@ -325,12 +325,12 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
     public enum Bm3ConnectionModeOption
     {
         /// <summary>
-        /// Not specified.
+        /// The Bridgemates for the section will work in online mode (continuous communication with the Bridgemate 3 server). 
         /// </summary>
         Online,
 
         /// <summary>
-        /// The Bridgemates for the section will work in online mode (continuous communication with the Bridgemate 3 server). 
+        /// The Bridgemates for the section will work in offline mode (communication will be initiated at the end of the session or can be initiated manually).
         /// </summary>
         Offline
     }
