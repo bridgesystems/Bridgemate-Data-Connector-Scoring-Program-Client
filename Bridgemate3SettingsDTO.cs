@@ -316,6 +316,14 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
     public class Bridgemate3SettingsDTO : BridgemateSettingsDTO
     {
         /// <summary>
+        /// Valid values 1-7. Defines the screen brightness.
+        /// </summary>
+        public byte BM3ScreenBrightness
+        {
+            get; set;
+        }
+
+        /// <summary>
         /// Valid values 0-15. Defines the number of seconds(times 5) before the screen of the Bridgemate will dim.So the default value of 2 amounts to 10 seconds.
         /// </summary>
         public byte BM3ScreenDimMode
@@ -349,10 +357,21 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             get; set;
         }
 
+
         /// <summary>
-        /// Valid values 1-7. Defines the screen brightness.
+        /// Specifies which language the Bridgemate will use. The default is zero for English.
         /// </summary>
-        public byte BM3ScreenBrightness
+        public Bm3LanguageOption BM3Language
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Specifies if the Bridgemates for this section will operate in offline mode. 
+        /// In offline mode the Bridgemate will not communicate with the Bridgemate 3 server during the session, 
+        /// but will try to send its results after the last board had been played.
+        /// </summary>
+        public Bm3ConnectionModeOption BM3ConnectionMode
         {
             get; set;
         }
@@ -366,9 +385,25 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
+        /// Specifies if players can call for the Tournament Director using the Bridgemate.
+        /// </summary>
+        public Bm3TdCallOption BM3TDCall
+        {
+            get; set;
+        }
+
+        /// <summary>
         /// Specifies how players can enter the result for a board: Up/Down tricks, total tricks or American style.
         /// </summary>
         public Bm3ResultEntryMethod BM3ResultMethod
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Specifies if players may reenter the result of the board after the original entry has been confirmed by the opponents.
+        /// </summary>
+        public Bm3ResultReentryOption BM3BoardResultReentry
         {
             get; set;
         }
@@ -398,25 +433,9 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Specifies if players can call for the Tournament Director using the Bridgemate.
-        /// </summary>
-        public Bm3TdCallOption BM3TDCall
-        {
-            get; set;
-        }
-
-        /// <summary>
         /// Specifies if and when the Bridgemate will show the current ranking for the players on the table.
         /// </summary>
         public Bm3RankingDisplayOption BM3Ranking
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Specifies if players may reenter the result of the board after the original entry has been confirmed by the opponents.
-        /// </summary>
-        public Bm3ResultReentryOption BM3BoardResultReentry
         {
             get; set;
         }
@@ -438,14 +457,6 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Specifies if the own percentage should be included in the results overview.
-        /// </summary>
-        public Bm3ViewOwnPercentageOption BM3OwnPercentage
-        {
-            get; set;
-        }
-
-        /// <summary>
         /// Specifies if the Bridgemate will show the other results for the board that was just entered.
         /// </summary>
         public Bm3ViewResultsOption BM3ViewResults
@@ -454,9 +465,9 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Specifies which language the Bridgemate will use. The default is zero for English.
+        /// Specifies if the own percentage should be included in the results overview.
         /// </summary>
-        public Bm3LanguageOption BM3Language
+        public Bm3ViewOwnPercentageOption BM3OwnPercentage
         {
             get; set;
         }
@@ -473,16 +484,6 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// Specifies if and when the players can enter the handrecord for a board if it is not present.
         /// </summary>
         public Bm3EnterHandrecordOption BM3EnterHandrecord
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Specifies if the Bridgemates for this section will operate in offline mode. 
-        /// In offline mode the Bridgemate will not communicate with the Bridgemate 3 server during the session, 
-        /// but will try to send its results after the last board had been played.
-        /// </summary>
-        public Bm3ConnectionModeOption BM3ConnectionMode
         {
             get; set;
         }
