@@ -132,9 +132,9 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             {
                 validationMessages.Add($"{nameof(ScoringGroupNumber)} ({ScoringGroupNumber}) must be greater than zero.");
             }
-            if (ScoringMethod < 10 || ScoringMethod > 70)
+            if (!new[] {ScoringType_Pairs,ScoringType_Imp,ScoringType_XImp,ScoringType_TeamImps,ScoringType_TeamVPDiscrete,ScoringType_TeamVPContinuous,ScoringType_Bam,ScoringType_Patton}.Contains(ScoringMethod))
             {
-                validationMessages.Add($"Invalid {nameof(ScoringMethod)} ({ScoringMethod}). The value must be between 10 and 70. ");
+                validationMessages.Add($"Invalid {nameof(ScoringMethod)} ({ScoringMethod}). The value must be a multiple of 10 between 10 and 70 or 51. ");
             }
             if (IsDeleted)
             {

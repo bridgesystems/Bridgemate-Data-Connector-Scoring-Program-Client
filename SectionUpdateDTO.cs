@@ -6,31 +6,13 @@ using System.Text.RegularExpressions;
 namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
 {
     /// <summary>
-    /// This class is a container for participants that can potentially meet each other during the session. Their results will be compared and they will be
-    /// ranked against each other. 
-    /// Note: if the updatedSection is part of a scoringgroup together with an other updatedSection the scoring calculation will treat these sections as one.
+    /// Contains information for an updated or added section
     /// </summary>
-    public class SectionDTO
+    public class SectionUpdateDTO
     {
-        public SectionDTO()
-        { }
-        /// <summary>
-        /// The updatedSection hosts a pairs competition. Rankings will be for each pair.
-        /// </summary>
-        public const int GameType_Pairs = 10;
 
         /// <summary>
-        /// The updatedSection hosts an individual competition. Rankings will be for each player.
-        /// </summary>
-        public const int GameType_Individual = 20;
-
-        /// <summary>
-        /// The updatedSection hosts a teams competition. Rankings will be for each teams (although a parallel pairs ranking is possible).
-        /// </summary>
-        public const int GameType_Teams = 30;
-
-        /// <summary>
-        /// Required. The guid of the session the updatedSection is part of.
+        /// Required. The guid of the session the section is part of.
         /// A string built from a Guid, without the curly braces or connecting dashes.
         /// The letters must be capitals
         /// </summary>
@@ -40,7 +22,8 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Required, the number of the scoringgroup the updatedSection belongs to. Must be greater than zero.
+        /// Required, the number of the scoringgroup the section belongs to. Must be greater than zero.
+        /// If the scoringgroup already exists the section wull be added to it, otherwise a new scoringgroup wil be added.
         /// </summary>
         public int ScoringGroupNumber
         {
@@ -48,7 +31,17 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Required. The letters of the updatedSection. They must be unique within an event.
+        /// Must be set and must match the scoringmethod of the scoringgroup if the section is added to one, otherwise it will specify the 
+        /// scoringmethod for the new scoringgroup. See for valid values the ScoringType contstants in the ScoringGroupDTO.
+        /// </summary>
+        public int ScoringGroupScoringMethod
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Required. The letters of the section. If a section with this letters already exists it will be updated. 
+        /// Otherwise the section will be added.
         /// Can be A-Z, AA, BB, CC,...ZZ, AAA, BBB, CCC, ... ZZZ
         /// </summary>
         public string Letters
@@ -108,7 +101,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// If true the SitoutSectionLetters must have the value for an existing updatedSection.
+        /// If true the SitoutSectionLetters must have the value for an existing section.
         /// </summary>
         public bool IsCombiSection
         {
@@ -116,8 +109,8 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Required if IsCombiSection is True. Must be the letters for an existing updatedSection.
-        /// The letters of the updatedSection the North-South pairs in the combisection originate from.
+        /// Required if IsCombiSection is True. Must be the letters for an existing section.
+        /// The letters of the section the North-South pairs in the combisection originate from.
         /// </summary>
         public string NorthSouthPairSectionLetters
         {
@@ -125,8 +118,8 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Required if IsCombisection is True. Must be the letters for an existing updatedSection.
-        /// The letters of the updatedSection the East-West pairs in the combisection originate from.
+        /// Required if IsCombisection is True. Must be the letters for an existing section.
+        /// The letters of the section the East-West pairs in the combisection originate from.
         /// </summary>
         public string EastWestPairSectionLetters
         {
@@ -134,7 +127,31 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// An array of TableDTOs. All tables for the updatedSection must be specified. If the updatedSection is to be deleted, no tables must be specified.
+        /// Marks the section for deletion. No tables must be specified. ALl properties other than the SessionGuid an Letters are ignored.
+        /// </summary>
+        public bool IsDeleted
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Optional. Any players that have been added and were not included while initializing the session.
+        /// </summary>
+        public PlayerDataDTO[] AddedPlayers
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Optional. The players as they are seated in the first round. Be sure to include players as well that do not play in the first round.
+        /// </summary>
+        public ParticipationDTO[] Participations
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// An array of TableDTOs. All tables for the section must be specified. If the section is to be deleted, no tables must be specified.
         /// </summary>
         public TableDTO[] Tables
         {
@@ -142,22 +159,29 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Creates a SectionDTO from an SectionUpdateDTO
+        /// Creates a SectionUpdateDTO from a SectionDTO
         /// </summary>
-        /// <param name="updatedSection"></param>
+        /// <param name="section"></param>
+        /// <param name="scoringMethod"></param>
+        /// <param name="isDeleted"/>
         /// <returns></returns>
-        public static SectionDTO CreateFromSectionUpdateDTO(SectionUpdateDTO updatedSection)
+        public static SectionUpdateDTO CreateFromSectionDTO(SectionDTO section,int scoringMethod,bool isDeleted)
         {
-            var section = new SectionDTO
+            var updatedSection = new SectionUpdateDTO
             {
-                SessionGuid = updatedSection.SessionGuid,
-                Letters = updatedSection.Letters,
-                Winners = updatedSection.Winners,
-                GameType = updatedSection.GameType,
-                ScoringGroupNumber = updatedSection.ScoringGroupNumber,
-                Tables = updatedSection.Tables,
+                SessionGuid = section.SessionGuid,
+                Letters = section.Letters,
+                Winners = section.Winners,
+                GameType = section.GameType,
+                ScoringGroupNumber = section.ScoringGroupNumber,
+                ScoringGroupScoringMethod =scoringMethod,
+                IsDeleted=isDeleted,
+                Tables = section.Tables,
+                Participations = new ParticipationDTO[] { }
             };
-            return section;
+            if(isDeleted)
+                updatedSection.Tables=new TableDTO[] { };
+            return updatedSection;
         }
 
         /// <summary>
@@ -165,7 +189,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// </summary>
         public string[] ValidationMessages
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -174,7 +198,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <returns>True if there are no validation errors.</returns>
         public bool Validate()
         {
-            var validationMessages=new List<string>();
+            var validationMessages = new List<string>();
             if (SessionGuid == null || SessionGuid.Length != 32 || SessionGuid.Any(c => !(c >= 'A' && c <= 'F' || c >= '0' && c <= '9')))
             {
                 validationMessages.Add("The guid must be exactly 32 character long and can only contain capital A to F or digits 0 to 9.");
@@ -183,9 +207,23 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             {
                 validationMessages.Add($"Invalid {nameof(Letters)} ({Letters}). Valid values are: 'A-Z', 'AA-ZZ' or 'AAA','ZZZ'");
             }
+            if (IsDeleted)
+            {
+                if (Tables.Any())
+                {
+                    validationMessages.Add("A deleted section cannot contain tables.");
+                }
+                return !validationMessages.Any();
+            }
             if (ScoringGroupNumber <= 0)
             {
                 validationMessages.Add($"{nameof(ScoringGroupNumber)} ({ScoringGroupNumber}) must be greater than zero.");
+            }
+            if (!new[] {ScoringGroupDTO.ScoringType_Pairs, ScoringGroupDTO.ScoringType_Imp, ScoringGroupDTO.ScoringType_XImp,
+                ScoringGroupDTO.ScoringType_TeamImps, ScoringGroupDTO.ScoringType_TeamVPDiscrete, ScoringGroupDTO.ScoringType_TeamVPContinuous,
+                ScoringGroupDTO.ScoringType_Bam,ScoringGroupDTO. ScoringType_Patton }.Contains(ScoringGroupScoringMethod))
+            {
+                validationMessages.Add($"Invalid {nameof(ScoringGroupScoringMethod)} ({ScoringGroupScoringMethod}). The value must be a multiple of 10 between 10 and 70 or 51. ");
             }
             if (MissingPair < 0)
             {
@@ -241,10 +279,14 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             {
                 validationMessages.Add($"Tablenumber {numberGroup.Key} occurs {numberGroup.Count()} times. ");
             }
-            ValidationMessages=validationMessages.ToArray();
+            ValidationMessages = validationMessages.ToArray();
             return !ValidationMessages.Any();
         }
 
+        /// <summary>
+        /// Returns a string representation of the DTO.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
 

@@ -1389,7 +1389,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// </summary>
         /// <param name="updatedSection">The section with its tables and rounds as they are after the update.</param>
         /// <returns></returns>
-        public async Task<ScoringProgramResponse> UpdateMovementAsync(SectionDTO updatedSection)
+        public async Task<ScoringProgramResponse> UpdateMovementAsync(SectionUpdateDTO updatedSection)
         {
             var serializedData = JsonSerializer.Serialize(updatedSection);
             Logger.Info($"{nameof(SectionDTO)}: {serializedData}");
@@ -1403,7 +1403,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// </summary>
         /// <param name="updatedSection">The section with its tables and rounds as they are after the update.</param>
         /// <returns></returns>
-        public ScoringProgramResponse UpdateMovement(SectionDTO updatedSection)
+        public ScoringProgramResponse UpdateMovement(SectionUpdateDTO updatedSection)
         {
             var serializedData = JsonSerializer.Serialize(updatedSection);
             Logger.Info($"{nameof(SectionDTO)}: {serializedData}");
