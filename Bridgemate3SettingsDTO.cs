@@ -88,6 +88,36 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
     }
 
     /// <summary>
+    /// Specifies whether starting positions should be confirmed by players at start of the session
+    /// </summary>
+    public enum BM3StartingPositionsOption
+    {
+        /// <summary>
+        /// Players cannot / may no confirm starting positions (NE/SW) at start of the session
+        /// </summary>
+        Disabled,
+        /// <summary>
+        /// Players must confirm starting positions (NE/SW) at start of the session
+        /// </summary>
+        Enabled
+    }
+
+    /// <summary>
+    /// Specifies how the wind rose player view is displayed
+    /// </summary>
+    public enum BM3PlayerViewOption
+    {
+        /// <summary>
+        /// players are displayed with north at the top
+        /// </summary>
+        NorthOnTop,
+        /// <summary>
+        ///  players are displayed with north at the bottom
+        /// </summary>
+        NorthOnTheBottom
+
+    }
+    /// <summary>
     /// Specifies of the players can call the TD using the Bridgemate.
     /// </summary>
     public enum Bm3TdCallOption
@@ -277,7 +307,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Turkish
         /// </summary>
-        Tukish
+        Turkish
 
     }
 
@@ -456,6 +486,22 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         public Bm3PlayerRegistrationOptionDuringPlay BM3PlayerNumberEntryDuringPlay
         {
             get; set;
+        }
+
+        /// <summary>
+        /// Specifies whether starting positions should be confirmed by players at start of the session
+        /// </summary>
+        public BM3StartingPositionsOption BM3StartingPositions
+        {
+            get;set;
+        }
+
+        /// <summary>
+        ///  Specifies how the wind rose player view is displayed
+        /// </summary>
+        public BM3PlayerViewOption BM3PlayerView
+        {
+            get;set;
         }
 
         /// <summary>
