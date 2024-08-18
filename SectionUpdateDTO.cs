@@ -165,7 +165,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <param name="scoringMethod"></param>
         /// <param name="isDeleted"/>
         /// <returns></returns>
-        public static SectionUpdateDTO CreateFromSectionDTO(SectionDTO section,int scoringMethod,bool isDeleted)
+        public static SectionUpdateDTO CreateFromSectionDTO(SectionDTO section,int scoringMethod,bool isDeleted=false)
         {
             var updatedSection = new SectionUpdateDTO
             {
