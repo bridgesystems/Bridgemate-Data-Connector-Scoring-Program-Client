@@ -8,29 +8,29 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
     /// <summary>
     /// This class is a container for participants that can potentially meet each other during the session. Their results will be compared and they will be
     /// ranked against each other. 
-    /// Note: if the updatedSection is part of a scoringgroup together with an other updatedSection the scoring calculation will treat these sections as one.
+    /// Note: if the section is part of a scoringgroup together with an other section the scoring calculation will treat these sections as one.
     /// </summary>
     public class SectionDTO
     {
         public SectionDTO()
         { }
         /// <summary>
-        /// The updatedSection hosts a pairs competition. Rankings will be for each pair.
+        /// The section hosts a pairs competition. Rankings will be for each pair.
         /// </summary>
         public const int GameType_Pairs = 10;
 
         /// <summary>
-        /// The updatedSection hosts an individual competition. Rankings will be for each player.
+        /// The section hosts an individual competition. Rankings will be for each player.
         /// </summary>
         public const int GameType_Individual = 20;
 
         /// <summary>
-        /// The updatedSection hosts a teams competition. Rankings will be for each teams (although a parallel pairs ranking is possible).
+        /// The section hosts a teams competition. Rankings will be for each teams (although a parallel pairs ranking is possible).
         /// </summary>
         public const int GameType_Teams = 30;
 
         /// <summary>
-        /// Required. The guid of the session the updatedSection is part of.
+        /// Required. The guid of the session the section is part of.
         /// A string built from a Guid, without the curly braces or connecting dashes.
         /// The letters must be capitals
         /// </summary>
@@ -40,7 +40,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Required, the number of the scoringgroup the updatedSection belongs to. Must be greater than zero.
+        /// Required, the number of the scoringgroup the section belongs to. Must be greater than zero.
         /// </summary>
         public int ScoringGroupNumber
         {
@@ -48,7 +48,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Required. The letters of the updatedSection. They must be unique within an event.
+        /// Required. The letters of the section. They must be unique within an event.
         /// Can be A-Z, AA, BB, CC,...ZZ, AAA, BBB, CCC, ... ZZZ
         /// </summary>
         public string Letters
@@ -108,7 +108,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// If true the SitoutSectionLetters must have the value for an existing updatedSection.
+        /// If true the NorthSouthPairSectionLetters and the EastWestPairSectionLetters must have the value for an existing section.
         /// </summary>
         public bool IsCombiSection
         {
@@ -116,8 +116,8 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Required if IsCombiSection is True. Must be the letters for an existing updatedSection.
-        /// The letters of the updatedSection the North-South pairs in the combisection originate from.
+        /// Required if IsCombiSection is True. Must be the letters for an existing section.
+        /// The letters of the section the North-South pairs in the combisection originate from.
         /// </summary>
         public string NorthSouthPairSectionLetters
         {
@@ -125,8 +125,8 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Required if IsCombisection is True. Must be the letters for an existing updatedSection.
-        /// The letters of the updatedSection the East-West pairs in the combisection originate from.
+        /// Required if IsCombisection is True. Must be the letters for an existing section.
+        /// The letters of the section the East-West pairs in the combisection originate from.
         /// </summary>
         public string EastWestPairSectionLetters
         {
@@ -134,7 +134,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// An array of TableDTOs. All tables for the updatedSection must be specified. If the updatedSection is to be deleted, no tables must be specified.
+        /// An array of TableDTOs. All tables for the section must be specified. If the section is to be deleted, no tables must be specified.
         /// </summary>
         public TableDTO[] Tables
         {
