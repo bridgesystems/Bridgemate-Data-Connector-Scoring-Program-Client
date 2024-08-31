@@ -1,23 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.SectionDTO">
-    <Position X="0.5" Y="0.5" Width="2" />
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.SectionUpdateDTO" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>ACAAABBAAACAAAAEAAAAQYUAUAACAAAAAQAAIQAAgAA=</HashCode>
-      <FileName>SectionDTO.cs</FileName>
+      <HashCode>ACAAABBAAAKAAEAEAAAgQYUAUAACEAAAAQAAAQAAAAA=</HashCode>
+      <FileName>SectionUpdateDTO.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Tables" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TableDTO">
-    <Position X="3.5" Y="0.5" Width="1.75" />
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TableDTO" Collapsed="true">
+    <Position X="3.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAABAAACAEAAgAAAAAAAAEAAAAAAAAAAAAAIAAAA=</HashCode>
       <FileName>TableDTO.cs</FileName>
@@ -26,11 +20,8 @@
       <Property Name="Rounds" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.RoundDTO">
-    <Position X="6.25" Y="0.5" Width="2" />
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.RoundDTO" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACgAAABAAICEEAAmAAAAQAAAEAAAABAAUAAAAgABABA=</HashCode>
       <FileName>RoundDTO.cs</FileName>

@@ -1,18 +1,28 @@
-# SectionDTO
+# SectionUpdateDTO
 
-![Image](<lib/SectionDTO.png>)
+![Image](<lib/SectionUpdateDTO.png>)
 
-&nbsp;
-
-The SectionDTO contains the movement for a group of participants for the duration of the session. It will be part of a [ScoringGroupDTO](<ScoringGroupDTO.md>) which is part of a [SessionDTO](<SessionDTO.md>) which is part of an [InitDTO.](<InitDTO.md>)
+The SectionUpdateDTO contains the movement for an updated or new section or it signals that the given section must be deleted. It is sent with the [UpdateMovement](<Overviewofcommunication.md#OverviewOfCommands>) command. The DTO must contain infomration on the scoring group it should be added to. If the scoring group with the given ScoringGroupNumber is not yet present, it will be created.
 
 ##### SessionGuid property
 
 Required. A guid uniquely defining the session. Must be exactly 32 character long, uppercase and cannot contaim dashes or curly braces.
 
+##### AddedPlayers
+
+Optional.An array of [PlayerDataDTOs](<PlayerDataDTO.md>). Should at least contain player data for players that have not been added beofre.
+
+##### Participations
+
+Optional. An array of [ParticipationDTOs](<ParticipationDTO.md>).&nbsp;
+
 ##### ScoringGroupNumber
 
-Required. The number of the ScoringGroupDTO that the section belongs to. Must be greater than zero.
+Required if IsDeleted is "False". The number of the ScoringGroupDTO that the section belongs to. Must be greater than zero.If the scoringgroup does not yet exist it will be created.
+
+##### ScoringGroupScoringMethod
+
+Required if the updated section belongs to a new scoring group that must be created. Vaalid values can be found at the information on the [ScoringGroupDTO](<ScoringGroupDTO.md#ScoringMethod>).
 
 ##### Letters property
 
@@ -52,7 +62,7 @@ Required if IsCombiSection is "true". The letters for the section where the East
 
 ##### Tables property
 
-Must be present as the SectionDTO contains the movement or a movement update for the section,
+Must be present if IsDeleted="False" as the SectionDTO contains the movement or a movement update for the section,
 
 Array of [TableDTO](<TableDTO.md>).
 

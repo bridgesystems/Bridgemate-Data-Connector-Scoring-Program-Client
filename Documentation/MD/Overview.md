@@ -20,7 +20,7 @@ Below you find all Data Transfer Objects (DTOs) and their relation according to 
 
 ![Image](<lib/ScoringGroupUpdateDTOClosed.png>)
 
-### [Update movement](<Updatethemovementforasection.md>)
+### [Update movement](<Updatethemovementforasectionorad.md>)
 
 ![Image](<lib/MovementUpdateDTOClosed.png>)
 

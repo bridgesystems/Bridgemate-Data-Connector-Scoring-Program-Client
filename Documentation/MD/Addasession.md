@@ -10,7 +10,7 @@
 
 ### Description
 
-Using the [InitDTO](<InitDTO.md>) and the [InitializeEvent command](<Overviewofcommunication.md>) it is possible to [start Bridgemate Control Software](<Initializeanevent.md>) with more than one session. After initialization it is possible to [add a section](<Updatethemovementforasection.md#AddSection>) to one of the events that were initialized.
+Using the [InitDTO](<InitDTO.md>) and the [InitializeEvent command](<Overviewofcommunication.md>) it is possible to [start Bridgemate Control Software](<Initializeanevent.md>) with more than one session. After initialization it is possible to [add a section](<Updatethemovementforasectionorad.md#AddSection>) to one of the events that were initialized.
 
 Apart from this it is possible to add a session after initialization. This works using a [SessionDTO](<SessionDTO.md>) and the [AddSession command](<Overviewofcommunication.md>).
 

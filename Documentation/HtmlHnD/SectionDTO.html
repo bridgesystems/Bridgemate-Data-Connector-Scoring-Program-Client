@@ -177,7 +177,7 @@
                         <li><a href="DataTransferObjects.html">Data Transfer Objects</a></li>
                     </ol>
                     <div class="nav-arrows">
-                        <div class="btn-group btn-group" role="group"><a class="btn btn-default" href="DataTransferObjects.html" title="Data Transfer Objects" role="button"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></a><a class="btn btn-default" href="ScoringGroupDTO.html" title="ScoringGroupDTO" role="button"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a><a class="btn btn-default" href="TableDTO.html" title="TableDTO" role="button"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></div>
+                        <div class="btn-group btn-group" role="group"><a class="btn btn-default" href="DataTransferObjects.html" title="Data Transfer Objects" role="button"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></a><a class="btn btn-default" href="ScoringGroupDTO.html" title="ScoringGroupDTO" role="button"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a><a class="btn btn-default" href="SectionUpdateDTO.html" title="SectionUpdateDTO" role="button"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></div>
                     </div>
                 </div> 
             
@@ -188,9 +188,9 @@
 
             <div class="main-content">
                 
-<p class="rvps2"><img alt="" style="width : 260px; height : 477px; padding : 1px;" src="lib/SectionDTO%201.png"></p>
+<p class="rvps2"><img alt="" style="width : 237px; height : 458px; padding : 1px;" src="lib/SectionDTO.png"></p>
 <p class="rvps2"><span class="rvts6"><br/></span></p>
-<p class="rvps2"><span class="rvts6">The SectionDTO contains the movement for a group of participants for the duration of the session. It will be part of a </span><a class="rvts16" href="ScoringGroupDTO.html">ScoringGroupDTO</a><span class="rvts6"> which is part of a </span><a class="rvts16" href="SessionDTO.html">SessionDTO</a><span class="rvts6"> which is part of an </span><a class="rvts16" href="InitDTO.html">InitDTO</a><span class="rvts6">, or it can be sent seperately with the </span><a class="rvts16" href="Overviewofcommunication.html#OverviewOfCommands">UpdateMovement</a><span class="rvts6"> command.</span></p>
+<p class="rvps2"><span class="rvts6">The SectionDTO contains the movement for a group of participants for the duration of the session. It will be part of a </span><a class="rvts16" href="ScoringGroupDTO.html">ScoringGroupDTO</a><span class="rvts6"> which is part of a </span><a class="rvts16" href="SessionDTO.html">SessionDTO</a><span class="rvts6"> which is part of an </span><a class="rvts16" href="InitDTO.html">InitDTO.</a></p>
 <h5 class="rvps12"><span class="rvts0"><span class="rvts29">SessionGuid property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. A guid uniquely defining the session. Must be exactly 32 character long, uppercase and cannot contaim dashes or curly braces.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">ScoringGroupNumber</span></span></h5>
@@ -213,10 +213,8 @@
 <p class="rvps2"><span class="rvts6">Required if IsCombiSection is "true". The letters for the section where the NorthSouth pair for each round comes from.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">EastWestPairSectionLetters property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required if IsCombiSection is "true". The letters for the section where the EastWest pair for each round comes from.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">IsDeleted property</span></span></h5>
-<p class="rvps2"><span class="rvts6">Can be used together with the </span><a class="rvts16" href="Overviewofcommunication.html#OverviewOfCommands">UpdateMovement</a><span class="rvts6"> command to indicate that the section should be removed from </span><span class="rvts6">BCS</span><span class="rvts6"> and the Bridgemates. Will be ignored otherwise.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">Tables property</span></span></h5>
-<p class="rvps2"><span class="rvts6">Must be present if IsDeleted is &nbsp;"false" &nbsp;as the SectionDTO contains the movement or a movement update for the section,</span></p>
+<p class="rvps2"><span class="rvts6">Must be present as the SectionDTO contains the movement or a movement update for the section,</span></p>
 <p class="rvps2"><span class="rvts6">Array of </span><a class="rvts16" href="TableDTO.html">TableDTO</a><span class="rvts6">.</span></p>
 <p class="rvps2" style="break-before: always;"><span class="rvts6"></span><span class="rvts6"></span></p>
 
