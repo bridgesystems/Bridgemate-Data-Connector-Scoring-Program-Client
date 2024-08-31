@@ -134,7 +134,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// An array of TableDTOs. All tables for the section must be specified. If the section is to be deleted, no tables must be specified.
+        /// An array of TableDTOs. All tables for the section must be specified.
         /// </summary>
         public TableDTO[] Tables
         {
