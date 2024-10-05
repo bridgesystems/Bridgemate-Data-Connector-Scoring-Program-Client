@@ -194,7 +194,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
     /// <summary>
     /// Specifies wheter to include the own score for a board in the result overview.
     /// </summary>
-    public enum Bm3ViewOwnPercentageOption
+    public enum Bm3ViewPercentagesOption
     {
         /// <summary>
         /// Do not include the own score for a board in the result overview.
@@ -247,6 +247,22 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// Other results, including the own results, on the board can be viewed.
         /// </summary>
         OwnResultAndOtherResults
+    }
+
+    /// <summary>
+    /// Specifies if there should be one column (for NS only) or two (for both NS and EW).
+    /// </summary>
+    public enum Bm3ScoreColumnOption
+    {
+        /// <summary>
+        /// Show one column, for NS.
+        /// </summary>
+        NorthSouthOnly,
+
+        /// <summary>
+        /// Shpw two columns, for NS and EW.
+        /// </summary>
+        NorthSouthAndEastWest
     }
 
     /// <summary>
@@ -537,9 +553,15 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
+        /// Specifies if the score columns should be for NS only (one column) or for NS and EW (two columns)
+        /// </summary>
+        public Bm3ScoreColumnOption BM3ScoreColum { get; set; }
+       
+
+        /// <summary>
         /// Specifies if the own percentage should be included in the results overview.
         /// </summary>
-        public Bm3ViewOwnPercentageOption BM3OwnPercentage
+        public Bm3ViewPercentagesOption BMViewPercentages
         {
             get; set;
         }
