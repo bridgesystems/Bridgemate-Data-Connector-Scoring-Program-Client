@@ -17,14 +17,54 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         public const int ScoringType_Pairs = 10;
 
         /// <summary>
-        /// The matchscore is expressed in Butler Imps.
+        /// The matchscore is expressed in Butler Imps with Avg+ as +2 and weighted datescore calculation.
         /// </summary>
-        public const int ScoringType_Imp = 20;
+        public const int ScoringType_Imp2_Weighted = 20;
 
         /// <summary>
-        /// The matchscore is expressed in Cross Imps.
+        /// The matchscore is expressed in Butler Imps with Avg+ as +2 and 10% omit datescore calculation.
         /// </summary>
-        public const int ScoringType_XImp = 30;
+        public const int ScoringType_Imp2_10Percent = 21;
+
+        /// <summary>
+        /// The matchscore is expressed in Butler Imps with Avg+ as +2 and no correection for datescore calculation.
+        /// </summary>
+        public const int ScoringType_Imp2_NoCorrection = 22;
+
+        /// <summary>
+        /// The matchscore is expressed in Butler Imps with Avg+ as +3 and weighted datescore calculation.
+        /// </summary>
+        public const int ScoringType_Imp3_Weighted = 25;
+
+        /// <summary>
+        /// The matchscore is expressed in Butler Imps with Avg+ as +3 and 10% omit datescore calculation.
+        /// </summary>
+        public const int ScoringType_Imp3_10Percent = 26;
+
+        /// <summary>
+        /// The matchscore is expressed in Butler Imps with Avg+ as +2 and no correection for datescore calculation.
+        /// </summary>
+        public const int ScoringType_Imp3_NoCorrection = 27;
+
+        /// <summary>
+        /// The matchscore is expressed in Cross Imps total IMPs.The Avg+=+2 IMP. 
+        /// </summary>
+        public const int ScoringType_XImp2_Total = 30;
+
+        /// <summary>
+        /// The matchscore is expressed in Cross Imps average IMPs.The Avg+=+2 IMP.
+        /// </summary>
+        public const int ScoringType_XImp2_Average = 31;
+
+        /// <summary>
+        /// The matchscore is expressed in Cross Imps total IMPs.The Avg+=+3 IMP.
+        /// </summary>
+        public const int ScoringType_XImp3_Total = 35;
+
+        /// <summary>
+        /// The matchscore is expressed in Cross Imps average IMPs.The Avg+=+3 IMP.
+        /// </summary>
+        public const int ScoringType_XImp3_Average = 36;
 
         /// <summary>
         /// The matchscore is expressed in Team Imps.
@@ -132,7 +172,10 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             {
                 validationMessages.Add($"{nameof(ScoringGroupNumber)} ({ScoringGroupNumber}) must be greater than zero.");
             }
-            if (!new[] {ScoringType_Pairs,ScoringType_Imp,ScoringType_XImp,ScoringType_TeamImps,ScoringType_TeamVPDiscrete,ScoringType_TeamVPContinuous,ScoringType_Bam,ScoringType_Patton}.Contains(ScoringMethod))
+            if (!new[] {ScoringType_Pairs,
+                ScoringType_Imp2_Weighted,ScoringType_Imp2_10Percent,ScoringType_Imp2_NoCorrection,ScoringType_Imp3_Weighted,ScoringType_Imp3_10Percent,ScoringType_Imp3_NoCorrection,
+                ScoringType_XImp2_Total,ScoringType_XImp2_Average,ScoringType_XImp3_Total,ScoringType_XImp3_Average,
+                ScoringType_TeamImps,ScoringType_TeamVPDiscrete,ScoringType_TeamVPContinuous,ScoringType_Bam,ScoringType_Patton}.Contains(ScoringMethod))
             {
                 validationMessages.Add($"Invalid {nameof(ScoringMethod)} ({ScoringMethod}). The value must be a multiple of 10 between 10 and 70 or 51. ");
             }

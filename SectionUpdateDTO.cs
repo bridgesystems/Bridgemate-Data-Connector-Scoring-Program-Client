@@ -219,7 +219,11 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             {
                 validationMessages.Add($"{nameof(ScoringGroupNumber)} ({ScoringGroupNumber}) must be greater than zero.");
             }
-            if (!new[] {ScoringGroupDTO.ScoringType_Pairs, ScoringGroupDTO.ScoringType_Imp, ScoringGroupDTO.ScoringType_XImp,
+            if (!new[] {ScoringGroupDTO.ScoringType_Pairs, 
+                ScoringGroupDTO.ScoringType_Imp2_Weighted,ScoringGroupDTO.ScoringType_Imp2_10Percent,ScoringGroupDTO.ScoringType_Imp2_NoCorrection,
+                ScoringGroupDTO.ScoringType_Imp3_Weighted,ScoringGroupDTO.ScoringType_Imp3_10Percent,ScoringGroupDTO.ScoringType_Imp3_NoCorrection,
+                ScoringGroupDTO.ScoringType_XImp2_Total,ScoringGroupDTO.ScoringType_XImp2_Average,
+                ScoringGroupDTO.ScoringType_XImp3_Total,ScoringGroupDTO.ScoringType_XImp3_Average,
                 ScoringGroupDTO.ScoringType_TeamImps, ScoringGroupDTO.ScoringType_TeamVPDiscrete, ScoringGroupDTO.ScoringType_TeamVPContinuous,
                 ScoringGroupDTO.ScoringType_Bam,ScoringGroupDTO. ScoringType_Patton }.Contains(ScoringGroupScoringMethod))
             {
