@@ -134,7 +134,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
     }
 
     /// <summary>
-    /// Speciefies if a not played entry must be confirmed by the TD
+    /// Specifies if a not played entry must be confirmed by the TD
     /// </summary>
     public enum Bm3ConfirmNPOption
     {
