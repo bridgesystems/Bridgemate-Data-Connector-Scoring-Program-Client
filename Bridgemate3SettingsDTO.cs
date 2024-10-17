@@ -134,6 +134,21 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
     }
 
     /// <summary>
+    /// Speciefies if a not played entry must be confirmed by the TD
+    /// </summary>
+    public enum Bm3ConfirmNPOption
+    {
+        /// <summary>
+        /// TD must not confirm Not Played
+        /// </summary>
+        Disabled,
+        /// <summary>
+        /// TD must confirm Not Played
+        /// </summary>
+        Enabled
+    }
+
+    /// <summary>
     /// Specifies whether and when the ranking can be consulted. 
     /// </summary>
     public enum Bm3RankingDisplayOption
@@ -454,6 +469,14 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         public string BM3PINcode
         {
             get; set;
+        }
+
+        /// <summary>
+        /// Specifies if the TD must confirm a "Not Played". Default Off
+        /// </summary>
+        public Bm3ConfirmNPOption BM3ConfirmNP
+        {
+            get;set;
         }
 
         /// <summary>
