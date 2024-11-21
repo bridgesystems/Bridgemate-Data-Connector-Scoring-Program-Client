@@ -11,6 +11,10 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
     public class SectionUpdateDTO
     {
 
+        public SectionUpdateDTO()
+        {
+            
+        }
         /// <summary>
         /// Required. The guid of the session the section is part of.
         /// A string built from a Guid, without the curly braces or connecting dashes.

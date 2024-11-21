@@ -1,4 +1,5 @@
 ﻿
+using BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,6 +73,17 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         public string PlayerNumber
         {
             get; set;
+        }
+
+        /// <summary>
+        /// Signals that this player was swapped with his partner: North was swapped with South, or East with West.
+        /// </summary>
+        /// <remarks>This property is only menaningful in conjunction with a 
+        /// <see cref="ScoringProgramDataConnectorCommands.PollQueueForNewParticipations">PollQueueForNewParticipations</see> command, or a 
+        /// <see cref="ScoringProgramDataConnectorCommands.PollQueueForAllParticipations">PollQueueForAllParticipations</see>> command.</remarks>
+        public bool IsPlayerSwap
+        {
+            get;set;
         }
 
         /// <summary>
