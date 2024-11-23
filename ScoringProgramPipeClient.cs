@@ -983,7 +983,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         }
 
         /// <summary>
-        /// Polls the client queue synchronously for new participations for the specified session.
+        /// Polls the client queue asynchronously for new participations for the specified session.
         /// </summary>
         /// <param name="sessionGuid">Required. The guid of the session to poll participations for.</param>
         /// <param name="all">Poll all participations for the session, included ones polled before.</param>
