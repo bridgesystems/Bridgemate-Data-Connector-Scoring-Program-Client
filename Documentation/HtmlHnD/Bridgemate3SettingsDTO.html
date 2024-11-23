@@ -188,8 +188,8 @@
 
             <div class="main-content">
                 
-<p class="rvps2"><img alt="" style="width : 381px; height : 425px; padding : 1px;" src="lib/Bridgemate3SettingsDTO.png"></p>
-<p class="rvps2"><img alt="" style="width : 875px; height : 647px; padding : 1px;" src="lib/Bridgemate3SettingsOptions.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="width : 885px; height : 514px; padding : 1px;" src="lib/Bridgemate3SettingsDTO.png"></p>
 <p class="rvps2"><span class="rvts6"><br/></span></p>
 <p class="rvps2"><span class="rvts6">The Bridgemate3SettingsDTO contains all settings for the Bridgemate 3. It can be used as part of the </span><a class="rvts16" href="InitDTO.html">InitDTO</a><span class="rvts6"> for </span><a class="rvts16" href="Initializeanevent.html">the intitialization of an event</a><span class="rvts6">, or</span></p>
 <p class="rvps2"><span class="rvts6">it can be used as data for the </span><a class="rvts16" href="Overviewofcommunication.html#OverviewOfCommands">PutBridgemate3Settings command</a><span class="rvts6"> to update settings. When used all settings must be provided.For readability many of the settings are expressed as enum values. This is not necessary, the use of integer values is allowed as well. In the image above the enum values will always be consecutively numbered starting wit zero. So Bm3ViewResultsOption.Disabled equals to zero and &nbsp;Bm3ViewResultsOption.OwnResutlsAndOtherResults equals to two.&nbsp;</span></p>
@@ -200,47 +200,55 @@
 <p class="rvps2"><span class="rvts6">Required. A guid uniquely defining the session. Must be exactly 32 character long, uppercase and cannot contaim dashes or curly braces.</span></p>
 <h5 class="rvps10"><span class="rvts0"><span class="rvts24">SectionLetters property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. Identifes the section that the settings pertain to.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">AudioVolume property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3AudioVolume property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer (0-7). Currently not in use.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ConnectionMode property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3ConnectionMode property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (BM3ConnectionModeOption). Specifies if the Bridgemates for this section will operate in offline mode. In offline mode the Bridgemate will not communicate with the Bridgemate 3 server during the session, but will try to send its results after the last board had been played.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">DimMode property</span></span></h5>
-<p class="rvps2"><span class="rvts6">Integer (0-15). Defines the number of seconds (times 5) before the screen of the Bridgemate will dim. So the default value of 2 amounts to 10 seconds.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">EnterHandrecord property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3EnterHandrecord property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (BM3EnterHandrecordOption). Specifies if and when the players can enter the handrecord for a board if it is not present.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">Language property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3Language property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (BM3LanguageOption). Specifies which language the Bridgemate will use. The default is zero for English.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">LeadCardEntry property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3LeadCardEntry property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (BM3LeadCardEntryOption). Specifies if the leadcard must be enterd together with the contract and if the leadcard should be validated againts the handrecord.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">NextRoundSeating property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3NextSeatings property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (BM3NextRoundSeatingOption).Specifes if the seatings for the next round must be displayed after the last result has been entered for the round.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">PlayerRegistration property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3PlayerNumberEntry property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (BM3PlayerRegistrationOption). Specifies if and when the players can make themselves known by entering their playernumber and/or name on the Bridgemate.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">PlayerRegistrationDuringPlay property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3PlayerVIew property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3PlayerViewOption). Specifies if the windrose showing the players will have the North seat on top (0) or North on the bottom (1).</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3PlayerNumberEntryDuringPlay property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (BM3PlayerRegistrationOptionDuringPlay). Specifies if and when the players can make themselves known by entering their playernumber and/or name on the Bridgemate while the round is in progress (i.e.: after a board has been entered).</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">RankingDisplay property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3Ranking property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (BM3RankingDisplayOption). Specifies if and when the Bridgemate will show the current ranking for the players on the table.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ResultMethod property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3ResultMethod property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (BM3ResultMethodOption). Specifies how players can enter the result for a board: Up/Down tricks, total tricks or American style.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ResultReentry property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3BoardResultReentry property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (BM3ResultReentryOption). Specifies if players may reenter the result of the board after the original entry has been confirmed by the opponents.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ScoreRecap property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3ScoreColumn property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3ScoreColumnOption). Specifies if the result overview will show one column for North-South only (0) or one for both North-South and East-West (1).</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3ScoreRecap property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (BM3ScoreRecapOption). Specifies if and when the Bridgemate will show a recap of the scores obtained on the table in the current round.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ScreenBrightness property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3ScreenBrightness property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer (1-7) Defines the screen brightness.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ScreenOffMode property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3ScreenDimMode property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer (0-15). Defines the number of seconds (times 5) before the screen of the Bridgemate will dim. So the default value of 2 amounts to 10 seconds.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3ScreenOffMode property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer (0-15). Defines the number of seconds (times 5) before the screen of the Bridgemate will turn off. A value of zero, the default, means "never turn off".</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">SleepMode property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3SleepMode property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer (0-120). Defines the number of seconds (times 5) befote the Bridgemate will enter Sleepmode. Once the Bridgemate has entered sleepmode its powerbutton must be used to wake it up again.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">TdCall property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3StartingPositions property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3StartingPositionsOption). Specifies if the players should confirm their seating before play starts.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3TDCall property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (BM3TdCallOption). Specifies if players can call for the Tournament Director using the Bridgemate.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">TdPinCode property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3PinCode property</span></span></h5>
 <p class="rvps2"><span class="rvts6">A string of four digits. The code the TD must enter to get access to the TD menu. Defaults to "0000".</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ViewHandrecord property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3ComfirmNP property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3ComfirmNPOption). Specifies if the TD must confirm a No Play result on the Bridgemate.</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3ViewHandrecord property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (BM3ViewHandrecordOption). Specifies if players may view the handrecord after the result has been entered.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ViewOwnPercentage property</span></span></h5>
-<p class="rvps2"><span class="rvts6">Integer/Enum (BM3ViewHandrecordOption). Specifies if the own percentage should be included in the results overview.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ViewResults property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BM3ViewPercentages property</span></span></h5>
+<p class="rvps2"><span class="rvts6">Integer/Enum (BM3ViewPercentagesOption). Specifies if the percentage score should be shown (1) rather than the matchpints (0) .</span></p>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts24">Bm3ViewResults property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (BM3ViewResultsOption). Specifies if the Bridgemate will show the other results for the board that was just entered.</span></p>
 <p class="rvps2" style="break-before: always;"><span class="rvts6"></span><span class="rvts6"></span></p>
 

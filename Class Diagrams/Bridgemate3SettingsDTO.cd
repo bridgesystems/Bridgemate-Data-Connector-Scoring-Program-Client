@@ -10,10 +10,10 @@
       <FileName>BridgemateSettingsDTO.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate3SettingsDTO" Collapsed="true">
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate3SettingsDTO">
     <Position X="2.75" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAQwABACAAEAAAIAQEBFgkAiAAAAAgAAMAAEAABA=</HashCode>
+      <HashCode>IAAAAQwABACAgEAAAMAQEJFikAiAAAAAgAAMAAAAABA=</HashCode>
       <FileName>Bridgemate3SettingsDTO.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -73,7 +73,7 @@
       <FileName>Bridgemate3SettingsDTO.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm3ViewOwnPercentageOption">
+  <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.BM3StartingPositionsOption">
     <Position X="12.5" Y="5.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAIAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -97,7 +97,7 @@
   <Enum Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm3LanguageOption">
     <Position X="13.25" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>YgAAAACQAACAAAAAQAAAAAAABAAAAAAQgAAAACAAAAA=</HashCode>
+      <HashCode>YgAAAACQAACAAAAAQAAAAAAABAAAAAAQAIAAACAAAAA=</HashCode>
       <FileName>Bridgemate3SettingsDTO.cs</FileName>
     </TypeIdentifier>
   </Enum>
