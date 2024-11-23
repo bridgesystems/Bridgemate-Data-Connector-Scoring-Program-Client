@@ -163,7 +163,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
 
         public override string ToString()
         {
-            return $"{SectionLetters}{TableNumber} {Direction} round {RoundNumber}: {PlayerNumber} {FirstName} {LastName}";
+            return $"{(IsPlayerSwap?"SWAP ":"")}{SectionLetters}{TableNumber} {Direction} round {RoundNumber}: {PlayerNumber} {FirstName} {LastName}";
         }
     }
 }
