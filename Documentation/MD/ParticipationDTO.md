@@ -1,13 +1,14 @@
 # ParticipationDTO
 
-![Image](<lib/ParticipationDTO.png>)
+![Image](<lib/participationDTO.png>)
 
 'The ParticipationDTO specifies for each round on a table which players occupy the four seats, Only specify partiicipation for known players.
 
-The ParticipationDTO can be used in two ways:
+The ParticipationDTO can be used in three ways:
 
 1. By specifiying the SessionGuid and PlayerNumber. Make sure that a corresponding [PlayerDataDTO](<PlayerDataDTO.md>) with the same SessionGuid and PlayerNumber has been sent before sending the participation.Do not include first name or last name of the player.
 1. By specifying the SessionGuid and at least the PlayerLastName. Internally Bridgemate Data Connector will make a registration of this player. Do not include the player number of the player.
+1. An array of ParticipationDTO will be returned by the [PollQueueForNewParticipations command](<Overviewofcommunication.md#PollingComands>). In this case the IsPlayerSwap property could have a value of "True".
 
 &nbsp;
 
@@ -33,6 +34,10 @@ Required. Specifies the table for the participation.
 
 Currently not supported.
 
+##### Direction property
+
+Required. Represents the seating for the player: North, East, South or West.
+
 ##### PlayerNumber property
 
 Optional. Together with the SessionGuid uniquely defnines the player. The player must have been sent to Bridgemate Data Connector using a PlauerDataDTO beforehand.Do not include first name or last name.
@@ -48,4 +53,10 @@ Optional. Required if no player number has been specified. Leave empty when a pl
 ##### CountryCode property
 
 Currently not supported.
+
+##### IsPlayerSwap property
+
+Can only be "True" after a [PollQueueForNewParticipations command](<Overviewofcommunication.md#PollingComands>). Signals that the North player was swapped with the South player, or that the East player was swapped with the West player. The Direction ans PlayerNumber properties reflect the values after the swap.
+
+&nbsp;
 

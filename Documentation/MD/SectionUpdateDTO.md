@@ -22,7 +22,7 @@ Required if IsDeleted is "False". The number of the ScoringGroupDTO that the sec
 
 ##### ScoringGroupScoringMethod
 
-Required if the updated section belongs to a new scoring group that must be created. Vaalid values can be found at the information on the [ScoringGroupDTO](<ScoringGroupDTO.md#ScoringMethod>).
+Required if the updated section belongs to a new scoring group that must be created. Valid values can be found at the information on the [ScoringGroupDTO](<ScoringGroupDTO.md#ScoringMethod>).
 
 ##### Letters property
 
