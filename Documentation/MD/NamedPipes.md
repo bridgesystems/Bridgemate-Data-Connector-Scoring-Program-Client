@@ -10,13 +10,15 @@ Mind that the pipe only accepts one connection.
 
 # The Named Pipe client
 
-The Named Pipe client must be created by the scoring program and should connect to the "BridgeSystems.Bridgemate.DataConnectorService.ScoringProgram" Named Pipe. Note that the pipe only accepts one connection. The pipe server will detect when then pipe client dies and will then accept a new connection. Alternatively the client can issue a Disconnect command to free up the pipe. A full ScoringProgramPipeClient class is provided in the BridgeSystems.Bridgemate.DataConnector.ScoringProgram.dll written by Bridge Systems. This class provides functions to connect, ping and exchange data with the pipe server. To use it the external scoring progam must be written in .Net 4.5 or higher or it must be able to use an adapter for using .Net Standard 2.0 code for its programming platform.
+The Named Pipe client must be created by the scoring program and should connect to the "BridgeSystems.Bridgemate.DataConnectorService.ScoringProgram.\<username\>" Named Pipe. The \<username\> is the name of the user as Windows had defined it based on the Windows account name. It can easily be retrieved by checking the C:\\Users\\\<username\> folders.
+
+Note that the pipe only accepts one connection. The pipe server will detect when then pipe client dies and will then accept a new connection. Alternatively the client can issue a Disconnect command to free up the pipe. A full ScoringProgramPipeClient class is provided in the BridgeSystems.Bridgemate.DataConnector.ScoringProgram.dll written by Bridge Systems. This class provides functions to connect, ping and exchange data with the pipe server. To use it the external scoring progam must be written in .Net 4.5 or higher or it must be able to use an adapter for using .Net Standard 2.0 code for its programming platform.
 
 &nbsp;
 
 ## Code examples
 
-A typical procedure to connect to the pipe server and test communication with it would be in .Net:
+A typical procedure to connect to the pipe server and test communication with it would be in .Net (\<username\> arbitrarily chosen as johndoe):
 
 &nbsp;
 
@@ -31,7 +33,7 @@ public async Task\<bool\> TryConnect()
 
 {
 
-\_pipeClient = new NamedPipeClientStream(".", "BridgeSystems.Bridgemate.DataConnectorService.ScoringProgram",
+\_pipeClient = new NamedPipeClientStream(".", "BridgeSystems.Bridgemate.DataConnectorService.ScoringProgram.*johndoe*",
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PipeDirection.InOut, PipeOptions.None,
 

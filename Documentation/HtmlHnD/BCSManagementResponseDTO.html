@@ -189,23 +189,23 @@
             <div class="main-content">
                 
 <h4 class="rvps13"><img alt="" style="width : 635px; height : 225px; padding : 1px;" src="lib/BCSManagementResponseDTO%202.png"></h4>
-<h4 class="rvps13"><span class="rvts0"><span class="rvts27">The BCSManagementResponseDTO</span></span></h4>
+<h4 class="rvps13"><span class="rvts0"><span class="rvts28">The BCSManagementResponseDTO</span></span></h4>
 <p class="rvps2"><span class="rvts6">The BCSManagementResponseDTO is returned for a </span><a class="rvts16" href="Overviewofcommunication.html">BCSManagementCommand</a><span class="rvts6"> that asks for session information and/or the scoringfile path.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">EventGuid property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">EventGuid property</span></span></h5>
 <p class="rvps2"><span class="rvts6">The guid of the current event being administerd by </span><span class="rvts6">Bridgemate Control Software</span><span class="rvts6">. Will be empty if IsRunning is "False" or when the </span><a class="rvts16" href="BCSManagementRequestDTO.html">BCSManagementRequestDTO</a><span class="rvts6">.Command property contains GetAllSessionsInformation (8).</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">IsRunning property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">IsRunning property</span></span></h5>
 <p class="rvps2"><span class="rvts6">If "True" BCS is running.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ScoringFilePath property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">ScoringFilePath property</span></span></h5>
 <p class="rvps2"><span class="rvts6">The full path to </span><span class="rvts6">BCS</span><span class="rvts6">'s scoring file. Can be used to make and restore back-ups.</span></p>
-<h4 class="rvps13"><a name="SessionInfoDTO"></a><span class="rvts0"><span class="rvts27">The SessionInfoDTO</span></span></h4>
+<h4 class="rvps13"><a name="SessionInfoDTO"></a><span class="rvts0"><span class="rvts28">The SessionInfoDTO</span></span></h4>
 <p class="rvps2"><span class="rvts6">The SessionInfoDTO contains either information on the sessions that </span><span class="rvts6">BCS</span><span class="rvts6"> currently administers (</span><a class="rvts16" href="BCSManagementRequestDTO.html">BCSManagementRequestDTO</a><span class="rvts6">.Command contains GetRunningSessions (2) or information on all known sessions in the scoring file (</span><a class="rvts16" href="BCSManagementRequestDTO.html">BCSManagementRequestDTO</a><span class="rvts6">.Command contains GetAllSessionsInformation (8) . It will only contain data when IsRunning is "True".</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">EventGuid property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">EventGuid property</span></span></h5>
 <p class="rvps2"><span class="rvts6">The guid of the event the session belongs to.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">SessionDateTime property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">SessionDateTime property</span></span></h5>
 <p class="rvps2"><span class="rvts6">The date and time when the session started,</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">SessionGuid property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">SessionGuid property</span></span></h5>
 <p class="rvps2"><span class="rvts6">The guid of the session.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">SessionName property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">SessionName property</span></span></h5>
 <p class="rvps2"><span class="rvts6">The name of the session.</span></p>
 <p class="rvps2" style="break-before: always;"><span class="rvts6"></span><span class="rvts6"></span></p>
 

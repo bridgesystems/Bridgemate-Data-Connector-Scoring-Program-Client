@@ -190,25 +190,25 @@
                 
 <p class="rvps2"><img alt="" style="width : 242px; height : 547px; padding : 1px;" src="lib/ResultDTO.png"></p>
 <p class="rvps2"><span class="rvts6">Represents the result on a board. Both natural and artificial results can be expressed, It is possible to send seperate results for the North-South scoring side and East-West scoring side, but currently </span><span class="rvts6">Bridgemate Control Software</span><span class="rvts6">, the Bridgemate App and the Bridgemate servers do not support this.</span></p>
-<h5 class="rvps12"><span class="rvts0"><span class="rvts29">SessionGuid property</span></span></h5>
+<h5 class="rvps12"><span class="rvts0"><span class="rvts30">SessionGuid property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. A guid uniquely defining the session. Must be exactly 32 character long, uppercase and cannot contaim dashes or curly braces.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">SectionLetters property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">SectionLetters property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. Specifies the section in whicht the result was obtained.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">TableNumber property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">TableNumber property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. Specifies the table on which &nbsp;the result was obtained.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">RoundNumber property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">RoundNumber property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. Specifies the round in which &nbsp;the result was obtained.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">BoardNumber property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BoardNumber property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. Specifies the board on which &nbsp;the result was obtained.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">ScoringDirection property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">ScoringDirection property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required (cannot be zero). 1 for North-South, 2 for East-West, 3 for both, i.e.: no split score. As split scores for North-South and East-West currently are not supported use 3 always.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">PairNorthSouth property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">PairNorthSouth property</span></span></h5>
 <p class="rvps2"><span class="rvts6">The number of the pair in the North-South position.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">PairEastWest property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">PairEastWest property</span></span></h5>
 <p class="rvps2"><span class="rvts6">The number of the pair in the East-West position.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">DeclaringPair property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">DeclaringPair property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Either the value of the PairNorthSouth property or the PairEastWest property.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">DeclarerDirection property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">DeclarerDirection property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Specifies the declarer on the board. Possible values are:</span></p>
 <ul style="text-indent: 0px; padding: 0; margin: 0 0 0 24px; list-style-position: outside; list-style-type: disc;">
  <li class="rvps2 noindent"><span class="rvts6">0: NA</span></li>
@@ -218,7 +218,7 @@
  <li class="rvps2 noindent"><span class="rvts6">4: West</span></li>
 </ul>
 <p class="rvps2"><span class="rvts11">Note</span><br/><span class="rvts6">When the declarer direction property is North or South while the de declaring pair is the East-West pair the result is marked as being a switched seating. Likewise for East or West and the North-South pair.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">Level property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">Level property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Represent the level of the contract: 1 to 7 for natural scores and:</span></p>
 <div class="rvps2">
 <table width="100%" cellpadding="1" style="border-color: canvastext; border-style: solid; border-width: 1px; border-spacing: 0px;">
@@ -356,7 +356,7 @@
  </tr>
 </table>
 </div>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">Denomination property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">Denomination property</span></span></h5>
 <p class="rvps2"><span class="rvts6">The denomination for the contract, if applicable. Possible values are:</span></p>
 <ul style="text-indent: 0px; padding: 0; margin: 0 0 0 24px; list-style-position: outside; list-style-type: disc;">
  <li class="rvps2 noindent"><span class="rvts6">0: N/A (Pass, No play, artificial score)</span></li>
@@ -366,16 +366,16 @@
  <li class="rvps2 noindent"><span class="rvts6">4: Spades</span></li>
  <li class="rvps2 noindent"><span class="rvts6">5: No Trump</span></li>
 </ul>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">Stake property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">Stake property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Specifies if the contract was doubled or redoubled. Possible values are:</span></p>
 <ul style="text-indent: 0px; padding: 0; margin: 0 0 0 24px; list-style-position: outside; list-style-type: disc;">
  <li class="rvps2 noindent"><span class="rvts6">0: Not doubled</span></li>
  <li class="rvps2 noindent"><span class="rvts6">1: Doubled</span></li>
  <li class="rvps2 noindent"><span class="rvts6">2: Redoubled</span></li>
 </ul>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">TotalTricks property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">TotalTricks property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Specifies the total number of tricks that were obtained by the declaring side. Zero if N/A.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">LeadCardRank property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">LeadCardRank property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Optional. The rank of the lead card, if specified. Possible values are:</span></p>
 <ul style="text-indent: 0px; padding: 0; margin: 0 0 0 24px; list-style-position: outside; list-style-type: disc;">
  <li class="rvps2 noindent"><span class="rvts6">0: N/A</span></li>
@@ -385,7 +385,7 @@
  <li class="rvps2 noindent"><span class="rvts6">13: King</span></li>
  <li class="rvps2 noindent"><span class="rvts6">14: Ace</span></li>
 </ul>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">LeadCardSuit property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">LeadCardSuit property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Optional, required if the lead card rank is other than zero. The suit of the leadcard. Possible values are:</span></p>
 <ul style="text-indent: 0px; padding: 0; margin: 0 0 0 24px; list-style-position: outside; list-style-type: disc;">
  <li class="rvps2 noindent"><span class="rvts6">0: N/A</span></li>

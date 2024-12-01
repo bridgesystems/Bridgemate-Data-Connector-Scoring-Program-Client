@@ -1134,150 +1134,150 @@
 </div>
 <h1 class="rvps5" style="break-before: always;"><a name="CodeExamples"></a><span class="rvts0"><span class="rvts14">Code examples</span></span></h1>
 <p class="rvps2"><span class="rvts6">Below a typical piece of code to send a request to the </span><span class="rvts6">Data Connector</span><span class="rvts6"> and awaiting the response: using the Ping command</span></p>
-<p class="rvps2"><span class="rvts17">&nbsp; &nbsp; &nbsp;</span><span class="rvts20">/// &lt;summary&gt;</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp;/// Communicates to the DataConnector to see if it is responsive.</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp;/// The Ping command returns the exact data that was sent with it.</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp;/// &lt;/summary&gt;</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp;/// &lt;returns&gt;&lt;/returns&gt;</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp;public async Task&lt;ScoringProgramResponse&gt; Ping()</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var requestTicks = DateTime.Now.Ticks.ToString();</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var serializedTicks=JsonSerializer.Serialize(requestTicks);</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var response = await SendDataAsync(sessionGuid: string.Empty, ScoringProgramMiddleManCommands.Ping, serializedTicks);</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (response.RequestCommand != ScoringProgramMiddleManCommands.Ping)</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return new ScoringProgramResponse</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = ScoringProgramMiddleManCommands.Ping,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = MiddleManResponseData.Error,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ErrorType = ErrorType.Unknown,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = JsonSerializer.Serialize($"Invalid command in reponse to {nameof(ScoringProgramMiddleManCommands.Ping)}: " +</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;$"'{response.RequestCommand}'")</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (response.DataType != MiddleManResponseData.OK)</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return response;</span></p>
-<p class="rvps2"><span class="rvts20"><br/></span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var responseTicks = JsonSerializer.Deserialize&lt;string&gt;(response.SerializedData);</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var error = responseTicks != requestTicks;</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return new ScoringProgramResponse</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = ScoringProgramMiddleManCommands.Ping,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = requestTicks == responseTicks ? MiddleManResponseData.OK : MiddleManResponseData.Error,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ErrorType = error ? ErrorType.Validation : ErrorType.None,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = response.SerializedData</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts20"><br/></span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;/// &lt;summary&gt;</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;/// The code that handles the actual sending of requests and reading their reponses.</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;/// &lt;/summary&gt;</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;/// &lt;param name="sessionGuid"&gt;Specifies which session the request targets (if any)&lt;/param&gt;</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;/// &lt;param name="command"&gt;The command to the middlleman&lt;/param&gt;</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;/// &lt;param name="serializedData"&gt;The data to send to the middleman as json data. (If any)&lt;/param&gt;</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;/// &lt;returns&gt;&lt;/returns&gt;</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;private async Task&lt;ScoringProgramResponse&gt; SendDataAsync(string sessionGuid, ScoringProgramMiddleManCommands command, string serializedData)</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;//Construct the request to the Middleman.</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;var request = new ScoringProgramRequest</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Command = command,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SessionGuid = sessionGuid,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = serializedData</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
-<p class="rvps2"><span class="rvts20"><br/></span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;//Serialize it.</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;var requestSerialized = JsonSerializer.Serialize(request);</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;//Do not proceed if sending is already in progress (for an other request). There can be only on request be sent at the same time.</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;if (_isSending)</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return new ScoringProgramResponse</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = command,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SessionGuid = sessionGuid,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = MiddleManResponseData.Error,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ErrorType = ErrorType.Busy,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = JsonSerializer.Serialize($"Client is busy, please retry later.")</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;try</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;_isSending = true;</span></p>
-<p class="rvps2"><span class="rvts20"><br/></span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Do not continue if the connection has been broken. Call the Connect method again then resend.</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var errorResponse = CheckConnection(command);</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (errorResponse != null)</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return errorResponse;</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts20"><br/></span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Reconnect to the Middleman if needed.</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (!MiddleManStream.IsConnected)</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;await MiddleManStream.ConnectAsync(5000);</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts20"><br/></span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Send the request to the Middleman. Mind: as it is written now this is a blocking call.</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//However, in .Net an exception will be thrown if the connection has gone dead for whatever reason.</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;await MiddleManWriter.WriteLineAsync(requestSerialized);</span></p>
-<p class="rvps2"><span class="rvts20"><br/></span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Wait for the response. This too is a blocking call. But in .Net a broken connection will throw an exception.</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;string response = await MiddleManReader.ReadLineAsync();</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (response != null)</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var responseDeserialized = JsonSerializer.Deserialize&lt;ScoringProgramResponse&gt;(response);</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return responseDeserialized ??</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; new ScoringProgramResponse</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; RequestCommand = command,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DataType = MiddleManResponseData.Error,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SerializedData = JsonSerializer.Serialize("Empty response")</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; };</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;else</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return new ScoringProgramResponse</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; RequestCommand = command,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DataType = MiddleManResponseData.Error,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SerializedData = JsonSerializer.Serialize("Empty response")</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; };</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;catch (IOException)</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CloseConnection();</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;new ScoringProgramResponse</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = command,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = MiddleManResponseData.Error,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = JsonSerializer.Serialize("Pipe broken")</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;catch (Exception ex)</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CloseConnection();</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DebugLogger.Error(ex);</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ErrorLogger.Error(ex);</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;new ScoringProgramResponse</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = command,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = MiddleManResponseData.Error,</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = JsonSerializer.Serialize(ex.Message)</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts20"><br/></span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;finally</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Always signal that the client is free for the next items to send.</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Otherwise after an exception further communication will be blocked.</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;_isSending = false;</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p class="rvps2"><span class="rvts20">&nbsp; &nbsp;}</span></p>
-<p class="rvps2" style="break-before: always;"><span class="rvts20"></span><span class="rvts6"></span></p>
+<p class="rvps2"><span class="rvts17">&nbsp; &nbsp; &nbsp;</span><span class="rvts21">/// &lt;summary&gt;</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp;/// Communicates to the DataConnector to see if it is responsive.</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp;/// The Ping command returns the exact data that was sent with it.</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp;/// &lt;/summary&gt;</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp;/// &lt;returns&gt;&lt;/returns&gt;</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp;public async Task&lt;ScoringProgramResponse&gt; Ping()</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var requestTicks = DateTime.Now.Ticks.ToString();</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var serializedTicks=JsonSerializer.Serialize(requestTicks);</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var response = await SendDataAsync(sessionGuid: string.Empty, ScoringProgramMiddleManCommands.Ping, serializedTicks);</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (response.RequestCommand != ScoringProgramMiddleManCommands.Ping)</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return new ScoringProgramResponse</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = ScoringProgramMiddleManCommands.Ping,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = MiddleManResponseData.Error,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ErrorType = ErrorType.Unknown,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = JsonSerializer.Serialize($"Invalid command in reponse to {nameof(ScoringProgramMiddleManCommands.Ping)}: " +</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;$"'{response.RequestCommand}'")</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (response.DataType != MiddleManResponseData.OK)</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return response;</span></p>
+<p class="rvps2"><span class="rvts21"><br/></span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var responseTicks = JsonSerializer.Deserialize&lt;string&gt;(response.SerializedData);</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var error = responseTicks != requestTicks;</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return new ScoringProgramResponse</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = ScoringProgramMiddleManCommands.Ping,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = requestTicks == responseTicks ? MiddleManResponseData.OK : MiddleManResponseData.Error,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ErrorType = error ? ErrorType.Validation : ErrorType.None,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = response.SerializedData</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts21"><br/></span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp;/// &lt;summary&gt;</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp;/// The code that handles the actual sending of requests and reading their reponses.</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp;/// &lt;/summary&gt;</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp;/// &lt;param name="sessionGuid"&gt;Specifies which session the request targets (if any)&lt;/param&gt;</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp;/// &lt;param name="command"&gt;The command to the middlleman&lt;/param&gt;</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp;/// &lt;param name="serializedData"&gt;The data to send to the middleman as json data. (If any)&lt;/param&gt;</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp;/// &lt;returns&gt;&lt;/returns&gt;</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp;private async Task&lt;ScoringProgramResponse&gt; SendDataAsync(string sessionGuid, ScoringProgramMiddleManCommands command, string serializedData)</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;//Construct the request to the Middleman.</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;var request = new ScoringProgramRequest</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Command = command,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SessionGuid = sessionGuid,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = serializedData</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
+<p class="rvps2"><span class="rvts21"><br/></span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;//Serialize it.</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;var requestSerialized = JsonSerializer.Serialize(request);</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;//Do not proceed if sending is already in progress (for an other request). There can be only on request be sent at the same time.</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;if (_isSending)</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return new ScoringProgramResponse</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = command,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SessionGuid = sessionGuid,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = MiddleManResponseData.Error,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ErrorType = ErrorType.Busy,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = JsonSerializer.Serialize($"Client is busy, please retry later.")</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;try</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;_isSending = true;</span></p>
+<p class="rvps2"><span class="rvts21"><br/></span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Do not continue if the connection has been broken. Call the Connect method again then resend.</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var errorResponse = CheckConnection(command);</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (errorResponse != null)</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return errorResponse;</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts21"><br/></span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Reconnect to the Middleman if needed.</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (!MiddleManStream.IsConnected)</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;await MiddleManStream.ConnectAsync(5000);</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts21"><br/></span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Send the request to the Middleman. Mind: as it is written now this is a blocking call.</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//However, in .Net an exception will be thrown if the connection has gone dead for whatever reason.</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;await MiddleManWriter.WriteLineAsync(requestSerialized);</span></p>
+<p class="rvps2"><span class="rvts21"><br/></span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Wait for the response. This too is a blocking call. But in .Net a broken connection will throw an exception.</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;string response = await MiddleManReader.ReadLineAsync();</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (response != null)</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var responseDeserialized = JsonSerializer.Deserialize&lt;ScoringProgramResponse&gt;(response);</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return responseDeserialized ??</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; new ScoringProgramResponse</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; RequestCommand = command,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DataType = MiddleManResponseData.Error,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SerializedData = JsonSerializer.Serialize("Empty response")</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; };</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;else</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return new ScoringProgramResponse</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; RequestCommand = command,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DataType = MiddleManResponseData.Error,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SerializedData = JsonSerializer.Serialize("Empty response")</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; };</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;catch (IOException)</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CloseConnection();</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;new ScoringProgramResponse</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = command,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = MiddleManResponseData.Error,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = JsonSerializer.Serialize("Pipe broken")</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;catch (Exception ex)</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CloseConnection();</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DebugLogger.Error(ex);</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ErrorLogger.Error(ex);</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;new ScoringProgramResponse</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RequestCommand = command,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DataType = MiddleManResponseData.Error,</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SerializedData = JsonSerializer.Serialize(ex.Message)</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;};</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts21"><br/></span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;finally</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Always signal that the client is free for the next items to send.</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Otherwise after an exception further communication will be blocked.</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;_isSending = false;</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p class="rvps2"><span class="rvts21">&nbsp; &nbsp;}</span></p>
+<p class="rvps2" style="break-before: always;"><span class="rvts21"></span><span class="rvts6"></span></p>
 
             </div>
             

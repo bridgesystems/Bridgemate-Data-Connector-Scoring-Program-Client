@@ -188,18 +188,18 @@
 
             <div class="main-content">
                 
-<h3 class="rvps9"><span class="rvts0"><span class="rvts26">Procedure</span></span></h3>
+<h3 class="rvps9"><span class="rvts0"><span class="rvts27">Procedure</span></span></h3>
 <p class="rvps2"><img alt="" style="width : 644px; height : 576px; padding : 1px;" src="lib/Initialize.png"></p>
-<h3 class="rvps9"><span class="rvts0"><span class="rvts26">Data structure</span></span></h3>
+<h3 class="rvps9"><span class="rvts0"><span class="rvts27">Data structure</span></span></h3>
 <p class="rvps2"><img alt="" style="width : 821px; height : 176px; padding : 1px;" src="lib/InitDTOPlus.png"></p>
 <p class="rvps2"><span class="rvts6"><br/></span></p>
-<h3 class="rvps9"><span class="rvts0"><span class="rvts26">Description</span></span></h3>
+<h3 class="rvps9"><span class="rvts0"><span class="rvts27">Description</span></span></h3>
 <p class="rvps2"><span class="rvts6">An event can be initialized with one or more sessions.Initialization is done using the </span><a class="rvts16" href="Overviewofcommunication.html">InitializeEvent</a><span class="rvts6"> command and an </span><a class="rvts16" href="InitDTO.html">InitDTO</a><span class="rvts6">. The SessionGuid must not be set in the </span><a class="rvts16" href="Overviewofcommunication.html#Diagram">ScoringProgramRequest</a><span class="rvts6">. This DTO must at least contain information on the scoring method, the scoring group for each section and the movement.</span></p>
 <p class="rvps2"><span class="rvts6">Player data, starting posititons and handrecords are optional. Board results are no part of initialization data but can be sent later.N</span></p>
 <p class="rvps2"><span class="rvts6">Furthermore, the InitDTO contains a </span><a class="rvts16" href="InitDTO.html#Commands">Commands</a><span class="rvts6"> property that specifies which actions the </span><span class="rvts6">Bridgemate Control Software</span><span class="rvts6"> must undertake &nbsp;when it has been launched.</span></p>
 <p class="rvps2"><span class="rvts11">Note</span></p>
 <p class="rvps2"><span class="rvts6">A player, as identified by his playernumber, may only exist once in the event. In the case that a player participates in both events make sure to duplicate the player with a different playernumber.</span></p>
-<h3 class="rvps9"><span class="rvts0"><span class="rvts26">Example json code</span></span></h3>
+<h3 class="rvps9"><span class="rvts0"><span class="rvts27">Example json code</span></span></h3>
 <p class="rvps2"><span class="rvts6">The code below shows the minimum required json data to send to initialize a session with four pairs that all meet each other.</span></p>
 <p class="rvps2"><span class="rvts6">{</span></p>
 <p class="rvps2"><span class="rvts6">&nbsp; "Command": 5,</span></p>

@@ -112,56 +112,63 @@ span.rvts19
 }
 span.rvts20
 {
- font-size: 9pt;
+ font-size: 9.5pt;
  font-family: 'Cascadia Mono';
+ font-style: italic;
  color: #000000;
 }
 span.rvts21
 {
- font-size: 9.5pt;
+ font-size: 9pt;
  font-family: 'Cascadia Mono';
- color: #0000ff;
+ color: #000000;
 }
 span.rvts22
 {
  font-size: 9.5pt;
  font-family: 'Cascadia Mono';
+ color: #0000ff;
+}
+span.rvts23
+{
+ font-size: 9.5pt;
+ font-family: 'Cascadia Mono';
  color: #2b91af;
 }
-a.rvts23, span.rvts23
+a.rvts24, span.rvts24
 {
  font-size: 12pt;
  font-weight: bold;
  color: #0000ff;
  text-decoration: underline;
 }
-span.rvts24
+span.rvts25
 {
  font-size: 11pt;
  font-style: italic;
  font-weight: bold;
 }
-span.rvts25
-{
- font-size: 11pt;
- font-weight: bold;
-}
 span.rvts26
 {
- font-size: 12pt;
+ font-size: 11pt;
  font-weight: bold;
 }
 span.rvts27
 {
  font-size: 12pt;
- font-style: italic;
  font-weight: bold;
 }
 span.rvts28
 {
+ font-size: 12pt;
  font-style: italic;
+ font-weight: bold;
 }
 span.rvts29
+{
+ font-style: italic;
+}
+span.rvts30
 {
  font-size: 11pt;
  font-style: italic;

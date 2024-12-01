@@ -200,25 +200,25 @@
 <p class="rvps2"><span class="rvts6">In theory you could send all participations for all rounds. However, currently this is not supported.</span><span class="rvts6">Bridgemate Control Software</span><span class="rvts6"> will determine the participations for round two and higher from the movement as sent with the </span><a class="rvts16" href="SectionDTO.html">SectionDTO</a><span class="rvts6">. So leave the RoundNumber at zero, or set it to 1.</span></p>
 <p class="rvps2"><span class="rvts6"><br/></span></p>
 <p class="rvps2"><span class="rvts6">You can send the participations as part of the </span><a class="rvts16" href="InitDTO.html">InitDTO</a><span class="rvts6"> when i</span><a class="rvts16" href="Initializeanevent.html">nitializing a new event</a><span class="rvts6">. Or they can be sent seperatly as data for the </span><a class="rvts16" href="Overviewofcommunication.html#OverviewOfCommands">PutParticipations command</a><span class="rvts6">.</span></p>
-<h5 class="rvps12"><span class="rvts0"><span class="rvts29">SessionGuid property</span></span></h5>
+<h5 class="rvps12"><span class="rvts0"><span class="rvts30">SessionGuid property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. A guid uniquely defining the session. Must be exactly 32 character long, uppercase and cannot contaim dashes or curly braces.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">SectionLetters property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">SectionLetters property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. Specifies the section for the participation.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">TableNumber property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">TableNumber property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. Specifies the table for the participation.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">RoundNumber property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">RoundNumber property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Currently not supported.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">Direction property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">Direction property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. Represents the seating for the player: North, East, South or West.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">PlayerNumber property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">PlayerNumber property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Optional. Together with the SessionGuid uniquely defnines the player. The player must have been sent to </span><span class="rvts6">Bridgemate Data Connector</span><span class="rvts6"> using a PlauerDataDTO beforehand.Do not include first name or last name.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">FirstName property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">FirstName property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Optional .Leave empty when a player number has been specified.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">LastName property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">LastName property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Optional. Required if no player number has been specified. Leave empty when a player number has been specified.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">CountryCode property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">CountryCode property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Currently not supported.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">IsPlayerSwap property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">IsPlayerSwap property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Can only be "True" after a </span><a class="rvts16" href="Overviewofcommunication.html#PollingComands">PollQueueForNewParticipations command</a><span class="rvts6">. Signals that the North player was swapped with the South player, or that the East player was swapped with the West player. The Direction ans PlayerNumber properties reflect the values after the swap.</span></p>
 <p class="rvps2"><span class="rvts6"><br/></span></p>
 <p class="rvps2" style="break-before: always;"><span class="rvts6"></span><span class="rvts6"></span></p>

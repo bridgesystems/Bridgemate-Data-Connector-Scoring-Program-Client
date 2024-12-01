@@ -190,33 +190,33 @@
                 
 <p class="rvps2"><img alt="" style="width : 275px; height : 411px; padding : 1px;" src="lib/RoundDTO.png"></p>
 <p class="rvps2"><span class="rvts6">The RoundDTO defines which pairs play on its table in the specified round and which boards they will play. Currently only consecutive boards are supported.</span></p>
-<h5 class="rvps12"><span class="rvts0"><span class="rvts29">SessionGuid property</span></span></h5>
+<h5 class="rvps12"><span class="rvts0"><span class="rvts30">SessionGuid property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. A guid uniquely defining the session. Must be exactly 32 character long, uppercase and cannot contaim dashes or curly braces.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">SectionLetters property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">SectionLetters property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. Refers to the section the table is part of.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">TableNumber property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">TableNumber property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. Uniquely defines the table in the section</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">RoundNumber property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">RoundNumber property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. Uniquely defines the round on its table.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">PairNS property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">PairNS property</span></span></h5>
 <p class="rvps2"><span class="rvts6">The number of the pair that takes the North-South position.If the value is greater than zero and if the section has one </span><a class="rvts16" href="SectionDTO.html#Winners">winner</a><span class="rvts6"> the number must be unique within all rounds with the same number in the section. If the section has two winners the number must be unique within all PairNS values within all rounds with the samen number in the section. A value of zero will indicate a sit-out if the PairEW value is greater than zero or an empty table if PairEW is zero too.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">PairEW property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">PairEW property</span></span></h5>
 <p class="rvps2"><span class="rvts6">The number of the pair that takes the East-West position. If the value is greater than zero and if the section has one </span><a class="rvts16" href="SectionDTO.html#Winners">winner</a><span class="rvts6"> the number must be unique within all rounds with the same number in the section. If the section has two winners the number must be unique within all PairEW values within all rounds with the samen number in the section. A value of zero will indicate a sit-out if the PairNS value is greater than zero or an empty table if PairNS is zero too.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">LowBoardNumber property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">LowBoardNumber property</span></span></h5>
 <p class="rvps2"><span class="rvts6">The number of the lowest board that the pairs will play. Together with the high board number property the value defines all boards that the pairs will play against each other.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">HighBoardNumber property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">HighBoardNumber property</span></span></h5>
 <p class="rvps2"><span class="rvts6">The number of the highest board that the pairs will play. Together with the low board number property the value defines all boards that the pairs will play against each other.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">TeamNS property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">TeamNS property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Optional. The number of the team for the North-South pair.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">TeamEW property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">TeamEW property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Optional. The number of the team for the East-West pair.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">MatesTableSectionLetters property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">MatesTableSectionLetters property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Optional. The letter of the section where the two other pairs of the teams match will play the same boards.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">MatesTableTableNumber property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">MatesTableTableNumber property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Optional. The number of the table where the two other pairs of the teams match will play the same boards.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">MatesTableRoundNumber property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">MatesTableRoundNumber property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Optional. The number of the round where the two other pairs of the teams match will play the same boards.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts24">Updated</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts25">Updated</span></span></h5>
 <p class="rvps2"><span class="rvts6">Not in use for external scoring programs.</span></p>
 <p class="rvps2" style="break-before: always;"><span class="rvts6"></span><span class="rvts6"></span></p>
 
