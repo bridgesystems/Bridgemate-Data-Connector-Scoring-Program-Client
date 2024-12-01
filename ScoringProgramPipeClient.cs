@@ -46,7 +46,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// The name of the pipe that handles the bidirectional communication with the Data Connector.
         /// </summary>
-        public string PipeName = "BridgeSystems.Bridgemate.DataConnectorService.ScoringProgram";
+        public string PipeName = $"BridgeSystems.Bridgemate.DataConnectorService.ScoringProgram.{Environment.UserName}";
 
         /// <summary>
         /// The implementation of the singleton pattern. Atypically the constructor is protected rather than private.
