@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using SIO=System.IO;
+using SIO = System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -10,10 +10,10 @@ using System.Diagnostics;
 using Microsoft.Win32;
 using NLog;
 
-namespace BridgeSystems.BCS.Net.Application.Common.DataConnector
+namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnector
 {
-    
-    public static class DataConnectorManager
+
+    public static class BridgemateDataConnectorManager
     {
         private static Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -25,21 +25,24 @@ namespace BridgeSystems.BCS.Net.Application.Common.DataConnector
         /// <summary>
         /// Restarts the Bridgemate Data Connector if it is not running.
         /// </summary>
-        /// <param name="dataconnectorExePath"></param>
-        /// <param name="forceRestart"></param>
+        /// <param name="forceRestart">If "true" restart even if it is running.</param>
         /// <returns></returns>
-        public static bool EnsureDataConnectorServiceIsRunning(string dataconnectorExePath,bool forceRestart)
+        public static bool EnsureDataConnectorServiceIsRunning(bool forceRestart)
         {
             try
             {
+                var BcsExePath =(string) Registry.LocalMachine.OpenSubKey(
+                    @"SOFTWARE\Bridge Systems BV\BCS.Net\InfoForExternalProgram")
+                    .GetValue("ExePath");
+                var dataconnectorExePath = Path.Combine(Path.GetDirectoryName(BcsExePath), "BDC", FullDataConnectorName);
                 if (forceRestart)
-                    return Restart(force:true);
+                    return Restart(dataconnectorExePath, force: true);
                 else
                 {
                     Process process = GetProcess(Path.GetFileNameWithoutExtension(dataconnectorExePath));
                     if (process != null) return true;
 
-                    return Restart();
+                    return Restart(dataconnectorExePath);
                 }
             }
             catch
@@ -47,9 +50,9 @@ namespace BridgeSystems.BCS.Net.Application.Common.DataConnector
                 return false;
             }
 
-            bool Restart(bool force = false)
+            bool Restart(string path, bool force = false)
             {
-                return StartProcess(dataconnectorExePath, $"-i{FullDataConnectorName} {(force?"-c":"")}");
+                return StartProcess(path, $"-i{FullDataConnectorName} {(force ? "-c" : "")}");
             }
         }
 
@@ -59,7 +62,7 @@ namespace BridgeSystems.BCS.Net.Application.Common.DataConnector
             try
             {
                 process.StartInfo.FileName = path;
-                process.StartInfo.WorkingDirectory = workingDirectory ?? System.IO.Path.GetDirectoryName(path);
+                process.StartInfo.WorkingDirectory = workingDirectory ?? Path.GetDirectoryName(path);
                 process.StartInfo.Arguments = parameters;
                 process.Start();
                 //process.WaitForInputIdle();

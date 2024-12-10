@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnector;
 using BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO;
 using NLog;
 
@@ -114,8 +115,19 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         {
             try
             {
-                var result =
-                    await ConnectAsync(PipeName);
+                (DataConnectorResponseData result, string message, ErrorType errorType) result;
+                var success=BridgemateDataConnectorManager.EnsureDataConnectorServiceIsRunning(forceRestart: false);
+                if (!success)
+                {
+                    return new ScoringProgramResponse
+                    {
+                        RequestCommand = ScoringProgramDataConnectorCommands.Connect,
+                        DataType = DataConnectorResponseData.Error,
+                        ErrorType = ErrorType.NoConnection,
+                        SerializedData = JsonSerializer.Serialize("The Bridgemate Data Connector is not running and could not be restarted.")
+                    };
+                }
+                result = await ConnectAsync(PipeName);
                 return new ScoringProgramResponse
                 {
                     RequestCommand = ScoringProgramDataConnectorCommands.Connect,
@@ -143,10 +155,21 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public ScoringProgramResponse Connect()
         {
+            (DataConnectorResponseData result, string message, ErrorType errorType) result;
+            var success = BridgemateDataConnectorManager.EnsureDataConnectorServiceIsRunning(forceRestart: false);
+            if (!success)
+            {
+                return new ScoringProgramResponse
+                {
+                    RequestCommand = ScoringProgramDataConnectorCommands.Connect,
+                    DataType = DataConnectorResponseData.Error,
+                    ErrorType = ErrorType.NoConnection,
+                    SerializedData = JsonSerializer.Serialize("The Bridgemate Data Connector is not running and could not be restarted.")
+                };
+            }
             try
             {
-                var result =
-                    Connect(PipeName);
+                result =Connect(PipeName);
                 return new ScoringProgramResponse
                 {
                     RequestCommand = ScoringProgramDataConnectorCommands.Connect,
