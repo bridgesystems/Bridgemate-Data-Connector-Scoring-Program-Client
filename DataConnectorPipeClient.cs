@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipes;
+using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using NLog;
@@ -12,7 +14,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     /// The base class for the <see cref="ScoringProgramPipeClient">ScoringProgram pipe client</see> and the BCS pipe client (not in this code base).
     /// Used to connect to and disconnect from the Data Connector.
     /// </summary>
-    public abstract class DataConnectorPipeClient : IDisposable
+    public abstract class DataConnectorPipeClient<TCommand> : IDisposable where TCommand : Enum
     {
         const int DefaultTimeOutInMilliSeconds = 5000;
 
@@ -27,9 +29,14 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// NLog implementation of logging.
         /// </summary>
-        protected static readonly Logger DebugLogger = LogManager.GetLogger(nameof(DebugLogger));
-        protected static readonly Logger ErrorLogger = LogManager.GetLogger(nameof(ErrorLogger));
-
+        
+        //protected static readonly Logger DebugLogger = LogManager.GetLogger(nameof(DebugLogger));
+        //protected static readonly Logger ErrorLogger = LogManager.GetLogger(nameof(ErrorLogger));
+        protected DataConnectorLogger<TCommand> Logger=new DataConnectorLogger<TCommand>(jsonDataLogLevel:LogLevel.Debug);
+        
+        /// <summary>
+        /// Initializes the class.
+        /// </summary>
         protected DataConnectorPipeClient()
         {
             TimeOutInMilliSeconds = 5000;
@@ -69,12 +76,19 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         protected StreamReader DataConnectorReader => _dataConnectorReader;
 
         /// <summary>
+        /// The source for the logging: Client or Server, BCS or ScoringProgram.
+        /// </summary>
+        protected abstract DataConnectorLogger<TCommand>.Source LoggingSource { get; }
+
+        /// <summary>
         /// Connects to the specified named pipe asynchronously.
         /// </summary>
         /// <param name="pipeName">The name of the pipe to connect to.</param>
         protected async Task<(DataConnectorResponseData result, string message, ErrorType errorType)>
             ConnectAsync(string pipeName)
         {
+            LogMethodEntry(nameof(ConnectAsync),(nameof(pipeName), pipeName));
+                
             try
             {
                 if (_dataConnectorStream != null && _dataConnectorStream.IsConnected)
@@ -95,8 +109,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
             catch (Exception ex)
             {
-                DebugLogger.Error(ex);
-                ErrorLogger.Error(ex);
+                LogError(ex);
+
                 return (DataConnectorResponseData.Error, ex.Message, ErrorType.NoConnection);
             }
         }
@@ -108,6 +122,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         protected (DataConnectorResponseData result, string message, ErrorType errorType)
           Connect(string pipeName)
         {
+            LogMethodEntry(nameof(Connect), (nameof(pipeName), pipeName));
+
             try
             {
                 if (_dataConnectorStream != null && _dataConnectorStream.IsConnected)
@@ -128,10 +144,37 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
             catch (Exception ex)
             {
-                DebugLogger.Error(ex);
-                ErrorLogger.Error(ex);
+                var errrorLogRecord = new DataConnectorLogger<TCommand>.DataConnectorLogRecord(
+                        LogLevel.Debug, LoggingSource, default, jsonData: "", exception: ex);
+                Logger.Log(errrorLogRecord);
                 return (DataConnectorResponseData.Error, ex.Message, ErrorType.NoConnection);
             }
+        }
+
+        /// <summary>
+        /// Logs an record for an exception.
+        /// </summary>
+        /// <param name="ex"></param>
+        protected void LogError(Exception ex)
+        {
+            var errrorLogRecord = new DataConnectorLogger<TCommand>.DataConnectorLogRecord(
+                    LogLevel.Debug, LoggingSource, default, jsonData: "", exception: ex);
+            Logger.Log(errrorLogRecord);
+        }
+
+        /// <summary>
+        /// Logs the entry of a method with its parameters (if any).
+        /// </summary>
+        /// <param name="methodName"></param>
+        /// <param name="parameters"></param>
+        protected void LogMethodEntry(string methodName, params (string parameterName, object parameterValue)[] parameters)
+        {
+            var parametersString = parameters.Any() ? string.Join(" ", parameters.Select(p => $"{p.parameterName}: {p.parameterValue}")) :
+                                   string.Empty;
+            var logRecord = new DataConnectorLogger<TCommand>.DataConnectorLogRecord(LogLevel.Debug, LoggingSource, default,
+               jsonData: "",
+               remark: $"{methodName}({string.Join(", ", parameters)})");
+            Logger.Log(logRecord);
         }
 
         /// <summary>

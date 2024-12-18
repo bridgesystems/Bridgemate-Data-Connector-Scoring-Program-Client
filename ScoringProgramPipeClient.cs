@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnector;
 using BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO;
 using NLog;
+using static BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnectorLogger<BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorCommands>;
 
 namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 {
@@ -32,9 +33,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     /// <see cref="ScoringProgramPipeClient.Initialize(InitDTO)">Initialize</see> and <see cref="ScoringProgramPipeClient.InitializeAsync(InitDTO)">InitializeAsync</see>: Initialization of a new event. <br/>
     /// <see cref="IssueManagementCommand(BCSManagementRequestDTO)">IssueManagementCommand</see> and <see cref="IssueManagementCommandAsync(BCSManagementRequestDTO)">IssueManagementCommandAsync</see>: Query the Bridgemate Control Software.
     /// </summary>
-    public class ScoringProgramPipeClient : DataConnectorPipeClient
+    public class ScoringProgramPipeClient : DataConnectorPipeClient<ScoringProgramDataConnectorCommands>
     {
-        private static readonly Logger Logger = LogManager.GetLogger(nameof(ScoringProgramPipeClient));
         /// <summary>
         /// Cached values of the ids of the several types of eventqueu items that have been sent to the Data Connector.
         /// If the scoring program does not include the id of the last received queue item when accepting them,the cached values will be used.
@@ -43,6 +43,11 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         private int _lastPlayeDataQueueItemId;      //A cached value of the id of the last sent participant queue item.
         private int _lastParticipantQueueItemId;    //A cached value of the id of the last sent participant queue item.
         private int _lastHandrecordQueueItemId;     //A cached value of the id of the last sent handrecord queue item.
+
+        /// <summary>
+        /// The source of the logging records.
+        /// </summary>
+        protected override Source LoggingSource => Source.ScoringProgramClient;
 
         /// <summary>
         /// The name of the pipe that handles the bidirectional communication with the Data Connector.
@@ -67,6 +72,9 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
         }
 
+        /// <summary>
+        /// Initializes the class.
+        /// </summary>
         protected ScoringProgramPipeClient()
         {
         }
@@ -138,8 +146,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
             catch (Exception ex)
             {
-                DebugLogger.Error(ex);
-                ErrorLogger.Error(ex);
+               LogError(ex);
                 return new ScoringProgramResponse
                 {
                     RequestCommand = ScoringProgramDataConnectorCommands.Connect,
@@ -180,8 +187,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
             catch (Exception ex)
             {
-                DebugLogger.Error(ex);
-                ErrorLogger.Error(ex);
+               LogError(ex);
                 return new ScoringProgramResponse
                 {
                     RequestCommand = ScoringProgramDataConnectorCommands.Connect,
@@ -197,6 +203,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public async Task<ScoringProgramResponse> DisconnectAsync()
         {
+            LogMethodEntry(nameof(DisconnectAsync));
+
             //The pipe only supports one request being sent at the same time.
             if (_isSending)
             {
@@ -244,8 +252,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
             catch (Exception ex)
             {
-                DebugLogger.Error(ex);
-                ErrorLogger.Error(ex);
+               LogError(ex);
                 return new ScoringProgramResponse
                 {
                     RequestCommand = ScoringProgramDataConnectorCommands.Disconnect,
@@ -262,6 +269,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public ScoringProgramResponse Disconnect()
         {
+            LogMethodEntry(nameof(Disconnect));
+
             //Do not proceed if sending is already in progress (for an other request). There can be only on request be sent at the same time.
             if (_isSending)
             {
@@ -309,8 +318,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
             catch (Exception ex)
             {
-                DebugLogger.Error(ex);
-                ErrorLogger.Error(ex);
+                LogError(ex);
                 return new ScoringProgramResponse
                 {
                     RequestCommand = ScoringProgramDataConnectorCommands.Disconnect,
@@ -328,6 +336,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public async Task<ScoringProgramResponse> PingAsync()
         {
+            LogMethodEntry(nameof(PingAsync));
+
             var requestTicks = DateTime.Now.Ticks.ToString();
             var serializedTicks = JsonSerializer.Serialize(requestTicks);
             var response = await SendDataAsync(sessionGuid: string.Empty, ScoringProgramDataConnectorCommands.Ping, serializedTicks);
@@ -363,6 +373,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public ScoringProgramResponse Ping()
         {
+            LogMethodEntry(nameof(Ping));
+
             var requestTicks = DateTime.Now.Ticks.ToString();
             var serializedTicks = JsonSerializer.Serialize(requestTicks);
             var response = SendData(sessionGuid: string.Empty, ScoringProgramDataConnectorCommands.Ping, serializedTicks);
@@ -399,7 +411,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public Task<ScoringProgramResponse> InitializeAsync(InitDTO initDTO)
         {
-
+            LogMethodEntry(nameof(InitializeAsync));
             var serializedData = JsonSerializer.Serialize(initDTO);
             Logger.Info($"{nameof(initDTO)}: {serializedData}");
             return SendDataAsync("", ScoringProgramDataConnectorCommands.InitializeEvent, serializedData);
@@ -413,6 +425,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public ScoringProgramResponse Initialize(InitDTO initDTO)
         {
+            LogMethodEntry(nameof(Initialize));
 
             var serializedData = JsonSerializer.Serialize(initDTO);
             Logger.Info($"{nameof(initDTO)}: {serializedData}");
@@ -426,6 +439,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public Task<ScoringProgramResponse> ContinueAsync(ContinueDTO continueDTO)
         {
+            LogMethodEntry(nameof(ContinueAsync));
+
             var serializedData = JsonSerializer.Serialize(continueDTO);
             Logger.Info($"{nameof(continueDTO)}: {serializedData}");
             return SendDataAsync("", ScoringProgramDataConnectorCommands.ContinueEvent, serializedData);
@@ -438,6 +453,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public ScoringProgramResponse Continue(ContinueDTO continueDTO)
         {
+            LogMethodEntry(nameof(Continue));
+
             var serializedData = JsonSerializer.Serialize(continueDTO);
             Logger.Info($"{nameof(continueDTO)}: {serializedData}");
             return SendData("", ScoringProgramDataConnectorCommands.ContinueEvent, serializedData);
@@ -451,6 +468,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public async Task<ScoringProgramResponse> SendResultsAsync(string sessionGuid, ResultDTO[] dtos)
         {
+            LogMethodEntry(nameof(SendResultsAsync),(nameof(sessionGuid),sessionGuid));
+
             var dtosForSession = dtos.Where(dto => dto.SessionGuid == sessionGuid).ToList();
             var serializedData = JsonSerializer.Serialize(dtosForSession);
             Logger.Info($"{nameof(ResultDTO)}s: {serializedData}");
@@ -465,6 +484,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public ScoringProgramResponse SendResults(string sessionGuid, ResultDTO[] dtos)
         {
+            LogMethodEntry(nameof(SendResults), (nameof(sessionGuid), sessionGuid));
+
             var dtosForSession = dtos.Where(dto => dto.SessionGuid == sessionGuid).ToList();
             var serializedData = JsonSerializer.Serialize(dtosForSession);
             Logger.Info($"{nameof(ResultDTO)}s: {serializedData}");
@@ -479,6 +500,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public Task<ScoringProgramResponse> SendHandrecordsAsync(string sessionGuid, HandrecordDTO[] dtos)
         {
+            LogMethodEntry(nameof(SendHandrecordsAsync), (nameof(sessionGuid), sessionGuid));
+
             var dtosForSession = dtos.Where(dto => dto.SessionGuid == sessionGuid).ToList();
             var serializedData = JsonSerializer.Serialize(dtosForSession);
             Logger.Info($"{nameof(HandrecordDTO)}s: {serializedData}");
@@ -494,6 +517,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public ScoringProgramResponse SendHandrecords(string sessionGuid, HandrecordDTO[] dtos)
         {
+            LogMethodEntry(nameof(SendHandrecords), (nameof(sessionGuid), sessionGuid));
+
             var dtosForSession = dtos.Where(dto => dto.SessionGuid == sessionGuid).ToList();
             var serializedData = JsonSerializer.Serialize(dtosForSession);
             Logger.Info($"{nameof(HandrecordDTO)}s: {serializedData}");
@@ -516,6 +541,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// </remarks>
         public Task<ScoringProgramResponse> SendPlayerDataAsync(string sessionGuid, PlayerDataDTO[] playerData)
         {
+            LogMethodEntry(nameof(SendPlayerDataAsync), (nameof(sessionGuid), sessionGuid));
+
             var dtosForSession = playerData.Where(dto => dto.SessionGuid == sessionGuid).ToList();
             var serializedData = JsonSerializer.Serialize(dtosForSession);
             Logger.Info($"{nameof(PlayerDataDTO)}s: {serializedData}");
@@ -541,6 +568,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// </remarks>
         public ScoringProgramResponse SendPlayerData(string sessionGuid, PlayerDataDTO[] playerData)
         {
+            LogMethodEntry(nameof(SendPlayerData), (nameof(sessionGuid), sessionGuid));
+
             var dtosForSession = playerData.Where(dto => dto.SessionGuid == sessionGuid).ToList();
             var serializedData = JsonSerializer.Serialize(dtosForSession);
             Logger.Info($"{nameof(PlayerDataDTO)}s: {serializedData}");
@@ -565,6 +594,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// </remarks>
         public async Task<ScoringProgramResponse> SendParticipationsAsync(string sessionGuid, ParticipationDTO[] dtos)
         {
+            LogMethodEntry(nameof(SendParticipationsAsync), (nameof(sessionGuid), sessionGuid));
+
             var dtosForSession = dtos.Where(dto => dto.SessionGuid == sessionGuid).ToList();
             if (dtosForSession.Any())
             {
@@ -597,6 +628,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// </remarks>
         public ScoringProgramResponse SendParticipations(string sessionGuid, ParticipationDTO[] dtos)
         {
+            LogMethodEntry(nameof(SendParticipations), (nameof(sessionGuid), sessionGuid));
+
             var dtosForSession = dtos.Where(dto => dto.SessionGuid == sessionGuid).ToList();
             if (dtosForSession.Any())
             {
@@ -623,6 +656,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public async Task<ScoringProgramResponse> SendBridgemate2SettingsAsync(string sessionGuid, Bridgemate2SettingsDTO[] bridgemate2Settings)
         {
+            LogMethodEntry(nameof(SendBridgemate2SettingsAsync), (nameof(sessionGuid), sessionGuid));
+
             var dtosForSession = bridgemate2Settings.Where(dto => dto.SessionGuid == sessionGuid);
             var serialized = JsonSerializer.Serialize(dtosForSession);
             return await SendDataAsync(sessionGuid, ScoringProgramDataConnectorCommands.PutBridgemate2Settings, serialized);
@@ -637,6 +672,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public ScoringProgramResponse SendBridgemate2Settings(string sessionGuid, Bridgemate2SettingsDTO[] bridgemate2Settings)
         {
+            LogMethodEntry(nameof(SendBridgemate2Settings), (nameof(sessionGuid), sessionGuid));
+
             var dtosForSession = bridgemate2Settings.Where(dto => dto.SessionGuid == sessionGuid);
             var serialized = JsonSerializer.Serialize(dtosForSession);
             return SendData(sessionGuid, ScoringProgramDataConnectorCommands.PutBridgemate2Settings, serialized);
@@ -647,10 +684,12 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// The section letters cannot be left out!
         /// </summary>
         /// <param name="sessionGuid"></param>
-        /// <param name="bridgemate2Settings"></param>
+        /// <param name="bridgemate3Settings"></param>
         /// <returns></returns>
         public async Task<ScoringProgramResponse> SendBridgemate3SettingsAsync(string sessionGuid, Bridgemate3SettingsDTO[] bridgemate3Settings)
         {
+            LogMethodEntry(nameof(SendBridgemate3SettingsAsync), (nameof(sessionGuid), sessionGuid));
+
             var dtosForSession = bridgemate3Settings.Where(dto => dto.SessionGuid == sessionGuid);
             var serialized = JsonSerializer.Serialize(dtosForSession);
             return await SendDataAsync(sessionGuid, ScoringProgramDataConnectorCommands.PutBridgemate3Settings, serialized);
@@ -661,10 +700,12 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// The section letters cannot be left out!
         /// </summary>
         /// <param name="sessionGuid"></param>
-        /// <param name="bridgemate2Settings"></param>
+        /// <param name="bridgemate3Settings"></param>
         /// <returns></returns>
         public ScoringProgramResponse SendBridgemate3Settings(string sessionGuid, Bridgemate3SettingsDTO[] bridgemate3Settings)
         {
+            LogMethodEntry(nameof(SendBridgemate3Settings), (nameof(sessionGuid), sessionGuid));
+
             var dtosForSession = bridgemate3Settings.Where(dto => dto.SessionGuid == sessionGuid);
             var serialized = JsonSerializer.Serialize(dtosForSession);
             return SendData(sessionGuid, ScoringProgramDataConnectorCommands.PutBridgemate3Settings, serialized);
@@ -680,6 +721,9 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         private async Task<ScoringProgramResponse> SendDataAsync(string sessionGuid,
             ScoringProgramDataConnectorCommands command, string serializedData)
         {
+            var logRecord = new DataConnectorLogRecord(LogLevel.Debug, LoggingSource, command, serializedData,nameof(SendDataAsync));
+            Logger.Log(logRecord);
+
             //Construct the request to the Data Connector.
             var request = new ScoringProgramRequest
             {
@@ -764,8 +808,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             catch (Exception ex)
             {
                 CloseConnection();
-                DebugLogger.Error(ex);
-                ErrorLogger.Error(ex);
+                LogError(ex);
                 return
                 new ScoringProgramResponse
                 {
@@ -793,6 +836,9 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         private ScoringProgramResponse SendData(string sessionGuid, ScoringProgramDataConnectorCommands command, string serializedData)
         {
+            var logRecord=new DataConnectorLogRecord(LogLevel.Debug,LoggingSource,command, serializedData, nameof(SendData));
+            Logger.Log(logRecord);
+
             //Construct the request to the Data Connector.
             var request = new ScoringProgramRequest
             {
@@ -877,8 +923,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             catch (Exception ex)
             {
                 CloseConnection();
-                DebugLogger.Error(ex);
-                ErrorLogger.Error(ex);
+               LogError(ex);
                 return
                 new ScoringProgramResponse
                 {
@@ -904,6 +949,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public async Task<ResultDTO[]> PollForResultsAsync(string sessionGuid, bool all = false)
         {
+            LogMethodEntry(nameof(PollForResultsAsync),(nameof(sessionGuid),sessionGuid),(nameof(all),all));
+
             var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllResults : 
                                 ScoringProgramDataConnectorCommands.PollQueueForNewResults;
             var response = await SendDataAsync(sessionGuid, command, serializedData: "");
@@ -931,6 +978,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public ResultDTO[] PollForResults(string sessionGuid, bool all = false)
         {
+            LogMethodEntry(nameof(PollForResults), (nameof(sessionGuid), sessionGuid), (nameof(all), all));
+
             var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllResults : 
                                 ScoringProgramDataConnectorCommands.PollQueueForNewResults;
             var response = SendData(sessionGuid, command, serializedData: "");
@@ -959,6 +1008,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public async Task<PlayerDataDTO[]> PollForPlayerDataAsync(string sessionGuid, bool all = false)
         {
+            LogMethodEntry(nameof(PollForPlayerDataAsync), (nameof(sessionGuid), sessionGuid), (nameof(all), all));
+
             var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllPlayerData : 
                                 ScoringProgramDataConnectorCommands.PollQueueForNewPlayerData;
             var response = await SendDataAsync(sessionGuid, command, serializedData: "");
@@ -986,6 +1037,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public PlayerDataDTO[] PollForPlayerData(string sessionGuid, bool all = false)
         {
+            LogMethodEntry(nameof(PollForPlayerData), (nameof(sessionGuid), sessionGuid), (nameof(all), all));
+
             var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllPlayerData : 
                                 ScoringProgramDataConnectorCommands.PollQueueForNewPlayerData;
             var response = SendData(sessionGuid, command, serializedData: "");
@@ -1013,6 +1066,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public async Task<ParticipationDTO[]> PollForParticipationsAsync(string sessionGuid, bool all = false)
         {
+            LogMethodEntry(nameof(PollForParticipationsAsync), (nameof(sessionGuid), sessionGuid), (nameof(all), all));
+
             var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllParticipations : 
                                 ScoringProgramDataConnectorCommands.PollQueueForNewParticipations;
             var response = await SendDataAsync(sessionGuid, command, serializedData: "");
@@ -1039,6 +1094,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public ParticipationDTO[] PollForParticipations(string sessionGuid, bool all = false)
         {
+            LogMethodEntry(nameof(PollForParticipations), (nameof(sessionGuid), sessionGuid), (nameof(all), all));
+
             var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllParticipations : 
                                 ScoringProgramDataConnectorCommands.PollQueueForNewParticipations;
 
@@ -1067,6 +1124,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public async Task<HandrecordDTO[]> PollForHandrecordsAsync(string sessionGuid, bool all = false)
         {
+            LogMethodEntry(nameof(PollForHandrecordsAsync), (nameof(sessionGuid), sessionGuid), (nameof(all), all));
+
             var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllHandrecords : 
                                 ScoringProgramDataConnectorCommands.PollQueueForNewHandrecords;
 
@@ -1094,6 +1153,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public HandrecordDTO[] PollForHandrecords(string sessionGuid, bool all = false)
         {
+            LogMethodEntry(nameof(PollForHandrecords), (nameof(sessionGuid), sessionGuid), (nameof(all), all));
+
             var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllHandrecords : 
                                 ScoringProgramDataConnectorCommands.PollQueueForNewHandrecords;
             var response = SendData(sessionGuid, command, serializedData: "");
@@ -1124,6 +1185,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// </remarks>
         public ScoringProgramResponse AcceptQueueData(string sessionGuid, DataConnectorResponseData dataType)
         {
+            LogMethodEntry(nameof(AcceptQueueData), (nameof(sessionGuid), sessionGuid),(nameof(dataType), dataType));
+
             (ScoringProgramDataConnectorCommands command, int lastQueueItemId) parameters = DetermineParametersForQueuAcceptance(dataType);
             if (parameters.command == ScoringProgramDataConnectorCommands.None)
             {
@@ -1153,6 +1216,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// </remarks>
         public async Task<ScoringProgramResponse> AcceptQueueDataAsync(string sessionGuid, DataConnectorResponseData dataType)
         {
+            LogMethodEntry(nameof(AcceptQueueDataAsync), (nameof(sessionGuid), sessionGuid), (nameof(dataType), dataType));
+
             (ScoringProgramDataConnectorCommands command, int lastQueueItemId) parameters =DetermineParametersForQueuAcceptance(dataType);
             if (parameters.command == ScoringProgramDataConnectorCommands.None)
             {
@@ -1221,6 +1286,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public async Task<SectionDTO> GetMovementAsync(string sessionGuid, string sectionLetters)
         {
+            LogMethodEntry(nameof(GetMovementAsync), (nameof(sessionGuid), sessionGuid), (nameof(sectionLetters), sectionLetters));
+
             try
             {
                 var sectionDto = new SectionDTO
@@ -1260,6 +1327,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public SectionDTO GetMovement(string sessionGuid, string sectionLetters)
         {
+            LogMethodEntry(nameof(GetMovement), (nameof(sessionGuid), sessionGuid), (nameof(sectionLetters), sectionLetters));
+
             try
             {
                 var sectionDto = new SectionDTO
@@ -1298,6 +1367,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public async Task<SectionDTO[]> GetAllMovementsAsync(string sessionGuid)
         {
+            LogMethodEntry(nameof(GetAllMovementsAsync), (nameof(sessionGuid), sessionGuid));
+
             var emptyResponse = new SectionDTO[] { };
             try
             {
@@ -1331,6 +1402,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public SectionDTO[] GetAllMovements(string sessionGuid)
         {
+            LogMethodEntry(nameof(GetAllMovements), (nameof(sessionGuid), sessionGuid));
+
             var emptyResponse = new SectionDTO[] { };
             try
             {
@@ -1363,6 +1436,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public async Task<ScoringProgramResponse> UpdateScoringGroupsAsync(IEnumerable<ScoringGroupDTO> scoringGroups)
         {
+            LogMethodEntry($"{nameof(UpdateScoringGroupsAsync)}");
+
             foreach (var groupedScoringGroup in scoringGroups.GroupBy(sg => sg.SessionGuid))
             {
                 var serializedData = JsonSerializer.Serialize(groupedScoringGroup);
@@ -1387,6 +1462,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public ScoringProgramResponse UpdateScoringGroups(IEnumerable<ScoringGroupDTO> scoringGroups)
         {
+            LogMethodEntry(nameof(UpdateScoringGroups));
+
             foreach (var groupedScoringGroup in scoringGroups.GroupBy(sg => sg.SessionGuid))
             {
                 var serializedData = JsonSerializer.Serialize(groupedScoringGroup);
@@ -1404,7 +1481,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             };
         }
 
-
         /// <summary>
         /// Instructs BCS asynchronously to update the movement for the given section. Be sure to include the movement for the section after its change.
         /// BCS will figure out how to adjust its data to enact the change.
@@ -1414,6 +1490,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public async Task<ScoringProgramResponse> UpdateMovementAsync(SectionUpdateDTO updatedSection)
         {
+            LogMethodEntry(nameof(UpdateMovementAsync));
+
             var serializedData = JsonSerializer.Serialize(updatedSection);
             Logger.Info($"{nameof(SectionDTO)}: {serializedData}");
             return await SendDataAsync(updatedSection.SessionGuid, ScoringProgramDataConnectorCommands.UpdateMovement, serializedData);
@@ -1428,6 +1506,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public ScoringProgramResponse UpdateMovement(SectionUpdateDTO updatedSection)
         {
+            LogMethodEntry(nameof(UpdateMovement));
+
             var serializedData = JsonSerializer.Serialize(updatedSection);
             Logger.Info($"{nameof(SectionDTO)}: {serializedData}");
             return SendData(updatedSection.SessionGuid, ScoringProgramDataConnectorCommands.UpdateMovement, serializedData);
@@ -1441,6 +1521,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public async Task<ScoringProgramResponse> AddSessionAsync(SessionDTO addedSession)
         {
+            LogMethodEntry(nameof(AddSessionAsync));
+
             var serializedData = JsonSerializer.Serialize(addedSession);
             Logger.Info($"{nameof(SessionDTO)}: {serializedData}");
             return await  SendDataAsync(addedSession.EventGuid, ScoringProgramDataConnectorCommands.AddSession, serializedData);
@@ -1455,6 +1537,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public ScoringProgramResponse AddSession(SessionDTO addedSession)
         {
+            LogMethodEntry(nameof(AddSession));
+
             var serializedData = JsonSerializer.Serialize(addedSession);
             Logger.Info($"{nameof(SessionDTO)}: {serializedData}");
             return SendData(addedSession.SessionGuid, ScoringProgramDataConnectorCommands.AddSession, serializedData);
@@ -1468,6 +1552,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public async Task<ScoringProgramResponse> IssueManagementCommandAsync(BCSManagementRequestDTO managementDTO)
         {
+            LogMethodEntry(nameof(IssueManagementCommandAsync));
+
             if (!managementDTO.Validate())
             {
                 var validationErrors = JsonSerializer.Serialize(managementDTO.ValidationMessages);
@@ -1494,6 +1580,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public ScoringProgramResponse IssueManagementCommand(BCSManagementRequestDTO managementDTO)
         {
+            LogMethodEntry(nameof (IssueManagementCommand));
+
             if (!managementDTO.Validate())
             {
                 var validationErrors = JsonSerializer.Serialize(managementDTO.ValidationMessages);
@@ -1522,7 +1610,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// </remarks>
         private ScoringProgramResponse CheckConnection(ScoringProgramDataConnectorCommands command)
         {
-
             if (DataConnectorStream == null)
                 return new ScoringProgramResponse
                 {
