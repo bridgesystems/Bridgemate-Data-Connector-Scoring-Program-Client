@@ -48,7 +48,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// The source of the logging records.
         /// </summary>
-        protected override Source LoggingSource => Source.ScoringProgramClient;
+        protected override DataConnectorLoggingSource LoggingSource => DataConnectorLoggingSource.ScoringProgramClient;
 
         /// <summary>
         /// The name of the pipe that handles the bidirectional communication with the Data Connector.
@@ -710,8 +710,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         private async Task<ScoringProgramResponse> SendDataAsync(string sessionGuid,
             ScoringProgramDataConnectorCommands command, string serializedData)
         {
-            var logRecord = new DataConnectorLogRecord(LogLevel.Debug, LoggingSource, command, serializedData,nameof(SendDataAsync));
-            DataConnectorLogger.Log(logRecord);
+            var logRecord = new DataConnectorLogRecord(DataConnectorLogLevel.Debug, LoggingSource, command, serializedData,nameof(SendDataAsync));
+            DataConnectorLogger.LogRecord(logRecord);
 
             //Construct the request to the Data Connector.
             var request = new ScoringProgramRequest
@@ -825,8 +825,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         private ScoringProgramResponse SendData(string sessionGuid, ScoringProgramDataConnectorCommands command, string serializedData)
         {
-            var logRecord=new DataConnectorLogRecord(LogLevel.Debug,LoggingSource,command, serializedData, nameof(SendData));
-            DataConnectorLogger.Log(logRecord);
+            var logRecord=new DataConnectorLogRecord(DataConnectorLogLevel.Debug,LoggingSource,command, serializedData, nameof(SendData));
+            DataConnectorLogger.LogRecord(logRecord);
 
             //Construct the request to the Data Connector.
             var request = new ScoringProgramRequest

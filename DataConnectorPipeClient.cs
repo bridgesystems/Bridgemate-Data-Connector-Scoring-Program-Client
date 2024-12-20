@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipes;
 using System.Linq;
+using System.Security;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using NLog;
@@ -32,7 +33,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         
         //protected static readonly DataConnectorLogger DebugLogger = LogManager.GetLogger(nameof(DebugLogger));
         //protected static readonly DataConnectorLogger ErrorLogger = LogManager.GetLogger(nameof(ErrorLogger));
-        protected DataConnectorLogger<TCommand> DataConnectorLogger=new DataConnectorLogger<TCommand>(jsonDataLogLevel:LogLevel.Debug,nameof(DataConnectorLogger));
+        protected DataConnectorLogger<TCommand> DataConnectorLogger=new DataConnectorLogger<TCommand>(jsonDataLogLevel:DataConnectorLogLevel.Debug,nameof(DataConnectorLogger));
         
         /// <summary>
         /// Initializes the class.
@@ -78,7 +79,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// The source for the logging: Client or Server, BCS or ScoringProgram.
         /// </summary>
-        protected abstract DataConnectorLogger<TCommand>.Source LoggingSource { get; }
+        protected abstract DataConnectorLoggingSource LoggingSource { get; }
 
         /// <summary>
         /// Connects to the specified named pipe asynchronously.
@@ -145,36 +146,10 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             catch (Exception ex)
             {
                 var errrorLogRecord = new DataConnectorLogger<TCommand>.DataConnectorLogRecord(
-                        LogLevel.Debug, LoggingSource, default, jsonData: "", exception: ex);
-                DataConnectorLogger.Log(errrorLogRecord);
+                        DataConnectorLogLevel.Debug, LoggingSource, default, jsonData: "", exception: ex);
+                DataConnectorLogger.LogRecord(errrorLogRecord);
                 return (DataConnectorResponseData.Error, ex.Message, ErrorType.NoConnection);
             }
-        }
-
-        /// <summary>
-        /// Logs an record for an exception.
-        /// </summary>
-        /// <param name="ex"></param>
-        protected void LogError(Exception ex)
-        {
-            var errrorLogRecord = new DataConnectorLogger<TCommand>.DataConnectorLogRecord(
-                    LogLevel.Debug, LoggingSource, default, jsonData: "", exception: ex);
-            DataConnectorLogger.Log(errrorLogRecord);
-        }
-
-        /// <summary>
-        /// Logs the entry of a method with its parameters (if any).
-        /// </summary>
-        /// <param name="methodName"></param>
-        /// <param name="parameters"></param>
-        protected void LogMethodEntry(string methodName, params (string parameterName, object parameterValue)[] parameters)
-        {
-            var parametersString = parameters.Any() ? string.Join(" ", parameters.Select(p => $"{p.parameterName}: {p.parameterValue}")) :
-                                   string.Empty;
-            var logRecord = new DataConnectorLogger<TCommand>.DataConnectorLogRecord(LogLevel.Debug, LoggingSource, default,
-               jsonData: "",
-               remark: $"{methodName}({string.Join(", ", parameters)})");
-            DataConnectorLogger.Log(logRecord);
         }
 
         /// <summary>
@@ -247,6 +222,25 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         {
             _dataConnectorStream?.Close();
             _dataConnectorStream = null;
+        }
+
+        /// <summary>
+        /// Logs an error
+        /// </summary>
+        /// <param name="ex"></param>
+        protected void LogError(Exception ex)
+        {
+            DataConnectorLogger.LogError(ex, LoggingSource);
+        }
+
+        /// <summary>
+        /// Logs the entry to a method with its parameters (if any),
+        /// </summary>
+        /// <param name="methodName"></param>
+        /// <param name="parameters"></param>
+        protected void LogMethodEntry(string methodName, params (string parameterName, object parameterValue)[] parameters)
+        {
+            DataConnectorLogger.LogMethodEntry(methodName, LoggingSource, parameters);
         }
 
         protected virtual void Dispose(bool disposing)
