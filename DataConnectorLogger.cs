@@ -8,7 +8,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     /// <summary>
     /// Logs all actions of the DataConnector in a structured way.
     /// </summary>
-    public class DataConnectorLogger<TCommand>:Logger where TCommand:Enum
+    public class DataConnectorLogger<TCommand> where TCommand:Enum
     {
         /// <summary>
         /// The source of the log message
@@ -117,14 +117,16 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         }
 
         private readonly LogLevel _jsonDataLogLevel;
+        private readonly Logger _nlLogLogger;
 
         /// <summary>
         /// Initializes the logger.
         /// </summary>
         /// <param name="jsonDataLogLevel">Specifies the lowest level of logging to include the json data as well.</param>
-        public DataConnectorLogger(LogLevel jsonDataLogLevel)
+        public DataConnectorLogger(LogLevel jsonDataLogLevel,string name)
         {
             _jsonDataLogLevel = jsonDataLogLevel;
+            _nlLogLogger=LogManager.GetLogger(name);
         }
 
         /// <summary>
@@ -134,11 +136,11 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         public void Log(DataConnectorLogRecord record) 
         {
             var message = $"{record.Source,-20} {record.Command,-20} {record.Remark}";
-            base.Log(record.LogLevel, message);
+            _nlLogLogger.Log(record.LogLevel, message);
             if (!string.IsNullOrEmpty(record.JsonData) && _jsonDataLogLevel<=record.LogLevel)
-                base.Log(record.LogLevel, record.JsonData);
+                _nlLogLogger.Log(record.LogLevel, record.JsonData);
             if(record.Exception != null)
-                base.Log(LogLevel.Error, record.Exception);
+                _nlLogLogger.Log(LogLevel.Error, record.Exception);
         }
 
     }

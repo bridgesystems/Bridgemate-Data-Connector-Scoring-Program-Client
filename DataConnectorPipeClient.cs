@@ -30,9 +30,9 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// NLog implementation of logging.
         /// </summary>
         
-        //protected static readonly Logger DebugLogger = LogManager.GetLogger(nameof(DebugLogger));
-        //protected static readonly Logger ErrorLogger = LogManager.GetLogger(nameof(ErrorLogger));
-        protected DataConnectorLogger<TCommand> Logger=new DataConnectorLogger<TCommand>(jsonDataLogLevel:LogLevel.Debug);
+        //protected static readonly DataConnectorLogger DebugLogger = LogManager.GetLogger(nameof(DebugLogger));
+        //protected static readonly DataConnectorLogger ErrorLogger = LogManager.GetLogger(nameof(ErrorLogger));
+        protected DataConnectorLogger<TCommand> DataConnectorLogger=new DataConnectorLogger<TCommand>(jsonDataLogLevel:LogLevel.Debug,nameof(DataConnectorLogger));
         
         /// <summary>
         /// Initializes the class.
@@ -146,7 +146,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             {
                 var errrorLogRecord = new DataConnectorLogger<TCommand>.DataConnectorLogRecord(
                         LogLevel.Debug, LoggingSource, default, jsonData: "", exception: ex);
-                Logger.Log(errrorLogRecord);
+                DataConnectorLogger.Log(errrorLogRecord);
                 return (DataConnectorResponseData.Error, ex.Message, ErrorType.NoConnection);
             }
         }
@@ -159,7 +159,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         {
             var errrorLogRecord = new DataConnectorLogger<TCommand>.DataConnectorLogRecord(
                     LogLevel.Debug, LoggingSource, default, jsonData: "", exception: ex);
-            Logger.Log(errrorLogRecord);
+            DataConnectorLogger.Log(errrorLogRecord);
         }
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             var logRecord = new DataConnectorLogger<TCommand>.DataConnectorLogRecord(LogLevel.Debug, LoggingSource, default,
                jsonData: "",
                remark: $"{methodName}({string.Join(", ", parameters)})");
-            Logger.Log(logRecord);
+            DataConnectorLogger.Log(logRecord);
         }
 
         /// <summary>

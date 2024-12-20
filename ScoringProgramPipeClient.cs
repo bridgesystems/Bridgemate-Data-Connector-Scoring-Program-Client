@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
 using BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnector;
@@ -413,7 +414,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         {
             LogMethodEntry(nameof(InitializeAsync));
             var serializedData = JsonSerializer.Serialize(initDTO);
-            Logger.Info($"{nameof(initDTO)}: {serializedData}");
             return SendDataAsync("", ScoringProgramDataConnectorCommands.InitializeEvent, serializedData);
         }
 
@@ -428,7 +428,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             LogMethodEntry(nameof(Initialize));
 
             var serializedData = JsonSerializer.Serialize(initDTO);
-            Logger.Info($"{nameof(initDTO)}: {serializedData}");
             return SendData("", ScoringProgramDataConnectorCommands.InitializeEvent, serializedData);
         }
 
@@ -442,7 +441,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             LogMethodEntry(nameof(ContinueAsync));
 
             var serializedData = JsonSerializer.Serialize(continueDTO);
-            Logger.Info($"{nameof(continueDTO)}: {serializedData}");
             return SendDataAsync("", ScoringProgramDataConnectorCommands.ContinueEvent, serializedData);
         }
 
@@ -456,7 +454,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             LogMethodEntry(nameof(Continue));
 
             var serializedData = JsonSerializer.Serialize(continueDTO);
-            Logger.Info($"{nameof(continueDTO)}: {serializedData}");
             return SendData("", ScoringProgramDataConnectorCommands.ContinueEvent, serializedData);
         }
 
@@ -472,7 +469,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 
             var dtosForSession = dtos.Where(dto => dto.SessionGuid == sessionGuid).ToList();
             var serializedData = JsonSerializer.Serialize(dtosForSession);
-            Logger.Info($"{nameof(ResultDTO)}s: {serializedData}");
             return await SendDataAsync(sessionGuid, ScoringProgramDataConnectorCommands.PutResults, serializedData);
         }
 
@@ -488,7 +484,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 
             var dtosForSession = dtos.Where(dto => dto.SessionGuid == sessionGuid).ToList();
             var serializedData = JsonSerializer.Serialize(dtosForSession);
-            Logger.Info($"{nameof(ResultDTO)}s: {serializedData}");
             return SendData(sessionGuid, ScoringProgramDataConnectorCommands.PutResults, serializedData);
         }
 
@@ -504,7 +499,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 
             var dtosForSession = dtos.Where(dto => dto.SessionGuid == sessionGuid).ToList();
             var serializedData = JsonSerializer.Serialize(dtosForSession);
-            Logger.Info($"{nameof(HandrecordDTO)}s: {serializedData}");
             return SendDataAsync(sessionGuid, ScoringProgramDataConnectorCommands.PutHandrecords, serializedData);
         }
 
@@ -521,7 +515,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 
             var dtosForSession = dtos.Where(dto => dto.SessionGuid == sessionGuid).ToList();
             var serializedData = JsonSerializer.Serialize(dtosForSession);
-            Logger.Info($"{nameof(HandrecordDTO)}s: {serializedData}");
             return SendData(sessionGuid, ScoringProgramDataConnectorCommands.PutHandrecords, serializedData);
         }
 
@@ -545,7 +538,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 
             var dtosForSession = playerData.Where(dto => dto.SessionGuid == sessionGuid).ToList();
             var serializedData = JsonSerializer.Serialize(dtosForSession);
-            Logger.Info($"{nameof(PlayerDataDTO)}s: {serializedData}");
             //Mind: this method (ab)uses the sessionGuid parameter to pass on the clubId.
             return SendDataAsync(sessionGuid: sessionGuid,
                                  command: ScoringProgramDataConnectorCommands.PutPlayerData,
@@ -572,7 +564,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 
             var dtosForSession = playerData.Where(dto => dto.SessionGuid == sessionGuid).ToList();
             var serializedData = JsonSerializer.Serialize(dtosForSession);
-            Logger.Info($"{nameof(PlayerDataDTO)}s: {serializedData}");
             //Mind: this method (ab)uses the sessionGuid parameter to pass on the clubId.
             return SendData(sessionGuid: sessionGuid,
                                  command: ScoringProgramDataConnectorCommands.PutPlayerData,
@@ -600,7 +591,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             if (dtosForSession.Any())
             {
                 var serializedData = JsonSerializer.Serialize(dtosForSession);
-                Logger.Info($"{nameof(ParticipationDTO)}s: {serializedData}");
                 return await SendDataAsync(sessionGuid, ScoringProgramDataConnectorCommands.PutParticipations, serializedData);
             }
             else
@@ -634,7 +624,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             if (dtosForSession.Any())
             {
                 var serializedData = JsonSerializer.Serialize(dtosForSession);
-                Logger.Info($"{nameof(ParticipationDTO)}s: {serializedData}");
                 return SendData(sessionGuid, ScoringProgramDataConnectorCommands.PutParticipations, serializedData);
             }
             else
@@ -722,7 +711,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             ScoringProgramDataConnectorCommands command, string serializedData)
         {
             var logRecord = new DataConnectorLogRecord(LogLevel.Debug, LoggingSource, command, serializedData,nameof(SendDataAsync));
-            Logger.Log(logRecord);
+            DataConnectorLogger.Log(logRecord);
 
             //Construct the request to the Data Connector.
             var request = new ScoringProgramRequest
@@ -837,7 +826,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         private ScoringProgramResponse SendData(string sessionGuid, ScoringProgramDataConnectorCommands command, string serializedData)
         {
             var logRecord=new DataConnectorLogRecord(LogLevel.Debug,LoggingSource,command, serializedData, nameof(SendData));
-            Logger.Log(logRecord);
+            DataConnectorLogger.Log(logRecord);
 
             //Construct the request to the Data Connector.
             var request = new ScoringProgramRequest
@@ -956,7 +945,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             var response = await SendDataAsync(sessionGuid, command, serializedData: "");
             if (response.DataType != DataConnectorResponseData.Results)
             {
-                Logger.Error($"ERROR: {response.ErrorType},'{JsonSerializer.Deserialize<string>(response.SerializedData)}'");
+                LogError(new Exception($"ERROR: {response.ErrorType},'{JsonSerializer.Deserialize<string>(response.SerializedData)}'"));
                 return new ResultDTO[] { };
             }
             var data = string.IsNullOrWhiteSpace(response.SerializedData) ? new ResultDTO[] { } :
@@ -985,7 +974,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             var response = SendData(sessionGuid, command, serializedData: "");
             if (response.DataType != DataConnectorResponseData.Results)
             {
-                Logger.Error($"ERROR: {response.ErrorType},'{JsonSerializer.Deserialize<string>(response.SerializedData)}'");
+                LogError(new Exception($"ERROR: {response.ErrorType},'{JsonSerializer.Deserialize<string>(response.SerializedData)}'"));
                 return new ResultDTO[] { };
             }
             var data = string.IsNullOrWhiteSpace(response.SerializedData) ? new ResultDTO[] { } :
@@ -996,9 +985,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 _lastResultQueueItemId = response.LastQueueItemId;
 
             return data;
-
         }
-
 
         /// <summary>
         /// Polls the client queue asynchronously for new player data for the specified session.
@@ -1015,7 +1002,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             var response = await SendDataAsync(sessionGuid, command, serializedData: "");
             if (response.DataType != DataConnectorResponseData.PlayerData)
             {
-                Logger.Error($"ERROR: {response.ErrorType},'{JsonSerializer.Deserialize<string>(response.SerializedData)}'");
+                LogError(new Exception($"ERROR: {response.ErrorType},'{JsonSerializer.Deserialize<string>(response.SerializedData)}'"));
                 return new PlayerDataDTO[] { };
             }
             var data = string.IsNullOrWhiteSpace(response.SerializedData) ? new PlayerDataDTO[] { } :
@@ -1044,7 +1031,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             var response = SendData(sessionGuid, command, serializedData: "");
             if (response.DataType != DataConnectorResponseData.PlayerData)
             {
-                Logger.Error($"ERROR: {response.ErrorType},'{JsonSerializer.Deserialize<string>(response.SerializedData)}'");
+                LogError(new Exception($"ERROR: {response.ErrorType},'{JsonSerializer.Deserialize<string>(response.SerializedData)}'"));
                 return new PlayerDataDTO[] { };
             }
             var data = string.IsNullOrWhiteSpace(response.SerializedData) ? new PlayerDataDTO[] { } :
@@ -1073,7 +1060,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             var response = await SendDataAsync(sessionGuid, command, serializedData: "");
             if (response.DataType != DataConnectorResponseData.Participations)
             {
-                Logger.Error($"ERROR: {response.ErrorType},'{JsonSerializer.Deserialize<string>(response.SerializedData)}'");
+                LogError(new Exception($"ERROR: {response.ErrorType},'{JsonSerializer.Deserialize<string>(response.SerializedData)}'"));
                 return new ParticipationDTO[] { };
             }
             var data = string.IsNullOrWhiteSpace(response.SerializedData) ? new ParticipationDTO[] { } :
@@ -1102,7 +1089,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             var response = SendData(sessionGuid, command, serializedData: "");
             if (response.DataType != DataConnectorResponseData.Participations)
             {
-                Logger.Error($"ERROR: {response.ErrorType},'{JsonSerializer.Deserialize<string>(response.SerializedData)}'");
+                LogError(new Exception($"ERROR: {response.ErrorType},'{JsonSerializer.Deserialize<string>(response.SerializedData)}'"));
                 return new ParticipationDTO[] { };
             }
             var data = string.IsNullOrWhiteSpace(response.SerializedData) ? new ParticipationDTO[] { } :
@@ -1132,7 +1119,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             var response = await SendDataAsync(sessionGuid, command, serializedData: "");
             if (response.DataType != DataConnectorResponseData.Handrecords)
             {
-                Logger.Error($"ERROR: {response.ErrorType},'{JsonSerializer.Deserialize<string>(response.SerializedData)}'");
+                LogError(new Exception($"ERROR: {response.ErrorType},'{JsonSerializer.Deserialize<string>(response.SerializedData)}'"));
                 return new HandrecordDTO[] { };
             }
             var data = string.IsNullOrWhiteSpace(response.SerializedData) ? new HandrecordDTO[] { } :
@@ -1160,7 +1147,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             var response = SendData(sessionGuid, command, serializedData: "");
             if (response.DataType != DataConnectorResponseData.Handrecords)
             {
-                Logger.Error($"ERROR: {response.ErrorType},'{JsonSerializer.Deserialize<string>(response.SerializedData)}'");
+                LogError(new Exception($"ERROR: {response.ErrorType},'{JsonSerializer.Deserialize<string>(response.SerializedData)}'"));
                 return new HandrecordDTO[] { };
             }
             var data = string.IsNullOrWhiteSpace(response.SerializedData) ? new HandrecordDTO[] { } :
@@ -1299,13 +1286,14 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 var response = await SendDataAsync(sessionGuid, ScoringProgramDataConnectorCommands.GetMovement, serializedData);
                 if (response.RequestCommand != ScoringProgramDataConnectorCommands.GetMovement)
                 {
-                    Logger.Error($"The {ScoringProgramDataConnectorCommands.GetMovement} command returned an unexpected result: '{response.RequestCommand}'");
+                    LogError(new Exception($"The {ScoringProgramDataConnectorCommands.GetMovement} command returned an unexpected result: " +
+                        $"'{response.RequestCommand}'"));
                     return null;
                 }
                 if (response.DataType != DataConnectorResponseData.Movement)
                 {
-                    Logger.Error($"The {ScoringProgramDataConnectorCommands.GetMovement} failed: " +
-                                 $"{response.DataType}-{response.ErrorType}: '{JsonSerializer.Deserialize<string>(response.SerializedData)}'");
+                    LogError(new Exception($"The {ScoringProgramDataConnectorCommands.GetMovement} failed: " +
+                                 $"{response.DataType}-{response.ErrorType}: '{JsonSerializer.Deserialize<string>(response.SerializedData)}'"));
                     return null;
                 }
                 var section = JsonSerializer.Deserialize<SectionDTO>(response.SerializedData);
@@ -1313,7 +1301,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                LogError(ex);
                 return null;
             }
         }
@@ -1340,13 +1328,14 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 var response =SendData(sessionGuid, ScoringProgramDataConnectorCommands.GetMovement, serializedData);
                 if (response.RequestCommand != ScoringProgramDataConnectorCommands.GetMovement)
                 {
-                    Logger.Error($"The {ScoringProgramDataConnectorCommands.GetMovement} command returned an unexpected result: '{response.RequestCommand}'");
+                    LogError(new Exception($"The {ScoringProgramDataConnectorCommands.GetMovement} command returned an unexpected result: " +
+                        $"'{response.RequestCommand}'"));
                     return null;
                 }
                 if (response.DataType != DataConnectorResponseData.Movement)
                 {
-                    Logger.Error($"The {ScoringProgramDataConnectorCommands.GetMovement} failed: " +
-                                 $"{response.DataType}-{response.ErrorType}: '{JsonSerializer.Deserialize<string>(response.SerializedData)}'");
+                    LogError(new Exception($"The {ScoringProgramDataConnectorCommands.GetMovement} failed: " +
+                                 $"{response.DataType}-{response.ErrorType}: '{JsonSerializer.Deserialize<string>(response.SerializedData)}'"));
                     return null;
                 }
                 var section = JsonSerializer.Deserialize<SectionDTO>(response.SerializedData);
@@ -1354,7 +1343,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                LogError(ex);
                 return null;
             }
         }
@@ -1375,13 +1364,16 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 var response = await SendDataAsync(sessionGuid, ScoringProgramDataConnectorCommands.GetAllMovements, serializedData: "");
                 if (response.RequestCommand != ScoringProgramDataConnectorCommands.GetAllMovements)
                 {
-                    Logger.Error($"The {ScoringProgramDataConnectorCommands.GetAllMovements} command returned an unexpected result: '{response.RequestCommand}'");
+                    LogError(new Exception($"The {ScoringProgramDataConnectorCommands.GetAllMovements} command returned an unexpected result: " +
+                        $"'{response.RequestCommand}'"));
+
                     return emptyResponse;
                 }
                 if (response.DataType != DataConnectorResponseData.Sessions)
                 {
-                    Logger.Error($"The {ScoringProgramDataConnectorCommands.GetAllMovements} failed: " +
-                                 $"{response.DataType}-{response.ErrorType}: '{JsonSerializer.Deserialize<string>(response.SerializedData)}'");
+                    LogError(new Exception($"The {ScoringProgramDataConnectorCommands.GetAllMovements} failed: " +
+                                 $"{response.DataType}-{response.ErrorType}: '{JsonSerializer.Deserialize<string>(response.SerializedData)}'"));
+
                     return emptyResponse;
                 }
                 var sections = JsonSerializer.Deserialize<SectionDTO[]>(response.SerializedData);
@@ -1389,7 +1381,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                LogError(ex);
                 return emptyResponse;
             }
         }
@@ -1410,13 +1402,16 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 var response = SendData(sessionGuid, ScoringProgramDataConnectorCommands.GetAllMovements, serializedData: "");
                 if (response.RequestCommand != ScoringProgramDataConnectorCommands.GetAllMovements)
                 {
-                    Logger.Error($"The {ScoringProgramDataConnectorCommands.GetAllMovements} command returned an unexpected result: '{response.RequestCommand}'");
+                    LogError(new Exception($"The {ScoringProgramDataConnectorCommands.GetAllMovements} command returned an unexpected result: " +
+                        $"'{response.RequestCommand}'"));
+                 
                     return emptyResponse;
                 }
                 if (response.DataType != DataConnectorResponseData.Sessions)
                 {
-                    Logger.Error($"The {ScoringProgramDataConnectorCommands.GetAllMovements} failed: " +
-                                 $"{response.DataType}-{response.ErrorType}: '{JsonSerializer.Deserialize<string>(response.SerializedData)}'");
+                    LogError(new Exception($"The {ScoringProgramDataConnectorCommands.GetAllMovements} failed: " +
+                                 $"{response.DataType}-{response.ErrorType}: '{JsonSerializer.Deserialize<string>(response.SerializedData)}'"));
+                   
                     return emptyResponse;
                 }
                 var sections = JsonSerializer.Deserialize<SectionDTO[]>(response.SerializedData);
@@ -1424,7 +1419,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                LogError(ex);
                 return emptyResponse;
             }
         }
@@ -1441,7 +1436,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             foreach (var groupedScoringGroup in scoringGroups.GroupBy(sg => sg.SessionGuid))
             {
                 var serializedData = JsonSerializer.Serialize(groupedScoringGroup);
-                Logger.Info($"{nameof(ScoringGroupDTO)}: {serializedData}");
                 var response = await SendDataAsync(groupedScoringGroup.Key, ScoringProgramDataConnectorCommands.UpdateScoringGroups, serializedData);
                 if (response.DataType != DataConnectorResponseData.OK)
                     return response;
@@ -1467,7 +1461,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             foreach (var groupedScoringGroup in scoringGroups.GroupBy(sg => sg.SessionGuid))
             {
                 var serializedData = JsonSerializer.Serialize(groupedScoringGroup);
-                Logger.Info($"{nameof(ScoringGroupDTO)}: {serializedData}");
                 var response = SendData(groupedScoringGroup.Key, ScoringProgramDataConnectorCommands.UpdateScoringGroups, serializedData);
                 if (response.DataType != DataConnectorResponseData.OK)
                     return response;
@@ -1493,7 +1486,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             LogMethodEntry(nameof(UpdateMovementAsync));
 
             var serializedData = JsonSerializer.Serialize(updatedSection);
-            Logger.Info($"{nameof(SectionDTO)}: {serializedData}");
             return await SendDataAsync(updatedSection.SessionGuid, ScoringProgramDataConnectorCommands.UpdateMovement, serializedData);
         }
 
@@ -1509,7 +1501,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             LogMethodEntry(nameof(UpdateMovement));
 
             var serializedData = JsonSerializer.Serialize(updatedSection);
-            Logger.Info($"{nameof(SectionDTO)}: {serializedData}");
             return SendData(updatedSection.SessionGuid, ScoringProgramDataConnectorCommands.UpdateMovement, serializedData);
         }
 
@@ -1524,7 +1515,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             LogMethodEntry(nameof(AddSessionAsync));
 
             var serializedData = JsonSerializer.Serialize(addedSession);
-            Logger.Info($"{nameof(SessionDTO)}: {serializedData}");
             return await  SendDataAsync(addedSession.EventGuid, ScoringProgramDataConnectorCommands.AddSession, serializedData);
         }
 
@@ -1540,7 +1530,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             LogMethodEntry(nameof(AddSession));
 
             var serializedData = JsonSerializer.Serialize(addedSession);
-            Logger.Info($"{nameof(SessionDTO)}: {serializedData}");
             return SendData(addedSession.SessionGuid, ScoringProgramDataConnectorCommands.AddSession, serializedData);
         }
 
@@ -1566,7 +1555,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 };
             }
             var serializedData=JsonSerializer.Serialize(managementDTO);
-            Logger.Info($"{nameof(BCSManagementRequestDTO)}: {serializedData}");
             var result = await SendDataAsync(sessionGuid: "", ScoringProgramDataConnectorCommands.ManageBCS, serializedData);
             return result;
         }
@@ -1594,7 +1582,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 };
             }
             var serializedData = JsonSerializer.Serialize(managementDTO);
-            Logger.Info($"{nameof(BCSManagementRequestDTO)}: {serializedData}");
             var result = SendData(sessionGuid: "", ScoringProgramDataConnectorCommands.ManageBCS, serializedData);
             return result;
         }
