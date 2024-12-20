@@ -2,9 +2,25 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 
 namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 {
+
+    /// <summary>
+    /// Structured logger for the scoring program side of data communicator communication
+    /// </summary>
+    public class ScoringProgramDataConnectionLogger : DataConnectorLogger<ScoringProgramDataConnectorCommands>
+    {
+        /// <summary>
+        /// Initializes the class.
+        /// </summary>
+        /// <param name="jsonDataLogLevel"></param>
+        /// <param name="name"></param>
+        public ScoringProgramDataConnectionLogger(LogLevel jsonDataLogLevel, string name) : base(jsonDataLogLevel, name)
+        {}
+    }
+
     /// <summary>
     /// Logs all actions of the DataConnector in a structured way.
     /// </summary>
@@ -67,6 +83,26 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// </summary>
         public struct DataConnectorLogRecord
         {
+            /// <summary>
+            /// Returns formatted json from raw json.
+            /// </summary>
+            /// <param name="rawJson"></param>
+            /// <returns></returns>
+            public static string HumanReadableJson(string rawJson)
+            {
+                if (string.IsNullOrWhiteSpace(rawJson))
+                    return string.Empty;
+                
+                var options = new JsonSerializerOptions()
+                {
+                    WriteIndented = true
+                };
+
+                var jsonElement = JsonSerializer.Deserialize<JsonElement>(rawJson);
+
+                return JsonSerializer.Serialize(jsonElement, options);
+            }
+
             /// <summary>
             /// Instantiates the logrecord
             /// </summary>
@@ -137,8 +173,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         {
             var message = $"{record.Source,-20} {record.Command,-20} {record.Remark}";
             _nlLogLogger.Log(record.LogLevel, message);
-            if (!string.IsNullOrEmpty(record.JsonData) && _jsonDataLogLevel<=record.LogLevel)
-                _nlLogLogger.Log(record.LogLevel, record.JsonData);
+            if (!string.IsNullOrEmpty(record.JsonData) && _jsonDataLogLevel <= record.LogLevel)
+                _nlLogLogger.Log(record.LogLevel, DataConnectorLogRecord.HumanReadableJson(record.JsonData));
             if(record.Exception != null)
                 _nlLogLogger.Log(LogLevel.Error, record.Exception);
         }
