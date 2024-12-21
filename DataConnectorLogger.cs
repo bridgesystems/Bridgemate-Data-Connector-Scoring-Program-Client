@@ -12,14 +12,14 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     /// <summary>
     /// Structured logger for the scoring program side of data communicator communication
     /// </summary>
-    public class ScoringProgramDataConnectionLogger : DataConnectorLogger<ScoringProgramDataConnectorCommands>
+    public class ScoringProgramDataConnectorLogger : DataConnectorLogger<ScoringProgramDataConnectorCommands>
     {
         /// <summary>
         /// Initializes the class.
         /// </summary>
         /// <param name="jsonDataLogLevel"></param>
         /// <param name="name"></param>
-        public ScoringProgramDataConnectionLogger(DataConnectorLogLevel jsonDataLogLevel, string name) : base(jsonDataLogLevel, name)
+        public ScoringProgramDataConnectorLogger(DataConnectorLogLevel jsonDataLogLevel, string name) : base(jsonDataLogLevel, name)
         {}
     }
 
@@ -235,13 +235,14 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// </summary>
         /// <param name="methodName"></param>
         /// <param name="parameters"></param>
+        /// <param name="source"></param>
         public void LogMethodEntry(string methodName,DataConnectorLoggingSource source, params (string parameterName, object parameterValue)[] parameters)
         {
-            var parametersString = parameters.Any() ? string.Join(" ", parameters.Select(p => $"{p.parameterName}: {p.parameterValue}")) :
+            var parametersString = parameters.Any() ? string.Join(", ", parameters.Select(p => $"{p.parameterName}: {p.parameterValue}")) :
                                    string.Empty;
             var logRecord = new DataConnectorLogger<TCommand>.DataConnectorLogRecord(DataConnectorLogLevel.Debug,source, default,
                jsonData: "",
-               remark: $"{methodName}({string.Join(", ", parameters)})");
+               remark: $"{methodName}({string.Join(", ", parametersString)})");
             LogRecord(logRecord);
         }
 
