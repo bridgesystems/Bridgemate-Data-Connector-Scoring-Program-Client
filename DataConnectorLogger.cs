@@ -20,7 +20,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <param name="jsonDataLogLevel"></param>
         /// <param name="name"></param>
         public ScoringProgramDataConnectorLogger(DataConnectorLogLevel jsonDataLogLevel, string name) : base(jsonDataLogLevel, name)
-        {}
+        { }
     }
 
     /// <summary>
@@ -114,7 +114,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     /// <summary>
     /// Logs all actions of the DataConnector in a structured way.
     /// </summary>
-    public class DataConnectorLogger<TCommand> where TCommand:Enum
+    public class DataConnectorLogger<TCommand> where TCommand : Enum
     {
         /// <summary>
         /// Contains the structured information
@@ -130,7 +130,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             {
                 if (string.IsNullOrWhiteSpace(rawJson))
                     return string.Empty;
-                
+
                 var options = new JsonSerializerOptions()
                 {
                     WriteIndented = true
@@ -150,25 +150,25 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             /// <param name="jsonData"></param>
             /// <param name="remark"></param>
             /// <param name="exception"></param>
-            public DataConnectorLogRecord(DataConnectorLogLevel level,DataConnectorLoggingSource source,TCommand command,string jsonData, string remark="",Exception exception=null)
+            public DataConnectorLogRecord(DataConnectorLogLevel level, DataConnectorLoggingSource source, TCommand command, string jsonData, string remark = "", Exception exception = null)
             {
                 LogLevel = level;
                 Source = source;
                 Command = command;
                 JsonData = jsonData;
                 Remark = remark;
-                Exception= exception;
-                }
+                Exception = exception;
+            }
             /// <summary>
             /// The level of the logrecord.
             /// </summary>
-            public DataConnectorLogLevel LogLevel { get; set; }  
+            public DataConnectorLogLevel LogLevel { get; set; }
 
             /// <summary>
             /// The source of the logrecord.
             /// </summary>
             public DataConnectorLoggingSource Source { get; set; }
-            
+
             /// <summary>
             /// Either the SCoringProgramCommand enum value or the BCSComand enum value.
             /// </summary>
@@ -191,31 +191,65 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         }
 
         private readonly DataConnectorLogLevel _jsonDataLogLevel;
-        private readonly Logger _nlLogLogger;
+
 
         /// <summary>
         /// Initializes the logger.
         /// </summary>
         /// <param name="jsonDataLogLevel">Specifies the lowest level of logging to include the json data as well.</param>
         /// <param name="name">the name of the logger</param>
-        public DataConnectorLogger(DataConnectorLogLevel jsonDataLogLevel,string name)
+        public DataConnectorLogger(DataConnectorLogLevel jsonDataLogLevel, string name)
         {
             _jsonDataLogLevel = jsonDataLogLevel;
-            _nlLogLogger=LogManager.GetLogger(name);
+            //_nlLogLogger=LogManager.GetLogger(name);
         }
 
         /// <summary>
         /// LogRecord a structured message on a DataConnector action.
         /// </summary>
         /// <param name="record"></param>
-        public void LogRecord(DataConnectorLogRecord record) 
+        public void LogRecord(DataConnectorLogRecord record)
         {
-            var message = $"{record.Source,-20} {record.Command,-20} {record.Remark}";
-            _nlLogLogger.Log(ToNLogLogLevel( record.LogLevel), message);
+            //var message = $"{record.Source,-20} {record.Command,-20} {record.Remark}";
+            //_nlLogLogger.Log(ToNLogLogLevel( record.LogLevel), message);
+            //if (!string.IsNullOrEmpty(record.JsonData) && _jsonDataLogLevel <= record.LogLevel)
+            //    _nlLogLogger.Log(ToNLogLogLevel(record.LogLevel), DataConnectorLogRecord.HumanReadableJson(record.JsonData));
+            //if(record.Exception != null)
+            //    _nlLogLogger.Log(LogLevel.Error, record.Exception);
+        }
+
+        /// <summary>
+        /// Create the content for logging
+        /// </summary>
+        /// <param name="record"></param>
+        /// <param name="eventqueItemId"></param>
+        /// <returns></returns>
+        public (string message, string formattedJson) CreateRequestLogContent(DataConnectorLogRecord record, int? eventqueItemId = null)
+        {
+            var message = $"REQ: {record.Source,-20} {$"{record.Command}{(eventqueItemId.HasValue?"(id: " + eventqueItemId.Value + ")":"")}",-20} {record.Remark}";
+            var formattedJson = string.Empty;
             if (!string.IsNullOrEmpty(record.JsonData) && _jsonDataLogLevel <= record.LogLevel)
-                _nlLogLogger.Log(ToNLogLogLevel(record.LogLevel), DataConnectorLogRecord.HumanReadableJson(record.JsonData));
-            if(record.Exception != null)
-                _nlLogLogger.Log(LogLevel.Error, record.Exception);
+                formattedJson = DataConnectorLogRecord.HumanReadableJson(record.JsonData);
+            return (message, formattedJson);
+        }
+
+        /// <summary>
+        /// Create the content for logging
+        /// </summary>
+        /// <param name="record"></param>
+        /// <param name="dataType"></param>
+        /// <param name="errorType"></param>
+        /// <param name="eventqueItemId"></param>
+        /// <returns></returns>
+        public (string message, string formattedJson) CreateResponseLogContent(DataConnectorLogRecord record,
+            DataConnectorResponseData dataType, ErrorType errorType, int? eventqueItemId = null)
+        {
+            var message = $"RSP: {record.Source,-20} {$"{record.Command}: {(dataType == DataConnectorResponseData.Error ? $"{dataType}: {errorType}" : $"{dataType}{(eventqueItemId.HasValue ? " (id: " + eventqueItemId.Value + ")" : "")}")}",-20}  " +
+                $"{record.Remark}";
+            var formattedJson = string.Empty;
+            if (!string.IsNullOrEmpty(record.JsonData) && _jsonDataLogLevel <= record.LogLevel)
+                formattedJson = DataConnectorLogRecord.HumanReadableJson(record.JsonData);
+            return (message, formattedJson);
         }
 
         /// <summary>
@@ -223,10 +257,22 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// </summary>
         /// <param name="ex"></param>
         /// <param name="source"></param>
-        public void LogError(Exception ex,DataConnectorLoggingSource source)
+        public void LogError(Exception ex, DataConnectorLoggingSource source)
         {
             var errrorLogRecord = new DataConnectorLogger<TCommand>.DataConnectorLogRecord(
-                    DataConnectorLogLevel.Debug, source, default, jsonData: "", exception: ex);
+                    DataConnectorLogLevel.Exception, source, default, jsonData: "", exception: ex);
+            LogRecord(errrorLogRecord);
+        }
+
+        /// <summary>
+        /// Logs an record for an exception.
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <param name="source"></param>
+        public void LogWarning(Exception ex, DataConnectorLoggingSource source)
+        {
+            var errrorLogRecord = new DataConnectorLogger<TCommand>.DataConnectorLogRecord(
+                    DataConnectorLogLevel.Warn, source, default, jsonData: "", exception: ex);
             LogRecord(errrorLogRecord);
         }
 
@@ -236,11 +282,11 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <param name="methodName"></param>
         /// <param name="parameters"></param>
         /// <param name="source"></param>
-        public void LogMethodEntry(string methodName,DataConnectorLoggingSource source, params (string parameterName, object parameterValue)[] parameters)
+        public void LogMethodEntry(string methodName, DataConnectorLoggingSource source, params (string parameterName, object parameterValue)[] parameters)
         {
             var parametersString = parameters.Any() ? string.Join(", ", parameters.Select(p => $"{p.parameterName}: {p.parameterValue}")) :
                                    string.Empty;
-            var logRecord = new DataConnectorLogger<TCommand>.DataConnectorLogRecord(DataConnectorLogLevel.Debug,source, default,
+            var logRecord = new DataConnectorLogger<TCommand>.DataConnectorLogRecord(DataConnectorLogLevel.Debug, source, default,
                jsonData: "",
                remark: $"{methodName}({string.Join(", ", parametersString)})");
             LogRecord(logRecord);
@@ -248,7 +294,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 
         private LogLevel ToNLogLogLevel(DataConnectorLogLevel dataConnectorLogLevel)
         {
-            switch (dataConnectorLogLevel) 
+            switch (dataConnectorLogLevel)
             {
                 case DataConnectorLogLevel.NotSet:
                     return LogLevel.Info;
@@ -258,7 +304,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                     return LogLevel.Debug;
                 case DataConnectorLogLevel.Info:
                     return LogLevel.Info;
-                    case DataConnectorLogLevel.Warn:
+                case DataConnectorLogLevel.Warn:
                     return LogLevel.Warn;
                 case DataConnectorLogLevel.Exception:
                     return LogLevel.Error;

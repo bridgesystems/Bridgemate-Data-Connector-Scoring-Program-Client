@@ -711,7 +711,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             ScoringProgramDataConnectorCommands command, string serializedData)
         {
             var logRecord = new DataConnectorLogRecord(DataConnectorLogLevel.Debug, LoggingSource, command, serializedData,nameof(SendDataAsync));
-            DataConnectorLogger.LogRecord(logRecord);
+            DataConnectorClientLogger.LogRecord(logRecord);
 
             //Construct the request to the Data Connector.
             var request = new ScoringProgramRequest
@@ -826,7 +826,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         private ScoringProgramResponse SendData(string sessionGuid, ScoringProgramDataConnectorCommands command, string serializedData)
         {
             var logRecord=new DataConnectorLogRecord(DataConnectorLogLevel.Debug,LoggingSource,command, serializedData, nameof(SendData));
-            DataConnectorLogger.LogRecord(logRecord);
+            DataConnectorClientLogger.LogRecord(logRecord);
 
             //Construct the request to the Data Connector.
             var request = new ScoringProgramRequest

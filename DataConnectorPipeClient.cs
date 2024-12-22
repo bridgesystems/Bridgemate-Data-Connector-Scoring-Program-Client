@@ -18,6 +18,11 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     public abstract class DataConnectorPipeClient<TCommand> : IDisposable where TCommand : Enum
     {
         const int DefaultTimeOutInMilliSeconds = 5000;
+        
+        /// <summary>
+        /// The name of the data connector logger.
+        /// </summary>
+        public static string DataConnectorLoggerName => nameof(DataConnectorClientLogger);
 
         /// <summary>
         /// All processes below are dispoable. They can and must be disposed when the class is no longer in user. Otherwise the 
@@ -31,9 +36,9 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// NLog implementation of logging.
         /// </summary>
         
-        //protected static readonly DataConnectorLogger DebugLogger = LogManager.GetLogger(nameof(DebugLogger));
-        //protected static readonly DataConnectorLogger ErrorLogger = LogManager.GetLogger(nameof(ErrorLogger));
-        protected DataConnectorLogger<TCommand> DataConnectorLogger=new DataConnectorLogger<TCommand>(jsonDataLogLevel:DataConnectorLogLevel.Debug,nameof(DataConnectorLogger));
+        //protected static readonly DataConnectorClientLogger DebugLogger = LogManager.GetLogger(nameof(DebugLogger));
+        //protected static readonly DataConnectorClientLogger ErrorLogger = LogManager.GetLogger(nameof(ErrorLogger));
+        protected DataConnectorLogger<TCommand> DataConnectorClientLogger=new DataConnectorLogger<TCommand>(jsonDataLogLevel:DataConnectorLogLevel.Debug,nameof(DataConnectorClientLogger));
         
         /// <summary>
         /// Initializes the class.
@@ -147,7 +152,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             {
                 var errrorLogRecord = new DataConnectorLogger<TCommand>.DataConnectorLogRecord(
                         DataConnectorLogLevel.Debug, LoggingSource, default, jsonData: "", exception: ex);
-                DataConnectorLogger.LogRecord(errrorLogRecord);
+                DataConnectorClientLogger.LogRecord(errrorLogRecord);
                 return (DataConnectorResponseData.Error, ex.Message, ErrorType.NoConnection);
             }
         }
@@ -230,7 +235,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <param name="ex"></param>
         protected void LogError(Exception ex)
         {
-            DataConnectorLogger.LogError(ex, LoggingSource);
+            DataConnectorClientLogger.LogError(ex, LoggingSource);
         }
 
         /// <summary>
@@ -240,7 +245,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <param name="parameters"></param>
         protected void LogMethodEntry(string methodName, params (string parameterName, object parameterValue)[] parameters)
         {
-            DataConnectorLogger.LogMethodEntry(methodName, LoggingSource, parameters);
+            DataConnectorClientLogger.LogMethodEntry(methodName, LoggingSource, parameters);
         }
 
         protected virtual void Dispose(bool disposing)
