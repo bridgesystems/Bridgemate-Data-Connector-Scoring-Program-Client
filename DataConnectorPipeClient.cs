@@ -22,7 +22,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// The name of the data connector logger.
         /// </summary>
-        public static string DataConnectorLoggerName => nameof(DataConnectorClientLogger);
+        //public static string DataConnectorLoggerName => nameof(DataConnectorClientLogger);
 
         /// <summary>
         /// All processes below are dispoable. They can and must be disposed when the class is no longer in user. Otherwise the 
@@ -38,7 +38,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         
         //protected static readonly DataConnectorClientLogger DebugLogger = LogManager.GetLogger(nameof(DebugLogger));
         //protected static readonly DataConnectorClientLogger ErrorLogger = LogManager.GetLogger(nameof(ErrorLogger));
-        protected DataConnectorLogger<TCommand> DataConnectorClientLogger=new DataConnectorLogger<TCommand>(jsonDataLogLevel:DataConnectorLogLevel.Debug,nameof(DataConnectorClientLogger));
+        public DataConnectorLogCreator<TCommand> DataConnectorClientLogger=new DataConnectorLogCreator<TCommand>(jsonDataLogLevel:DataConnectorLogLevel.Debug,nameof(DataConnectorClientLogger));
         
         /// <summary>
         /// Initializes the class.
@@ -150,7 +150,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
             catch (Exception ex)
             {
-                var errrorLogRecord = new DataConnectorLogger<TCommand>.DataConnectorLogRecord(
+                var errrorLogRecord = new DataConnectorLogCreator<TCommand>.DataConnectorLogRecord(
                         DataConnectorLogLevel.Debug, LoggingSource, default, jsonData: "", exception: ex);
                 DataConnectorClientLogger.LogRecord(errrorLogRecord);
                 return (DataConnectorResponseData.Error, ex.Message, ErrorType.NoConnection);
@@ -233,10 +233,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// Logs an error
         /// </summary>
         /// <param name="ex"></param>
-        protected void LogError(Exception ex)
-        {
-            DataConnectorClientLogger.LogError(ex, LoggingSource);
-        }
+        protected abstract void LogError(Exception ex);
+      
 
         /// <summary>
         /// Logs the entry to a method with its parameters (if any),
@@ -245,8 +243,15 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <param name="parameters"></param>
         protected void LogMethodEntry(string methodName, params (string parameterName, object parameterValue)[] parameters)
         {
-            DataConnectorClientLogger.LogMethodEntry(methodName, LoggingSource, parameters);
+            var logEntry=DataConnectorClientLogger.CreateMethodEntryLog(methodName,LoggingSource,parameters);
+            LogMethodEntry(logEntry);
         }
+
+        /// <summary>
+        /// Logs the entry to a method.
+        /// </summary>
+        /// <param name="entry"></param>
+        protected abstract void LogMethodEntry(string entry);
 
         protected virtual void Dispose(bool disposing)
         {

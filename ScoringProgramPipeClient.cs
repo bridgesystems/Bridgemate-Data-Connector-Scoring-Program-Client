@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnector;
 using BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO;
 using NLog;
-using static BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnectorLogger<BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorCommands>;
+using static BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnectorLogCreator<BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorCommands>;
 
 namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 {
@@ -44,6 +44,11 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         private int _lastPlayeDataQueueItemId;      //A cached value of the id of the last sent participant queue item.
         private int _lastParticipantQueueItemId;    //A cached value of the id of the last sent participant queue item.
         private int _lastHandrecordQueueItemId;     //A cached value of the id of the last sent handrecord queue item.
+
+        /// <summary>
+        /// The logger for this class.
+        /// </summary>
+        public static readonly Logger ScoringProgramClientLogger=LogManager.GetLogger(nameof(ScoringProgramClientLogger));
 
         /// <summary>
         /// The source of the logging records.
@@ -114,6 +119,24 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         {
             get => _isSending;
             set => _isSending = value;
+        }
+
+        /// <summary>
+        /// Logs an exception.
+        /// </summary>
+        /// <param name="ex"></param>
+        protected override void LogError(Exception ex)
+        {
+            ScoringProgramClientLogger.Error(ex);
+        }
+
+        /// <summary>
+        /// Logs the entry to a method with its parameters (if any).
+        /// </summary>
+        /// <param name="entry"></param>
+        protected override void LogMethodEntry(string entry)
+        {
+            ScoringProgramClientLogger.Debug(entry);
         }
 
         /// <summary>
