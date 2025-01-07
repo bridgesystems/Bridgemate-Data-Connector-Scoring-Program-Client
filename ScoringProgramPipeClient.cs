@@ -1558,7 +1558,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 
         /// <summary>
         /// Issue a management command to BCS asynchronously. This command can either be a query for information on the location of its scoring file, which sessions
-        /// it is currently administering or which sessions are know to it, or it can be an instruction to shut down.
+        /// it is currently administering or which sessions are known to it, or it can be an instruction to shut down.
         /// </summary>
         /// <param name="managementDTO">The carrier of the managment command.</param>
         /// <returns></returns>
