@@ -145,11 +145,11 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             {
                 validationMessages.Add($"Invalid {nameof(RoundNumber)} ({RoundNumber}). Currently only the values zero and one are supported..");
             }
-            if (!allowPlayerNumberAndName && string.IsNullOrWhiteSpace(LastName) && string.IsNullOrWhiteSpace(PlayerNumber))
+            if (string.IsNullOrWhiteSpace(LastName) && string.IsNullOrWhiteSpace(PlayerNumber))
             {
                 validationMessages.Add($"Either the {nameof(LastName)} or the {nameof(PlayerNumber)} must be specified.");
             }
-            if (!string.IsNullOrWhiteSpace(LastName) && !string.IsNullOrWhiteSpace(PlayerNumber))
+            if (!allowPlayerNumberAndName && !string.IsNullOrWhiteSpace(LastName) && !string.IsNullOrWhiteSpace(PlayerNumber))
             {
                 validationMessages.Add($"Either the {nameof(LastName)} or the {nameof(PlayerNumber)} must be specified, " +
                                        $"but not both.");
