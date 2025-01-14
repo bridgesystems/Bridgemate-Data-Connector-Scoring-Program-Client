@@ -219,7 +219,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             {
                 foreach (var participation in Participations)
                 {
-                    if (!participation.Validate())
+                    if (!participation.Validate(allowPlayerNumberAndName:false))
                     {
                         var errorMessage = string.Join(", ", participation.ValidationMessages);
                         validationMessages.Add($"{nameof(ParticipationDTO)}  '{participation.SessionGuid}-{participation.PlayerNumber}': " +

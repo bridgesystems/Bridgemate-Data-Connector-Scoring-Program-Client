@@ -30,7 +30,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Required. The letters of the section the participation belongs to.
         /// Can be A-Z, AA, BB, CC,...ZZ, AAA, BBB, CCC, ... ZZZ
-        /// </summa
+        /// </summary>
         public string SectionLetters
         {
             get; set;
@@ -122,7 +122,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// Validates the DTO. Produces validation messages if there are problems. 
         /// </summary>
         /// <returns>True if there are no validation errors.</returns>
-        public bool Validate()
+        public bool Validate(bool allowPlayerNumberAndName)
         {
             var validationMessages =new List<string>();
             if (SessionGuid.Length != 32)
@@ -145,7 +145,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             {
                 validationMessages.Add($"Invalid {nameof(RoundNumber)} ({RoundNumber}). Currently only the values zero and one are supported..");
             }
-            if (string.IsNullOrWhiteSpace(LastName) && string.IsNullOrWhiteSpace(PlayerNumber))
+            if (!allowPlayerNumberAndName && string.IsNullOrWhiteSpace(LastName) && string.IsNullOrWhiteSpace(PlayerNumber))
             {
                 validationMessages.Add($"Either the {nameof(LastName)} or the {nameof(PlayerNumber)} must be specified.");
             }
