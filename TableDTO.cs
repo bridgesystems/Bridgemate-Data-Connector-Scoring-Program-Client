@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
 {
     /// <summary>
-    /// A class describing a real of virtual bridge table where each round two pairs will compete.
+    /// A class describing a real or virtual bridge table where each round two pairs will compete.
     /// </summary>
     public class TableDTO
     {
@@ -33,6 +33,11 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
+        /// Optional: specifies if the Bridgemate on the table should work in online mode (default) or offline mode.
+        /// </summary>
+        public Bm3ConnectionModeOption ConnectionMode{ get; set; }
+
+        /// <summary>
         /// Required. An array of RoundDTOs describing which pairs will meet on this table and which boards they will play.
         /// </summary>
         public RoundDTO[] Rounds
@@ -54,8 +59,8 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <returns>True if there are no validation errors.</returns>
         public bool Validate()
         {
-            var validationMessages=new List<string>();
-           
+            var validationMessages = new List<string>();
+
             if (SessionGuid == null || SessionGuid.Length != 32 || SessionGuid.Any(c => !(c >= 'A' && c <= 'F' || c >= '0' && c <= '9')))
             {
                 validationMessages.Add("The guid must be exactly 32 character long and can only contain capital A to F or digits 0 to 9.");
@@ -69,7 +74,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                 validationMessages.Add($"{nameof(TableNumber)} ({TableNumber}) must be greater than zero.");
             }
             var roundNumbers = Rounds.Select(r => r.RoundNumber).OrderBy(number => number).ToList();
-            if(roundNumbers.Any())
+            if (roundNumbers.Any())
             {
                 if (roundNumbers.Distinct().Count() != Rounds.Count())
                 {
@@ -87,7 +92,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                     validationMessages.Add($"The round numbers must start with 1, but the lowest round is {roundNumbers.Min()}");
                 }
             }
-           
+
             foreach (RoundDTO round in Rounds)
             {
                 if (round.SessionGuid != SessionGuid)
@@ -100,7 +105,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                     validationMessages.Add($"Round {round.RoundNumber} on table ' {SectionLetters} {TableNumber}' must have {nameof(RoundDTO.SectionLetters)} '{SectionLetters}' " +
                                            $"but it is '{round.SectionLetters}'");
                 }
-                if(round.TableNumber != TableNumber)
+                if (round.TableNumber != TableNumber)
                 {
                     validationMessages.Add($"Round {round.RoundNumber} on table ' {SectionLetters} {TableNumber}' must have {nameof(RoundDTO.TableNumber)} '{TableNumber}' " +
                                            $"but it is '{round.TableNumber}'");
@@ -112,7 +117,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                 }
             }
 
-            ValidationMessages=validationMessages.ToArray();
+            ValidationMessages = validationMessages.ToArray();
             return !ValidationMessages.Any();
         }
     }
