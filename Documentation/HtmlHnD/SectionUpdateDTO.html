@@ -190,35 +190,35 @@
                 
 <p class="rvps2"><img alt="" style="width : 242px; height : 476px; padding : 1px;" src="lib/SectionUpdateDTO.png"></p>
 <p class="rvps2"><span class="rvts6">The SectionUpdateDTO contains the movement for an updated or new section or it signals that the given section must be deleted. It is sent with the </span><a class="rvts16" href="Overviewofcommunication.html#OverviewOfCommands">UpdateMovement</a><span class="rvts6"> command. The DTO must contain infomration on the scoring group it should be added to. If the scoring group with the given ScoringGroupNumber is not yet present, it will be created.</span></p>
-<h5 class="rvps12"><span class="rvts0"><span class="rvts30">SessionGuid property</span></span></h5>
+<h5 class="rvps12"><span class="rvts0"><span class="rvts31">SessionGuid property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. A guid uniquely defining the session. Must be exactly 32 character long, uppercase and cannot contaim dashes or curly braces.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">AddedPlayers</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">AddedPlayers</span></span></h5>
 <p class="rvps2"><span class="rvts6">Optional.An array of </span><a class="rvts16" href="PlayerDataDTO.html">PlayerDataDTOs</a><span class="rvts6">. Should at least contain player data for players that have not been added beofre.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">Participations</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">Participations</span></span></h5>
 <p class="rvps2"><span class="rvts6">Optional. An array of </span><a class="rvts16" href="ParticipationDTO.html">ParticipationDTOs</a><span class="rvts6">.&nbsp;</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">ScoringGroupNumber</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">ScoringGroupNumber</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required if IsDeleted is "False". The number of the ScoringGroupDTO that the section belongs to. Must be greater than zero.If the scoringgroup does not yet exist it will be created.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">ScoringGroupScoringMethod</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">ScoringGroupScoringMethod</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required if the updated section belongs to a new scoring group that must be created. Valid values can be found at the information on the </span><a class="rvts16" href="ScoringGroupDTO.html#ScoringMethod">ScoringGroupDTO</a><span class="rvts6">.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">Letters property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">Letters property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. Uniquely defines the section within </span><a class="rvts16" href="Explanationofusedterms.html">the event</a><span class="rvts6">.</span></p>
-<h5 class="rvps10"><a name="Winners"></a><span class="rvts0"><span class="rvts25">Winners property</span></span></h5>
+<h5 class="rvps10"><a name="Winners"></a><span class="rvts0"><span class="rvts26">Winners property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. Values can be 1 or 2. In the case of 2 winners the pair numbers in the section can be the same for North-South and East-West. Otherwise the pairnumbers in the section must be unique.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">GameType property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">GameType property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. Values can be 10 for "Pairs", 20 for "Individual" and 30 for "Teams".</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">Name property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">Name property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Optional.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">EWMoveBeforePlay property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">EWMoveBeforePlay property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Currently not supported.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">MissingPair property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">MissingPair property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Optional. If specified it will indicate the number for the pair that is not playing. Its opponents will have a sit-out when they are scheduled to play against this pair. This value can &nbsp;be omitted as a sit-out can also be specified on the RoundDTOs. However, if used the graphic representation of sit-out tables in </span><span class="rvts6">BCS</span><span class="rvts6"> will be improved.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">IsCombiSection property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">IsCombiSection property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Optional. If "true" the section will host the two pairs that would have otherwise have a sit-out in their own sections. Specify the section that will provide the NorthSouth pair and the section that will provide the EastWest pair.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">NorthSouthPairSectionLetters property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">NorthSouthPairSectionLetters property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required if IsCombiSection is "true". The letters for the section where the NorthSouth pair for each round comes from.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">EastWestPairSectionLetters property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">EastWestPairSectionLetters property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required if IsCombiSection is "true". The letters for the section where the EastWest pair for each round comes from.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">Tables property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">Tables property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Must be present if IsDeleted="False" as the SectionDTO contains the movement or a movement update for the section,</span></p>
 <p class="rvps2"><span class="rvts6">Array of </span><a class="rvts16" href="TableDTO.html">TableDTO</a><span class="rvts6">.</span></p>
 <p class="rvps2" style="break-before: always;"><span class="rvts6"></span><span class="rvts6"></span></p>

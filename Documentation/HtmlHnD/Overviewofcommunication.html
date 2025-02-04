@@ -462,7 +462,7 @@
  </tr>
 </table>
 </div>
-<h2 class="rvps6"><a name="PollingComands"></a><span class="rvts0"><span class="rvts18">Polling data from the </span></span><span class="rvts0"><span class="rvts18">Bridgemate Data Connector</span></span></h2>
+<h2 class="rvps6" style="break-before: always;"><a name="PollingComands"></a><span class="rvts0"><span class="rvts18">Polling data from the </span></span><span class="rvts0"><span class="rvts18">Bridgemate Data Connector</span></span></h2>
 <div class="rvps2">
 <table width="100%" cellpadding="1" style="border-color: canvastext; border-style: solid; border-width: 1px; border-spacing: 0px; border-top: none; border-left: none;">
  <tr style="vertical-align: top;">
@@ -724,7 +724,66 @@
  </tr>
 </table>
 </div>
-<h2 class="rvps6"><a name="OverviewOfDataTypes"></a><span class="rvts0"><span class="rvts18">Data types</span></span></h2>
+<h2 class="rvps6" style="break-before: always;"><a name="OverviewOfDataTypes"></a><span class="rvts0"><span class="rvts18">Management commands</span></span></h2>
+<div class="rvps2">
+<table width="100%" cellpadding="1" style="border-color: canvastext; border-style: solid; border-width: 1px; border-spacing: 0px;">
+ <tr style="vertical-align: top;">
+  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 171px;">
+   <p class="rvps2"><span class="rvts11">Command</span></p>
+  </td>
+  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 57px;">
+   <p class="rvps2"><span class="rvts11">Value</span></p>
+  </td>
+  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 233px;">
+   <p class="rvps2"><span class="rvts11">Description</span></p>
+  </td>
+  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 194px;">
+   <p class="rvps2"><span class="rvts11">DTO</span></p>
+  </td>
+  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 212px;">
+   <p class="rvps2"><span class="rvts11">Remarks</span></p>
+  </td>
+ </tr>
+ <tr style="vertical-align: top;">
+  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 171px;">
+   <p class="rvps2"><span class="rvts6">ManageBCS</span></p>
+  </td>
+  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 57px;">
+   <p class="rvps2"><span class="rvts6">34</span></p>
+  </td>
+  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 233px;">
+   <p class="rvps2"><span class="rvts22">Queries BCS for either the running session or all known sessions. Also used to request BCS to shut down.</span></p>
+  </td>
+  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 194px;">
+   <p class="rvps2"><span class="rvts6">sends:</span><br/><a class="rvts16" href="BCSManagementRequestDTO.html">BCSManagementRequestDTO</a></p>
+   <p class="rvps2"><span class="rvts6">returns:&nbsp;</span></p>
+   <p class="rvps2"><a class="rvts16" href="BCSManagementResponseDTO.html">BCSManagementResponseDTO</a></p>
+  </td>
+  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 212px;">
+   <p class="rvps2"><span class="rvts6">See the documentation on these DTOs.</span></p>
+  </td>
+ </tr>
+ <tr style="vertical-align: top;">
+  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 171px;">
+   <p class="rvps2"><span class="rvts6">ClearData</span></p>
+  </td>
+  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 57px;">
+   <p class="rvps2"><span class="rvts6">35</span></p>
+  </td>
+  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 233px;">
+   <p class="rvps2"><span class="rvts6">Instructs </span><span class="rvts6">Data Connector</span><span class="rvts6"> to clear all incoming and outgoing queued and handled messages and will remove all validation data, especially the PlayerData and MovementData.</span></p>
+  </td>
+  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 194px;">
+   <p class="rvps2"><span class="rvts6">n/a</span></p>
+  </td>
+  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px; width: 212px;">
+   <p class="rvps2"><span class="rvts6">Use with caution!</span></p>
+   <p class="rvps2"><span class="rvts6">Best to use only when there are no active events. Be mindful of that other clubs may have ongoing events for which not all data has been processed yet.</span></p>
+  </td>
+ </tr>
+</table>
+</div>
+<h2 class="rvps6"><span class="rvts0"><span class="rvts18">Data types</span></span></h2>
 <p class="rvps2"><span class="rvts6">The ScoringProgramResponse has a DataType property which specifies which type of data can be expected to be in its SerializedData property.</span></p>
 <div class="rvps2">
 <table width="100%" cellpadding="1" style="border-color: canvastext; border-style: solid; border-width: 1px; border-spacing: 0px;">
@@ -950,7 +1009,7 @@
  </tr>
 </table>
 </div>
-<h2 class="rvps6"><span class="rvts0"><span class="rvts18">Error codes</span></span></h2>
+<h2 class="rvps6" style="break-before: always;"><span class="rvts0"><span class="rvts18">Error codes</span></span></h2>
 <p class="rvps2"><span class="rvts6">When the ScoringProgramResponse.DataType property is "Error" (4) then the ScoringProgramResponse.ErrorType property will hold a value further explaining what went wrong. Moreover the SerializedData property can be desierialized to a string to obtain detailed debugging information. This information is not meant to be shown to the end users of the external scoring program.</span></p>
 <div class="rvps2">
 <table width="100%" cellpadding="1" style="border-color: canvastext; border-style: solid; border-width: 1px; border-spacing: 0px;">

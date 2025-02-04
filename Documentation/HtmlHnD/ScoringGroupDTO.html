@@ -191,11 +191,11 @@
 <p class="rvps2"><span class="rvts6"><br/></span></p>
 <p class="rvps2"><img alt="" style="width : 259px; height : 420px; padding : 1px;" src="lib/ScoringGroup%201.png"></p>
 <p class="rvps2"><span class="rvts6">The ScoringGroupDTO defines the scoring method for its sections and is used for the score calculation: it will group the results of all the participants of its sections together. It will be part of the a SessionDTO in an InitDTO, or it can be sent seperately using the </span><a class="rvts16" href="Overviewofcommunication.html#OverviewOfCommands">UpdateScoringGroups</a><span class="rvts6"> command.</span></p>
-<h5 class="rvps12"><span class="rvts0"><span class="rvts30">SessionGuid property</span></span></h5>
+<h5 class="rvps12"><span class="rvts0"><span class="rvts31">SessionGuid property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. A guid uniquely defining the session. Must be exactly 32 character long, uppercase and cannot contaim dashes or curly braces.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">ScoringGroupNumber property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">ScoringGroupNumber property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. An integer value uniquely defining the scoring group within the event. Must be greater than zero.</span></p>
-<h5 class="rvps10"><a name="ScoringMethod"></a><span class="rvts0"><span class="rvts25">ScoringMethod property</span></span></h5>
+<h5 class="rvps10"><a name="ScoringMethod"></a><span class="rvts0"><span class="rvts26">ScoringMethod property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. Values can be:</span></p>
 <ul style="text-indent: 0px; padding: 0; margin: 0 0 0 24px; list-style-position: outside; list-style-type: disc;">
  <li class="rvps2 noindent"><span class="rvts6">10 for Matchpoints</span></li>
@@ -207,11 +207,11 @@
  <li class="rvps2 noindent"><span class="rvts6">60 for Board-a-Match</span></li>
  <li class="rvps2 noindent"><span class="rvts6">70 for Patton</span></li>
 </ul>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">Name property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">Name property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Optional</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">Sections property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">Sections property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. An array of </span><a class="rvts16" href="SectionDTO.html">SectionDTOs</a><span class="rvts6"> whose results will be calculated together as if they were one section.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">IsDeleted property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">IsDeleted property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Only used for the Update Scoringgroups command. Indicates that the scoring group has no more sections and can be deleted. Before deleting a scoring group make sure that its former sections have been assigned to a different scoring group.</span></p>
 <p class="rvps2" style="break-before: always;"><span class="rvts6"></span><span class="rvts6"></span></p>
 

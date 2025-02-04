@@ -195,107 +195,107 @@
 <p class="rvps2"><span class="rvts6">The settings will be applied to all Bridgemate 2s for a section.The settings must be provided for each section, even if they are the same.</span></p>
 <p class="rvps2"><span class="rvts11">Note</span></p>
 <p class="rvps2"><span class="rvts6">In the diagram the Bridgemate2SettingsDTO is depicted as a child of the abstract BridgemateSettingsDTO. The latter's properties can be considered to be part of the Bridgemate2SettingsDTO.&nbsp;</span></p>
-<h5 class="rvps12"><span class="rvts0"><span class="rvts30">SessionGuid property</span></span></h5>
+<h5 class="rvps12"><span class="rvts0"><span class="rvts31">SessionGuid property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. A guid uniquely defining the session. Must be exactly 32 character long, uppercase and cannot contaim dashes or curly braces.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">SectionLetters property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">SectionLetters property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Required. Identifes the section that the settings pertain to.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">AutopoweroffTime property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">AutopoweroffTime property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Byte. Specifies the number of seconds after which the display will power off.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">AutoShutDownBPC property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">AutoShutDownBPC property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. Specifes if </span><span class="rvts6">Bridgemate Control Software</span><span class="rvts6"> should shut down after the last result has been processed.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2AutoBoardNumber property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2AutoBoardNumber property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (Bm2AutoBoardNumberOption).Specifies if the Bridgemate should fill in the boardnumber automatically, Also see the BM2FirstBoardManually setting.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2AutoShowScoreRecap property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2AutoShowScoreRecap property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. Specifies if the scores obtained should be displayed for review after the last result &nbsp;has been entered for each round. All obtained results will be shown as well after the play of the last board.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2ConfirmNP property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2ConfirmNP property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. Specifies if the TD must come to the table to confirm No play on the Bridgemate.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2EnterHandrecord property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2EnterHandrecord property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. Specifies if the players can enter the handrecord for a board. If "true" then the BM2EnterHandrecordWhen setting determines when the handrecord may be entered.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2EnterHandrecordWhen property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2EnterHandrecordWhen property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (Bm2EnterHandrecordWhenOption).Specifies when the players can enter the handrecord on the Bridgemate. The default value is zero: after all boards for the round have been played.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2FirstBoardManually property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2FirstBoardManually property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. If the BM2AutoBoardNumber setting is "True" this setting further specifies if the board number for the first board played should be entered manually.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2GameSummary property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2GameSummary property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean.If "True" shows the summary of the session after the last board has been entered.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2NameSource property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2NameSource property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Currently not supported. Player names for at least all competing players should be sent to the </span><span class="rvts6">Data Connector</span><span class="rvts6"> using </span><a class="rvts16" href="PlayerDataDTO.html">PlayerDataDTOs</a><span class="rvts6">.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2NextSeating property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2NextSeating property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. Specifies it the Bridgemate should show the table for the next round after the last result has been entered for the current round.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2NumberEntryEachRound property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2NumberEntryEachRound property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. If "True" the players must enter their player number at the start of each round.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2NumberEntryPreloadValues property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2NumberEntryPreloadValues property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean.If player numbers are entered each round, preload known player numbers.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2PairNumberEntry property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2PairNumberEntry property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (Bm2PairNumberEntyOption). Specifies if when entering a result the declaring pair must be entered.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2PINcode property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2PINcode property</span></span></h5>
 <p class="rvps2"><span class="rvts6">String of four digits. Optional.Defaults to "0000".</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2Ranking property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2Ranking property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (Bm2ShowRankingOption). Specifies if and when the current ranking for the pairs should be shown.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2RecordBidding property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2RecordBidding property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. Currently not supported.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2RecordPlay property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2RecordPlay property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. Currently not supported.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2RemainingBoards property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2RemainingBoards property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. If "True" the Bridgemate will show how many boards remain to be played.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2ResetFunctionKey property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2ResetFunctionKey property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. If "True" the reset function key will be available from the TD menu without having to enter the PIN code first.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2ResultsOverview property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2ResultsOverview property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (Bm2ResultsOverviewOption). Specifies how the previous results on the board should be shown. Either as frequency list (show number of times a specific contract was played) or as traveler (show the result for each pair).</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2ScoreCorrection property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2ScoreCorrection property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. If "True" allows the players to erase a result in the round on their table and to enter it again.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2ScoreRecap property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2ScoreRecap property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. If "True" the Bridgemate will show a "Scores" button to check the entered results for the round.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2ShowHands property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2ShowHands property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. Currently not supported.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2ShowPlayerNames property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2ShowPlayerNames property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (Bm2ShowPlayerNamesOption). Specifies if and when the playernames shoud be shown on the Bridgemate at the start of a round.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2SummaryPoints property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2SummaryPoints property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (Bm2SummaryPointsOption). If the BM2GameSummary is "True" specifies whether the obtained results per board should be shown as matchpoints or as a percentag. For this to work the BM2RankingProperty must be either ShowAllRounds (1) or ShowAfterLastRound (2).</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2TDCall property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2TDCall property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. If "True" specifies that the players can call the Tournament Director from the Bridgemate.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2TextBasedNumber property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2TextBasedNumber property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Currently not supported. Player numbers can be set using the </span><a class="rvts16" href="PlayerDataDTO.html">PlayerDataDTO</a><span class="rvts6">. The player number is stored as a string.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2ValidateLeadCard property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2ValidateLeadCard property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. If "True" The entered lead card will be checked against the handrecord.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2ValidateRecording property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2ValidateRecording property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Currently not supported.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BM2ViewHandRecord property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BM2ViewHandRecord property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. If "true" the players get the option to view the handrecord after entering the result.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">BoardOrderVerification property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">BoardOrderVerification property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. If "True" the Bridgemate will check the order of entry of the boardnumbers.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">EnterResultsMethod property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">EnterResultsMethod property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (Bm2ResultsEntryOption). Specifies how the resulting tricks after play must be entered.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">GroupSections property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">GroupSections property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Not supported. Use the </span><a class="rvts16" href="ScoringGroupDTO.html">ScoringGroupDTO</a><span class="rvts6"> to indiciate that sections should be scored together.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">HandRecordValidation property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">HandRecordValidation property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. Currently not supported.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">Intermediate results property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">Intermediate results property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. Currently not supported.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">LeadCard property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">LeadCard property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. If "True" specifies that the leadcard must be entered along with the cotnract.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">MaximumResults property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">MaximumResults property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer (0-127). Specifies the maximum number of results to show. Zero means "unlimieted".</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">MemberNumber property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">MemberNumber property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. If "True" &nbsp;the Bridgemate will ask for playernumbers at the start of a round when for that round there are participations without a player number.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">MemberNumbersNoBlankEntry property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">MemberNumbersNoBlankEntry property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean If "True" entry of player numbers cannot be skipped,</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">NumberValidation property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">NumberValidation property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Currently not supported.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">RepeatResults property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">RepeatResults property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. If "True" allows the players to review the results of a round again.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">ScorePoints property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">ScorePoints property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (Bm2PointScorePerspectiveOption). Show score points from perspective of North-South or from declarer.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">ShowContract property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">ShowContract property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer/Enum (Bm2ContractRepresentationOption). Specifies if the denomination of the contract should be shown with letters or symbols.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">ShowOwnResult property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">ShowOwnResult property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. If "True" specifies that the own result should be included in the result overview.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">ShowPairNumbers property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">ShowPairNumbers property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. If "True" the pair numbers for the current round will be displayed on the Bridgemate.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">ShowPercentage property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">ShowPercentage property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. If "True" show the percentage obtained on the board just played.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">ShowResults property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">ShowResults property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Boolean. If "True" show previous results on the board just played.</span></p>
-<h5 class="rvps10"><span class="rvts0"><span class="rvts25">VerificationTime property</span></span></h5>
+<h5 class="rvps10"><span class="rvts0"><span class="rvts26">VerificationTime property</span></span></h5>
 <p class="rvps2"><span class="rvts6">Integer (1-7) The time in seconds that the verification message is shown before the opponents get to confirm the result on the board just played.</span></p>
 <p class="rvps2" style="break-before: always;"><span class="rvts6"></span><span class="rvts6"></span></p>
 

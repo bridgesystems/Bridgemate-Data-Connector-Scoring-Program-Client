@@ -17,7 +17,7 @@ The command property is the sum of actions that BCS should perform:
 | &#49;6 | Minimize | BCS will start minimized. |
 | &#51;2 | Auto shutdown | Instructs BCS to shut down after the last result has been processed. |
 | &#54;4 | Loglevel debug | Lowers the Log level from "Info" to "Debug". |
-| &#49;28 | Clear data | Instructs the Bridgemate Data Connector to clear all data. This prevents stale data of the same sessions that are contained in the InitDTO from being processed. On the other hand it will also delete data from other sessions that may await further processing. Use with caution in situations where multiple events may be ongoing. |
+| &#49;28 | Clear data | Instructs the Bridgemate Data Connector to clear all data. This prevents stale data of the same sessions that are contained in the InitDTO from being processed. On the other hand it will also delete data from other sessions that may await further processing. Use with caution in situations where multiple events may be ongoing. Mind that all data related to the (re)initialized event will be removed in any case. |
 
 
 &nbsp;

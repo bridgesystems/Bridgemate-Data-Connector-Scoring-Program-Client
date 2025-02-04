@@ -60,6 +60,14 @@ The tables below give a short description of the available commands for the Scor
 | GetAllMovements | &#51;3 | Requests all movements for a session. | sends: n/a returns: an array of [SectionDTO](<SectionDTO.md>) | Each sectionDTO has Tables as an array of TableDTO, eacht table has Rounds as an array of RoundDTO. The RoundDTO contains the opponents and the board numbers that they will play. |
 
 
+## Management commands
+
+| **Command** | **Value** | **Description** | **DTO** | **Remarks** |
+| --- | --- | --- | --- | --- |
+| ManageBCS | &#51;4 | Queries BCS for either the running session or all known sessions. Also used to request BCS to shut down. | sends: [BCSManagementRequestDTO](<BCSManagementRequestDTO.md>) returns:&nbsp; [BCSManagementResponseDTO](<BCSManagementResponseDTO.md>) | See the documentation on these DTOs. |
+| ClearData | &#51;5 | Instructs Data Connector to clear all incoming and outgoing queued and handled messages and will remove all validation data, especially the PlayerData and MovementData. | n/a | Use with caution\! Best to use only when there are no active events. Be mindful of that other clubs may have ongoing events for which not all data has been processed yet. |
+
+
 ## Data types
 
 The ScoringProgramResponse has a DataType property which specifies which type of data can be expected to be in its SerializedData property.

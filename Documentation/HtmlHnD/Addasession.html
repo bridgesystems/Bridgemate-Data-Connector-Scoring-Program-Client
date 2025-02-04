@@ -188,15 +188,15 @@
 
             <div class="main-content">
                 
-<h3 class="rvps9"><span class="rvts0"><span class="rvts27">Procedure</span></span></h3>
+<h3 class="rvps9"><span class="rvts0"><span class="rvts28">Procedure</span></span></h3>
 <p class="rvps2"><img alt="" style="width : 617px; height : 510px; padding : 1px;" src="lib/Add%20session%201.png"></p>
-<h3 class="rvps9"><span class="rvts0"><span class="rvts27">Data structure</span></span></h3>
+<h3 class="rvps9"><span class="rvts0"><span class="rvts28">Data structure</span></span></h3>
 <p class="rvps2"><img alt="" style="width : 869px; height : 55px; padding : 1px;" src="lib/AddSection.png"></p>
-<h3 class="rvps9"><span class="rvts0"><span class="rvts27">Description</span></span></h3>
+<h3 class="rvps9"><span class="rvts0"><span class="rvts28">Description</span></span></h3>
 <p class="rvps2"><span class="rvts6">Using the </span><a class="rvts16" href="InitDTO.html">InitDTO</a><span class="rvts6"> and the </span><a class="rvts16" href="Overviewofcommunication.html">InitializeEvent command</a><span class="rvts6"> it is possible to </span><a class="rvts16" href="Initializeanevent.html">start </a><a class="rvts16" href="Initializeanevent.html">Bridgemate Control Software</a><span class="rvts6"> with more than one session. After initialization it is possible to </span><a class="rvts16" href="Updatethemovementforasectionorad.html#AddSection">add a section</a><span class="rvts6"> to one of the events that were initialized.</span></p>
 <p class="rvps2"><span class="rvts6">Apart from this it is possible to add a session after initialization. This works using a </span><a class="rvts16" href="SessionDTO.html">SessionDTO</a><span class="rvts6"> and the </span><a class="rvts16" href="Overviewofcommunication.html">AddSession command</a><span class="rvts6">.</span></p>
 <ul style="text-indent: 0px; padding: 0; margin: 0 0 0 24px; list-style-position: outside; list-style-type: disc;">
- <li class="rvps2 noindent"><span class="rvts6">Set the ScoringProgramRequest.SessionGuid property to the </span><span class="rvts29">EventGuid</span><span class="rvts6"> that was used when sending the InitDTO. Mind that when the event was initialized with one session and no event guid was specified at that time, the event guid will be equal to the single session's SessionGuid property.</span></li>
+ <li class="rvps2 noindent"><span class="rvts6">Set the ScoringProgramRequest.SessionGuid property to the </span><span class="rvts30">EventGuid</span><span class="rvts6"> that was used when sending the InitDTO. Mind that when the event was initialized with one session and no event guid was specified at that time, the event guid will be equal to the single session's SessionGuid property.</span></li>
  <li class="rvps2 noindent"><span class="rvts6">Add scoringgroups, sections, tables and rounds.</span></li>
  <li class="rvps2 noindent"><span class="rvts6">Send the ScoringProgramRequest with the </span><a class="rvts16" href="Overviewofcommunication.html">AddSection command.</a></li>
  <li class="rvps2 noindent"><span class="rvts6">Optionally proceed with sennding </span><a class="rvts16" href="Updateplayerdata.html">playerdata</a><span class="rvts6">,</span><a class="rvts16" href="Updateparticipations.html"> participations, </a><a class="rvts16" href="Updatehandrecords.html">handrecords</a><span class="rvts6"> and </span><a class="rvts16" href="UpdateBridgematesettings.html">Bridgemate settings</a><span class="rvts6">.</span></li>
