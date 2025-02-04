@@ -182,6 +182,11 @@
         ManageBCS,                              //BCSManagementDTO
 
         /// <summary>
+        /// Instructs the DataConnector to clear all incoming and outgoing queue data.
+        /// </summary>
+        ClearData,
+
+        /// <summary>
         /// Not supported
         /// </summary>
         TestData                                //Not supported

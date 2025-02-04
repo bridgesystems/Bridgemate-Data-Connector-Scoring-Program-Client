@@ -47,7 +47,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// The logger for this class.
         /// </summary>
-        public static readonly Logger ScoringProgramClientLogger=LogManager.GetLogger(nameof(ScoringProgramClientLogger));
+        public static readonly Logger ScoringProgramClientLogger = LogManager.GetLogger(nameof(ScoringProgramClientLogger));
 
         /// <summary>
         /// The source of the logging records.
@@ -63,7 +63,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// The implementation of the singleton pattern. Atypically the constructor is protected rather than private.
         /// </summary>
         private static ScoringProgramPipeClient _instance;
-        
+
         /// <summary>
         /// The single instance of the pipe client. Use this property to retrieve the client and use it in the external program.
         /// </summary>
@@ -71,8 +71,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         {
             get
             {
-                if(_instance == null)
-                    _instance=new ScoringProgramPipeClient();
+                if (_instance == null)
+                    _instance = new ScoringProgramPipeClient();
                 return _instance;
             }
         }
@@ -147,7 +147,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             try
             {
                 (DataConnectorResponseData result, string message, ErrorType errorType) result;
-                var success=BridgemateDataConnectorManager.EnsureDataConnectorServiceIsRunning(forceRestart: false);
+                var success = BridgemateDataConnectorManager.EnsureDataConnectorServiceIsRunning(forceRestart: false);
                 if (!success)
                 {
                     return new ScoringProgramResponse
@@ -169,7 +169,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
             catch (Exception ex)
             {
-               LogError(ex);
+                LogError(ex);
                 return new ScoringProgramResponse
                 {
                     RequestCommand = ScoringProgramDataConnectorCommands.Connect,
@@ -199,7 +199,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
             try
             {
-                result =Connect(PipeName);
+                result = Connect(PipeName);
                 return new ScoringProgramResponse
                 {
                     RequestCommand = ScoringProgramDataConnectorCommands.Connect,
@@ -210,7 +210,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
             catch (Exception ex)
             {
-               LogError(ex);
+                LogError(ex);
                 return new ScoringProgramResponse
                 {
                     RequestCommand = ScoringProgramDataConnectorCommands.Connect,
@@ -275,7 +275,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
             catch (Exception ex)
             {
-               LogError(ex);
+                LogError(ex);
                 return new ScoringProgramResponse
                 {
                     RequestCommand = ScoringProgramDataConnectorCommands.Disconnect,
@@ -487,7 +487,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public async Task<ScoringProgramResponse> SendResultsAsync(string sessionGuid, ResultDTO[] dtos)
         {
-            LogMethodEntry(nameof(SendResultsAsync),(nameof(sessionGuid),sessionGuid));
+            LogMethodEntry(nameof(SendResultsAsync), (nameof(sessionGuid), sessionGuid));
 
             var dtosForSession = dtos.Where(dto => dto.SessionGuid == sessionGuid).ToList();
             var serializedData = JsonSerializer.Serialize(dtosForSession);
@@ -731,7 +731,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         private async Task<ScoringProgramResponse> SendDataAsync(string sessionGuid,
             ScoringProgramDataConnectorCommands command, string serializedData)
         {
-            var logRecord = new DataConnectorLogRecord(DataConnectorLogLevel.Debug, LoggingSource, command, serializedData,nameof(SendDataAsync));
+            var logRecord = new DataConnectorLogRecord(DataConnectorLogLevel.Debug, LoggingSource, command, serializedData, nameof(SendDataAsync));
             DataConnectorClientLogger.LogRecord(logRecord);
 
             //Construct the request to the Data Connector.
@@ -846,7 +846,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         private ScoringProgramResponse SendData(string sessionGuid, ScoringProgramDataConnectorCommands command, string serializedData)
         {
-            var logRecord=new DataConnectorLogRecord(DataConnectorLogLevel.Debug,LoggingSource,command, serializedData, nameof(SendData));
+            var logRecord = new DataConnectorLogRecord(DataConnectorLogLevel.Debug, LoggingSource, command, serializedData, nameof(SendData));
             DataConnectorClientLogger.LogRecord(logRecord);
 
             //Construct the request to the Data Connector.
@@ -933,7 +933,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             catch (Exception ex)
             {
                 CloseConnection();
-               LogError(ex);
+                LogError(ex);
                 return
                 new ScoringProgramResponse
                 {
@@ -959,9 +959,9 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public async Task<ResultDTO[]> PollForResultsAsync(string sessionGuid, bool all = false)
         {
-            LogMethodEntry(nameof(PollForResultsAsync),(nameof(sessionGuid),sessionGuid),(nameof(all),all));
+            LogMethodEntry(nameof(PollForResultsAsync), (nameof(sessionGuid), sessionGuid), (nameof(all), all));
 
-            var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllResults : 
+            var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllResults :
                                 ScoringProgramDataConnectorCommands.PollQueueForNewResults;
             var response = await SendDataAsync(sessionGuid, command, serializedData: "");
             if (response.DataType != DataConnectorResponseData.Results)
@@ -971,7 +971,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
             var data = string.IsNullOrWhiteSpace(response.SerializedData) ? new ResultDTO[] { } :
                                                                             JsonSerializer.Deserialize<ResultDTO[]>(response.SerializedData);
-            
+
             //Cache the id for the last queue item. We can use this to accept up to this id included.
             if (data.Any())
                 _lastResultQueueItemId = response.LastQueueItemId;
@@ -990,7 +990,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         {
             LogMethodEntry(nameof(PollForResults), (nameof(sessionGuid), sessionGuid), (nameof(all), all));
 
-            var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllResults : 
+            var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllResults :
                                 ScoringProgramDataConnectorCommands.PollQueueForNewResults;
             var response = SendData(sessionGuid, command, serializedData: "");
             if (response.DataType != DataConnectorResponseData.Results)
@@ -1000,7 +1000,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
             var data = string.IsNullOrWhiteSpace(response.SerializedData) ? new ResultDTO[] { } :
                                                                             JsonSerializer.Deserialize<ResultDTO[]>(response.SerializedData);
-            
+
             //Cache the id for the last queue item. We can use this to accept up to this id included.
             if (data.Any())
                 _lastResultQueueItemId = response.LastQueueItemId;
@@ -1018,7 +1018,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         {
             LogMethodEntry(nameof(PollForPlayerDataAsync), (nameof(sessionGuid), sessionGuid), (nameof(all), all));
 
-            var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllPlayerData : 
+            var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllPlayerData :
                                 ScoringProgramDataConnectorCommands.PollQueueForNewPlayerData;
             var response = await SendDataAsync(sessionGuid, command, serializedData: "");
             if (response.DataType != DataConnectorResponseData.PlayerData)
@@ -1028,7 +1028,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
             var data = string.IsNullOrWhiteSpace(response.SerializedData) ? new PlayerDataDTO[] { } :
                                                                             JsonSerializer.Deserialize<PlayerDataDTO[]>(response.SerializedData);
-            
+
             //Cache the id for the last queue item. We can use this to accept up to this id included.
             if (data.Any())
                 _lastPlayeDataQueueItemId = response.LastQueueItemId;
@@ -1047,7 +1047,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         {
             LogMethodEntry(nameof(PollForPlayerData), (nameof(sessionGuid), sessionGuid), (nameof(all), all));
 
-            var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllPlayerData : 
+            var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllPlayerData :
                                 ScoringProgramDataConnectorCommands.PollQueueForNewPlayerData;
             var response = SendData(sessionGuid, command, serializedData: "");
             if (response.DataType != DataConnectorResponseData.PlayerData)
@@ -1076,7 +1076,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         {
             LogMethodEntry(nameof(PollForParticipationsAsync), (nameof(sessionGuid), sessionGuid), (nameof(all), all));
 
-            var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllParticipations : 
+            var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllParticipations :
                                 ScoringProgramDataConnectorCommands.PollQueueForNewParticipations;
             var response = await SendDataAsync(sessionGuid, command, serializedData: "");
             if (response.DataType != DataConnectorResponseData.Participations)
@@ -1104,7 +1104,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         {
             LogMethodEntry(nameof(PollForParticipations), (nameof(sessionGuid), sessionGuid), (nameof(all), all));
 
-            var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllParticipations : 
+            var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllParticipations :
                                 ScoringProgramDataConnectorCommands.PollQueueForNewParticipations;
 
             var response = SendData(sessionGuid, command, serializedData: "");
@@ -1134,7 +1134,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         {
             LogMethodEntry(nameof(PollForHandrecordsAsync), (nameof(sessionGuid), sessionGuid), (nameof(all), all));
 
-            var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllHandrecords : 
+            var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllHandrecords :
                                 ScoringProgramDataConnectorCommands.PollQueueForNewHandrecords;
 
             var response = await SendDataAsync(sessionGuid, command, serializedData: "");
@@ -1163,7 +1163,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         {
             LogMethodEntry(nameof(PollForHandrecords), (nameof(sessionGuid), sessionGuid), (nameof(all), all));
 
-            var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllHandrecords : 
+            var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllHandrecords :
                                 ScoringProgramDataConnectorCommands.PollQueueForNewHandrecords;
             var response = SendData(sessionGuid, command, serializedData: "");
             if (response.DataType != DataConnectorResponseData.Handrecords)
@@ -1193,7 +1193,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// </remarks>
         public ScoringProgramResponse AcceptQueueData(string sessionGuid, DataConnectorResponseData dataType)
         {
-            LogMethodEntry(nameof(AcceptQueueData), (nameof(sessionGuid), sessionGuid),(nameof(dataType), dataType));
+            LogMethodEntry(nameof(AcceptQueueData), (nameof(sessionGuid), sessionGuid), (nameof(dataType), dataType));
 
             (ScoringProgramDataConnectorCommands command, int lastQueueItemId) parameters = DetermineParametersForQueuAcceptance(dataType);
             if (parameters.command == ScoringProgramDataConnectorCommands.None)
@@ -1226,7 +1226,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         {
             LogMethodEntry(nameof(AcceptQueueDataAsync), (nameof(sessionGuid), sessionGuid), (nameof(dataType), dataType));
 
-            (ScoringProgramDataConnectorCommands command, int lastQueueItemId) parameters =DetermineParametersForQueuAcceptance(dataType);
+            (ScoringProgramDataConnectorCommands command, int lastQueueItemId) parameters = DetermineParametersForQueuAcceptance(dataType);
             if (parameters.command == ScoringProgramDataConnectorCommands.None)
             {
                 return new ScoringProgramResponse
@@ -1237,8 +1237,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                     SerializedData = JsonSerializer.Serialize($"Invalid datatype '{dataType}'")
                 };
             }
-            var serializedLastQueueItemId=JsonSerializer.Serialize(parameters.lastQueueItemId);
-           
+            var serializedLastQueueItemId = JsonSerializer.Serialize(parameters.lastQueueItemId);
+
             return await SendDataAsync(sessionGuid, parameters.command, serializedLastQueueItemId);
 
         }
@@ -1248,11 +1248,11 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// </summary>
         /// <param name="dataType"></param>
         /// <returns></returns>
-        private (ScoringProgramDataConnectorCommands command,int lastQueueItemId) DetermineParametersForQueuAcceptance(DataConnectorResponseData dataType)
+        private (ScoringProgramDataConnectorCommands command, int lastQueueItemId) DetermineParametersForQueuAcceptance(DataConnectorResponseData dataType)
         {
             int lastQueueItemId;
             ScoringProgramDataConnectorCommands command;
-         
+
             switch (dataType)
             {
                 case DataConnectorResponseData.Results:
@@ -1282,7 +1282,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                         break;
                     }
             }
-            return (command,lastQueueItemId);
+            return (command, lastQueueItemId);
         }
 
         /// <summary>
@@ -1346,7 +1346,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                     Letters = sectionLetters
                 };
                 var serializedData = JsonSerializer.Serialize(sectionDto);
-                var response =SendData(sessionGuid, ScoringProgramDataConnectorCommands.GetMovement, serializedData);
+                var response = SendData(sessionGuid, ScoringProgramDataConnectorCommands.GetMovement, serializedData);
                 if (response.RequestCommand != ScoringProgramDataConnectorCommands.GetMovement)
                 {
                     LogError(new Exception($"The {ScoringProgramDataConnectorCommands.GetMovement} command returned an unexpected result: " +
@@ -1425,14 +1425,14 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 {
                     LogError(new Exception($"The {ScoringProgramDataConnectorCommands.GetAllMovements} command returned an unexpected result: " +
                         $"'{response.RequestCommand}'"));
-                 
+
                     return emptyResponse;
                 }
                 if (response.DataType != DataConnectorResponseData.Sessions)
                 {
                     LogError(new Exception($"The {ScoringProgramDataConnectorCommands.GetAllMovements} failed: " +
                                  $"{response.DataType}-{response.ErrorType}: '{JsonSerializer.Deserialize<string>(response.SerializedData)}'"));
-                   
+
                     return emptyResponse;
                 }
                 var sections = JsonSerializer.Deserialize<SectionDTO[]>(response.SerializedData);
@@ -1536,7 +1536,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             LogMethodEntry(nameof(AddSessionAsync));
 
             var serializedData = JsonSerializer.Serialize(addedSession);
-            return await  SendDataAsync(addedSession.EventGuid, ScoringProgramDataConnectorCommands.AddSession, serializedData);
+            return await SendDataAsync(addedSession.EventGuid, ScoringProgramDataConnectorCommands.AddSession, serializedData);
         }
 
         /// <summary>
@@ -1574,7 +1574,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                     SerializedData = validationErrors
                 };
             }
-            var serializedData=JsonSerializer.Serialize(managementDTO);
+            var serializedData = JsonSerializer.Serialize(managementDTO);
             var result = await SendDataAsync(sessionGuid: "", ScoringProgramDataConnectorCommands.ManageBCS, serializedData);
             return result;
         }
@@ -1587,7 +1587,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public ScoringProgramResponse IssueManagementCommand(BCSManagementRequestDTO managementDTO)
         {
-            LogMethodEntry(nameof (IssueManagementCommand));
+            LogMethodEntry(nameof(IssueManagementCommand));
 
             if (!managementDTO.Validate())
             {
@@ -1623,12 +1623,12 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 {
                     BCSManagementResponseDTO info = JsonSerializer.Deserialize<BCSManagementResponseDTO>(result.SerializedData);
                     var sessionInfos = info.SessionInformation ?? new[] { new SessionInfoDTO() };
-                    return sessionInfos.Any(i=>i.SessionGuid == sessionGuid);
+                    return sessionInfos.Any(i => i.SessionGuid == sessionGuid);
                 }
                 else
                     return false;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 DataConnectorClientLogger.LogError(ex, DataConnectorLoggingSource.ScoringProgramClient);
                 return false;
@@ -1663,6 +1663,32 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 DataConnectorClientLogger.LogError(ex, DataConnectorLoggingSource.ScoringProgramClient);
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Instructs the DataConnector to asynchronously clear all incoming and outgoing queuedata and to remove al validation data as well.
+        /// Use with caution!
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> ClearDataAsync()
+        {
+            ScoringProgramResponse result = await SendDataAsync(sessionGuid: string.Empty,
+                                                                command: ScoringProgramDataConnectorCommands.ClearData,
+                                                                serializedData: string.Empty);
+            return result.DataType == DataConnectorResponseData.OK;
+        }
+
+        /// <summary>
+        /// Instructs the DataConnector to synchronously clear all incoming and outgoing queuedata and to remove al validation data as well.
+        /// Use with caution!
+        /// </summary>
+        /// <returns></returns>
+        public bool ClearData()
+        {
+            ScoringProgramResponse result= SendData(sessionGuid: string.Empty,
+                                                    command: ScoringProgramDataConnectorCommands.ClearData,
+                                                    serializedData: string.Empty);
+            return result.DataType != DataConnectorResponseData.OK;
         }
 
 
