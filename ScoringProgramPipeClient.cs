@@ -20,13 +20,13 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     /// Note that this class is written as a singleton: there should never be more than one instance communicating over the pipe. 
     /// The constructor is protected however, so by inheriting from this class a non singleton instance can be used.
     /// <br/>
-    /// The class implements IDispable through its base class, as the base class contains a stream writer and stream reader that must be disposed
+    /// The class implements IDisopable through its base class, as the base class contains a stream writer and stream reader that must be disposed
     /// when the communication shuts down. Be sure to call Dispose on the class any time it is no longer in use, otherwise communication will stall.
     /// <br/>
-    /// The code has no dependencies, except one on NLog. If you decide to copy the code make sure to add a dependency to the NLog NuGet package
-    /// or implement your own logging.The logger is defined in the base class and is named "DataConnectorClientLogger".
+    /// The code has no dependencies, except one on NLog (and Net Standard 2.0). If you decide to copy the code make sure to add a dependency to the NLog NuGet package
+    /// or implement your own logging.
     /// <br/>
-    /// All public functions have synchronous and asynchronous implementation (ending in "Async").
+    /// All public functions have synchronous and asynchronous implementations (ending in "Async").
     /// <br/>
     /// To get started inspect the following functions:<br/>
     /// <see cref="ScoringProgramPipeClient.Connect">Connect</see> and <see cref="ScoringProgramPipeClient.ConnectAsync">ConnectAsync</see>: Connection to the Data Connector.<br/>
@@ -36,7 +36,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     public class ScoringProgramPipeClient : DataConnectorPipeClient<ScoringProgramDataConnectorCommands>
     {
         /// <summary>
-        /// Cached values of the ids of the several types of eventqueu items that have been sent to the Data Connector.
+        /// Cached values of the ids of the several types of eventqueue items that have been sent to the Data Connector.
         /// If the scoring program does not include the id of the last received queue item when accepting them,the cached values will be used.
         /// </summary>      
         private int _lastResultQueueItemId;         //A cached value of the id of the last sent board result queue item.
@@ -56,6 +56,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 
         /// <summary>
         /// The name of the pipe that handles the bidirectional communication with the Data Connector.
+        /// Each Windows account must have its own pipe, hence the username of the logged in user (as Windows knows it) is appended.
+        /// Tip: you can find the usernames as Windows knows them by going to the Windows\AppData\Local folder.
         /// </summary>
         public string PipeName = $"BridgeSystems.Bridgemate.DataConnectorService.ScoringProgram.{Environment.UserName}";
 
