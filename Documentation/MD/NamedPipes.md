@@ -14,7 +14,7 @@ The Named Pipe client must be created by the scoring program and should connect 
 
 Note that the pipe only accepts one connection. The pipe server will detect when then pipe client dies and will then accept a new connection. Alternatively the client can issue a Disconnect command to free up the pipe. A full ScoringProgramPipeClient class is provided in the BridgeSystems.Bridgemate.DataConnector.ScoringProgram.dll written by Bridge Systems. This class provides functions to connect, ping and exchange data with the pipe server. To use it the external scoring progam must be written in .Net 4.5 or higher or it must be able to use an adapter for using .Net Standard 2.0 code for its programming platform.
 
-&nbsp;
+The source code for the &nbsp; ScoringProgramPipeClientClass can be found [at github](<https://github.com/bridgesystems/Bridgemate-Data-Connector-Scoring-Program-Client> "target=\"\_blank\""),
 
 ## Code examples
 

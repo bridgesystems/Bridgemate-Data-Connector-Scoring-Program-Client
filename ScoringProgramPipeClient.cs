@@ -57,7 +57,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// The name of the pipe that handles the bidirectional communication with the Data Connector.
         /// Each Windows account must have its own pipe, hence the username of the logged in user (as Windows knows it) is appended.
-        /// Tip: you can find the usernames as Windows knows them by going to the Windows\AppData\Local folder.
+        /// Tip: you can find the usernames as Windows knows them by going to the C:\Users folder.
         /// </summary>
         public string PipeName = $"BridgeSystems.Bridgemate.DataConnectorService.ScoringProgram.{Environment.UserName}";
 
