@@ -24,8 +24,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     /// when the communication shuts down. Be sure to call Dispose on the class any time it is no longer in use, otherwise communication will stall.
     /// <br/>
     /// The code has no dependencies, except one on NLog. If you decide to copy the code make sure to add a dependency to the NLog NuGet package
-    /// or implement your own logging.The loggers are defined in the base class and are named "DebugLogger" and "ErrorLogger". Anything written 
-    /// to the ErrorLogger is expected to be written to the DebugLogger as well.
+    /// or implement your own logging.The logger is defined in the base class and is named "DataConnectorClientLogger".
     /// <br/>
     /// All public functions have synchronous and asynchronous implementation (ending in "Async").
     /// <br/>

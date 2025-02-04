@@ -20,12 +20,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         const int DefaultTimeOutInMilliSeconds = 5000;
         
         /// <summary>
-        /// The name of the data connector logger.
-        /// </summary>
-        //public static string DataConnectorLoggerName => nameof(DataConnectorClientLogger);
-
-        /// <summary>
-        /// All processes below are dispoable. They can and must be disposed when the class is no longer in user. Otherwise the 
+        /// All processes below are dispoable. They can and must be disposed when the class is no longer in use. Otherwise the 
         /// communication with the Data Connector will stall.
         /// </summary>
         private NamedPipeClientStream _dataConnectorStream;
@@ -35,9 +30,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// NLog implementation of logging.
         /// </summary>
-        
-        //protected static readonly DataConnectorClientLogger DebugLogger = LogManager.GetLogger(nameof(DebugLogger));
-        //protected static readonly DataConnectorClientLogger ErrorLogger = LogManager.GetLogger(nameof(ErrorLogger));
         public DataConnectorLogCreator<TCommand> DataConnectorClientLogger=new DataConnectorLogCreator<TCommand>(jsonDataLogLevel:DataConnectorLogLevel.Debug,nameof(DataConnectorClientLogger));
         
         /// <summary>
@@ -52,7 +44,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         private bool disposedValue;
 
         /// <summary>
-        /// The timeout for establishing a connectio with the Data Connector.
+        /// The timeout for establishing a connection with the Data Connector.
         /// If not set the default value DefaultTimeOutInMilliSeconds will be used.
         /// </summary>
         public int TimeOutInMilliSeconds
@@ -211,18 +203,27 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             _dataConnectorWriter.AutoFlush = true;
         }
 
+        /// <summary>
+        /// Disposes of the StreamWriter class that sends messages to the DataConnector.
+        /// </summary>
         protected void CloseWriter()
         {
             _dataConnectorWriter?.Close();
             _dataConnectorWriter = null;
         }
 
+        /// <summary>
+        /// Disposes of the StreamReader class that reads messages from the DataConnector.
+        /// </summary>
         protected void CloseReader()
         {
             _dataConnectorReader?.Close();
             _dataConnectorReader = null;
         }
 
+        /// <summary>
+        /// Disposes of the NamedPipeClientStream that channels messages to and from the DataConnector.
+        /// </summary>
         protected void CloseConnection()
         {
             _dataConnectorStream?.Close();
@@ -253,6 +254,10 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <param name="entry"></param>
         protected abstract void LogMethodEntry(string entry);
 
+        /// <summary>
+        /// Disposes the stream, writer and reader for the DataConnector if disposing is not already in progress.
+        /// </summary>
+        /// <param name="disposing"></param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -265,6 +270,9 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             }
         }
 
+        /// <summary>
+        /// Disposes the class.
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
