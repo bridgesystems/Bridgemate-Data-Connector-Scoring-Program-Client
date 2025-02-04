@@ -14,8 +14,8 @@
         }
 
         /// <summary>
-        /// Specifies the datatype to deserialize to after rececption of the response.
-        /// Data ConnectorResponseData.Error signals that something went wrong. The serialized data will be a string
+        /// Specifies the datatype to deserialize to after reception of the response.
+        /// DataConnectorResponseData.Error signals that something went wrong. The serialized data in that case will be a string
         /// describing the error.
         /// </summary>
         public DataConnectorResponseData DataType
