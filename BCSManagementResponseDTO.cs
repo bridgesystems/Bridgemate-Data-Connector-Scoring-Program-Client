@@ -11,6 +11,10 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
     /// </summary>
     public class SessionInfoDTO
     {
+        public SessionInfoDTO()
+        {
+
+        }
         /// <summary>
         /// The guid of the event that the session is part of. Can be the same as the session guid when there is only one session.
         /// </summary>
@@ -38,10 +42,12 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// The date and time that the session was scheduled to start.
         /// </summary>
-        public DateTime SessionDateTime
-        {
-            get; set;
-        }
+        public DateTime SessionDateTime { get; set; }
+
+        /// <summary>
+        /// Signals if the InitDto of the session has been processed.
+        /// </summary>
+        public bool HasBeenProcessed { get; set; }
     }
 
     /// <summary>
@@ -49,7 +55,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
     /// </summary>
     public class BCSManagementResponseDTO
     {
-       
+
         /// <summary>
         /// The guid of the event currently being administered. Can be empty if no sessions are active.
         /// </summary>
@@ -102,7 +108,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                 validationMessages.Add("The event guid must be exactly 32 character long and can only contain capital A to F or digits 0 to 9.");
             }
 
-            if (SessionInformation!=null && SessionInformation.Any())
+            if (SessionInformation != null && SessionInformation.Any())
             {
                 foreach (SessionInfoDTO sessionInfo in SessionInformation)
                 {

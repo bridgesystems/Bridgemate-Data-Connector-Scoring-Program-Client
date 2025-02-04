@@ -524,7 +524,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             return SendDataAsync(sessionGuid, ScoringProgramDataConnectorCommands.PutHandrecords, serializedData);
         }
 
-
         /// <summary>
         /// Sends handrecords synchronously to the BCS queue.
         /// </summary>
@@ -1540,7 +1539,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             return await  SendDataAsync(addedSession.EventGuid, ScoringProgramDataConnectorCommands.AddSession, serializedData);
         }
 
-
         /// <summary>
         /// Adds the given session to a known event synchronously.
         /// This event must have been sent to the Data Connector previously using an <see cref="InitDTO">InitDTO</see>.
@@ -1581,7 +1579,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             return result;
         }
 
-
         /// <summary>
         /// Issue a management command to BCS synchronously. This command can either be a query for information on the location of its scoring file, which sessions
         /// it is currently administering or which sessions are know to it, or it can be an instruction to shut down.
@@ -1607,6 +1604,67 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             var result = SendData(sessionGuid: "", ScoringProgramDataConnectorCommands.ManageBCS, serializedData);
             return result;
         }
+
+        /// <summary>
+        /// Does an asynchronous check on if the session with the given guid exists.
+        /// </summary>
+        /// <param name="sessionGuid"></param>
+        /// <returns></returns>
+        public async Task<bool> DoesSessionExistAsync(string sessionGuid)
+        {
+            try
+            {
+                var dto = new BCSManagementRequestDTO
+                {
+                    Command = BCSManagementRequestDTO.GetAllSessionsInformation
+                };
+                ScoringProgramResponse result = await IssueManagementCommandAsync(dto);
+                if (result.DataType == DataConnectorResponseData.AllSessionsInfo)
+                {
+                    BCSManagementResponseDTO info = JsonSerializer.Deserialize<BCSManagementResponseDTO>(result.SerializedData);
+                    var sessionInfos = info.SessionInformation ?? new[] { new SessionInfoDTO() };
+                    return sessionInfos.Any(i=>i.SessionGuid == sessionGuid);
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex) 
+            {
+                DataConnectorClientLogger.LogError(ex, DataConnectorLoggingSource.ScoringProgramClient);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Does an synchronous check on if the session with the given guid exists.
+        /// </summary>
+        /// <param name="sessionGuid"></param>
+        /// <returns></returns>
+        public bool DoesSessionExist(string sessionGuid)
+        {
+            try
+            {
+                var dto = new BCSManagementRequestDTO
+                {
+                    Command = BCSManagementRequestDTO.GetAllSessionsInformation
+                };
+                ScoringProgramResponse result = IssueManagementCommand(dto);
+                if (result.DataType == DataConnectorResponseData.AllSessionsInfo)
+                {
+                    BCSManagementResponseDTO info = JsonSerializer.Deserialize<BCSManagementResponseDTO>(result.SerializedData);
+                    var sessionInfos = info.SessionInformation ?? new[] { new SessionInfoDTO() };
+                    return sessionInfos.Any(i => i.SessionGuid == sessionGuid);
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                DataConnectorClientLogger.LogError(ex, DataConnectorLoggingSource.ScoringProgramClient);
+                return false;
+            }
+        }
+
 
         /// <summary>
         /// Checks if the connection has been established after a Connect command.
