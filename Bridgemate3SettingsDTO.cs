@@ -454,16 +454,6 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Specifies if the Bridgemates for this section will operate in offline mode. 
-        /// In offline mode the Bridgemate will not communicate with the Bridgemate 3 server during the session, 
-        /// but will try to send its results after the last board had been played.
-        /// </summary>
-        public Bm3ConnectionModeOption BM3ConnectionMode
-        {
-            get; set;
-        }
-
-        /// <summary>
         /// Must be four digits. The code the TD must enter to get access to the TD menu. Defaults to "0000".
         /// </summary>
         public string BM3PINcode
