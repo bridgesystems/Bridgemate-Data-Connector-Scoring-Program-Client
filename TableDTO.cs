@@ -37,6 +37,8 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// In offline mode the Bridgemate will not communicate with the Bridgemate 3 server during the session, 
         /// but will try to send its results after the last board had been played. 
         /// Because of this the Bridgemate will not respond to movement updates.
+        /// Mind: this setting will only have effect when the Bridgemate first connects to the session. 
+        /// Once a Bridgemate has been initialized with movement data the ConnectionMode cannot be changed until the Bridgemate is restarted.
         /// </summary>
         public Bm3ConnectionModeOption ConnectionMode{ get; set; }
 
