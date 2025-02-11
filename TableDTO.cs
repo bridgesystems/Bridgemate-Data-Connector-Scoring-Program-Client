@@ -34,6 +34,9 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
 
         /// <summary>
         /// Optional: specifies if the Bridgemate on the table should work in online mode (default) or offline mode.
+        /// In offline mode the Bridgemate will not communicate with the Bridgemate 3 server during the session, 
+        /// but will try to send its results after the last board had been played. 
+        /// Because of this the Bridgemate will not respond to movement updates.
         /// </summary>
         public Bm3ConnectionModeOption ConnectionMode{ get; set; }
 
