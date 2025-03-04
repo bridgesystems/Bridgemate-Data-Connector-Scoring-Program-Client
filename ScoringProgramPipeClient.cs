@@ -1690,7 +1690,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             ScoringProgramResponse result= SendData(sessionGuid: string.Empty,
                                                     command: ScoringProgramDataConnectorCommands.ClearData,
                                                     serializedData: string.Empty);
-            return result.DataType != DataConnectorResponseData.OK;
+            return result.DataType == DataConnectorResponseData.OK;
         }
 
 
