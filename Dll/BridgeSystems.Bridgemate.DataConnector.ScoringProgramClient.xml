@@ -1074,13 +1074,6 @@
             Specifies which language the Bridgemate will use. The default is zero for English.
             </summary>
         </member>
-        <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate3SettingsDTO.BM3ConnectionMode">
-            <summary>
-            Specifies if the Bridgemates for this section will operate in offline mode. 
-            In offline mode the Bridgemate will not communicate with the Bridgemate 3 server during the session, 
-            but will try to send its results after the last board had been played.
-            </summary>
-        </member>
         <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate3SettingsDTO.BM3PINcode">
             <summary>
             Must be four digits. The code the TD must enter to get access to the TD menu. Defaults to "0000".
@@ -2572,7 +2565,7 @@
         </member>
         <member name="T:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TableDTO">
             <summary>
-            A class describing a real of virtual bridge table where each round two pairs will compete.
+            A class describing a real or virtual bridge table where each round two pairs will compete.
             </summary>
         </member>
         <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TableDTO.SessionGuid">
@@ -2588,6 +2581,16 @@
         <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TableDTO.TableNumber">
             <summary>
             Required, must be greater than zero and must be unique within the section.
+            </summary>
+        </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TableDTO.ConnectionMode">
+            <summary>
+            Optional: specifies if the Bridgemate on the table should work in online mode (default) or offline mode.
+            In offline mode the Bridgemate will not communicate with the Bridgemate 3 server during the session, 
+            but will try to send its results after the last board had been played. 
+            Because of this the Bridgemate will not respond to movement updates.
+            Mind: this setting will only have effect when the Bridgemate first connects to the session. 
+            Once a Bridgemate has been initialized with movement data the ConnectionMode cannot be changed until the Bridgemate is restarted.
             </summary>
         </member>
         <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TableDTO.Rounds">
@@ -3487,13 +3490,13 @@
             Note that this class is written as a singleton: there should never be more than one instance communicating over the pipe. 
             The constructor is protected however, so by inheriting from this class a non singleton instance can be used.
             <br/>
-            The class implements IDispable through its base class, as the base class contains a stream writer and stream reader that must be disposed
+            The class implements IDisopable through its base class, as the base class contains a stream writer and stream reader that must be disposed
             when the communication shuts down. Be sure to call Dispose on the class any time it is no longer in use, otherwise communication will stall.
             <br/>
-            The code has no dependencies, except one on NLog. If you decide to copy the code make sure to add a dependency to the NLog NuGet package
-            or implement your own logging.The logger is defined in the base class and is named "DataConnectorClientLogger".
+            The code has no dependencies, except one on NLog (and Net Standard 2.0). If you decide to copy the code make sure to add a dependency to the NLog NuGet package
+            or implement your own logging.
             <br/>
-            All public functions have synchronous and asynchronous implementation (ending in "Async").
+            All public functions have synchronous and asynchronous implementations (ending in "Async").
             <br/>
             To get started inspect the following functions:<br/>
             <see cref="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramPipeClient.Connect">Connect</see> and <see cref="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramPipeClient.ConnectAsync">ConnectAsync</see>: Connection to the Data Connector.<br/>
@@ -3503,7 +3506,7 @@
         </member>
         <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramPipeClient._lastResultQueueItemId">
             <summary>
-            Cached values of the ids of the several types of eventqueu items that have been sent to the Data Connector.
+            Cached values of the ids of the several types of eventqueue items that have been sent to the Data Connector.
             If the scoring program does not include the id of the last received queue item when accepting them,the cached values will be used.
             </summary>      
         </member>
@@ -3520,6 +3523,8 @@
         <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramPipeClient.PipeName">
             <summary>
             The name of the pipe that handles the bidirectional communication with the Data Connector.
+            Each Windows account must have its own pipe, hence the username of the logged in user (as Windows knows it) is appended.
+            Tip: you can find the usernames as Windows knows them by going to the C:\Users folder.
             </summary>
         </member>
         <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramPipeClient._instance">
@@ -4070,8 +4075,8 @@
         </member>
         <member name="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramResponse.DataType">
             <summary>
-            Specifies the datatype to deserialize to after rececption of the response.
-            Data ConnectorResponseData.Error signals that something went wrong. The serialized data will be a string
+            Specifies the datatype to deserialize to after reception of the response.
+            DataConnectorResponseData.Error signals that something went wrong. The serialized data in that case will be a string
             describing the error.
             </summary>
         </member>
