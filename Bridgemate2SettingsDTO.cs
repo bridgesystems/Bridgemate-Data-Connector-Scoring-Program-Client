@@ -13,12 +13,12 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Use the symbols for clubs, diamonds, hearts and spades
         /// </summary>
-        UseSymbols = 1,
+        UseSymbols = 0,
 
         /// <summary>
         /// Use letters for the denominations
         /// </summary>
-        UseLetter = 0
+        UseLetter = 1
     }
 
     /// <summary>
