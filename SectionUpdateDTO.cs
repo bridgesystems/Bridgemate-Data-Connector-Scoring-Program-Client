@@ -180,6 +180,9 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                 ScoringGroupNumber = section.ScoringGroupNumber,
                 ScoringGroupScoringMethod =scoringMethod,
                 IsDeleted=isDeleted,
+                IsCombiSection=section.IsCombiSection,
+                NorthSouthPairSectionLetters = section.NorthSouthPairSectionLetters,
+                EastWestPairSectionLetters = section.EastWestPairSectionLetters,
                 Tables = section.Tables,
                 Participations = new ParticipationDTO[] { }
             };

@@ -155,6 +155,9 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                 Winners = updatedSection.Winners,
                 GameType = updatedSection.GameType,
                 ScoringGroupNumber = updatedSection.ScoringGroupNumber,
+                IsCombiSection = updatedSection.IsCombiSection,
+                NorthSouthPairSectionLetters = updatedSection.NorthSouthPairSectionLetters,
+                EastWestPairSectionLetters = updatedSection.EastWestPairSectionLetters,
                 Tables = updatedSection.Tables,
             };
             return section;
