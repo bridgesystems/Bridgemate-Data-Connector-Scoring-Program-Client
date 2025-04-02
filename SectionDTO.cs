@@ -12,6 +12,9 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
     /// </summary>
     public class SectionDTO
     {
+        /// <summary>
+        /// Constructor. Initializes the object with default values.
+        /// </summary>
         public SectionDTO()
         { }
         /// <summary>
@@ -108,6 +111,12 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
+        /// When "true" the Bridgemate (2) server will be instructed to net close the session when the result for the last available round
+        /// have been received. In this way it is possible to play Swiss matches.
+        /// </summary>
+        public bool KeepBridgematesAlive { get; set; }
+
+        /// <summary>
         /// If true the NorthSouthPairSectionLetters and the EastWestPairSectionLetters must have the value for an existing section.
         /// </summary>
         public bool IsCombiSection
@@ -155,6 +164,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                 Winners = updatedSection.Winners,
                 GameType = updatedSection.GameType,
                 ScoringGroupNumber = updatedSection.ScoringGroupNumber,
+                KeepBridgematesAlive = updatedSection.KeepBridgematesAlive,
                 IsCombiSection = updatedSection.IsCombiSection,
                 NorthSouthPairSectionLetters = updatedSection.NorthSouthPairSectionLetters,
                 EastWestPairSectionLetters = updatedSection.EastWestPairSectionLetters,

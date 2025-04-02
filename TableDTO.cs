@@ -43,12 +43,6 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         public Bm3ConnectionModeOption ConnectionMode{ get; set; }
 
         /// <summary>
-        /// When "true" the Bridgemate 2 server will be instructed to net close the session when the result for the last available round
-        /// have been received. In this way it is possible to play Swiss matches.
-        /// </summary>
-        //public bool KeepAlive { get; set; }
-
-        /// <summary>
         /// Required. An array of RoundDTOs describing which pairs will meet on this table and which boards they will play.
         /// </summary>
         public RoundDTO[] Rounds
