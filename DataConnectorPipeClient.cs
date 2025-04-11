@@ -18,7 +18,11 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     public abstract class DataConnectorPipeClient<TCommand> : IDisposable where TCommand : Enum
     {
         const int DefaultTimeOutInMilliSeconds = 5000;
-        
+        /// <summary>
+        /// Then application name
+        /// </summary>
+        protected const string ApplicationName="BCS.Net";
+
         /// <summary>
         /// All processes below are dispoable. They can and must be disposed when the class is no longer in use. Otherwise the 
         /// communication with the Data Connector will stall.
