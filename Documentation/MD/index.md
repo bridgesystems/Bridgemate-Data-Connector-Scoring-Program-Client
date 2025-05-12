@@ -4,6 +4,8 @@
 
 - [Revision history](<Revisionhistory.md>)
 - [General](<General.md>)
+- [BCS.Net](<BCSNet.md>)
+  - [EBUScore](<EBUScore.md>)
 - [Data exchange](<Dataexchange.md>)
   - [Named Pipes](<NamedPipes.md>)
   - [Overview of communication](<Overviewofcommunication.md>)
