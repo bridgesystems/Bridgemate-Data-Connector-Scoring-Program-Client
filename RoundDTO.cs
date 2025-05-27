@@ -116,7 +116,9 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             get; set;
         }
 
-        //Currently not in use for scoring programs. Used for internal administration when handling movement updates.
+        /// <summary>
+        /// Currently not in use for scoring programs. Used for internal administration when handling movement updates.
+        /// </summary>
         public bool Updated
         {
             get; set;
