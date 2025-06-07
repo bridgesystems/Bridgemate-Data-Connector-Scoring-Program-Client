@@ -19,7 +19,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         private readonly HttpClient _httpClient;
         protected static readonly Logger DebugLogger = LogManager.GetLogger(nameof(DebugLogger));
         protected static readonly Logger ErrorLogger = LogManager.GetLogger(nameof(ErrorLogger));
-        private static readonly Logger Logger = LogManager.GetLogger(nameof(ScoringProgramPipeClient));
+        private static readonly Logger Logger = LogManager.GetLogger(nameof(ScoringProgramHttpClient));
         private int _lastResultQueueItemId;
         private int _lastParticipantQueueItemId;
         private int _lastHandrecordQueueItemId;

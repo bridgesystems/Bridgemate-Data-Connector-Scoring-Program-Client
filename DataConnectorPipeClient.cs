@@ -6,23 +6,11 @@ using System.Threading.Tasks;
 
 namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 {
-
-    public class DataConnectorScoringProgramPipeClientConnectionManager : DataConnectorPipeClient2<ScoringProgramDataConnectorCommands>
-    {
-        protected override DataConnectorLoggingSource LoggingSource => throw new NotImplementedException();
-
-        protected override void LogError(Exception ex)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void LogMethodEntry(string entry)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public abstract class DataConnectorPipeClient2<TCommand> : DataConnectorClient<TCommand>, IDisposable where TCommand : Enum
+    /// <summary>
+    /// Handles connection to the dataconnector from scoringprogram clients and the BCS client.
+    /// </summary>
+    /// <typeparam name="TCommand"></typeparam>
+    public abstract class DataConnectorPipeClientConnectionManager<TCommand> : DataConnectorClientCommandManager<TCommand>, IDisposable where TCommand : Enum
     {
 
         /// <summary>
@@ -41,7 +29,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// Initializes the class.
         /// </summary>
-        protected DataConnectorPipeClient2()
+        protected DataConnectorPipeClientConnectionManager()
         {
             TimeOutInMilliSeconds = 5000;
         }
@@ -240,7 +228,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     /// The base class for the <see cref="ScoringProgramPipeClient">ScoringProgram pipe client</see> and the BCS pipe client (not in this code base).
     /// Used to connect to and disconnect from the Data Connector.
     /// </summary>
-    public abstract class DataConnectorPipeClient<TCommand> : DataConnectorClient<TCommand>, IDisposable where TCommand : Enum
+    public abstract class DataConnectorPipeClientOld<TCommand> : DataConnectorClientCommandManager<TCommand>, IDisposable where TCommand : Enum
     {
 
         /// <summary>
@@ -259,7 +247,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// Initializes the class.
         /// </summary>
-        protected DataConnectorPipeClient()
+        protected DataConnectorPipeClientOld()
         {
             TimeOutInMilliSeconds = 5000;
         }

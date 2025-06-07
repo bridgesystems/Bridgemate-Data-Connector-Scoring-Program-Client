@@ -8,7 +8,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     /// Defines shared code for client classes for the dataconnector. Clients for the scoringprogram and BCS both inherit from this class.
     /// </summary>
     /// <typeparam name="TCommand"></typeparam>
-    public abstract class DataConnectorClient<TCommand> where TCommand : Enum
+    public abstract class DataConnectorClientCommandManager<TCommand> where TCommand : Enum
     {
         /// <summary>
         /// The default time to wait for a connection attempt to succeed.
@@ -38,7 +38,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// The source for the logging: Client or Server, BCS or ScoringProgram.
         /// </summary>
-        protected abstract DataConnectorLoggingSource LoggingSource { get; }
+        public abstract DataConnectorLoggingSource LoggingSource { get; }
 
         /// <summary>
         /// Disposes the class.
@@ -88,7 +88,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// </summary>
         /// <param name="methodName"></param>
         /// <param name="parameters"></param>
-        protected void LogMethodEntry(string methodName, params (string parameterName, object parameterValue)[] parameters)
+        public void LogMethodEntry(string methodName, params (string parameterName, object parameterValue)[] parameters)
         {
             var logEntry = DataConnectorClientLogger.CreateMethodEntryLog(methodName, LoggingSource, parameters);
             LogMethodEntry(logEntry);

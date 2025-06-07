@@ -12,7 +12,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     /// The client that communicates with the dataconnector used by the scoring program.
     /// Defines the public interface that can be used to send and retrieve data to and from the dataconnector.
     /// </summary>
-    public abstract class DataConnectorScoringProgramClient:DataConnectorClient<ScoringProgramDataConnectorCommands>
+    public abstract class DataConnectorScoringProgramClient:DataConnectorClientCommandManager<ScoringProgramDataConnectorCommands>
     {
         /// <summary>
         /// Cached values of the ids of the several types of eventqueue items that have been sent to the Data Connector.
@@ -31,7 +31,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// The source of the logging records.
         /// </summary>
-        protected override DataConnectorLoggingSource LoggingSource => DataConnectorLoggingSource.ScoringProgramClient;
+        public override DataConnectorLoggingSource LoggingSource => DataConnectorLoggingSource.ScoringProgramClient;
 
        
 
