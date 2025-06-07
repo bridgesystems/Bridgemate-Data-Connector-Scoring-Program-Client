@@ -6,7 +6,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     /// <summary>
     /// Handles connections to the dataconnector for scoring programs.
     /// </summary>
-    public class DataConnectorScoringProgramPipeClientConnectionManager : DataConnectorPipeClientConnectionManager<ScoringProgramDataConnectorCommands>
+    public class ScoringProgramDataConnectorPipeClientConnectionManager : DataConnectorPipeClientConnectionManager<ScoringProgramDataConnectorCommands>
     {
         /// <summary>
         /// Returns the logging source.

@@ -30,10 +30,10 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     /// <br/>
     /// To get started inspect the following functions:<br/>
     /// <see cref=Connect">Connect</see> and <see cref="ConnectAsync">ConnectAsync</see>: Connection to the Data Connector.<br/>
-    /// <see cref="DataConnectorScoringProgramClient.Initialize(InitDTO)">Initialize</see> and <see cref="DataConnectorScoringProgramPipeClient.InitializeAsync(InitDTO)">InitializeAsync</see>: Initialization of a new event. <br/>
-    /// <see cref="DataConnectorScoringProgramClient.IssueManagementCommand(BCSManagementRequestDTO)">IssueManagementCommand</see> and <see cref="DataConnectorScoringProgramClient.IssueManagementCommandAsync(BCSManagementRequestDTO)">IssueManagementCommandAsync</see>: Query the Bridgemate Control Software.
+    /// <see cref="ScoringProgramDataConnectorClientCommandManager.Initialize(InitDTO)">Initialize</see> and <see cref="ScoringProgramDataConnectorPipeClient.InitializeAsync(InitDTO)">InitializeAsync</see>: Initialization of a new event. <br/>
+    /// <see cref="ScoringProgramDataConnectorClientCommandManager.IssueManagementCommand(BCSManagementRequestDTO)">IssueManagementCommand</see> and <see cref="ScoringProgramDataConnectorClientCommandManager.IssueManagementCommandAsync(BCSManagementRequestDTO)">IssueManagementCommandAsync</see>: Query the Bridgemate Control Software.
     /// </summary>
-    public class DataConnectorScoringProgramPipeClient : DataConnectorScoringProgramClient, IScoringProgramClient
+    public class ScoringProgramDataConnectorPipeClient : ScoringProgramDataConnectorClientCommandManager, IScoringProgramClient
     {
         /// <summary>
         /// The name of the pipe that handles the bidirectional communication with the Data Connector.
@@ -45,17 +45,17 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// The implementation of the singleton pattern. Atypically the constructor is protected rather than private.
         /// </summary>
-        private static DataConnectorScoringProgramPipeClient _instance;
+        private static ScoringProgramDataConnectorPipeClient _instance;
 
         /// <summary>
         /// The single instance of the pipe client. Use this property to retrieve the client and use it in the external program.
         /// </summary>
-        public static DataConnectorScoringProgramPipeClient Instance
+        public static ScoringProgramDataConnectorPipeClient Instance
         {
             get
             {
                 if (_instance == null)
-                    _instance = new DataConnectorScoringProgramPipeClient();
+                    _instance = new ScoringProgramDataConnectorPipeClient();
                 return _instance;
             }
         }
@@ -63,9 +63,9 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// Initializes the class.
         /// </summary>
-        protected DataConnectorScoringProgramPipeClient()
+        protected ScoringProgramDataConnectorPipeClient()
         {
-            _pipeClient = new DataConnectorScoringProgramPipeClientConnectionManager();
+            _pipeClient = new ScoringProgramDataConnectorPipeClientConnectionManager();
         }
         // End of singleton implementation
 
@@ -73,7 +73,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 
         #region pipeClientwrapper
 
-        private readonly DataConnectorScoringProgramPipeClientConnectionManager _pipeClient;
+        private readonly ScoringProgramDataConnectorPipeClientConnectionManager _pipeClient;
         
         /// <summary>
         /// Can be used to see if there already is a connection to the Data Connector. If so, do not try to connect again.
