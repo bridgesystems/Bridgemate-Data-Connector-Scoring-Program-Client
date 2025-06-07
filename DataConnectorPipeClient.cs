@@ -1,27 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipes;
-using System.Linq;
-using System.Security;
 using System.Security.Principal;
 using System.Threading.Tasks;
-using NLog;
 
 namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 {
 
-    /// <summary>
-    /// The base class for the <see cref="ScoringProgramPipeClient">ScoringProgram pipe client</see> and the BCS pipe client (not in this code base).
-    /// Used to connect to and disconnect from the Data Connector.
-    /// </summary>
-    public abstract class DataConnectorPipeClient<TCommand> : DataConnectorClient<TCommand>, IDisposable where TCommand : Enum
+    public class DataConnectorScoringProgramPipeClientConnectionManager : DataConnectorPipeClient2<ScoringProgramDataConnectorCommands>
     {
-       
+        protected override DataConnectorLoggingSource LoggingSource => throw new NotImplementedException();
+
+        protected override void LogError(Exception ex)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void LogMethodEntry(string entry)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public abstract class DataConnectorPipeClient2<TCommand> : DataConnectorClient<TCommand>, IDisposable where TCommand : Enum
+    {
+
         /// <summary>
         /// Then application name
         /// </summary>
-        protected const string ApplicationName="BCS.Net";
+        protected const string ApplicationName = "BCS.Net";
 
         /// <summary>
         /// All processes below are dispoable. They can and must be disposed when the class is no longer in use. Otherwise the 
@@ -34,7 +41,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// Initializes the class.
         /// </summary>
-        protected DataConnectorPipeClient()
+        protected DataConnectorPipeClient2()
         {
             TimeOutInMilliSeconds = 5000;
         }
@@ -43,31 +50,31 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// Can be used to see if there already is a connection to the Data Connector. If so, do not try to connect again.
         /// </summary>
         public override bool IsActive => _dataConnectorStream?.IsConnected ?? false;
-       
+
         /// <summary>
         /// The underlying pipe stream for both the writer and the reader. Can and must be disposed.
         /// </summary>
-        protected NamedPipeClientStream DataConnectorStream => _dataConnectorStream;
+        public NamedPipeClientStream DataConnectorStream => _dataConnectorStream;
 
         /// <summary>
         /// The class that writes data over the pipe stream.  Can and must be disposed.
         /// </summary>
-        protected StreamWriter DataConnectorWriter => _dataConnectorWriter;
+        public StreamWriter DataConnectorWriter => _dataConnectorWriter;
 
         /// <summary>
         /// The class that reads data from the pipe stream.  Can and must be disposed.
         /// </summary>
-        protected StreamReader DataConnectorReader => _dataConnectorReader;
+        public StreamReader DataConnectorReader => _dataConnectorReader;
 
         /// <summary>
         /// Connects to the specified named pipe asynchronously.
         /// </summary>
         /// <param name="pipeName">The name of the pipe to connect to.</param>
-        protected async override Task<(DataConnectorResponseData result, string message, ErrorType errorType)>
+        public async override Task<(DataConnectorResponseData result, string message, ErrorType errorType)>
             ConnectAsync(string pipeName)
         {
-            LogMethodEntry(nameof(ConnectAsync),(nameof(pipeName), pipeName));
-                
+            LogMethodEntry(nameof(ConnectAsync), (nameof(pipeName), pipeName));
+
             try
             {
                 if (_dataConnectorStream != null && _dataConnectorStream.IsConnected)
@@ -98,7 +105,225 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// Connects to the specified named pipe synchronously.
         /// </summary>
         /// <param name="pipeName">The name of the pipe to connect to.</param>
-        protected override (DataConnectorResponseData result, string message, ErrorType errorType)
+        public override (DataConnectorResponseData result, string message, ErrorType errorType)
+          Connect(string pipeName)
+        {
+            LogMethodEntry(nameof(Connect), (nameof(pipeName), pipeName));
+            try
+            {
+                if (_dataConnectorStream != null && _dataConnectorStream.IsConnected)
+                {
+                    return (DataConnectorResponseData.OK, "Client already connected.", ErrorType.None);
+                }
+                if (_dataConnectorStream == null)
+                {
+                    _dataConnectorStream = new NamedPipeClientStream(".", pipeName,
+                                                          PipeDirection.InOut, PipeOptions.None,
+                                                          TokenImpersonationLevel.Impersonation);
+                }
+                TryConnect();
+
+                CreateStreamReaderAndWriter();
+
+                return (DataConnectorResponseData.OK, "OK", ErrorType.None);
+            }
+            catch (Exception ex)
+            {
+                var errrorLogRecord = new DataConnectorLogCreator<TCommand>.DataConnectorLogRecord(
+                        DataConnectorLogLevel.Debug, LoggingSource, default, jsonData: "", exception: ex);
+                DataConnectorClientLogger.LogRecord(errrorLogRecord);
+                return (DataConnectorResponseData.Error, ex.Message, ErrorType.NoConnection);
+            }
+        }
+
+        /// <summary>
+        /// Tries to connect twice synchronously. After that throws a <see cref="TimeoutException">TimeOutException</see>.
+        /// </summary>
+        private void TryConnect()
+        {
+            var counter = 0;
+            var connected = false;
+            do
+            {
+                try
+                {
+                    _dataConnectorStream.Connect(TimeOutInMilliSeconds);
+                    connected = true;
+                }
+                catch (TimeoutException ex)
+                {
+                    counter++;
+                    if (counter > 1) throw ex;
+                }
+            } while (!connected);
+        }
+
+        /// <summary>
+        /// Tries to connect twice asynchronously. After that throws a <see cref="TimeoutException">TimeOutException</see>.
+        /// </summary>
+        private async Task TryConnectAsync()
+        {
+            var counter = 0;
+            var connected = false;
+            do
+            {
+                try
+                {
+                    await _dataConnectorStream.ConnectAsync(TimeOutInMilliSeconds);
+                    connected = true;
+                }
+                catch (TimeoutException ex)
+                {
+                    counter++;
+                    if (counter > 1) throw ex;
+                }
+            } while (!connected);
+        }
+
+        /// <summary>
+        /// Creates the StreamReader and StreamReader classes based on the NamedPipeStream.
+        /// </summary>
+        private void CreateStreamReaderAndWriter()
+        {
+            _dataConnectorReader = new StreamReader(_dataConnectorStream);
+            _dataConnectorWriter = new StreamWriter(_dataConnectorStream);
+            _dataConnectorWriter.AutoFlush = true;
+        }
+
+        /// <summary>
+        /// Disposes of the StreamWriter class that sends messages to the DataConnector.
+        /// </summary>
+        public void CloseWriter()
+        {
+            _dataConnectorWriter?.Close();
+            _dataConnectorWriter = null;
+        }
+
+        /// <summary>
+        /// Disposes of the StreamReader class that reads messages from the DataConnector.
+        /// </summary>
+        public void CloseReader()
+        {
+            _dataConnectorReader?.Close();
+            _dataConnectorReader = null;
+        }
+
+        /// <summary>
+        /// Disposes of the NamedPipeClientStream that channels messages to and from the DataConnector.
+        /// </summary>
+        public void CloseConnection()
+        {
+            _dataConnectorStream?.Close();
+            _dataConnectorStream = null;
+        }
+
+        private bool _disposedValue;
+        /// <summary>
+        /// Disposes the stream, writer and reader for the DataConnector if disposing is not already in progress.
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected override void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    CloseConnection();
+                }
+                _disposedValue = true;
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// The base class for the <see cref="ScoringProgramPipeClient">ScoringProgram pipe client</see> and the BCS pipe client (not in this code base).
+    /// Used to connect to and disconnect from the Data Connector.
+    /// </summary>
+    public abstract class DataConnectorPipeClient<TCommand> : DataConnectorClient<TCommand>, IDisposable where TCommand : Enum
+    {
+
+        /// <summary>
+        /// Then application name
+        /// </summary>
+        protected const string ApplicationName = "BCS.Net";
+
+        /// <summary>
+        /// All processes below are dispoable. They can and must be disposed when the class is no longer in use. Otherwise the 
+        /// communication with the Data Connector will stall.
+        /// </summary>
+        private NamedPipeClientStream _dataConnectorStream;
+        private StreamWriter _dataConnectorWriter;
+        private StreamReader _dataConnectorReader;
+
+        /// <summary>
+        /// Initializes the class.
+        /// </summary>
+        protected DataConnectorPipeClient()
+        {
+            TimeOutInMilliSeconds = 5000;
+        }
+
+        /// <summary>
+        /// Can be used to see if there already is a connection to the Data Connector. If so, do not try to connect again.
+        /// </summary>
+        public override bool IsActive => _dataConnectorStream?.IsConnected ?? false;
+
+        /// <summary>
+        /// The underlying pipe stream for both the writer and the reader. Can and must be disposed.
+        /// </summary>
+        protected NamedPipeClientStream DataConnectorStream => _dataConnectorStream;
+
+        /// <summary>
+        /// The class that writes data over the pipe stream.  Can and must be disposed.
+        /// </summary>
+        protected StreamWriter DataConnectorWriter => _dataConnectorWriter;
+
+        /// <summary>
+        /// The class that reads data from the pipe stream.  Can and must be disposed.
+        /// </summary>
+        protected StreamReader DataConnectorReader => _dataConnectorReader;
+
+        /// <summary>
+        /// Connects to the specified named pipe asynchronously.
+        /// </summary>
+        /// <param name="pipeName">The name of the pipe to connect to.</param>
+        public async override Task<(DataConnectorResponseData result, string message, ErrorType errorType)>
+            ConnectAsync(string pipeName)
+        {
+            LogMethodEntry(nameof(ConnectAsync), (nameof(pipeName), pipeName));
+
+            try
+            {
+                if (_dataConnectorStream != null && _dataConnectorStream.IsConnected)
+                {
+                    return (DataConnectorResponseData.OK, "Client already connected.", ErrorType.None);
+                }
+                if (_dataConnectorStream == null)
+                {
+                    _dataConnectorStream = new NamedPipeClientStream(".", pipeName,
+                                                          PipeDirection.InOut, PipeOptions.None,
+                                                          TokenImpersonationLevel.Impersonation);
+                }
+                await TryConnectAsync();
+
+                CreateStreamReaderAndWriter();
+
+                return (DataConnectorResponseData.OK, "OK", ErrorType.None);
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+
+                return (DataConnectorResponseData.Error, ex.Message, ErrorType.NoConnection);
+            }
+        }
+
+        /// <summary>
+        /// Connects to the specified named pipe synchronously.
+        /// </summary>
+        /// <param name="pipeName">The name of the pipe to connect to.</param>
+        public override (DataConnectorResponseData result, string message, ErrorType errorType)
           Connect(string pipeName)
         {
             LogMethodEntry(nameof(Connect), (nameof(pipeName), pipeName));

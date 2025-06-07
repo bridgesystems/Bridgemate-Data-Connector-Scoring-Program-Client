@@ -3,14 +3,25 @@ using System.Threading.Tasks;
 
 namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 {
+
+    /// <summary>
+    /// Defines shared code for client classes for the dataconnector. Clients for the scoringprogram and BCS both inherit from this class.
+    /// </summary>
+    /// <typeparam name="TCommand"></typeparam>
     public abstract class DataConnectorClient<TCommand> where TCommand : Enum
     {
+        /// <summary>
+        /// The default time to wait for a connection attempt to succeed.
+        /// </summary>
         public static int DefaultTimeOutInMilliSeconds = 5000;
         /// <summary>
         /// NLog implementation of logging.
         /// </summary>
         public DataConnectorLogCreator<TCommand> DataConnectorClientLogger = new DataConnectorLogCreator<TCommand>(jsonDataLogLevel: DataConnectorLogLevel.Debug, nameof(DataConnectorClientLogger));
 
+        /// <summary>
+        /// Returns true if the
+        /// </summary>
         public abstract bool IsActive { get; }
 
         private int? _timeOutInMilliSeconds;
@@ -39,10 +50,25 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// Disposes the class.
+        /// </summary>
+        /// <param name="disposing"></param>
         protected abstract void Dispose(bool disposing);    
 
-        protected abstract (DataConnectorResponseData result, string message, ErrorType errorType) Connect(string pipeName);
-        protected abstract Task<(DataConnectorResponseData result, string message, ErrorType errorType)> ConnectAsync(string pipeName);
+        /// <summary>
+        /// Connects to the dataconnector synchronously.
+        /// </summary>
+        /// <param name="connectionName">data needed to locate the dataconnector</param>
+        /// <returns></returns>
+        public abstract (DataConnectorResponseData result, string message, ErrorType errorType) Connect(string connectionName);
+
+        /// <summary>
+        /// Connects to the dataconnector asynchronously.
+        /// </summary>
+        /// <param name="connectionName">data needed to locate the dataconnector</param>
+        /// <returns></returns>
+        public abstract Task<(DataConnectorResponseData result, string message, ErrorType errorType)> ConnectAsync(string connectionName);
 
         /// <summary>
         /// Logs an error
