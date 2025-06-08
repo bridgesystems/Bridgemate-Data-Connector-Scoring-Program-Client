@@ -13,6 +13,11 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     public class ScoringProgramDataConnectorHttpClient : ScoringProgramDataConnectorClientCommandManager, IScoringProgramClient
     {
         /// <summary>
+        /// The url to call when the scoring program communicates with the data connector.
+        /// </summary>
+        public const string ApiCall = "dc-scoringprogram";
+
+        /// <summary>
         /// The debug logger
         /// </summary>
         protected static readonly Logger DebugLogger = LogManager.GetLogger(nameof(DebugLogger));
@@ -159,7 +164,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 using (var httpClient = new HttpClient())
                 {
                     //Send the request to the Data Connector and await the response.
-                    var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"http://localhost:5079/dc-scoringprogram");
+                    var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"http://localhost:5079/{ApiCall}");
                     var content = new StringContent(requestSerialized, Encoding.UTF8, "application/json");
                     requestMessage.Content = content;
                     var httpResponse = await httpClient.SendAsync(requestMessage);
