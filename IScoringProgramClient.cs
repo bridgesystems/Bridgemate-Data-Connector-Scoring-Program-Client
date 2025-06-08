@@ -6,6 +6,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 {
     public interface IScoringProgramClient
     {
+        bool IsActive { get; }
         bool IsSending { get; set; }
         int LastHandrecordQueueItemId { get; }
         int LastParticipantQueueItemId { get; }

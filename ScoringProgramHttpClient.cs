@@ -90,7 +90,111 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 ErrorType = ErrorType.None,
                 SerializedData = JsonSerializer.Serialize("Not implemented for Http client.")
             };
+        }     /// <summary>
+              /// The code that handles the actual sending of requests and reading their reponses.
+              /// </summary>
+              /// <param name="sessionGuid">Specifies which session the request targets (if any)</param>
+              /// <param name="command">The command to the middlleman</param>
+              /// <param name="serializedData">The data to send to the Data Connector as json data. (If any)</param>
+              /// <returns></returns>
+        private async Task<ScoringProgramResponse> SendDataAsync(string sessionGuid, ScoringProgramDataConnectorCommands command, string serializedData)
+        {
+            //Construct the request to the Data Connector.
+            var request = new ScoringProgramRequest
+            {
+                Command = command,
+                SessionGuid = sessionGuid,
+                SerializedData = serializedData
+            };
+
+            //Serialize it.
+            var requestSerialized = JsonSerializer.Serialize(request);
+
+            //Do not proceed if sending is already in progress (for an other request). There can be only on request be sent at the same time.
+            if (_isSending)
+            {
+                return new ScoringProgramResponse
+                {
+                    RequestCommand = command,
+                    SessionGuid = sessionGuid,
+                    DataType = DataConnectorResponseData.Error,
+                    ErrorType = ErrorType.Busy,
+                    SerializedData = JsonSerializer.Serialize($"Client is busy, please retry later.")
+                };
+            }
+            try
+            {
+                _isSending = true;
+
+                //Send the request to the Data Connector and await the response.
+                var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"http://localhost:5079/middleman");
+                var content = new StringContent(requestSerialized, Encoding.UTF8, "application/json");
+                requestMessage.Content = content;
+                var httpResponse = await _httpClient.SendAsync(requestMessage);
+                var json = await httpResponse.Content.ReadAsStringAsync();
+
+                var clientResponse = JsonSerializer.Deserialize<ScoringProgramResponse>(json);
+                return clientResponse ??
+                             new ScoringProgramResponse
+                             {
+                                 RequestCommand = command,
+                                 DataType = DataConnectorResponseData.Error,
+                                 SerializedData = JsonSerializer.Serialize("Empty response")
+                             };
+
+            }
+            catch (Exception ex)
+            {
+                DebugLogger.Error(ex);
+                ErrorLogger.Error(ex);
+                return
+                new ScoringProgramResponse
+                {
+                    RequestCommand = command,
+                    DataType = DataConnectorResponseData.Error,
+                    SerializedData = JsonSerializer.Serialize(ex.Message)
+                };
+            }
+
+            finally
+            {
+                //Always signal that the client is free for the next items to send.
+                //Otherwise after an exception further communication will be blocked.
+                _isSending = false;
+            }
         }
+
+
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    _httpClient.Dispose();
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+                // TODO: set large fields to null
+                disposedValue = true;
+            }
+        }
+
+        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+        // ~ScoringProgramHttpClient()
+        // {
+        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        //     Dispose(disposing: false);
+        // }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
 
         /// <summary>
         /// Communicates to the Data Connector to see if it is responsive.
@@ -391,109 +495,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// Alternatively the Ping command can be used to check the connection before sending a request.
         /// </remarks>
 
-        /// <summary>
-        /// The code that handles the actual sending of requests and reading their reponses.
-        /// </summary>
-        /// <param name="sessionGuid">Specifies which session the request targets (if any)</param>
-        /// <param name="command">The command to the middlleman</param>
-        /// <param name="serializedData">The data to send to the Data Connector as json data. (If any)</param>
-        /// <returns></returns>
-        private async Task<ScoringProgramResponse> SendDataAsync(string sessionGuid, ScoringProgramDataConnectorCommands command, string serializedData)
-        {
-            //Construct the request to the Data Connector.
-            var request = new ScoringProgramRequest
-            {
-                Command = command,
-                SessionGuid = sessionGuid,
-                SerializedData = serializedData
-            };
-
-            //Serialize it.
-            var requestSerialized = JsonSerializer.Serialize(request);
-
-            //Do not proceed if sending is already in progress (for an other request). There can be only on request be sent at the same time.
-            if (_isSending)
-            {
-                return new ScoringProgramResponse
-                {
-                    RequestCommand = command,
-                    SessionGuid = sessionGuid,
-                    DataType = DataConnectorResponseData.Error,
-                    ErrorType = ErrorType.Busy,
-                    SerializedData = JsonSerializer.Serialize($"Client is busy, please retry later.")
-                };
-            }
-            try
-            {
-                _isSending = true;
-
-                //Send the request to the Data Connector and await the response.
-                var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"http://localhost:5079/middleman");
-                var content = new StringContent(requestSerialized, Encoding.UTF8, "application/json");
-                requestMessage.Content = content;
-                var httpResponse = await _httpClient.SendAsync(requestMessage);
-                var json = await httpResponse.Content.ReadAsStringAsync();
-
-                var clientResponse = JsonSerializer.Deserialize<ScoringProgramResponse>(json);
-                return clientResponse ??
-                             new ScoringProgramResponse
-                             {
-                                 RequestCommand = command,
-                                 DataType = DataConnectorResponseData.Error,
-                                 SerializedData = JsonSerializer.Serialize("Empty response")
-                             };
-
-            }
-            catch (Exception ex)
-            {
-                DebugLogger.Error(ex);
-                ErrorLogger.Error(ex);
-                return
-                new ScoringProgramResponse
-                {
-                    RequestCommand = command,
-                    DataType = DataConnectorResponseData.Error,
-                    SerializedData = JsonSerializer.Serialize(ex.Message)
-                };
-            }
-
-            finally
-            {
-                //Always signal that the client is free for the next items to send.
-                //Otherwise after an exception further communication will be blocked.
-                _isSending = false;
-            }
-        }
-
-
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    _httpClient.Dispose();
-                }
-
-                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
-                // TODO: set large fields to null
-                disposedValue = true;
-            }
-        }
-
-        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
-        // ~ScoringProgramHttpClient()
-        // {
-        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-        //     Dispose(disposing: false);
-        // }
-
-        public void Dispose()
-        {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
-        }
+   
     }
 }
