@@ -21,7 +21,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// The error logger
         /// </summary>
         protected static readonly Logger ErrorLogger = LogManager.GetLogger(nameof(ErrorLogger));
-        private static readonly Logger Logger = LogManager.GetLogger(nameof(ScoringProgramHttpClient));
+        private static readonly Logger Logger = LogManager.GetLogger(nameof(ScoringProgramDataConnectorHttpClient));
 
         private bool disposedValue;
 
@@ -41,7 +41,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 RequestCommand = ScoringProgramDataConnectorCommands.Connect,
                 SessionGuid = "",
                 DataType = DataConnectorResponseData.OK,
-                ErrorType = ErrorType.None,
+                ErrorType = ErrorType.NotImplemented,
                 SerializedData = JsonSerializer.Serialize("Not implemented for Http client.")
             };
         }
@@ -58,7 +58,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 RequestCommand = ScoringProgramDataConnectorCommands.Connect,
                 SessionGuid = "",
                 DataType = DataConnectorResponseData.OK,
-                ErrorType = ErrorType.None,
+                ErrorType = ErrorType.NotImplemented,
                 SerializedData = JsonSerializer.Serialize("Not implemented for Http client.")
             };
         }
@@ -98,7 +98,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 RequestCommand = ScoringProgramDataConnectorCommands.Disconnect,
                 SessionGuid = "",
                 DataType = DataConnectorResponseData.OK,
-                ErrorType = ErrorType.None,
+                ErrorType = ErrorType.NotImplemented,
                 SerializedData = JsonSerializer.Serialize("Not implemented for Http client.")
             };
         }
@@ -114,7 +114,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 RequestCommand = ScoringProgramDataConnectorCommands.Disconnect,
                 SessionGuid = "",
                 DataType = DataConnectorResponseData.OK,
-                ErrorType = ErrorType.None,
+                ErrorType = ErrorType.NotImplemented,
                 SerializedData = JsonSerializer.Serialize("Not implemented for Http client.")
             };
         }
@@ -136,8 +136,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 SerializedData = serializedData
             };
 
-            //Serialize it.
-            var requestSerialized = JsonSerializer.Serialize(request);
+           
 
             //Do not proceed if sending is already in progress (for an other request). There can be only on request be sent at the same time.
             if (IsSending)
@@ -154,10 +153,13 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             try
             {
                 IsSending = true;
+                
+                //Serialize
+                var requestSerialized = JsonSerializer.Serialize(request);
                 using (var httpClient = new HttpClient())
                 {
                     //Send the request to the Data Connector and await the response.
-                    var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"http://localhost:5079/dataconnector");
+                    var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"http://localhost:5079/dc-scoringprogram");
                     var content = new StringContent(requestSerialized, Encoding.UTF8, "application/json");
                     requestMessage.Content = content;
                     var httpResponse = await httpClient.SendAsync(requestMessage);
