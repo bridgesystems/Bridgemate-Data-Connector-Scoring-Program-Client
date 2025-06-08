@@ -11,6 +11,10 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     public abstract class DataConnectorClientCommandManager<TCommand> where TCommand : Enum
     {
         /// <summary>
+        /// Then application name
+        /// </summary>
+        public const string ApplicationName = "BCS.Net";
+        /// <summary>
         /// The default time to wait for a connection attempt to succeed.
         /// </summary>
         public static int DefaultTimeOutInMilliSeconds = 5000;

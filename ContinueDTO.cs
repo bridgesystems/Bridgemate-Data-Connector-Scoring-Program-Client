@@ -60,7 +60,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         {
             var validationMessages = new List<string>();
             var mask = 255 & ~InitDTO.StartBCS & ~InitDTO.Command_StartReading & ~InitDTO.Command_ClearData 
-                           & ~InitDTO.Command_Minimize & ~InitDTO.Command_AutoShutDownBPC;
+                           & ~InitDTO.Command_Minimize & ~InitDTO.Command_AutoShutDownBPC & ~InitDTO.Command_LogLevel_Debug;
             if ((Commands & mask) != 0)
             {
                 validationMessages.Add($"Invalid value for {nameof(Commands)} ({Commands}). " +

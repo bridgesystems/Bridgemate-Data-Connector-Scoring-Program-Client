@@ -14,11 +14,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     {
 
         /// <summary>
-        /// Then application name
-        /// </summary>
-        protected const string ApplicationName = "BCS.Net";
-
-        /// <summary>
         /// All processes below are dispoable. They can and must be disposed when the class is no longer in use. Otherwise the 
         /// communication with the Data Connector will stall.
         /// </summary>
