@@ -13,6 +13,10 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
     /// </summary>
     public class InitDTO
     {
+        public InitDTO()
+        {
+            ClubId=string.Empty;
+        }
         /// <summary>
         /// Instructs the Data Connector to start BCS.
         /// </summary>
