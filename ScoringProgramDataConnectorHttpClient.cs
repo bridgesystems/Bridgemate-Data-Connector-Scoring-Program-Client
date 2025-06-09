@@ -28,6 +28,17 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         protected static readonly Logger ErrorLogger = LogManager.GetLogger(nameof(ErrorLogger));
         private static readonly Logger Logger = LogManager.GetLogger(nameof(ScoringProgramDataConnectorHttpClient));
 
+        public ScoringProgramDataConnectorHttpClient(string clubdId, string licenceKey)
+        {
+            Credentials = (clubdId, licenceKey);
+        }
+
+        /// <summary>
+        /// The information needed to get access to the http channel for the data communicator.
+        /// </summary>
+        public (string clubId, string licenceKey) Credentials { get; }
+
+
         private bool disposedValue;
 
         /// <summary>
@@ -131,14 +142,18 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <param name="command">The command to the middlleman</param>
         /// <param name="serializedData">The data to send to the Data Connector as json data. (If any)</param>
         /// <returns></returns>
-        protected override async Task<ScoringProgramResponse> SendDataAsync(string sessionGuid, ScoringProgramDataConnectorCommands command, string serializedData)
+        protected override async Task<ScoringProgramResponse> SendDataAsync(string sessionGuid,
+            ScoringProgramDataConnectorCommands command,
+            string serializedData)
         {
             //Construct the request to the Data Connector.
             var request = new ScoringProgramRequest
             {
                 Command = command,
                 SessionGuid = sessionGuid,
-                SerializedData = serializedData
+                SerializedData = serializedData,
+                ClubId=Credentials.clubId,
+                LicenceKey=Credentials.licenceKey
             };
 
            

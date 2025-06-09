@@ -98,6 +98,13 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         {
             get; set;
         }
+
+        /// <summary>
+        /// Required when using http for communication with the data connector.
+        /// </summary>
+        public string ClubId
+        { get; set; }
+
         /// <summary>
         /// Required when the dto is part of the InitDTO, must be at least one. 
         /// Optional when the dto is used for scoringgroup updates.

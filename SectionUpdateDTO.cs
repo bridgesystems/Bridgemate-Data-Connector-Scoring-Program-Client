@@ -29,6 +29,12 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
+        /// Required when using the http interface for the dataconnector
+        /// </summary>
+        public string ClubId
+        { get; set; }
+
+        /// <summary>
         /// Required, the number of the scoringgroup the section belongs to. Must be greater than zero.
         /// If the scoringgroup already exists the section wull be added to it, otherwise a new scoringgroup wil be added.
         /// </summary>

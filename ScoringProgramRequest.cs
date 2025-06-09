@@ -10,10 +10,29 @@
     /// nested JSON data.</remarks>
     public class ScoringProgramRequest
     {
+        public ScoringProgramRequest()
+        {
+            ClubId=string.Empty;
+            LicenceKey=string.Empty;
+        }
         /// <summary>
         /// Required. The command that the Data Connector must pass on to BCS.
         /// </summary>
         public ScoringProgramDataConnectorCommands Command
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Required when using the http interface for the dataconnector
+        /// </summary>
+        public string ClubId
+        { get; set; }
+
+        /// <summary>
+        /// Required when using the http interface for the dataconnector
+        /// </summary>
+        public string LicenceKey
         {
             get; set;
         }

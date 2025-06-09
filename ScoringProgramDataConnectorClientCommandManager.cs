@@ -475,7 +475,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <param name="command">The command to the Data Connector</param>
         /// <param name="serializedData">The data to send to the Data Connector as json data. (If any)</param>
         /// <returns></returns>
-        protected abstract ScoringProgramResponse SendData(string sessionGuid, ScoringProgramDataConnectorCommands command, string serializedData);
+        protected abstract ScoringProgramResponse SendData(string sessionGuid,
+            ScoringProgramDataConnectorCommands command, string serializedData);
 
         /// <summary>
         /// Polls the client queue for new boardresults asynchronously.

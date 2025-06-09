@@ -78,12 +78,19 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
+        /// Required when using http for communication with the data connector.
+        /// </summary>
+        public string ClubId
+        { get; set; }
+
+
+        /// <summary>
         /// Optional. Specifies a different directory for the BCS scoring file. Only use in advanced scenarios.
         /// If used make sure that the directory exists.
         /// </summary>
         public string AlternativeDataFolder
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -141,7 +148,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// </summary>
         public string[] ValidationMessages
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -150,7 +157,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <returns>True if there are no validation errors.</returns>
         public bool Validate()
         {
-            var validationMessages=new List<string>();
+            var validationMessages = new List<string>();
 
             if (Commands < 0 || Commands > 255)
             {
@@ -158,7 +165,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             }
             if (!string.IsNullOrWhiteSpace(AlternativeDataFolder))
             {
-                if (!Directory.Exists(AlternativeDataFolder)) 
+                if (!Directory.Exists(AlternativeDataFolder))
                 {
                     validationMessages.Add($"The specified alternative data folder ('{AlternativeDataFolder}' does not exist.)");
                 }
@@ -219,7 +226,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             {
                 foreach (var participation in Participations)
                 {
-                    if (!participation.Validate(allowPlayerNumberAndName:false))
+                    if (!participation.Validate(allowPlayerNumberAndName: false))
                     {
                         var errorMessage = string.Join(", ", participation.ValidationMessages);
                         validationMessages.Add($"{nameof(ParticipationDTO)}  '{participation.SessionGuid}-{participation.PlayerNumber}': " +
@@ -282,7 +289,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                 }
             }
 
-            ValidationMessages=validationMessages.ToArray();
+            ValidationMessages = validationMessages.ToArray();
             return !ValidationMessages.Any();
         }
     }

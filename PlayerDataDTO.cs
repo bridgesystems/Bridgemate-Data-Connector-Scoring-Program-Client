@@ -17,6 +17,13 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         {
             get; set;
         }
+
+        /// <summary>
+        /// Required when using the http interface for the dataconnector
+        /// </summary>
+        public string ClubId
+        { get; set; }
+
         /// <summary>
         /// Required, must uniquely identify the player within the session.
         /// </summary>

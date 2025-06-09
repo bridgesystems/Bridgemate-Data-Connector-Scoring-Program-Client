@@ -28,6 +28,12 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
+        /// Required when using the http interface for the dataconnector
+        /// </summary>
+        public string ClubId
+        { get; set; }
+
+        /// <summary>
         /// 1: Just start BCS and let it reconnect to the last used scoring file if it contains a session with
         ///    the correct guid.
         /// 5: Start BCS, let it reconnect and start reading.
