@@ -58,6 +58,11 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         public const int Command_ClearData = 128;
 
         /// <summary>
+        /// Instructs the Data Connector to use communicate over http.
+        /// </summary>
+        public const int Command_UseHttp=256;
+
+        /// <summary>
         /// Instructions to BCS. Add up the values to combine.<br/>
         /// 1. Start BCS (if not already started).<br/>
         /// 2: Reset the Bridgemates (and App) and fill them with the provided data.<br/>
