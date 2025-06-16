@@ -12,6 +12,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     /// </summary>
     public class ScoringProgramDataConnectorHttpClient : ScoringProgramDataConnectorClientCommandManager, IScoringProgramClient
     {
+        public const string ProductionUrl= "https://bridgematedataconnector-a6bndyc3gwgmhydq.germanywestcentral-01.azurewebsites.net";
+        public const string LocalHostUrl = "http://localhost:5079";
         /// <summary>
         /// The url to call when the scoring program communicates with the data connector.
         /// </summary>
@@ -179,7 +181,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 using (var httpClient = new HttpClient())
                 {
                     //Send the request to the Data Connector and await the response.
-                    var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"http://localhost:5079/{ApiCall}");
+                    var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{ProductionUrl}/{ApiCall}");
                     var content = new StringContent(requestSerialized, Encoding.UTF8, "application/json");
                     requestMessage.Content = content;
                     var httpResponse = await httpClient.SendAsync(requestMessage);
