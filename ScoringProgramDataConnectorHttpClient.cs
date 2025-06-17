@@ -188,14 +188,15 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 var requestSerialized = JsonSerializer.Serialize(request);
                 using (var httpClient = new HttpClient())
                 {
-                    //Send the request to the Data Connector and await the response.
-                    var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{ApiUrlRoot}/{ApiCall}");
-                    var content = new StringContent(requestSerialized, Encoding.UTF8, "application/json");
-                    requestMessage.Content = content;
+                   
                     
                     var retryCounter = 5;
                     while (retryCounter > 0)
                     {
+                        //Send the request to the Data Connector and await the response.
+                        var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{ApiUrlRoot}/{ApiCall}");
+                        var content = new StringContent(requestSerialized, Encoding.UTF8, "application/json");
+                        requestMessage.Content = content;
                         HttpResponseMessage httpResponse=null;
                         try
                         {
