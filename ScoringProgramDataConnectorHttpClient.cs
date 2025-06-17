@@ -1,6 +1,7 @@
 ﻿using NLog;
 using System;
 using System.Net.Http;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -12,9 +13,15 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     /// </summary>
     public class ScoringProgramDataConnectorHttpClient : ScoringProgramDataConnectorClientCommandManager, IScoringProgramClient
     {
+
         public const string ProductionUrl= "https://bridgematedataconnector-a6bndyc3gwgmhydq.germanywestcentral-01.azurewebsites.net";
         public const string LocalHostUrl = "http://localhost:5079";
-        /// <summary>
+        
+        public static bool UseLocalHost { get; set; }
+        
+        public static string ApiUrlRoot=>UseLocalHost ? LocalHostUrl : ProductionUrl;
+        
+            /// <summary>
         /// The url to call when the scoring program communicates with the data connector.
         /// </summary>
         public const string ApiCall = "dc-scoringprogram";
@@ -58,7 +65,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             {
                 RequestCommand = ScoringProgramDataConnectorCommands.Connect,
                 SessionGuid = "",
-                DataType = DataConnectorResponseData.OK,
+                DataType = DataConnectorResponseData.Error,
                 ErrorType = ErrorType.NotImplemented,
                 SerializedData = JsonSerializer.Serialize("Not implemented for Http client.")
             };
@@ -70,14 +77,15 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public async Task<ScoringProgramResponse> ConnectAsync()
         {
-            await Task.CompletedTask;
+            Ping ping = new Ping();
+            PingReply reply = await ping.SendPingAsync(ApiUrlRoot);
+
             return new ScoringProgramResponse
             {
                 RequestCommand = ScoringProgramDataConnectorCommands.Connect,
-                SessionGuid = "",
-                DataType = DataConnectorResponseData.OK,
-                ErrorType = ErrorType.NotImplemented,
-                SerializedData = JsonSerializer.Serialize("Not implemented for Http client.")
+                DataType = reply.Status == IPStatus.Success ? DataConnectorResponseData.OK : DataConnectorResponseData.Error,
+                ErrorType = ErrorType.NoConnection,
+                SerializedData = JsonSerializer.Serialize(reply.Status)
             };
         }
 
@@ -181,21 +189,55 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 using (var httpClient = new HttpClient())
                 {
                     //Send the request to the Data Connector and await the response.
-                    var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{ProductionUrl}/{ApiCall}");
+                    var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{ApiUrlRoot}/{ApiCall}");
                     var content = new StringContent(requestSerialized, Encoding.UTF8, "application/json");
                     requestMessage.Content = content;
-                    var httpResponse = await httpClient.SendAsync(requestMessage);
-                    var json = await httpResponse.Content.ReadAsStringAsync();
+                    
+                    var retryCounter = 5;
+                    while (retryCounter > 0)
+                    {
+                        HttpResponseMessage httpResponse=null;
+                        try
+                        {
+                            httpResponse = await httpClient.SendAsync(requestMessage);
+                        }
+                        catch (Exception ex) 
+                        {
+                            Logger.Error(ex);
+                            retryCounter--;
+                            await Task.Delay(10000 - retryCounter * 200);
+                        }
+                        if (httpResponse != null)
+                        {
+                            if (httpResponse.IsSuccessStatusCode)
+                            {
+                                var json = await httpResponse.Content.ReadAsStringAsync();
+                                retryCounter = 0;
+                                var clientResponse = JsonSerializer.Deserialize<ScoringProgramResponse>(json);
+                                return clientResponse ??
+                                             new ScoringProgramResponse
+                                             {
+                                                 RequestCommand = command,
+                                                 DataType = DataConnectorResponseData.Error,
+                                                 SerializedData = JsonSerializer.Serialize("Empty response")
+                                             };
 
-                    var clientResponse = JsonSerializer.Deserialize<ScoringProgramResponse>(json);
-                    return clientResponse ??
-                                 new ScoringProgramResponse
-                                 {
-                                     RequestCommand = command,
-                                     DataType = DataConnectorResponseData.Error,
-                                     SerializedData = JsonSerializer.Serialize("Empty response")
-                                 };
-
+                            }
+                            else
+                            {
+                                retryCounter--;
+                                var errorMessage = httpResponse.ReasonPhrase;
+                                Logger.Error(errorMessage);
+                                await Task.Delay(10000 - retryCounter * 200);
+                            }
+                        }
+                    }
+                    return new ScoringProgramResponse
+                    {
+                        RequestCommand = command,
+                        DataType = DataConnectorResponseData.Error,
+                        ErrorType = ErrorType.NoConnection
+                    };
                 }
             }
             catch (Exception ex)
