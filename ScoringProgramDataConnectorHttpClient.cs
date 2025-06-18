@@ -13,13 +13,15 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     /// </summary>
     public class ScoringProgramDataConnectorHttpClient : ScoringProgramDataConnectorClientCommandManager, IScoringProgramClient
     {
-
-        public const string ProductionUrl= "https://bridgematedataconnector-a6bndyc3gwgmhydq.germanywestcentral-01.azurewebsites.net";
-        public const string LocalHostUrl = "http://localhost:5079";
+        public const string ProductionUrlWithouProtocol = "bridgematedataconnector-a6bndyc3gwgmhydq.germanywestcentral-01.azurewebsites.net";
+        public const string ProductionUrl= "https://"+ ProductionUrlWithouProtocol;
+        public const string LocalHostUrlWithoutProtocol = "localhost:5079";
+        public const string LocalHostUrl = "http://" + LocalHostUrlWithoutProtocol;
         
         public static bool UseLocalHost { get; set; }
         
         public static string ApiUrlRoot=>UseLocalHost ? LocalHostUrl : ProductionUrl;
+        public static string ApiUrlRootWihtoutProtocol = UseLocalHost ? LocalHostUrlWithoutProtocol : ProductionUrlWithouProtocol;
         
             /// <summary>
         /// The url to call when the scoring program communicates with the data connector.
@@ -78,7 +80,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         public async Task<ScoringProgramResponse> ConnectAsync()
         {
             Ping ping = new Ping();
-            PingReply reply = await ping.SendPingAsync(ApiUrlRoot);
+            PingReply reply = await ping.SendPingAsync(ApiUrlRootWihtoutProtocol);
 
             return new ScoringProgramResponse
             {
