@@ -1,11 +1,7 @@
 ﻿using BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnector;
-using BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipes;
-using System.Linq;
-using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
 using static BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnectorLogCreator<BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorCommands>;
