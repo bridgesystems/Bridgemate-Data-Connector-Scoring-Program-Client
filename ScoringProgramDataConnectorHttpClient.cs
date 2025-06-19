@@ -39,7 +39,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         protected static readonly Logger ErrorLogger = LogManager.GetLogger(nameof(ErrorLogger));
         private static readonly Logger Logger = LogManager.GetLogger(nameof(ScoringProgramDataConnectorHttpClient));
 
-        private static ScoringProgramDataConnectorHttpClient? _instance;
+        private static ScoringProgramDataConnectorHttpClient _instance;
         public static ScoringProgramDataConnectorHttpClient Instance(string clubId, string licenceKey)
         {
                 if(_instance==null)
