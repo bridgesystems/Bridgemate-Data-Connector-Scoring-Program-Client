@@ -96,11 +96,10 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             {
                 RequestCommand = ScoringProgramDataConnectorCommands.Connect,
                 DataType = reply.Status == IPStatus.Success ? DataConnectorResponseData.OK : DataConnectorResponseData.Error,
-                ErrorType = ErrorType.NoConnection,
+                ErrorType =reply.Status== IPStatus.Success? ErrorType.None:ErrorType.NoConnection,
                 SerializedData = JsonSerializer.Serialize(reply.Status)
             };
         }
-
 
         /// <summary>
         /// Not implemented for http.
