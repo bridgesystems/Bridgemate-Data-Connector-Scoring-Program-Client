@@ -68,23 +68,25 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         public override bool IsActive => true;
 
         /// <summary>
-        /// Not implemented for http.
+        /// Checks if the endpoint can be reached by sending a ping request to it.
         /// </summary>
         /// <returns></returns>
         public ScoringProgramResponse Connect()
         {
+            Ping ping = new Ping();
+            PingReply reply = ping.Send(ApiUrlRootWihtoutProtocol);
+
             return new ScoringProgramResponse
             {
                 RequestCommand = ScoringProgramDataConnectorCommands.Connect,
-                SessionGuid = "",
-                DataType = DataConnectorResponseData.Error,
-                ErrorType = ErrorType.NotImplemented,
-                SerializedData = JsonSerializer.Serialize("Not implemented for Http client.")
+                DataType = reply.Status == IPStatus.Success ? DataConnectorResponseData.OK : DataConnectorResponseData.Error,
+                ErrorType = reply.Status == IPStatus.Success ? ErrorType.None : ErrorType.NoConnection,
+                SerializedData = JsonSerializer.Serialize(reply.Status)
             };
         }
 
         /// <summary>
-        /// Not implemented for http.
+        /// Checks if the endpoint can be reached by sending a ping request to it.
         /// </summary>
         /// <returns></returns>
         public async Task<ScoringProgramResponse> ConnectAsync()

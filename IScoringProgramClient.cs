@@ -4,24 +4,111 @@ using System.Threading.Tasks;
 
 namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 {
+    /// <summary>
+    /// Defines a common interface for the <see cref="ScoringProgramDataConnectorPipeClient">ScoringProgramDataConnectorPipeClient</see> and the
+    /// <see cref="ScoringProgramDataConnectorHttpClient">ScoringProgramDataConnectorHttpClient</see>.
+    /// </summary>
     public interface IScoringProgramClient
     {
+        /// <summary>
+        /// Signals if the client can be used.
+        /// </summary>
         bool IsActive { get; }
+
+        /// <summary>
+        /// Signals that the client is sending and will not accept any new requests. Try again later.
+        /// </summary>
         bool IsSending { get; set; }
+
+        /// <summary>
+        /// The id of last handrecord queueitem that was retrieved.
+        /// </summary>
         int LastHandrecordQueueItemId { get; }
+
+
+        /// <summary>
+        /// The id of last participant queueitem that was retrieved.
+        /// </summary>
         int LastParticipantQueueItemId { get; }
+
+
+        /// <summary>
+        /// The id of last player data queueitem that was retrieved.
+        /// </summary>
         int LastPlayerDataQueueItemId { get; }
+
+
+        /// <summary>
+        /// The id of last board result queueitem that was retrieved.
+        /// </summary>
         int LastResultQueueItemId { get; }
 
+        /// <summary>
+        /// Synchronously accepts the eventqueue data of the given data type.
+        /// </summary>
+        /// <param name="sessionGuid"></param>
+        /// <param name="dataType"></param>
+        /// <returns></returns>
         ScoringProgramResponse AcceptQueueData(string sessionGuid, DataConnectorResponseData dataType);
+
+        /// <summary>
+        /// Asynchronously accepts the eventqueue data of the given data type.
+        /// </summary>
+        /// <param name="sessionGuid"></param>
+        /// <param name="dataType"></param>
+        /// <returns></returns>
         Task<ScoringProgramResponse> AcceptQueueDataAsync(string sessionGuid, DataConnectorResponseData dataType);
+      
+        /// <summary>
+        /// Synchronously adds the given session to an existing event.
+        /// </summary>
+        /// <param name="addedSession"></param>
+        /// <returns></returns>
         ScoringProgramResponse AddSession(SessionDTO addedSession);
+
+        /// <summary>
+        /// Asynchronously adds the given session to an existing event.
+        /// </summary>
+        /// <param name="addedSession"></param>
+        /// <returns></returns>
         Task<ScoringProgramResponse> AddSessionAsync(SessionDTO addedSession);
+        
+        /// <summary>
+        /// Synchronously clears all dataconnector data for the club.
+        /// </summary>
+        /// <returns></returns>
         bool ClearData();
+
+        /// <summary>
+        /// Asynchronously clears all dataconnector data for the club.
+        /// </summary>
+        /// <returns></returns>
         Task<bool> ClearDataAsync();
+
+        /// <summary>
+        /// Synchronously attempts to connect to the dataconnector.
+        /// </summary>
+        /// <returns></returns>
         ScoringProgramResponse Connect();
+
+        /// <summary>
+        /// Asynchronously attempts to connect to the dataconnector.
+        /// </summary>
+        /// <returns></returns>
         Task<ScoringProgramResponse> ConnectAsync();
+        
+        /// <summary>
+        /// Synchronously instructs BCS to continue administering an event it already knows.
+        /// </summary>
+        /// <param name="continueDTO"></param>
+        /// <returns></returns>
         ScoringProgramResponse Continue(ContinueDTO continueDTO);
+
+        /// <summary>
+        /// Asynchronously instructs BCS to continue administering an event it already knows.
+        /// </summary>
+        /// <param name="continueDTO"></param>
+        /// <returns></returns>
         Task<ScoringProgramResponse> ContinueAsync(ContinueDTO continueDTO);
         ScoringProgramResponse Disconnect();
         Task<ScoringProgramResponse> DisconnectAsync();
