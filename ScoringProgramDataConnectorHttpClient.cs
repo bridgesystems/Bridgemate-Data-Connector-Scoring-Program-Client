@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
@@ -272,23 +273,120 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         }
 
         /// <summary>
-        /// Not implemented for http. Use <see cref="SendDataAsync(string, ScoringProgramDataConnectorCommands, string)">SendDataAsync</see> instead.
+        /// The code that handles the actual sending of requests and reading their reponses.
         /// </summary>
-        /// <param name="sessionGuid"></param>
-        /// <param name="command"></param>
-        /// <param name="serializedData"></param>
+        /// <param name="sessionGuid">Specifies which session the request targets (if any)</param>
+        /// <param name="command">The command to the middlleman</param>
+        /// <param name="serializedData">The data to send to the Data Connector as json data. (If any)</param>
         /// <returns></returns>
-        protected override ScoringProgramResponse SendData(string sessionGuid, ScoringProgramDataConnectorCommands command, string serializedData)
+        protected override  ScoringProgramResponse SendData(string sessionGuid,
+            ScoringProgramDataConnectorCommands command,
+            string serializedData)
         {
-            return new ScoringProgramResponse
+            //Construct the request to the Data Connector.
+            var request = new ScoringProgramRequest
             {
-                RequestCommand = ScoringProgramDataConnectorCommands.Disconnect,
-                SessionGuid = "",
-                DataType = DataConnectorResponseData.OK,
-                ErrorType = ErrorType.None,
-                SerializedData = JsonSerializer.Serialize($"Not implemented for Http client. Use {nameof(SendDataAsync)}.")
+                Command = command,
+                SessionGuid = sessionGuid,
+                SerializedData = serializedData,
+                ClubId = Credentials.clubId,
+                LicenceKey = Credentials.licenceKey
             };
+
+
+
+            //Do not proceed if sending is already in progress (for an other request). There can be only on request be sent at the same time.
+            if (IsSending)
+            {
+                return new ScoringProgramResponse
+                {
+                    RequestCommand = command,
+                    SessionGuid = sessionGuid,
+                    DataType = DataConnectorResponseData.Error,
+                    ErrorType = ErrorType.Busy,
+                    SerializedData = JsonSerializer.Serialize($"Client is busy, please retry later.")
+                };
+            }
+            try
+            {
+                IsSending = true;
+
+                //Serialize
+                var requestSerialized = JsonSerializer.Serialize(request);
+                using (var httpClient = new HttpClient())
+                {
+                    var retryCounter = 5;
+                    while (retryCounter > 0)
+                    {
+                        //Send the request to the Data Connector and await the response.
+                        var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{ApiUrlRoot}/{ApiCall}");
+                        var content = new StringContent(requestSerialized, Encoding.UTF8, "application/json");
+                        requestMessage.Content = content;
+                        HttpResponseMessage httpResponse = null;
+                        try
+                        {
+                            httpResponse = Task.Run(() => httpClient.SendAsync(requestMessage)).Result;
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.Error(ex);
+                            retryCounter--;
+                            Thread.Sleep(10000 - retryCounter * 200);
+                        }
+                        if (httpResponse != null)
+                        {
+                            if (httpResponse.IsSuccessStatusCode)
+                            {
+                                var json = httpResponse.Content.ReadAsStringAsync().Result;
+                                retryCounter = 0;
+                                var clientResponse = JsonSerializer.Deserialize<ScoringProgramResponse>(json);
+                                return clientResponse ??
+                                             new ScoringProgramResponse
+                                             {
+                                                 RequestCommand = command,
+                                                 DataType = DataConnectorResponseData.Error,
+                                                 SerializedData = JsonSerializer.Serialize("Empty response")
+                                             };
+
+                            }
+                            else
+                            {
+                                retryCounter--;
+                                var errorMessage = httpResponse.ReasonPhrase;
+                                Logger.Error(errorMessage);
+                                Thread.Sleep(10000 - retryCounter * 200);
+                            }
+                        }
+                    }
+                    return new ScoringProgramResponse
+                    {
+                        RequestCommand = command,
+                        DataType = DataConnectorResponseData.Error,
+                        ErrorType = ErrorType.NoConnection
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                DebugLogger.Error(ex);
+                ErrorLogger.Error(ex);
+                return
+                new ScoringProgramResponse
+                {
+                    RequestCommand = command,
+                    DataType = DataConnectorResponseData.Error,
+                    SerializedData = JsonSerializer.Serialize(ex.Message)
+                };
+            }
+
+            finally
+            {
+                //Always signal that the client is free for the next items to send.
+                //Otherwise after an exception further communication will be blocked.
+                IsSending = false;
+            }
         }
+
 
 
 
