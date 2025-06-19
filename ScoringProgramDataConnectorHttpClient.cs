@@ -325,7 +325,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                         HttpResponseMessage httpResponse = null;
                         try
                         {
-                            httpResponse = Task.Run(() => httpClient.SendAsync(requestMessage)).Result;
+                            httpResponse = httpClient.SendAsync(requestMessage).ConfigureAwait(false).GetAwaiter().GetResult();
                         }
                         catch (Exception ex)
                         {
