@@ -39,7 +39,16 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         protected static readonly Logger ErrorLogger = LogManager.GetLogger(nameof(ErrorLogger));
         private static readonly Logger Logger = LogManager.GetLogger(nameof(ScoringProgramDataConnectorHttpClient));
 
-        public ScoringProgramDataConnectorHttpClient(string clubdId, string licenceKey)
+        private static ScoringProgramDataConnectorHttpClient? _instance;
+        public static ScoringProgramDataConnectorHttpClient Instance(string clubId, string licenceKey)
+        {
+                if(_instance==null)
+                    _instance=new ScoringProgramDataConnectorHttpClient(clubId,licenceKey);
+                _instance.Credentials=(clubId,licenceKey);
+                return _instance;
+        }
+
+        private ScoringProgramDataConnectorHttpClient(string clubdId, string licenceKey)
         {
             Credentials = (clubdId, licenceKey);
         }
@@ -47,7 +56,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// The information needed to get access to the http channel for the data communicator.
         /// </summary>
-        public (string clubId, string licenceKey) Credentials { get; }
+        public (string clubId, string licenceKey) Credentials { get; set; }
 
 
         private bool disposedValue;
@@ -190,8 +199,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 var requestSerialized = JsonSerializer.Serialize(request);
                 using (var httpClient = new HttpClient())
                 {
-                   
-                    
                     var retryCounter = 5;
                     while (retryCounter > 0)
                     {

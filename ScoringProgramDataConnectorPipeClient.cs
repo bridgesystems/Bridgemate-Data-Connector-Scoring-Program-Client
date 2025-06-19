@@ -46,14 +46,12 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// The single instance of the pipe client. Use this property to retrieve the client and use it in the external program.
         /// </summary>
-        public static ScoringProgramDataConnectorPipeClient Instance
+        public static ScoringProgramDataConnectorPipeClient Instance()
         {
-            get
-            {
+            
                 if (_instance == null)
                     _instance = new ScoringProgramDataConnectorPipeClient();
                 return _instance;
-            }
         }
 
         /// <summary>
