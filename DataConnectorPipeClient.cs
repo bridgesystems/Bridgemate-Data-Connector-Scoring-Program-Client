@@ -22,6 +22,11 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         private StreamReader _dataConnectorReader;
 
         /// <summary>
+        /// Will be raised if the named pipe client has been disposed (due to an error).
+        /// </summary>
+        public event EventHandler<EventArgs> PipeClientDisposed;
+
+        /// <summary>
         /// Initializes the class.
         /// </summary>
         protected DataConnectorPipeClientConnectionManager()
@@ -215,6 +220,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 }
                 _disposedValue = true;
             }
+            PipeClientDisposed?.Invoke(this,EventArgs.Empty);
         }
     }
 
