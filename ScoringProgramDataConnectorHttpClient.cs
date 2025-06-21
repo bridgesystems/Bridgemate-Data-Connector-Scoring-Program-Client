@@ -240,7 +240,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                                 retryCounter--;
                                 var errorMessage = httpResponse.ReasonPhrase;
                                 Logger.Error(errorMessage);
-                                await Task.Delay(10000 - retryCounter * 200);
+                                await Task.Delay(1000 - retryCounter * 200);
                             }
                         }
                     }
