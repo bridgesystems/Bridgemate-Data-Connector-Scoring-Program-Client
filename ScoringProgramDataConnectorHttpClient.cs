@@ -217,7 +217,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                         {
                             Logger.Error(ex);
                             retryCounter--;
-                            await Task.Delay(10000 - retryCounter * 200);
+                            await Task.Delay(1000 - retryCounter * 200);
                         }
                         if (httpResponse != null)
                         {
