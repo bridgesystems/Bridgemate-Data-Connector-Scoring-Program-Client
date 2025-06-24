@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorPipeClient">
+    <Position X="8.25" Y="0.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AQQEBAAAgKAAAgAAEAAAIJQIAQgAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>ScoringProgramDataConnectorPipeClient.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient">
+    <Position X="1.25" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>CAQEABAAAKMCAAAAEAAABIQAAAgMCAIAQAABAgAAIgI=</HashCode>
+      <FileName>ScoringProgramDataConnectorHttpClient.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager">
+    <Position X="4.5" Y="0.5" Width="3.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>EAQ0DQgIAIApAQVYFUAIoiQMILCBQABIwIgAQBBBBoA=</HashCode>
+      <FileName>ScoringProgramDataConnectorClientCommandManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
