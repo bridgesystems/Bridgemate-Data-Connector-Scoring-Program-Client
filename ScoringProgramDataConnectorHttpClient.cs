@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient;
+using NLog;
 using System;
 using System.Net.Http;
 using System.Net.NetworkInformation;
@@ -14,26 +15,59 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     /// </summary>
     public class ScoringProgramDataConnectorHttpClient : ScoringProgramDataConnectorClientCommandManager, IScoringProgramClient
     {
+        /// <summary>
+        /// The url for the webservice without the http:// prefix.
+        /// </summary>
         public const string ProductionUrlWithouProtocol = "bridgematedataconnector-a6bndyc3gwgmhydq.germanywestcentral-01.azurewebsites.net";
-        public const string ProductionUrl= "https://"+ ProductionUrlWithouProtocol;
+
+        /// <summary>
+        /// The full url for the webservice.
+        /// </summary>
+        public const string ProductionUrl = "https://" + ProductionUrlWithouProtocol;
+
+        /// <summary>
+        /// The url for the local host hosted webservice without the http:// prefix.
+        /// Used for debugging only.
+        /// </summary>
         public const string LocalHostUrlWithoutProtocol = "localhost:5079";
+
+        /// <summary>
+        /// The full url for the local host hosted webservice.
+        /// Used for debugging only.
+        /// </summary>
         public const string LocalHostUrl = "http://" + LocalHostUrlWithoutProtocol;
-        
+
+        /// <summary>
+        /// If set to true will make the client communicate with the local host hosted webservice.
+        /// Used for debugging only.
+        /// </summary>
         public static bool UseLocalHost { get; set; }
-        
-        public static string ApiUrlRoot=>UseLocalHost ? LocalHostUrl : ProductionUrl;
+
+        /// <summary>
+        /// Constructs the full url for the webservice based on whether it is hosted in local host or in the cloud.
+        /// </summary>
+        public static string ApiUrlRoot => UseLocalHost ? LocalHostUrl : ProductionUrl;
+
+        /// <summary>
+        /// Constructs the url for the webservice without the http:// prefix based on whether it is hosted in local host or in the cloud.
+        /// </summary>
         public static string ApiUrlRootWihtoutProtocol = UseLocalHost ? LocalHostUrlWithoutProtocol : ProductionUrlWithouProtocol;
-        
-            /// <summary>
+
+        /// <summary>
         /// The url to call when the scoring program communicates with the data connector.
         /// </summary>
         public const string ApiCall = "dc-scoringprogram";
 
         /// <summary>
+        /// Part of the expected response from the webservice when sending a Get httprequest to it.
+        /// </summary>
+        public const string ApiPingResponse = "Bridgemate dataconnector service version";
+
+        /// <summary>
         /// The debug logger
         /// </summary>
         protected static readonly Logger DebugLogger = LogManager.GetLogger(nameof(DebugLogger));
-        
+
         /// <summary>
         /// The error logger
         /// </summary>
@@ -41,12 +75,19 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         private static readonly Logger Logger = LogManager.GetLogger(nameof(ScoringProgramDataConnectorHttpClient));
 
         private static ScoringProgramDataConnectorHttpClient _instance;
+        
+        /// <summary>
+        /// Returns the singleton instance of the client with its ClubdId and LicenceKey properties set to the values of the parameters.
+        /// </summary>
+        /// <param name="clubId">The id of the club that is using the client</param>
+        /// <param name="licenceKey">The licence key for the club using the client</param>
+        /// <returns></returns>
         public static ScoringProgramDataConnectorHttpClient Instance(string clubId, string licenceKey)
         {
-                if(_instance==null)
-                    _instance=new ScoringProgramDataConnectorHttpClient(clubId,licenceKey);
-                _instance.Credentials=(clubId,licenceKey);
-                return _instance;
+            if (_instance == null)
+                _instance = new ScoringProgramDataConnectorHttpClient(clubId, licenceKey);
+            _instance.Credentials = (clubId, licenceKey);
+            return _instance;
         }
 
         private ScoringProgramDataConnectorHttpClient(string clubdId, string licenceKey)
@@ -54,10 +95,35 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             Credentials = (clubdId, licenceKey);
         }
 
-        /// <summary>
-        /// The information needed to get access to the http channel for the data communicator.
-        /// </summary>
-        public (string clubId, string licenceKey) Credentials { get; set; }
+        public static async Task<string> IsServiceAlive()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var success = false;
+                var responseMessage = "";
+                try
+                {
+                    var url = ApiUrlRoot;
+                    HttpResponseMessage response = await client.GetAsync(url).ConfigureAwait(false);
+                    response.EnsureSuccessStatusCode(); // Throw if not 200–299
+
+                    var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    success = responseBody.Contains(ApiPingResponse);
+                    responseMessage = responseBody;
+                }
+                catch (HttpRequestException ex)
+                {
+                    Logger.Error(ex);
+                    success = false;
+                    responseMessage = ex.Message;
+                }
+                return responseMessage;
+            }
+        }
+/// <summary>
+/// The information needed to get access to the http channel for the data communicator.
+/// </summary>
+public (string clubId, string licenceKey) Credentials { get; set; }
 
 
         private bool disposedValue;
@@ -73,15 +139,14 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public ScoringProgramResponse Connect()
         {
-            Ping ping = new Ping();
-            PingReply reply = ping.Send(ApiUrlRootWihtoutProtocol);
-
+            var responseMessage = IsServiceAlive().ConfigureAwait(false).GetAwaiter().GetResult();
+            var success = responseMessage.Contains(ApiPingResponse);
             return new ScoringProgramResponse
             {
                 RequestCommand = ScoringProgramDataConnectorCommands.Connect,
-                DataType = reply.Status == IPStatus.Success ? DataConnectorResponseData.OK : DataConnectorResponseData.Error,
-                ErrorType = reply.Status == IPStatus.Success ? ErrorType.None : ErrorType.NoConnection,
-                SerializedData = JsonSerializer.Serialize(reply.Status)
+                DataType = success ? DataConnectorResponseData.OK : DataConnectorResponseData.Error,
+                ErrorType = success ? ErrorType.None : ErrorType.NoConnection,
+                SerializedData = JsonSerializer.Serialize(responseMessage)
             };
         }
 
@@ -91,15 +156,14 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <returns></returns>
         public async Task<ScoringProgramResponse> ConnectAsync()
         {
-            Ping ping = new Ping();
-            PingReply reply = await ping.SendPingAsync(ApiUrlRootWihtoutProtocol);
-
+            var responseMessage = await IsServiceAlive();
+            var success = responseMessage.Contains(ApiPingResponse);
             return new ScoringProgramResponse
             {
-                RequestCommand = ScoringProgramDataConnectorCommands.Connect,
-                DataType = reply.Status == IPStatus.Success ? DataConnectorResponseData.OK : DataConnectorResponseData.Error,
-                ErrorType =reply.Status== IPStatus.Success? ErrorType.None:ErrorType.NoConnection,
-                SerializedData = JsonSerializer.Serialize(reply.Status)
+                RequestCommand = ScoringProgramDataConnectorCommands.Connect ,
+                DataType = success ? DataConnectorResponseData.OK : DataConnectorResponseData.Error,
+                ErrorType = success ? ErrorType.None : ErrorType.NoConnection,
+                SerializedData = JsonSerializer.Serialize(responseMessage)
             };
         }
 
@@ -175,11 +239,11 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 Command = command,
                 SessionGuid = sessionGuid,
                 SerializedData = serializedData,
-                ClubId=Credentials.clubId,
-                LicenceKey=Credentials.licenceKey
+                ClubId = Credentials.clubId,
+                LicenceKey = Credentials.licenceKey
             };
 
-           
+
 
             //Do not proceed if sending is already in progress (for an other request). There can be only on request be sent at the same time.
             if (IsSending)
@@ -196,7 +260,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             try
             {
                 IsSending = true;
-                
+
                 //Serialize
                 var requestSerialized = JsonSerializer.Serialize(request);
                 using (var httpClient = new HttpClient())
@@ -208,12 +272,12 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                         var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{ApiUrlRoot}/{ApiCall}");
                         var content = new StringContent(requestSerialized, Encoding.UTF8, "application/json");
                         requestMessage.Content = content;
-                        HttpResponseMessage httpResponse=null;
+                        HttpResponseMessage httpResponse = null;
                         try
                         {
                             httpResponse = await httpClient.SendAsync(requestMessage);
                         }
-                        catch (Exception ex) 
+                        catch (Exception ex)
                         {
                             Logger.Error(ex);
                             retryCounter--;
@@ -280,7 +344,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <param name="command">The command to the middlleman</param>
         /// <param name="serializedData">The data to send to the Data Connector as json data. (If any)</param>
         /// <returns></returns>
-        protected override  ScoringProgramResponse SendData(string sessionGuid,
+        protected override ScoringProgramResponse SendData(string sessionGuid,
             ScoringProgramDataConnectorCommands command,
             string serializedData)
         {
