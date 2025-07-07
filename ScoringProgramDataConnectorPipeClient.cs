@@ -63,8 +63,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         }
         // End of singleton implementation
 
-
-
         #region pipeClientwrapper
 
         private readonly ScoringProgramDataConnectorPipeClientConnectionManager _pipeClient;
