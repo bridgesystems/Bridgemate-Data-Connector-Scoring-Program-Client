@@ -7,7 +7,7 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="generator" content="HelpNDoc Professional Edition 9.1.0.198">
+  <meta name="generator" content="HelpNDoc Professional Edition 9.9.0.637">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href="favicon.ico"/>
 
@@ -188,23 +188,23 @@
 
             <div class="main-content">
                 
-<p class="rvps2"><span class="rvts6"><br/></span></p>
-<h3 class="rvps9"><img alt="" style="width : 630px; height : 557px; padding : 1px;" src="lib/UpdateMovement%201.png"></h3>
-<h3 class="rvps9"><span class="rvts0"><span class="rvts28">Data structure</span></span></h3>
-<p class="rvps2"><img alt="" style="width : 697px; height : 81px; padding : 1px;" src="lib/MovementUpdateDTOClosed.png"></p>
-<h3 class="rvps9"><span class="rvts0"><span class="rvts28">Description</span></span></h3>
-<h4 class="rvps13"><span class="rvts0"><span class="rvts29">Update the movement for a section or add a section</span></span></h4>
-<p class="rvps2"><span class="rvts6">When after the play of the session has started the need arises to adjust the movements, the movement for a section can be updated, or a section can be added, using a </span><a class="rvts16" href="SectionUpdateDTO.html">SectionUpdateDTO</a><span class="rvts6"> and the </span><a class="rvts16" href="Overviewofcommunication.html#OverviewOfCommands">UpdateMovementCommand</a><span class="rvts6">. Reasons for such an update could be a pair arriving late or playing a Swiss pairs event, The update is communicated to the </span><span class="rvts6">Bridgemate Data Connector</span><span class="rvts6"> by sending a SectionDTO that contains the new movement data for the section. On reception of this data </span><span class="rvts6">BCS</span><span class="rvts6"> will figure out how to update the section. Movements are expressed by adding the </span><a class="rvts16" href="TableDTO.html">tables</a><span class="rvts6"> and their </span><a class="rvts16" href="RoundDTO.html">rounds</a><span class="rvts6"> to the section.</span></p>
-<p class="rvps2"><span class="rvts6">The ScoringProgramResponse, if successful, contains a SectionDTO in its SerializedData property that specifies which rounds have been updated: Each round below the first specified round on a table is unchanged, each round above the last specified round will be deleted.</span></p>
-<h4 class="rvps13"><a name="AddSection"></a><span class="rvts0"><span class="rvts29">Adding a section</span></span></h4>
-<p class="rvps2"><span class="rvts6">Adding a section works the same way. The </span><span class="rvts6">Bridgemate Data Connector</span><span class="rvts6"> will detect that the secion did not exist before and will add it.</span></p>
-<p class="rvps2"><span class="rvts6"><br/></span></p>
-<p class="rvps2"><span class="rvts11">Note</span></p>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<h3 class="rvps5"><img alt="" style="width : 630px; height : 557px; padding : 1px;" src="lib/UpdateMovement%201.png"></h3>
+<h3 class="rvps5"><span class="rvts0"><span class="rvts14">Data structure</span></span></h3>
+<p class="rvps3"><img alt="" style="width : 697px; height : 81px; padding : 1px;" src="lib/MovementUpdateDTOClosed.png"></p>
+<h3 class="rvps5"><span class="rvts0"><span class="rvts14">Description</span></span></h3>
+<h4 class="rvps6"><span class="rvts0"><span class="rvts16">Update the movement for a section or add a section</span></span></h4>
+<p class="rvps3"><span class="rvts8">When after the play of the session has started the need arises to adjust the movements, the movement for a section can be updated, or a section can be added, using a </span><a class="rvts13" href="SectionUpdateDTO.html">SectionUpdateDTO</a><span class="rvts8"> and the </span><a class="rvts13" href="Overviewofcommunication.html#OverviewOfCommands">UpdateMovementCommand</a><span class="rvts8">. Reasons for such an update could be a pair arriving late or playing a Swiss pairs event, The update is communicated to the </span><span class="rvts8">Bridgemate Data Connector</span><span class="rvts8"> by sending a SectionDTO that contains the new movement data for the section. On reception of this data </span><span class="rvts8">BCS</span><span class="rvts8"> will figure out how to update the section. Movements are expressed by adding the </span><a class="rvts13" href="TableDTO.html">tables</a><span class="rvts8"> and their </span><a class="rvts13" href="RoundDTO.html">rounds</a><span class="rvts8"> to the section.</span></p>
+<p class="rvps3"><span class="rvts8">The ScoringProgramResponse, if successful, contains a SectionDTO in its SerializedData property that specifies which rounds have been updated: Each round below the first specified round on a table is unchanged, each round above the last specified round will be deleted.</span></p>
+<h4 class="rvps6"><a name="AddSection"></a><span class="rvts0"><span class="rvts16">Adding a section</span></span></h4>
+<p class="rvps3"><span class="rvts8">Adding a section works the same way. The </span><span class="rvts8">Bridgemate Data Connector</span><span class="rvts8"> will detect that the secion did not exist before and will add it.</span></p>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps3"><span class="rvts15">Note</span></p>
 <ul style="text-indent: 0px; padding: 0; margin: 0 0 0 24px; list-style-position: outside; list-style-type: disc;">
- <li class="rvps2 noindent"><span class="rvts6">Do not forget to send a Bridgemate2SettingsDTO or a Bridgemate3SettingsDTO for a new section.</span></li>
- <li class="rvps2 noindent"><span class="rvts6">Boardresults will be deleted from the first round where the round data for a table has changed. The ScoringProgramResponse contains the rounds (as a SectionDTO) for which this is the case. If applicable send the results for these rounds again (but as a rule it should not apply).</span></li>
+ <li class="rvps3 noindent"><span class="rvts8">Do not forget to send a Bridgemate2SettingsDTO or a Bridgemate3SettingsDTO for a new section.</span></li>
+ <li class="rvps3 noindent"><span class="rvts8">Boardresults will be deleted from the first round where the round data for a table has changed. The ScoringProgramResponse contains the rounds (as a SectionDTO) for which this is the case. If applicable send the results for these rounds again (but as a rule it should not apply).</span></li>
 </ul>
-<p class="rvps2" style="break-before: always;"><span class="rvts6"></span><span class="rvts6"></span></p>
+<p class="rvps3" style="break-before: always;"><span class="rvts8"></span><span class="rvts8"></span></p>
 
             </div>
             
@@ -239,7 +239,7 @@
   <div id="hnd-splitter" style="left: 350px"></div>  
 
   <!-- Scripts -->
-  <script src="vendors/jquery-3.5.1/jquery.min.js"></script>
+  <script src="vendors/jquery-3.7.1/jquery.min.js"></script>
   <script src="vendors/bootstrap-3.4.1/js/bootstrap.min.js"></script>
   <script src="vendors/bootstrap-3.4.1/js/ie10-viewport-bug-workaround.js"></script>
   <script src="vendors/markjs-8.11.1/jquery.mark.min.js"></script>
@@ -257,22 +257,7 @@
   <script src="js/app.min.js"></script>
 
   <!-- Init script -->
-  <script>
-    $(function() {
-      // Create the app
-      var app = new Hnd.App({
-        searchEngineMinChars: 3
-      });
-      // Update translations
-      hnd_ut(app);
-	  // Instanciate imageMapResizer
-	  imageMapResize();
-	  // Custom JS
-	  
-      // Boot the app
-      app.Boot();
-    });
-  </script>
+  <script src="_topic_init.js"></script>
 
 
 

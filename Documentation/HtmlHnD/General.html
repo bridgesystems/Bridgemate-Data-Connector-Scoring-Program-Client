@@ -7,7 +7,7 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="generator" content="HelpNDoc Professional Edition 9.1.0.198">
+  <meta name="generator" content="HelpNDoc Professional Edition 9.9.0.637">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href="favicon.ico"/>
 
@@ -201,74 +201,74 @@
 <h1 class="rvps5" style="break-before: always;"><span class="rvts0"><span class="rvts14">Differences in architecture</span></span></h1>
 <p class="rvps2"><span class="rvts6">The table below summarizes the differences in architecture between using data exchange using the classic database based method and the newer intermediary process based approach.</span></p>
 <div class="rvps2">
-<table width="100%" cellpadding="1" style="border-color: canvastext; border-style: solid; border-width: 1px; border-spacing: 0px; border-top: none; border-left: none;">
+<table width="100%" style="border-color: #000000; border-style: solid; border-width: 1px; border-spacing: 0px; border-top: none; border-left: none;">
  <tr style="vertical-align: top;">
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <p class="rvps2"><span class="rvts6">Topic</span></p>
   </td>
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <p class="rvps2"><span class="rvts6">Database based approach</span></p>
   </td>
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <p class="rvps2"><span class="rvts6">Data Connector</span><span class="rvts6"> based approach</span></p>
   </td>
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <p class="rvps2"><span class="rvts6">Remarks</span></p>
   </td>
  </tr>
  <tr style="vertical-align: top;">
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <p class="rvps2"><span class="rvts6">BCS data</span></p>
   </td>
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <p class="rvps2"><span class="rvts6">BCS and external program both read and write to the same database (.bws) file</span></p>
   </td>
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <p class="rvps2"><span class="rvts6">BCS has its own scoring file. No other program should read or write to it.</span></p>
   </td>
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <p class="rvps2"><span class="rvts6">The </span><span class="rvts6">Data Connector</span><span class="rvts6"> stores the exchange data in its own data tables</span></p>
   </td>
  </tr>
  <tr style="vertical-align: top;">
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <p class="rvps2"><span class="rvts6">Consecutive actions</span></p>
   </td>
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <p class="rvps2"><span class="rvts6">No new movement data, handrecords or settings updates can be sent before the previous batch has been processed by BCS as the new batch may overwrite the previous batch with instructions</span></p>
   </td>
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <p class="rvps2"><span class="rvts6">The external program can send consecutive batches of instrucitons (with data). These batches will be processed by BCS in the same order.</span></p>
   </td>
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <p class="rvps2"><span class="rvts6">The .bws Tables table has an UpdateFromRound field that contains instructions for updates to that table. This field should only be modified when its original value is zero. Failure to do so will lead to the loss of the previous instruction contained in this field.</span></p>
   </td>
  </tr>
  <tr style="vertical-align: top;">
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <p class="rvps2"><span class="rvts6">Concurrency conflicts</span></p>
   </td>
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <p class="rvps2"><span class="rvts6">Both BCS and the external program may have to deal with locked database files and concurrent writes to a table (or record).&nbsp;</span></p>
   </td>
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <p class="rvps2"><span class="rvts6">All data sent is atomic: it is not visible to the other side before it has been completely sent. Conflicts are resolved by the </span><span class="rvts6">Data Connector</span><span class="rvts6"> process.&nbsp;</span></p>
   </td>
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <br/>
   </td>
  </tr>
  <tr style="vertical-align: top;">
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <p class="rvps2"><span class="rvts6">New versions</span></p>
   </td>
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <p class="rvps2"><span class="rvts6">Newer functions for the Bridgemates may at some time no longer be supported.</span></p>
   </td>
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <p class="rvps2"><span class="rvts6">New functions will always be supported. Effort will be put in maintaining backward compatibility.</span></p>
   </td>
-  <td style="border-width : 1px; border-color: canvastext; border-style: solid; padding: 1px;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px;">
    <p class="rvps2"><span class="rvts6">The .bws file is a legacy, MS-Access 2000 based, database format. Using the </span><span class="rvts6">Data Connector</span><span class="rvts6"> BCS.Net has its own database format, which will support all future functions of the Bridgemates.</span></p>
   </td>
  </tr>
@@ -310,7 +310,7 @@
   <div id="hnd-splitter" style="left: 350px"></div>  
 
   <!-- Scripts -->
-  <script src="vendors/jquery-3.5.1/jquery.min.js"></script>
+  <script src="vendors/jquery-3.7.1/jquery.min.js"></script>
   <script src="vendors/bootstrap-3.4.1/js/bootstrap.min.js"></script>
   <script src="vendors/bootstrap-3.4.1/js/ie10-viewport-bug-workaround.js"></script>
   <script src="vendors/markjs-8.11.1/jquery.mark.min.js"></script>
@@ -328,22 +328,7 @@
   <script src="js/app.min.js"></script>
 
   <!-- Init script -->
-  <script>
-    $(function() {
-      // Create the app
-      var app = new Hnd.App({
-        searchEngineMinChars: 3
-      });
-      // Update translations
-      hnd_ut(app);
-	  // Instanciate imageMapResizer
-	  imageMapResize();
-	  // Custom JS
-	  
-      // Boot the app
-      app.Boot();
-    });
-  </script>
+  <script src="_topic_init.js"></script>
 
 
 

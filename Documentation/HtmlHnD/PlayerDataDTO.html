@@ -7,7 +7,7 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="generator" content="HelpNDoc Professional Edition 9.1.0.198">
+  <meta name="generator" content="HelpNDoc Professional Edition 9.9.0.637">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href="favicon.ico"/>
 
@@ -241,7 +241,7 @@
   <div id="hnd-splitter" style="left: 350px"></div>  
 
   <!-- Scripts -->
-  <script src="vendors/jquery-3.5.1/jquery.min.js"></script>
+  <script src="vendors/jquery-3.7.1/jquery.min.js"></script>
   <script src="vendors/bootstrap-3.4.1/js/bootstrap.min.js"></script>
   <script src="vendors/bootstrap-3.4.1/js/ie10-viewport-bug-workaround.js"></script>
   <script src="vendors/markjs-8.11.1/jquery.mark.min.js"></script>
@@ -259,22 +259,7 @@
   <script src="js/app.min.js"></script>
 
   <!-- Init script -->
-  <script>
-    $(function() {
-      // Create the app
-      var app = new Hnd.App({
-        searchEngineMinChars: 3
-      });
-      // Update translations
-      hnd_ut(app);
-	  // Instanciate imageMapResizer
-	  imageMapResize();
-	  // Custom JS
-	  
-      // Boot the app
-      app.Boot();
-    });
-  </script>
+  <script src="_topic_init.js"></script>
 
 
 

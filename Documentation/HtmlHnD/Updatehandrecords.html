@@ -7,7 +7,7 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="generator" content="HelpNDoc Professional Edition 9.1.0.198">
+  <meta name="generator" content="HelpNDoc Professional Edition 9.9.0.637">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href="favicon.ico"/>
 
@@ -188,12 +188,12 @@
 
             <div class="main-content">
                 
-<p class="rvps2"><img alt="" style="width : 601px; height : 533px; padding : 1px;" src="lib/Update%20handrecords.png"></p>
-<h3 class="rvps9"><span class="rvts0"><span class="rvts28">Data structure</span></span></h3>
-<p class="rvps2"><img alt="" style="width : 268px; height : 71px; padding : 1px;" src="lib/handrecordDTOClosed.png"></p>
-<h3 class="rvps9"><span class="rvts0"><span class="rvts28">Description</span></span></h3>
-<p class="rvps2"><span class="rvts6">Handrecords can be updated with an array of </span><a class="rvts16" href="HandrecordDTO1.html">HandrecordDTOs</a><span class="rvts6"> using the </span><a class="rvts16" href="Overviewofcommunication.html#OverviewOfCommands">PutHandrecords command</a><span class="rvts6">. Existing handrecords will be updated, the rest will be added. Handrecords preferably are sent with the </span><a class="rvts16" href="InitDTO.html">InitDTO</a><span class="rvts6"> while </span><a class="rvts16" href="Initializeanevent.html">initializing the event</a><span class="rvts6">: this is more performant. Use the updates for movement changes or corrections after the event has started.</span></p>
-<p class="rvps2" style="break-before: always;"><span class="rvts6"></span><span class="rvts6"></span></p>
+<p class="rvps3"><img alt="" style="width : 601px; height : 533px; padding : 1px;" src="lib/Update%20handrecords.png"></p>
+<h3 class="rvps5"><span class="rvts0"><span class="rvts14">Data structure</span></span></h3>
+<p class="rvps3"><img alt="" style="width : 268px; height : 71px; padding : 1px;" src="lib/handrecordDTOClosed.png"></p>
+<h3 class="rvps5"><span class="rvts0"><span class="rvts14">Description</span></span></h3>
+<p class="rvps3"><span class="rvts8">Handrecords can be updated with an array of </span><a class="rvts13" href="HandrecordDTO1.html">HandrecordDTOs</a><span class="rvts8"> using the </span><a class="rvts13" href="Overviewofcommunication.html#OverviewOfCommands">PutHandrecords command</a><span class="rvts8">. Existing handrecords will be updated, the rest will be added. Handrecords preferably are sent with the </span><a class="rvts13" href="InitDTO.html">InitDTO</a><span class="rvts8"> while </span><a class="rvts13" href="Initializeanevent.html">initializing the event</a><span class="rvts8">: this is more performant. Use the updates for movement changes or corrections after the event has started.</span></p>
+<p class="rvps3" style="break-before: always;"><span class="rvts8"></span><span class="rvts8"></span></p>
 
             </div>
             
@@ -228,7 +228,7 @@
   <div id="hnd-splitter" style="left: 350px"></div>  
 
   <!-- Scripts -->
-  <script src="vendors/jquery-3.5.1/jquery.min.js"></script>
+  <script src="vendors/jquery-3.7.1/jquery.min.js"></script>
   <script src="vendors/bootstrap-3.4.1/js/bootstrap.min.js"></script>
   <script src="vendors/bootstrap-3.4.1/js/ie10-viewport-bug-workaround.js"></script>
   <script src="vendors/markjs-8.11.1/jquery.mark.min.js"></script>
@@ -246,22 +246,7 @@
   <script src="js/app.min.js"></script>
 
   <!-- Init script -->
-  <script>
-    $(function() {
-      // Create the app
-      var app = new Hnd.App({
-        searchEngineMinChars: 3
-      });
-      // Update translations
-      hnd_ut(app);
-	  // Instanciate imageMapResizer
-	  imageMapResize();
-	  // Custom JS
-	  
-      // Boot the app
-      app.Boot();
-    });
-  </script>
+  <script src="_topic_init.js"></script>
 
 
 

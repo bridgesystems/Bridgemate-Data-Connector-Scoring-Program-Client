@@ -7,7 +7,7 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="generator" content="HelpNDoc Professional Edition 9.1.0.198">
+  <meta name="generator" content="HelpNDoc Professional Edition 9.9.0.637">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href="favicon.ico"/>
 
@@ -188,20 +188,20 @@
 
             <div class="main-content">
                 
-<h3 class="rvps9"><span class="rvts0"><span class="rvts28">Procedure</span></span></h3>
-<p class="rvps2"><img alt="" style="width : 617px; height : 510px; padding : 1px;" src="lib/Add%20session%201.png"></p>
-<h3 class="rvps9"><span class="rvts0"><span class="rvts28">Data structure</span></span></h3>
-<p class="rvps2"><img alt="" style="width : 869px; height : 55px; padding : 1px;" src="lib/AddSection.png"></p>
-<h3 class="rvps9"><span class="rvts0"><span class="rvts28">Description</span></span></h3>
-<p class="rvps2"><span class="rvts6">Using the </span><a class="rvts16" href="InitDTO.html">InitDTO</a><span class="rvts6"> and the </span><a class="rvts16" href="Overviewofcommunication.html">InitializeEvent command</a><span class="rvts6"> it is possible to </span><a class="rvts16" href="Initializeanevent.html">start </a><a class="rvts16" href="Initializeanevent.html">Bridgemate Control Software</a><span class="rvts6"> with more than one session. After initialization it is possible to </span><a class="rvts16" href="Updatethemovementforasectionorad.html#AddSection">add a section</a><span class="rvts6"> to one of the events that were initialized.</span></p>
-<p class="rvps2"><span class="rvts6">Apart from this it is possible to add a session after initialization. This works using a </span><a class="rvts16" href="SessionDTO.html">SessionDTO</a><span class="rvts6"> and the </span><a class="rvts16" href="Overviewofcommunication.html">AddSession command</a><span class="rvts6">.</span></p>
+<h3 class="rvps5"><span class="rvts0"><span class="rvts14">Procedure</span></span></h3>
+<p class="rvps3"><img alt="" style="width : 617px; height : 510px; padding : 1px;" src="lib/Add%20session%201.png"></p>
+<h3 class="rvps5"><span class="rvts0"><span class="rvts14">Data structure</span></span></h3>
+<p class="rvps3"><img alt="" style="width : 869px; height : 55px; padding : 1px;" src="lib/AddSection.png"></p>
+<h3 class="rvps5"><span class="rvts0"><span class="rvts14">Description</span></span></h3>
+<p class="rvps3"><span class="rvts8">Using the </span><a class="rvts13" href="InitDTO.html">InitDTO</a><span class="rvts8"> and the </span><a class="rvts13" href="Overviewofcommunication.html">InitializeEvent command</a><span class="rvts8"> it is possible to </span><a class="rvts13" href="Initializeanevent.html">start </a><a class="rvts13" href="Initializeanevent.html">Bridgemate Control Software</a><span class="rvts8"> with more than one session. After initialization it is possible to </span><a class="rvts13" href="Updatethemovementforasectionorad.html#AddSection">add a section</a><span class="rvts8"> to one of the events that were initialized.</span></p>
+<p class="rvps3"><span class="rvts8">Apart from this it is possible to add a session after initialization. This works using a </span><a class="rvts13" href="SessionDTO.html">SessionDTO</a><span class="rvts8"> and the </span><a class="rvts13" href="Overviewofcommunication.html">AddSession command</a><span class="rvts8">.</span></p>
 <ul style="text-indent: 0px; padding: 0; margin: 0 0 0 24px; list-style-position: outside; list-style-type: disc;">
- <li class="rvps2 noindent"><span class="rvts6">Set the ScoringProgramRequest.SessionGuid property to the </span><span class="rvts30">EventGuid</span><span class="rvts6"> that was used when sending the InitDTO. Mind that when the event was initialized with one session and no event guid was specified at that time, the event guid will be equal to the single session's SessionGuid property.</span></li>
- <li class="rvps2 noindent"><span class="rvts6">Add scoringgroups, sections, tables and rounds.</span></li>
- <li class="rvps2 noindent"><span class="rvts6">Send the ScoringProgramRequest with the </span><a class="rvts16" href="Overviewofcommunication.html">AddSection command.</a></li>
- <li class="rvps2 noindent"><span class="rvts6">Optionally proceed with sennding </span><a class="rvts16" href="Updateplayerdata.html">playerdata</a><span class="rvts6">,</span><a class="rvts16" href="Updateparticipations.html"> participations, </a><a class="rvts16" href="Updatehandrecords.html">handrecords</a><span class="rvts6"> and </span><a class="rvts16" href="UpdateBridgematesettings.html">Bridgemate settings</a><span class="rvts6">.</span></li>
+ <li class="rvps3 noindent"><span class="rvts8">Set the ScoringProgramRequest.SessionGuid property to the </span><span class="rvts17">EventGuid</span><span class="rvts8"> that was used when sending the InitDTO. Mind that when the event was initialized with one session and no event guid was specified at that time, the event guid will be equal to the single session's SessionGuid property.</span></li>
+ <li class="rvps3 noindent"><span class="rvts8">Add scoringgroups, sections, tables and rounds.</span></li>
+ <li class="rvps3 noindent"><span class="rvts8">Send the ScoringProgramRequest with the </span><a class="rvts13" href="Overviewofcommunication.html">AddSection command.</a></li>
+ <li class="rvps3 noindent"><span class="rvts8">Optionally proceed with sennding </span><a class="rvts13" href="Updateplayerdata.html">playerdata</a><span class="rvts8">,</span><a class="rvts13" href="Updateparticipations.html"> participations, </a><a class="rvts13" href="Updatehandrecords.html">handrecords</a><span class="rvts8"> and </span><a class="rvts13" href="UpdateBridgematesettings.html">Bridgemate settings</a><span class="rvts8">.</span></li>
 </ul>
-<p class="rvps2" style="break-before: always;"><span class="rvts6"></span><span class="rvts6"></span></p>
+<p class="rvps3" style="break-before: always;"><span class="rvts8"></span><span class="rvts8"></span></p>
 
             </div>
             
@@ -236,7 +236,7 @@
   <div id="hnd-splitter" style="left: 350px"></div>  
 
   <!-- Scripts -->
-  <script src="vendors/jquery-3.5.1/jquery.min.js"></script>
+  <script src="vendors/jquery-3.7.1/jquery.min.js"></script>
   <script src="vendors/bootstrap-3.4.1/js/bootstrap.min.js"></script>
   <script src="vendors/bootstrap-3.4.1/js/ie10-viewport-bug-workaround.js"></script>
   <script src="vendors/markjs-8.11.1/jquery.mark.min.js"></script>
@@ -254,22 +254,7 @@
   <script src="js/app.min.js"></script>
 
   <!-- Init script -->
-  <script>
-    $(function() {
-      // Create the app
-      var app = new Hnd.App({
-        searchEngineMinChars: 3
-      });
-      // Update translations
-      hnd_ut(app);
-	  // Instanciate imageMapResizer
-	  imageMapResize();
-	  // Custom JS
-	  
-      // Boot the app
-      app.Boot();
-    });
-  </script>
+  <script src="_topic_init.js"></script>
 
 
 

@@ -7,7 +7,7 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="generator" content="HelpNDoc Professional Edition 9.1.0.198">
+  <meta name="generator" content="HelpNDoc Professional Edition 9.9.0.637">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href="favicon.ico"/>
 
@@ -188,13 +188,13 @@
 
             <div class="main-content">
                 
-<p class="rvps2"><img alt="" style="width : 551px; height : 488px; padding : 1px;" src="lib/Update%20scoringgroups%201.png"></p>
-<h3 class="rvps9"><span class="rvts0"><span class="rvts28">Data structure</span></span></h3>
-<p class="rvps2"><img alt="" style="width : 602px; height : 90px; padding : 1px;" src="lib/ScoringGroupUpdateDTOClosed.png"></p>
-<h3 class="rvps9"><span class="rvts0"><span class="rvts28">Description</span></span></h3>
-<p class="rvps2"><span class="rvts6">The configuration of the scoringgroups can be upated using a </span><a class="rvts16" href="ScoringGroupDTO.html">ScoringGroupDTO</a><span class="rvts6"> and attachting the </span><a class="rvts16" href="SectionDTO.html">SectionDTOs</a><span class="rvts6"> to it that should beccome part of it. Send the ScoringGroupDTOs using the </span><a class="rvts16" href="Overviewofcommunication.html#OverviewOfCommands">UpdateScoringGroups</a><span class="rvts6"> command. Mind that each section must have a scoringgroup, so take care that no section is without one. Existing scoringgroups will be updated, the rest will be added.</span></p>
-<p class="rvps2"><span class="rvts11">Note</span><br/><span class="rvts6">When adding a section that will be part of a new scoringgroup be sure to add the scoringgroup first.</span></p>
-<p class="rvps2" style="break-before: always;"><span class="rvts6"></span><span class="rvts6"></span></p>
+<p class="rvps3"><img alt="" style="width : 551px; height : 488px; padding : 1px;" src="lib/Update%20scoringgroups%201.png"></p>
+<h3 class="rvps5"><span class="rvts0"><span class="rvts14">Data structure</span></span></h3>
+<p class="rvps3"><img alt="" style="width : 602px; height : 90px; padding : 1px;" src="lib/ScoringGroupUpdateDTOClosed.png"></p>
+<h3 class="rvps5"><span class="rvts0"><span class="rvts14">Description</span></span></h3>
+<p class="rvps3"><span class="rvts8">The configuration of the scoringgroups can be upated using a </span><a class="rvts13" href="ScoringGroupDTO.html">ScoringGroupDTO</a><span class="rvts8"> and attachting the </span><a class="rvts13" href="SectionDTO.html">SectionDTOs</a><span class="rvts8"> to it that should beccome part of it. Send the ScoringGroupDTOs using the </span><a class="rvts13" href="Overviewofcommunication.html#OverviewOfCommands">UpdateScoringGroups</a><span class="rvts8"> command. Mind that each section must have a scoringgroup, so take care that no section is without one. Existing scoringgroups will be updated, the rest will be added.</span></p>
+<p class="rvps3"><span class="rvts15">Note</span><br/><span class="rvts8">When adding a section that will be part of a new scoringgroup be sure to add the scoringgroup first.</span></p>
+<p class="rvps3" style="break-before: always;"><span class="rvts8"></span><span class="rvts8"></span></p>
 
             </div>
             
@@ -229,7 +229,7 @@
   <div id="hnd-splitter" style="left: 350px"></div>  
 
   <!-- Scripts -->
-  <script src="vendors/jquery-3.5.1/jquery.min.js"></script>
+  <script src="vendors/jquery-3.7.1/jquery.min.js"></script>
   <script src="vendors/bootstrap-3.4.1/js/bootstrap.min.js"></script>
   <script src="vendors/bootstrap-3.4.1/js/ie10-viewport-bug-workaround.js"></script>
   <script src="vendors/markjs-8.11.1/jquery.mark.min.js"></script>
@@ -247,22 +247,7 @@
   <script src="js/app.min.js"></script>
 
   <!-- Init script -->
-  <script>
-    $(function() {
-      // Create the app
-      var app = new Hnd.App({
-        searchEngineMinChars: 3
-      });
-      // Update translations
-      hnd_ut(app);
-	  // Instanciate imageMapResizer
-	  imageMapResize();
-	  // Custom JS
-	  
-      // Boot the app
-      app.Boot();
-    });
-  </script>
+  <script src="_topic_init.js"></script>
 
 
 
