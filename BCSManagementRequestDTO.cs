@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient;
 
 namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
 {
