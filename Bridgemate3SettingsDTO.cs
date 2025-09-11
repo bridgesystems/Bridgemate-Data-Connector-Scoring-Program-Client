@@ -369,14 +369,15 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         Disabled,
 
         /// <summary>
+        /// Handrecords can be entered after play of the board.
+        /// </summary>
+        AtEndOfBoard,
+
+        /// <summary>
         /// Handrecords can be entered at the end of the round.
         /// </summary>
         AtEndOfRound,
 
-        /// <summary>
-        /// Handrecords can be entered after play of the board.
-        /// </summary>
-        AtEndOfBoard
     }
 
     /// <summary>
