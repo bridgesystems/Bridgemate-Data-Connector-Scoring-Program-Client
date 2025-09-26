@@ -125,7 +125,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         public bool Validate(bool allowPlayerNumberAndName)
         {
             var validationMessages =new List<string>();
-            if (SessionGuid.Length != 32)
+            if (SessionGuid?.Length != 32)
             {
                 validationMessages.Add($"Invalid {nameof(SessionGuid)} ({SessionGuid}). The value must be in capitals and be exactly 32 characters long.");
             }
