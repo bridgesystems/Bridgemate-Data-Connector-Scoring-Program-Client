@@ -1077,7 +1077,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             LogMethodEntry(nameof(AddSession));
 
             var serializedData = JsonSerializer.Serialize(addedSession);
-            return SendData(addedSession.SessionGuid, ScoringProgramDataConnectorCommands.AddSession, serializedData);
+            return SendData(addedSession.EventGuid, ScoringProgramDataConnectorCommands.AddSession, serializedData);
         }
 
         /// <summary>
