@@ -1,85 +1,23 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient;
 
 namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
 {
     /// <summary>
-    /// Contains information on how to construct a new event, with its sessions, sections, tables and rounds.
-    /// Optionally player data, participations and handrecords can be added. Doing this is more performant than adding them later.
-    /// Is used as a parameter for the <see cref="ScoringProgramDataConnectorClientCommandManager.Initialize(InitDTO)">ScoringProgramPipeClient.Initialize</see> or the 
-    /// <see cref="ScoringProgramDataConnectorClientCommandManager.InitializeAsync(InitDTO)">ScoringProgramPipeClient.InitializeAsync</see> method.
+    /// Use this DTO to add a session to an existing event.
     /// </summary>
-    public class InitDTO
+    public class AddSessionDTO
     {
-        public InitDTO()
+        /// <summary>
+        /// Initializes the DTO.
+        /// </summary>
+        public AddSessionDTO()
         {
             ClubId = string.Empty;
         }
-        /// <summary>
-        /// Instructs the Data Connector to start BCS.
-        /// </summary>
-        public const int StartBCS = 1;
 
         /// <summary>
-        /// Instructs BCS to create a new event from the data in this DTO.
-        /// </summary>
-        public const int Command_Reset = 2;
-
-        /// <summary>
-        /// Instructs BCS to start reading from the Data Connector.
-        /// </summary>
-        public const int Command_StartReading = 4;
-
-        /// <summary>
-        /// Instructs BCS to upload the sessions to the Bridgemate App server.
-        /// </summary>
-        public const int Command_ShowInApp = 8;
-
-        /// <summary>
-        /// Instructs BCS to start minimized.
-        /// </summary>
-        public const int Command_Minimize = 16;
-
-        /// <summary>
-        /// Instructs BCS to shut down after the last result has been processed.
-        /// </summary>
-        public const int Command_AutoShutDownBPC = 32;
-
-        /// <summary>
-        /// Sets the log level to "Debug" rather than "Info".
-        /// </summary>
-        public const int Command_LogLevel_Debug = 64;
-
-        /// <summary>
-        /// Instructs the Data Connector to clear all its previous data and start with a clean slate.
-        /// </summary>
-        public const int Command_ClearData = 128;
-
-        /// <summary>
-        /// Instructs the Data Connector to use communicate over http.
-        /// </summary>
-        public const int Command_UseHttp = 256;
-
-        /// <summary>
-        /// Instructions to BCS. Add up the values to combine.<br/>
-        /// 1. Start BCS (if not already started).<br/>
-        /// 2: Reset the Bridgemates (and App) and fill them with the provided data.<br/>
-        /// 4: Start Reading from the Bridgemates, Data Connector (and App).<br/>
-        /// 8: Upload the sessions to the app.<br/>
-        /// 16: Minimize BCS<br/>
-        /// 32:Close BCS when all results have been processed.<br/>
-        /// 64: Lower the logging level from "Info" to "Debug".<br/>
-        /// 128:Clear all previous data from the Data Connector queue.
-        /// </summary>
-        public int Commands
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Required if the number of sessions is greater than one. This signals that BCS should administer these sessions together.
+        /// Required. The guid of the event to add this session to.
         /// </summary>
         public string EventGuid
         {
@@ -94,24 +32,15 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
 
 
         /// <summary>
-        /// Optional. Specifies a different directory for the BCS scoring file. Only use in advanced scenarios.
-        /// If used make sure that the directory exists.
+        /// Required
         /// </summary>
-        public string AlternativeDataFolder
+        public SessionDTO Session
         {
             get; set;
         }
 
         /// <summary>
-        /// Required, must be at least one.
-        /// </summary>
-        public SessionDTO[] Sessions
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Optional: the data of at least the players that will participate in the sessions.
+        /// Optional: the data of at least the players that will participate in the session.
         /// <see cref="PlayerDataDTO">Player data</see> is required for every <see cref="ParticipationDTO">participation</see> that has its a SessionGuid and PlayerNumber properties set.
         /// </summary>
         public PlayerDataDTO[] PlayerData
@@ -168,48 +97,34 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         {
             var validationMessages = new List<string>();
 
-            if (Commands < 0 || Commands > 255)
+            if (Session == null)
             {
-                validationMessages.Add($"The Commands ({Commands}) must be between 0 and 63.");
-            }
-            if (!string.IsNullOrWhiteSpace(AlternativeDataFolder))
-            {
-                if (!Directory.Exists(AlternativeDataFolder))
-                {
-                    validationMessages.Add($"The specified alternative data folder ('{AlternativeDataFolder}' does not exist.)");
-                }
-            }
-            if (Sessions == null || Sessions.Length == 0)
-            {
-                validationMessages.Add("At least one session is required.");
+                validationMessages.Add("A session is required.");
+                ValidationMessages=validationMessages.ToArray();
+                return false;
             }
 
-            if (Sessions.Length > 1)
+            if (EventGuid == null || (EventGuid.Length != 32 || EventGuid.Any(c => !(c >= 'A' && c <= 'F' || c >= '0' && c <= '9'))))
             {
-                if (string.IsNullOrWhiteSpace(EventGuid))
-                {
-                    validationMessages.Add($"If there is more than one session the {nameof(EventGuid)} must be specified and it must be identical " +
-                        $"to the sessions' {nameof(SessionDTO.EventGuid)}.");
-                }
-                else
-                {
-                    foreach (var session in Sessions)
-                    {
-                        if (session.EventGuid != EventGuid)
-                            validationMessages.Add($"The {nameof(SessionDTO.EventGuid)} ('{session.EventGuid}') of session " +
-                                $"'{session.Name}' ({session.SessionGuid}) are not the same.");
-                    }
-                }
-
+                validationMessages.Add("The event guid is required and must be exactly 32 character long and can only contain capital A to F or digits 0 to 9.");
+                ValidationMessages = validationMessages.ToArray();
+                return false;
             }
-            if (EventGuid != null && (EventGuid.Length != 32 || EventGuid.Any(c => !(c >= 'A' && c <= 'F' || c >= '0' && c <= '9'))))
+
+            if (EventGuid != Session.EventGuid) 
             {
-                validationMessages.Add("The event guid, if used, must be exactly 32 character long and can only contain capital A to F or digits 0 to 9.");
+                validationMessages.Add($"The event guid in the session must be equal to the {nameof(EventGuid)} property: '{EventGuid}', " +
+                                       $"but it is '{Session.EventGuid}'");
+            }
+
+            if (!Session.Validate(forAdding: true))
+            {
+                validationMessages.AddRange(Session.ValidationMessages);
             }
 
             if (PlayerData.Any())
             {
-                var sessionGuids = Sessions.Select(s => s.SessionGuid).ToArray();
+                var sessionGuid = Session.SessionGuid;
                 foreach (var data in PlayerData)
                 {
                     if (!data.Validate())
@@ -218,10 +133,10 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                         validationMessages.Add($"{nameof(PlayerData)} '{data.FirstName} {data.LastName} ({data.SessionGuid}-{data.PlayerNumber})': " +
                                                $"{errorMessage} ");
                     }
-                    if (!sessionGuids.Contains(data.SessionGuid))
+                    if (sessionGuid != data.SessionGuid)
                     {
                         validationMessages.Add($"{nameof(PlayerData)}.{nameof(PlayerDataDTO.SessionGuid)} ('{data.SessionGuid}') " +
-                            $"must be one of the sessions' guids ({string.Join(", ", sessionGuids)}).");
+                            $"must be equal to the sessions' guids({sessionGuid}).");
                     }
                 }
                 var ids = PlayerData.GroupBy(data => data.PlayerNumber ?? "");
