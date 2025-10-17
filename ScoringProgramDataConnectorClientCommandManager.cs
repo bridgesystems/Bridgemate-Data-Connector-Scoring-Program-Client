@@ -1058,7 +1058,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// </summary>
         /// <param name="addedSession"></param>
         /// <returns></returns>
-        public async Task<ScoringProgramResponse> AddSessionAsync(SessionDTO addedSession)
+        public async Task<ScoringProgramResponse> AddSessionAsync(AddSessionDTO addedSession)
         {
             LogMethodEntry(nameof(AddSessionAsync));
 
@@ -1072,7 +1072,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// </summary>
         /// <param name="addedSession"></param>
         /// <returns></returns>
-        public ScoringProgramResponse AddSession(SessionDTO addedSession)
+        public ScoringProgramResponse AddSession(AddSessionDTO addedSession)
         {
             LogMethodEntry(nameof(AddSession));
 

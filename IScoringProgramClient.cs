@@ -64,14 +64,14 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// </summary>
         /// <param name="addedSession"></param>
         /// <returns></returns>
-        ScoringProgramResponse AddSession(SessionDTO addedSession);
+        ScoringProgramResponse AddSession(AddSessionDTO addedSession);
 
         /// <summary>
         /// Asynchronously adds the given session to an existing event.
         /// </summary>
         /// <param name="addedSession"></param>
         /// <returns></returns>
-        Task<ScoringProgramResponse> AddSessionAsync(SessionDTO addedSession);
+        Task<ScoringProgramResponse> AddSessionAsync(AddSessionDTO addedSession);
         
         /// <summary>
         /// Synchronously clears all dataconnector data for the club.
