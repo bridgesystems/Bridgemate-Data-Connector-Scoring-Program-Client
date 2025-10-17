@@ -100,7 +100,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             if (Session == null)
             {
                 validationMessages.Add("A session is required.");
-                ValidationMessages=validationMessages.ToArray();
+                ValidationMessages = validationMessages.ToArray();
                 return false;
             }
 
@@ -111,7 +111,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                 return false;
             }
 
-            if (EventGuid != Session.EventGuid) 
+            if (EventGuid != Session.EventGuid)
             {
                 validationMessages.Add($"The event guid in the session must be equal to the {nameof(EventGuid)} property: '{EventGuid}', " +
                                        $"but it is '{Session.EventGuid}'");
@@ -122,7 +122,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                 validationMessages.AddRange(Session.ValidationMessages);
             }
 
-            if (PlayerData.Any())
+            if (PlayerData != null && PlayerData.Any())
             {
                 var sessionGuid = Session.SessionGuid;
                 foreach (var data in PlayerData)
@@ -146,7 +146,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                                            $"'{id.First().FirstName}+{id.First().LastName}'");
                 }
             }
-            if (Participations.Any())
+            if (Participations != null && Participations.Any())
             {
                 foreach (var participation in Participations)
                 {
@@ -168,7 +168,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                                            $"has no corresponding {nameof(PlayerDataDTO)}");
                 }
             }
-            if (Handrecords.Any())
+            if (Handrecords!=null && Handrecords.Any())
             {
                 foreach (var handrecord in Handrecords)
                 {
