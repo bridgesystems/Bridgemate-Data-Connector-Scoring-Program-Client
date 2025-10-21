@@ -207,7 +207,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                 validationMessages.Add("The event guid, if used, must be exactly 32 character long and can only contain capital A to F or digits 0 to 9.");
             }
 
-            if (PlayerData.Any())
+            if (PlayerData!=null && PlayerData.Any())
             {
                 var sessionGuids = Sessions.Select(s => s.SessionGuid).ToArray();
                 foreach (var data in PlayerData)
@@ -231,8 +231,15 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                                            $"'{id.First().FirstName}+{id.First().LastName}'");
                 }
             }
-            if (Participations.Any())
+            if (Participations!=null && Participations.Any())
             {
+                if (PlayerData == null)
+                {
+                    validationMessages.Add($"No {nameof(PlayerDataDTO)} defined, but there are " +
+                                           $"{Participations.Length} {nameof(ParticipationDTO)}s defined. " +
+                                           $"Each {nameof(ParticipationDTO)} with its SessionGuid and PlayerNumber properties set " +
+                                           $"must have a corresponding {nameof(PlayerDataDTO)} that specifies at least its name.");
+                }
                 foreach (var participation in Participations)
                 {
                     if (!participation.Validate(allowPlayerNumberAndName: false))
@@ -244,16 +251,16 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                 }
                 foreach (var participation in Participations)
                 {
-                    var id = participation.SessionGuid ?? "" + participation.PlayerNumber ?? "";
+                    var id = (participation.SessionGuid ?? "") + (participation.PlayerNumber ?? "");
                     if (string.IsNullOrEmpty(id) || id == (participation.SessionGuid ?? ""))
                         continue;
-                    if (PlayerData.Any(data => (data.SessionGuid ?? "" + data.PlayerNumber ?? "") == id))
+                    if (PlayerData.Any(data => ((data.SessionGuid ?? "") + (data.PlayerNumber ?? "")) == id))
                         continue;
                     validationMessages.Add($"{nameof(ParticipationDTO)} '{participation.SessionGuid}-{participation.PlayerNumber}' " +
                                            $"has no corresponding {nameof(PlayerDataDTO)}");
                 }
             }
-            if (Handrecords.Any())
+            if (Handrecords!=null && Handrecords.Any())
             {
                 foreach (var handrecord in Handrecords)
                 {

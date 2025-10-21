@@ -148,24 +148,34 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             }
             if (Participations != null && Participations.Any())
             {
-                foreach (var participation in Participations)
+                if (PlayerData == null)
                 {
-                    if (!participation.Validate(allowPlayerNumberAndName: false))
-                    {
-                        var errorMessage = string.Join(", ", participation.ValidationMessages);
-                        validationMessages.Add($"{nameof(ParticipationDTO)}  '{participation.SessionGuid}-{participation.PlayerNumber}': " +
-                                               $"{errorMessage} ");
-                    }
+                    validationMessages.Add($"No {nameof(PlayerDataDTO)} defined, but there are " +
+                                           $"{Participations.Length} {nameof(ParticipationDTO)}s defined. " +
+                                           $"Each {nameof(ParticipationDTO)} with its SessionGuid and PlayerNumber properties set " +
+                                           $"must have a corresponding {nameof(PlayerDataDTO)} that specifies at least its name.");
                 }
-                foreach (var participation in Participations)
+                else
                 {
-                    var id = participation.SessionGuid ?? "" + participation.PlayerNumber ?? "";
-                    if (string.IsNullOrEmpty(id) || id == (participation.SessionGuid ?? ""))
-                        continue;
-                    if (PlayerData.Any(data => (data.SessionGuid ?? "" + data.PlayerNumber ?? "") == id))
-                        continue;
-                    validationMessages.Add($"{nameof(ParticipationDTO)} '{participation.SessionGuid}-{participation.PlayerNumber}' " +
-                                           $"has no corresponding {nameof(PlayerDataDTO)}");
+                    foreach (var participation in Participations)
+                    {
+                        if (!participation.Validate(allowPlayerNumberAndName: false))
+                        {
+                            var errorMessage = string.Join(", ", participation.ValidationMessages);
+                            validationMessages.Add($"{nameof(ParticipationDTO)}  '{participation.SessionGuid}-{participation.PlayerNumber}': " +
+                                                   $"{errorMessage} ");
+                        }
+                    }
+                    foreach (var participation in Participations)
+                    {
+                        var id = (participation.SessionGuid ?? "") + (participation.PlayerNumber ?? "");
+                        if (string.IsNullOrEmpty(id) || id == (participation.SessionGuid ?? ""))
+                            continue;
+                        if (PlayerData.Any(data => ((data.SessionGuid ?? "") + (data.PlayerNumber ?? "")) == id))
+                            continue;
+                        validationMessages.Add($"{nameof(ParticipationDTO)} '{participation.SessionGuid}-{participation.PlayerNumber}' " +
+                                               $"has no corresponding {nameof(PlayerDataDTO)}");
+                    }
                 }
             }
             if (Handrecords!=null && Handrecords.Any())
