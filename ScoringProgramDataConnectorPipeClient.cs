@@ -28,7 +28,6 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     /// <see cref="ScoringProgramDataConnectorClientCommandManager.Initialize(InitDTO)">Initialize</see> and <see cref="ScoringProgramDataConnectorPipeClient.InitializeAsync(InitDTO)">InitializeAsync</see>: Initialization of a new event. <br/>
     /// <see cref="ScoringProgramDataConnectorClientCommandManager.IssueManagementCommand(BCSManagementRequestDTO)">IssueManagementCommand</see> and <see cref="ScoringProgramDataConnectorClientCommandManager.IssueManagementCommandAsync(BCSManagementRequestDTO)">IssueManagementCommandAsync</see>: Query the Bridgemate Control Software.
     /// </summary>
-    /// 
     public class ScoringProgramDataConnectorPipeClient : ScoringProgramDataConnectorClientCommandManager, IScoringProgramClient
     {
         /// <summary>
