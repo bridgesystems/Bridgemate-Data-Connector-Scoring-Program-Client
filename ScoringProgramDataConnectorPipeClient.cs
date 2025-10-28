@@ -11,7 +11,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 {
     /// <summary>
     /// Handles request from the scoring programs. This code is freely available for external programmers to adapt to their
-    /// specific needs. This code, however, is guaranteed to work. Interop options are available for many programming languages.
+    /// specific needs. This code, however, is guaranteed to work. Interop options are available for many programming languages 
+    /// that can interface with .Net Standard 2.0 assemblies.
     /// <br/>
     /// Note that this class is written as a singleton: there should never be more than one instance communicating over the pipe. 
     /// The constructor is protected however, so by inheriting from this class a non singleton instance can be used.
