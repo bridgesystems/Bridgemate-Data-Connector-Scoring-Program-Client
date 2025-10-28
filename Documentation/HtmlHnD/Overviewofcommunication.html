@@ -331,11 +331,28 @@
    <p class="rvps2"><span class="rvts6">Instructs BCS to change the movement for the given section, or to delete it.</span></p>
   </td>
   <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px; width: 150px;">
-   <p class="rvps2"><a class="rvts16" href="SectionDTO.html">SectionDTO</a></p>
+   <p class="rvps2"><a class="rvts16" href="SectionUpdateDTO.html">SectionUpdateDTO</a></p>
   </td>
   <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px; width: 432px;">
-   <p class="rvps2"><span class="rvts6">The SectionDTO holds Tables as an array of TableDTOs. Each TableDTO holds Rounds as an array of RoundDTOs. Each RoundDTO contains data on the opponents and the boards played.</span><br/><span class="rvts6">The SectionDTO holds a IsDeleted property that can be set to 'True' if the section must be deleted.</span></p>
+   <p class="rvps2"><span class="rvts6">The SectionUpdateDTO holds Tables as an array of TableDTOs. Each TableDTO holds Rounds as an array of RoundDTOs. Each RoundDTO contains data on the opponents and the boards played. Optionally an array of ParticipationDTOs can be added to set the players at the round one tables.</span><br/><span class="rvts6">The SectionUpdateDTO holds a IsDeleted property that can be set to 'True' if the section must be deleted.</span></p>
    <p class="rvps2"><span class="rvts6">If the section does not yet exist, it will be added.</span></p>
+  </td>
+ </tr>
+ <tr style="vertical-align: top;">
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px; width: 243px;">
+   <p class="rvps2"><span class="rvts6">AddSession</span></p>
+  </td>
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px; width: 80px;">
+   <p class="rvps2"><span class="rvts6">7</span></p>
+  </td>
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px; width: 325px;">
+   <p class="rvps2"><span class="rvts6">Instructs BCS to add a session to an existing event.</span></p>
+  </td>
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px; width: 150px;">
+   <p class="rvps2"><a class="rvts16" href="AddSessionDTO.html">AddSessionDTO</a></p>
+  </td>
+  <td style="border-width : 1px; border-color: #000000; border-style: solid; padding: 1px; width: 432px;">
+   <p class="rvps2"><span class="rvts6">The AddSessionDTO contains a SessionDTO and optionally arrays of PlayerDataDTOs, ParticipationDTOs, HandrecordDTOs and BridgemateSettingsDTOs.</span></p>
   </td>
  </tr>
  <tr style="vertical-align: top;">

@@ -30,7 +30,7 @@ Below you find all Data Transfer Objects (DTOs) and their relation according to 
 
 ### [Add session](<Addasession.md>)
 
-![Image](<lib/AddSection.png>)
+![Image](<lib/AddSessionDTO 2.png>)
 
 &nbsp;
 
