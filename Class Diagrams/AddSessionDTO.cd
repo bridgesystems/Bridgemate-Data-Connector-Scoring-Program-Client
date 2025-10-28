@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.AddSessionDTO">
+    <Position X="3.5" Y="0.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Bridgemate3Settings" Type="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate3SettingsDTO" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.562" Y="2.247" />
+        <Point X="4.59" Y="2.482" />
+        <Point X="4.59" Y="3.125" />
+        <Point X="6.75" Y="3.125" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AhAAEABAAACABQAAAAAiAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AddSessionDTO.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Session" />
+      <Property Name="PlayerData" />
+      <Property Name="Participations" />
+      <Property Name="Handrecords" />
+      <Property Name="Bridgemate2Settings" />
+      <Property Name="Bridgemate3Settings" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.ParticipationDTO" Collapsed="true">
+    <Position X="6.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAEBAAACEEAAkADAAAAAAEABAAAAAAAAAAAAAABg=</HashCode>
+      <FileName>ParticipationDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.PlayerDataDTO" Collapsed="true">
+    <Position X="6.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAEEBAAACAAAAAABAAAAAAEAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>PlayerDataDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate2SettingsDTO" Collapsed="true">
+    <Position X="6.75" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>EAoCgCCADAaIoAABIcBwABAj0DJQAAAAhEAE8DAEIBA=</HashCode>
+      <FileName>Bridgemate2SettingsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate3SettingsDTO" Collapsed="true">
+    <Position X="6.75" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAAAAQQABACAgEAAAMAQEJFikAiAAAAAgAAMAAAAABA=</HashCode>
+      <FileName>Bridgemate3SettingsDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.HandrecordDTO" Collapsed="true">
+    <Position X="6.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAQBEASDAEFAFBEhIIgAIGBsGAQABgAAARAADBAA=</HashCode>
+      <FileName>HandrecordDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.SessionDTO" Collapsed="true">
+    <Position X="1" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgABAABAJACAAAAAAAAAAAQAEQAAgCIUAAAAAAAAAAA=</HashCode>
+      <FileName>SessionDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
