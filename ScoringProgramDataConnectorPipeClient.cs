@@ -1,4 +1,5 @@
 ﻿using BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnector;
+using BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO;
 using System;
 using System.IO;
 using System.IO.Pipes;
@@ -24,8 +25,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     /// All public functions have synchronous and asynchronous implementations (ending in "Async").
     /// <br/>
     /// To get started inspect the following functions:<br/>
-    /// <see cref=Connect">Connect</see> and <see cref="ConnectAsync">ConnectAsync</see>: Connection to the Data Connector.<br/>
-    /// <see cref="ScoringProgramDataConnectorClientCommandManager.Initialize(InitDTO)">Initialize</see> and <see cref="ScoringProgramDataConnectorPipeClient.InitializeAsync(InitDTO)">InitializeAsync</see>: Initialization of a new event. <br/>
+    /// <see cref="Connect()">Connect</see> and <see cref="ConnectAsync()">ConnectAsync</see>: Connection to the Data Connector.<br/>
+    /// <see cref="ScoringProgramDataConnectorClientCommandManager.Initialize(InitDTO)">Initialize</see> and <see cref="ScoringProgramDataConnectorClientCommandManager.InitializeAsync(InitDTO)">InitializeAsync</see>: Initialization of a new event. <br/>
     /// <see cref="ScoringProgramDataConnectorClientCommandManager.IssueManagementCommand(BCSManagementRequestDTO)">IssueManagementCommand</see> and <see cref="ScoringProgramDataConnectorClientCommandManager.IssueManagementCommandAsync(BCSManagementRequestDTO)">IssueManagementCommandAsync</see>: Query the Bridgemate Control Software.
     /// </summary>
     public class ScoringProgramDataConnectorPipeClient : ScoringProgramDataConnectorClientCommandManager, IScoringProgramClient
