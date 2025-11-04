@@ -606,7 +606,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             var validationMessages = new List<string>(ValidationMessages);
             if (BM3ScreenDimMode < 0 || BM3ScreenDimMode > 15)
                 validationMessages.Add($"Invalid {nameof(BM3ScreenDimMode)} ({BM3ScreenDimMode}). Value must be between 0 and 15");
-            if (BM3ScreenBrightness < 1 || BM3ScreenDimMode > 7)
+            if (BM3ScreenBrightness < 1 || BM3ScreenBrightness > 7)
                 validationMessages.Add($"Invalid {nameof(BM3ScreenBrightness)} ({BM3ScreenBrightness}). Value must be between 1 and 7");
             if (BM3SleepMode < 0 || BM3SleepMode > 120)
                 validationMessages.Add($"Invalid {nameof(BM3SleepMode)} ({BM3SleepMode}). Value must be between 0 and 120");
