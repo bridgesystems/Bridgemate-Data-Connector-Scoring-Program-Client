@@ -22,7 +22,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         public const int GetRunningSessions = 2;
 
         /// <summary>
-        /// Returns the full path to the scoring file (i.e. for back-up purposes). Can be combined with GetRunningSessions.
+        /// Returns the full path to the scoring file (i.e. for back-up purposes). Can be combined with GetRunningSessions and GetDataConnectorFileLocation.
         /// </summary>
         public const int GetScoringFileLocation = 4;
 
@@ -30,6 +30,11 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// Asks the Data Connector to return an array of eventguid-sessionguid-session name pairs for all sessions in the scoring file.
         /// </summary>
         public const int GetAllSessionsInformation = 8;
+
+        /// <summary>
+        /// Returns the full path to the data connector messages file (i.e. for back-up purposes). Can be combined with GetRunningSessions and GetScoringFileLocaation.
+        /// </summary>
+        public const int GetDataConnectorFileLocation = 16;
 
         /// <summary>
         /// Must be (a combination of) one of the constants above.
@@ -55,12 +60,15 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         public bool Validate()
         {
             var validationsErrors = new List<string>();
-            if (!(Command == ShutDownNow || Command == GetRunningSessions || Command == GetScoringFileLocation || 
-                  Command== GetAllSessionsInformation || 
-                  Command == GetRunningSessions + GetScoringFileLocation))
+            if (!(Command == ShutDownNow || Command == GetRunningSessions || Command == GetScoringFileLocation ||
+                  Command == GetDataConnectorFileLocation || Command == GetAllSessionsInformation ||
+                  Command == GetRunningSessions + GetScoringFileLocation ||
+                  Command == GetRunningSessions + GetDataConnectorFileLocation ||
+                  Command == GetRunningSessions + GetScoringFileLocation+ GetDataConnectorFileLocation ||
+                  Command == GetScoringFileLocation + GetDataConnectorFileLocation))
             {
                 validationsErrors.Add($"Invalid Command ({Command}). " +
-                    $"Valid values are 1, 2, 4, 2+4 or 8.");
+                    $"Valid values are 1, 2, 4, 2+4, 2+16,2+4+16, 4+16 or 8.");
             }
             ValidationMessages = validationsErrors.ToArray();
             return !validationsErrors.Any();

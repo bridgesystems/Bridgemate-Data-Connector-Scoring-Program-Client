@@ -44,6 +44,11 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
+        /// The location of the Data Connector messages file. Can be used for back-up purposes.
+        /// </summary>
+        public string DataConnectorFilePath { get; set; }
+
+        /// <summary>
         /// An array of messages describing problems in data integrity and invalid values.
         /// </summary>
         public string[] ValidationMessages
