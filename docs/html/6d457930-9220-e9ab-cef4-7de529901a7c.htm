@@ -6,7 +6,7 @@
             Note that this class is written as a singleton: there should never be more than one instance communicating over the pipe. 
             The constructor is protected however, so by inheriting from this class a non singleton instance can be used.
             <br />
-            The class implements IDisopable through its base class, as the base class contains a stream writer and stream reader that must be disposed
+            The class implements IDisposable through its base class, as the base class contains a stream writer and stream reader that must be disposed
             when the communication shuts down. Be sure to call Dispose on the class any time it is no longer in use, otherwise communication will stall.
             <br />
             The code has no dependencies, except one on NLog (and Net Standard 2.0). If you decide to copy the code make sure to add a dependency to the NLog NuGet package
