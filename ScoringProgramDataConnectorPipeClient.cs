@@ -393,7 +393,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                     };
                 }
             }
-            catch (IOException)
+            catch (IOException ioex)
             {
                 //CloseConnection is defined in the base class.
                 CloseConnection();
@@ -402,7 +402,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 {
                     RequestCommand = command,
                     DataType = DataConnectorResponseData.Error,
-                    SerializedData = JsonSerializer.Serialize("Pipe broken")
+                    SerializedData = JsonSerializer.Serialize($"Pipe broken: '{ioex}'")
                 };
             }
             catch (Exception ex)
