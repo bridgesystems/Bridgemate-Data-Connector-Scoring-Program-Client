@@ -465,7 +465,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <param name="serializedData">The data to send to the Data Connector as json data. (If any)</param>
         /// <returns></returns>
         protected abstract Task<ScoringProgramResponse> SendDataAsync(string sessionGuid,
-            ScoringProgramDataConnectorCommands command, string serializedData);
+            ScoringProgramDataConnectorCommands command, string serializedData,string caller = "");
 
 
         /// <summary>
@@ -476,7 +476,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <param name="serializedData">The data to send to the Data Connector as json data. (If any)</param>
         /// <returns></returns>
         protected abstract ScoringProgramResponse SendData(string sessionGuid,
-            ScoringProgramDataConnectorCommands command, string serializedData);
+            ScoringProgramDataConnectorCommands command, string serializedData,string caller="");
 
         /// <summary>
         /// Polls the client queue for new boardresults asynchronously.

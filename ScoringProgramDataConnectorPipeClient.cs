@@ -3,6 +3,7 @@ using BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO;
 using System;
 using System.IO;
 using System.IO.Pipes;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading.Tasks;
 using static BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnectorLogCreator<BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorCommands>;
@@ -319,9 +320,9 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <param name="serializedData">The data to send to the Data Connector as json data. (If any)</param>
         /// <returns></returns>
         protected override async Task<ScoringProgramResponse> SendDataAsync(string sessionGuid,
-            ScoringProgramDataConnectorCommands command, string serializedData)
+            ScoringProgramDataConnectorCommands command, string serializedData, [CallerMemberName] string caller="")
         {
-            var logRecord = new DataConnectorLogRecord(DataConnectorLogLevel.Debug, LoggingSource, command, serializedData, nameof(SendDataAsync));
+            var logRecord = new DataConnectorLogRecord(DataConnectorLogLevel.Debug, LoggingSource, command, serializedData, caller);
             DataConnectorClientLogger.LogRecord(logRecord);
 
             //Construct the request to the Data Connector.
@@ -483,9 +484,10 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <param name="command">The command to the Data Connector</param>
         /// <param name="serializedData">The data to send to the Data Connector as json data. (If any)</param>
         /// <returns></returns>
-        protected override ScoringProgramResponse SendData(string sessionGuid, ScoringProgramDataConnectorCommands command, string serializedData)
+        protected override ScoringProgramResponse SendData(string sessionGuid, ScoringProgramDataConnectorCommands command, string serializedData,
+                                                           [CallerMemberName] string caller = "")
         {
-            var logRecord = new DataConnectorLogRecord(DataConnectorLogLevel.Debug, LoggingSource, command, serializedData, nameof(SendData));
+            var logRecord = new DataConnectorLogRecord(DataConnectorLogLevel.Debug, LoggingSource, command, serializedData, caller);
             DataConnectorClientLogger.LogRecord(logRecord);
 
             //Construct the request to the Data Connector.

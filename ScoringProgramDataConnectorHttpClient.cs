@@ -231,7 +231,8 @@ public (string clubId, string licenceKey) Credentials { get; set; }
         /// <returns></returns>
         protected override async Task<ScoringProgramResponse> SendDataAsync(string sessionGuid,
             ScoringProgramDataConnectorCommands command,
-            string serializedData)
+            string serializedData, 
+            string caller = "")
         {
             //Construct the request to the Data Connector.
             var request = new ScoringProgramRequest
@@ -242,8 +243,6 @@ public (string clubId, string licenceKey) Credentials { get; set; }
                 ClubId = Credentials.clubId,
                 LicenceKey = Credentials.licenceKey
             };
-
-
 
             //Do not proceed if sending is already in progress (for an other request). There can be only on request be sent at the same time.
             if (IsSending)
@@ -346,7 +345,8 @@ public (string clubId, string licenceKey) Credentials { get; set; }
         /// <returns></returns>
         protected override ScoringProgramResponse SendData(string sessionGuid,
             ScoringProgramDataConnectorCommands command,
-            string serializedData)
+            string serializedData, 
+            string caller="")
         {
             //Construct the request to the Data Connector.
             var request = new ScoringProgramRequest

@@ -202,7 +202,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         public DataConnectorLogCreator(DataConnectorLogLevel jsonDataLogLevel, string name)
         {
             _jsonDataLogLevel = jsonDataLogLevel;
-            //_nLogLogger=LogManager.GetLogger(name);
+            _nLogLogger=LogManager.GetLogger(name);
         }
 
         /// <summary>
@@ -211,7 +211,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <param name="record"></param>
         public void LogRecord(DataConnectorLogRecord record)
         {
-            return;
+            //return;
             var message = $"{record.Source,-20} {record.Command,-20} {record.Remark}";
             _nLogLogger.Log(ToNLogLogLevel(record.LogLevel), message);
             if (!string.IsNullOrEmpty(record.JsonData) && _jsonDataLogLevel <= record.LogLevel)
