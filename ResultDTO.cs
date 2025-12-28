@@ -416,15 +416,14 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             {
                 validationResults.Add($"Invalid {nameof(DeclaringPair)} ({DeclaringPair}). The value must be either {PairNorthSouth} or {PairEastWest}.");
             }
-            //if ((Level ==ContractLevel_Pass || Level>=1) && (DeclarerDirection < 1 || DeclarerDirection > 4))
-            //{
-            //    validationResults.Add($"Invalid {nameof(DeclarerDirection)} ({DeclarerDirection}). The value must be between 1 and 4.");
-            //}
             if (Level >= 1 && (DeclarerDirection < 1 || DeclarerDirection > 4))
             {
                 validationResults.Add($"Invalid {nameof(DeclarerDirection)} ({DeclarerDirection}). The value must be between 1 and 4.");
             }
-
+            if (Level >= 1 && (ScoringDirection < 1 || ScoringDirection > 3))
+            {
+                validationResults.Add($"Invalid {nameof(ScoringDirection)} ({ScoringDirection}). The value must be between 1 and 3.");
+            }
             if (Level < -10 || Level > 7)
             {
                 validationResults.Add($"Invalid {nameof(Level)} ({Level}). The value must be between -10 and +7.");
