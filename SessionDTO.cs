@@ -158,7 +158,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                     validationMessages.Add($"Scoringgroup {group.ScoringGroupNumber} has validation errrors: {errorMessage}.");
                 }
             }
-            var sections = ScoringGroups.SelectMany(sg => sg.Sections).ToList();
+            var sections = ScoringGroups.SelectMany(sg => sg.Sections?? Array.Empty<SectionDTO>()).ToList();
             if (sections.Any(s => s.IsCombiSection))
             {
                 var combiSectionGroups = sections.Where(s => s.IsCombiSection)

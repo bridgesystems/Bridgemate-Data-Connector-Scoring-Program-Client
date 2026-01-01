@@ -193,32 +193,35 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                     validationMessages.Add($"A scoringgroup marked for deletion must not have any sections defined.");
                 }
             }
-            else if (!Sections.Any())
+            else if (Sections == null || !Sections.Any())
             {
                 validationMessages.Add("The scoringgroup must have at least one section.");
             }
-            if (Sections.Select(sg => sg.Letters).Distinct().Count() != Sections.Count())
+            else
             {
-                validationMessages.Add($"The sections cannot have the same {nameof(SectionDTO.Letters)}");
-            }
-
-            foreach (SectionDTO section in Sections)
-            {
-                if (section.SessionGuid != SessionGuid)
+                if (Sections.Select(sg => sg.Letters).Distinct().Count() != Sections.Count())
                 {
-                    validationMessages.Add($"Section '{section.Letters}' must have {nameof(ScoringGroupDTO.SessionGuid)} '{SessionGuid}' " +
-                                           $"but it is '{section.SessionGuid}'");
-                }
-                if (section.ScoringGroupNumber != ScoringGroupNumber)
-                {
-                    validationMessages.Add($"Section '{section.Letters}' must have {nameof(ScoringGroupDTO.ScoringGroupNumber)} '{ScoringGroupNumber}' " +
-                                           $"but it is '{section.ScoringGroupNumber}'");
+                    validationMessages.Add($"The sections cannot have the same {nameof(SectionDTO.Letters)}");
                 }
 
-                if (!section.Validate())
+                foreach (SectionDTO section in Sections)
                 {
-                    var errorMessage = string.Join("; ", section.ValidationMessages);
-                    validationMessages.Add($"Section '{section.Letters}' has validation errrors: {errorMessage}.");
+                    if (section.SessionGuid != SessionGuid)
+                    {
+                        validationMessages.Add($"Section '{section.Letters}' must have {nameof(ScoringGroupDTO.SessionGuid)} '{SessionGuid}' " +
+                                               $"but it is '{section.SessionGuid}'");
+                    }
+                    if (section.ScoringGroupNumber != ScoringGroupNumber)
+                    {
+                        validationMessages.Add($"Section '{section.Letters}' must have {nameof(ScoringGroupDTO.ScoringGroupNumber)} '{ScoringGroupNumber}' " +
+                                               $"but it is '{section.ScoringGroupNumber}'");
+                    }
+
+                    if (!section.Validate())
+                    {
+                        var errorMessage = string.Join("; ", section.ValidationMessages);
+                        validationMessages.Add($"Section '{section.Letters}' has validation errrors: {errorMessage}.");
+                    }
                 }
             }
             ValidationMessages = validationMessages.ToArray();
