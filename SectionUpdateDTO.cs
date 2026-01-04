@@ -232,7 +232,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             }
             if (IsDeleted)
             {
-                if (Tables.Any())
+                if (Tables!=null && Tables.Any())
                 {
                     validationMessages.Add("A deleted section cannot contain tables.");
                 }
