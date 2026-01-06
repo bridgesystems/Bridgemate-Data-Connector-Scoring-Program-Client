@@ -568,6 +568,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 {
                     RequestCommand = command,
                     DataType = DataConnectorResponseData.Error,
+                    ErrorType= ErrorType.NoConnection,
                     SerializedData = JsonSerializer.Serialize($"Pipe broken: '{ioex}'")
                 };
             }
