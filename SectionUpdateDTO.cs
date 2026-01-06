@@ -16,7 +16,6 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// </summary>
         public SectionUpdateDTO()
         {
-            
         }
         /// <summary>
         /// Required. The guid of the session the section is part of.
@@ -184,7 +183,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <param name="scoringMethod"></param>
         /// <param name="isDeleted"/>
         /// <returns></returns>
-        public static SectionUpdateDTO CreateFromSectionDTO(SectionDTO section,int scoringMethod,bool isDeleted=false)
+        public static SectionUpdateDTO CreateFromSectionDTO(SectionDTO section, int scoringMethod, bool isDeleted = false)
         {
             var updatedSection = new SectionUpdateDTO
             {
@@ -193,17 +192,17 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                 Winners = section.Winners,
                 GameType = section.GameType,
                 ScoringGroupNumber = section.ScoringGroupNumber,
-                ScoringGroupScoringMethod =scoringMethod,
+                ScoringGroupScoringMethod = scoringMethod,
                 KeepBridgematesAlive = section.KeepBridgematesAlive,
-                IsDeleted =isDeleted,
-                IsCombiSection=section.IsCombiSection,
+                IsDeleted = isDeleted,
+                IsCombiSection = section.IsCombiSection,
                 NorthSouthPairSectionLetters = section.NorthSouthPairSectionLetters,
                 EastWestPairSectionLetters = section.EastWestPairSectionLetters,
                 Tables = section.Tables,
                 Participations = new ParticipationDTO[] { }
             };
-            if(isDeleted)
-                updatedSection.Tables=new TableDTO[] { };
+            if (isDeleted)
+                updatedSection.Tables = new TableDTO[] { };
             return updatedSection;
         }
 
@@ -232,7 +231,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             }
             if (IsDeleted)
             {
-                if (Tables!=null && Tables.Any())
+                if (Tables != null && Tables.Any())
                 {
                     validationMessages.Add("A deleted section cannot contain tables.");
                 }
@@ -242,7 +241,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             {
                 validationMessages.Add($"{nameof(ScoringGroupNumber)} ({ScoringGroupNumber}) must be greater than zero.");
             }
-            if (!new[] {ScoringGroupDTO.ScoringType_Pairs, 
+            if (!new[] {ScoringGroupDTO.ScoringType_Pairs,
                 ScoringGroupDTO.ScoringType_Imp2_Weighted,ScoringGroupDTO.ScoringType_Imp2_10Percent,ScoringGroupDTO.ScoringType_Imp2_NoCorrection,
                 ScoringGroupDTO.ScoringType_Imp3_Weighted,ScoringGroupDTO.ScoringType_Imp3_10Percent,ScoringGroupDTO.ScoringType_Imp3_NoCorrection,
                 ScoringGroupDTO.ScoringType_XImp2_Total,ScoringGroupDTO.ScoringType_XImp2_Average,
@@ -317,7 +316,9 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         public override string ToString()
         {
 
-            var description = $"Section {Letters} '{Name}'; tables: {Tables?.Count()}, scoringGroup {ScoringGroupNumber}, game type {GameType}";
+            var description = IsDeleted ? 
+                $"Section {Letters} '{Name}' will be deleted." :
+                $"Section {Letters} '{Name}'; tables: {Tables?.Count()}, scoringGroup {ScoringGroupNumber}, game type {GameType}";
             if (Tables != null)
             {
                 foreach (TableDTO table in Tables)
