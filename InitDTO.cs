@@ -182,6 +182,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             if (Sessions == null || Sessions.Length == 0)
             {
                 validationMessages.Add("At least one session is required.");
+                return false;
             }
 
             if (Sessions.Length > 1)
@@ -207,7 +208,33 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                 validationMessages.Add("The event guid, if used, must be exactly 32 character long and can only contain capital A to F or digits 0 to 9.");
             }
 
-            if (PlayerData!=null && PlayerData.Any())
+            foreach (var session in Sessions)
+            {
+                if (!session.Validate(forAdding: false))
+                {
+                    validationMessages.Add($"Session {session.SessionGuid} did not validate: {string.Join(", ", session.ValidationMessages)}");
+                }
+            }
+
+            IEnumerable<string> allSectionLetters = Sessions.SelectMany(session => session.ScoringGroups
+                                                                                          .SelectMany(sg => sg.Sections
+                                                                                                              .Select(section => section.Letters)));
+            var groupedSections = allSectionLetters.GroupBy(el => el);
+            foreach (var groupedSection in groupedSections.Where(g => g.Count() > 1))
+            {
+                validationMessages.Add($"Section '{groupedSection.Key}' appears {groupedSection.Count()} times. Each section letter must be unique.");
+            }
+
+            IEnumerable<int> allScoringGroupNumbers = Sessions.SelectMany(session => session.ScoringGroups.Select(sg => sg.ScoringGroupNumber));
+            var groupedScoringGroups = allScoringGroupNumbers.GroupBy(el => el);
+            foreach (var groupedScoringGroup in groupedScoringGroups.Where(g => g.Count() > 1))
+            {
+                validationMessages.Add($"Scoringgroup '{groupedScoringGroup.Key}' appears {groupedScoringGroup.Count()} times. " +
+                    $"Each scoringgroup number must be unique.");
+            }
+
+
+            if (PlayerData != null && PlayerData.Any())
             {
                 var sessionGuids = Sessions.Select(s => s.SessionGuid).ToArray();
                 foreach (var data in PlayerData)
@@ -231,7 +258,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                                            $"'{id.First().FirstName}+{id.First().LastName}'");
                 }
             }
-            if (Participations!=null && Participations.Any())
+            if (Participations != null && Participations.Any())
             {
                 if (PlayerData == null)
                 {
@@ -260,7 +287,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                                            $"has no corresponding {nameof(PlayerDataDTO)}");
                 }
             }
-            if (Handrecords!=null && Handrecords.Any())
+            if (Handrecords != null && Handrecords.Any())
             {
                 foreach (var handrecord in Handrecords)
                 {
