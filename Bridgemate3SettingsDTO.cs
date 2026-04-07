@@ -293,7 +293,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// Indicates that the feature or functionality is disabled.
         /// </summary>
-
+        Disabled,
         /// <summary>
         /// Indicates that the feature or functionality is enabled.
         /// </summary>
