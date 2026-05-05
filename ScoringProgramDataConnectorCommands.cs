@@ -202,6 +202,11 @@
         AcceptTdCallQueueItems = 30,
 
         /// <summary>
+        /// Upload td calls to the Data Connector
+        /// </summary>
+        PutTdCalls,
+
+        /// <summary>
         /// Not supported
         /// </summary>
         TestData                                //Not supported

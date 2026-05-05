@@ -19,7 +19,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// If the scoring program does not include the id of the last received queue item when accepting them,the cached values will be used.
         /// </summary>      
         private int _lastResultQueueItemId;         //A cached value of the id of the last sent board result queue item.
-        private int _lastPlayeDataQueueItemId;      //A cached value of the id of the last sent participant queue item.
+        private int _lastTdCallQueueItemId;         //A cached value of the id of the last sent td call queue item.
+        private int _lastPlayerDataQueueItemId;      //A cached value of the id of the last sent player data queue item.
         private int _lastParticipantQueueItemId;    //A cached value of the id of the last sent participant queue item.
         private int _lastHandrecordQueueItemId;     //A cached value of the id of the last sent handrecord queue item.
 
@@ -45,7 +46,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// The id of the last player data queue item downloaded from the Data Connector.
         /// You can use this to internally accept this item (and all before of the same type).
         /// </summary>
-        public int LastPlayerDataQueueItemId => _lastPlayeDataQueueItemId;
+        public int LastPlayerDataQueueItemId => _lastPlayerDataQueueItemId;
 
         /// <summary>
         /// The id of the last handrecord queue item downloaded from the Data Connector.
@@ -58,6 +59,12 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// You can use this to internally accept this item (and all before of the same type).
         /// </summary>
         public int LastResultQueueItemId => _lastResultQueueItemId;
+
+        /// <summary>
+        /// The id of the last TD call queue item downloaded from the Data Connector.
+        /// You can use this to internally accept this item (and all before of the same type).
+        /// </summary>
+        public int LastTdCallQueueItemId => _lastTdCallQueueItemId;
 
         private bool _isSending;
         /// <summary>
@@ -243,6 +250,36 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             var dtosForSession = dtos.Where(dto => dto.SessionGuid == sessionGuid).ToList();
             var serializedData = JsonSerializer.Serialize(dtosForSession);
             return SendData(sessionGuid, ScoringProgramDataConnectorCommands.PutResults, serializedData);
+        }
+
+        /// <summary>
+        /// Sends TD calls asynchronously to the BCS queue.
+        /// </summary>
+        /// <param name="sessionGuid">The guid of the session to send TD calls for.</param>
+        /// <param name="dtos">The TD call data transfer objects to send.</param>
+        /// <returns></returns>
+        public async Task<ScoringProgramResponse>SendTdCallsAsync(string sessionGuid, TdCallDTO[] dtos)
+        {
+            LogMethodEntry(nameof(SendTdCallsAsync), (nameof(sessionGuid), sessionGuid));
+
+            var dtosForSession = dtos.Where(dto => dto.SessionGuid == sessionGuid).ToList();
+            var serializedData = JsonSerializer.Serialize(dtosForSession);
+            return await SendDataAsync(sessionGuid, ScoringProgramDataConnectorCommands.PutTdCalls, serializedData);
+        }
+
+        /// <summary>
+        /// Sends TD calls synchronously to the BCS queue.
+        /// </summary>
+        /// <param name="sessionGuid">The guid of the session to send TD calls for.</param>
+        /// <param name="dtos">The TD call data transfer objects to send.</param>
+        /// <returns></returns>
+        public ScoringProgramResponse SendTdCalls(string sessionGuid, TdCallDTO[] dtos)
+        {
+            LogMethodEntry(nameof(SendTdCalls), (nameof(sessionGuid), sessionGuid));
+
+            var dtosForSession = dtos.Where(dto => dto.SessionGuid == sessionGuid).ToList();
+            var serializedData = JsonSerializer.Serialize(dtosForSession);
+            return SendData(sessionGuid, ScoringProgramDataConnectorCommands.PutTdCalls, serializedData);
         }
 
         /// <summary>
@@ -536,6 +573,56 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         }
 
         /// <summary>
+        /// Polls the client queue synchronously for new TD calls for the specified session.
+        /// </summary>
+        /// <param name="sessionGuid">Required. The guid of the session to poll TD calls for.</param>
+        /// <param name="all">Poll all TD calls for the session, included ones polled before.</param>
+        /// <returns></returns>
+        public TdCallDTO[] PollForTdCalls(string sessionGuid, bool all = false)
+        {
+            LogMethodEntry(nameof(PollForTdCalls), (nameof(sessionGuid), sessionGuid), (nameof(all), all));
+            var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllTdCalls :
+                                ScoringProgramDataConnectorCommands.PollQueueForNewTdCalls;
+            var response = SendData(sessionGuid, command, serializedData: "");
+            if (response.DataType != DataConnectorResponseData.TdCalls)
+            {
+                LogError(new Exception($"ERROR: {response.ErrorType},'{JsonSerializer.Deserialize<string>(response.SerializedData)}'"));
+                return new TdCallDTO[] { };
+            }
+            var data = string.IsNullOrWhiteSpace(response.SerializedData) ? new TdCallDTO[] { } :
+                                                                            JsonSerializer.Deserialize<TdCallDTO[]>(response.SerializedData);
+            //Cache the id for the last queue item. We can use this to accept up to this id included.
+            if (data.Any())
+                _lastTdCallQueueItemId = response.LastQueueItemId;
+            return data;
+        }
+
+        /// <summary>
+        /// Polls the client queue asynchronously for new TD calls for the specified session.
+        /// </summary>
+        /// <param name="sessionGuid">Required. The guid of the session to poll TD calls for.</param>
+        /// <param name="all">Poll all TD calls for the session, included ones polled before.</param>
+        /// <returns></returns>
+        public async Task<TdCallDTO[]> PollForTdCallsAsync(string sessionGuid, bool all = false)
+        {
+            LogMethodEntry(nameof(PollForTdCallsAsync), (nameof(sessionGuid), sessionGuid), (nameof(all), all));
+            var command = all ? ScoringProgramDataConnectorCommands.PollQueueForAllTdCalls :
+                                ScoringProgramDataConnectorCommands.PollQueueForNewTdCalls;
+            var response = await SendDataAsync(sessionGuid, command, serializedData: "");
+            if (response.DataType != DataConnectorResponseData.TdCalls)
+            {
+                LogError(new Exception($"ERROR: {response.ErrorType},'{JsonSerializer.Deserialize<string>(response.SerializedData)}'"));
+                return new TdCallDTO[] { };
+            }
+            var data = string.IsNullOrWhiteSpace(response.SerializedData) ? new TdCallDTO[] { } :
+                                                                            JsonSerializer.Deserialize<TdCallDTO[]>(response.SerializedData);
+            //Cache the id for the last queue item. We can use this to accept up to this id included.
+            if (data.Any())
+                _lastTdCallQueueItemId = response.LastQueueItemId;
+            return data;
+        }
+
+        /// <summary>
         /// Polls the client queue asynchronously for new player data for the specified session.
         /// </summary>
         /// <param name="sessionGuid">Required. The guid of the session to poll participations for.</param>
@@ -558,7 +645,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 
             //Cache the id for the last queue item. We can use this to accept up to this id included.
             if (data.Any())
-                _lastPlayeDataQueueItemId = response.LastQueueItemId;
+                _lastPlayerDataQueueItemId = response.LastQueueItemId;
 
             return data;
 
@@ -587,7 +674,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
 
             //Cache the id for the last queue item. We can use this to accept up to this id included.
             if (data.Any())
-                _lastPlayeDataQueueItemId = response.LastQueueItemId;
+                _lastPlayerDataQueueItemId = response.LastQueueItemId;
 
             return data;
 
@@ -794,7 +881,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                     }
                 case DataConnectorResponseData.PlayerData:
                     {
-                        lastQueueItemId = _lastPlayeDataQueueItemId;
+                        lastQueueItemId = _lastPlayerDataQueueItemId;
                         command = ScoringProgramDataConnectorCommands.AcceptPlayerDataQueueItems; break;
                     }
                 case DataConnectorResponseData.Handrecords:
