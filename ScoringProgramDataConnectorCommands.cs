@@ -184,7 +184,7 @@
         /// <summary>
         /// Instructs the DataConnector to clear all incoming and outgoing queue data.
         /// </summary>
-        ClearData,
+        ClearData=35,
 
         /// <summary>
         /// Query the Data Connector for new td calls.
@@ -199,7 +199,7 @@
         /// <summary>
         /// Accept the new td calls: the Data Connector will not send them again, unless the PollQueueForAllTdCalls command is used.
         /// </summary>
-        AcceptTdCallQueueItems = 30,
+        AcceptTdCallQueueItems,
 
         /// <summary>
         /// Upload td calls to the Data Connector
@@ -209,6 +209,6 @@
         /// <summary>
         /// Not supported
         /// </summary>
-        TestData                                //Not supported
+        TestData=40                                //Not supported
     }
 }
