@@ -72,6 +72,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// Boardresults. A collection of <see cref="ResultDTO">ResultDTO</see>.
         /// </summary>
         Results,
+
         /// <summary>
         /// Handrecords. A collection of <see cref="HandrecordDTO">HandrecordDTO</see>.
         /// </summary>
@@ -116,6 +117,11 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// Embedded in a <see cref="BCSManagementRequestDTO">BCSManagementRequesetDTO</see>.
         /// </summary>
         ShutDownRequest, 
+
+        /// <summary>
+        /// A collection of td calls. <see cref="TdCallDTO">TdCallDTO</see>/>
+        /// </summary>
+        TdCalls,
 
         /// <summary>
         /// Currently not supported.
