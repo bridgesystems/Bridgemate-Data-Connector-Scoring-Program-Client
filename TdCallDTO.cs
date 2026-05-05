@@ -10,6 +10,25 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
     public class TdCallDTO
     {
         /// <summary>
+        /// The TD call status has been iniiated.
+        /// </summary>
+        public const int TdCallStatus_Launched = 1;
+
+       /// <summary>
+       /// The TD is at the table.
+       /// </summary>
+        public const int TdCallStatus_InProgress = 2;
+
+        /// <summary>
+        /// The call has been resolved.
+        /// </summary>
+        public const int TdCallStatus_Resolved = 3;
+
+        /// <summary>
+        /// Resolution of the call has been deferred.
+        /// </summary>
+        public const int TdCallStatus_Deferred = 4;
+        /// <summary>
         /// Required. The guid of the session the td call belongs to.
         /// </summary>
         public string SessionGuid
