@@ -52,6 +52,14 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
+        /// Required. The round om the table where the td call is generated from.
+        /// </summary>
+        public int RoundNumber
+        {
+            get;set;
+        }
+
+        /// <summary>
         /// Required. Valid values are:
         /// 1: Launched
         /// 2: InProgress
@@ -89,7 +97,12 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             {
                 validationMessages.Add($"{nameof(TableNumber)} ({TableNumber}) must be greater than zero.");
             }
-            if(Status <= 0 || Status>4)
+            if (RoundNumber <= 0)
+            {
+                validationMessages.Add($"{nameof(RoundNumber)} ({RoundNumber}) must be greater than zero.");
+            }
+
+            if (Status <= 0 || Status>4)
             {
                 validationMessages.Add($"Invalide {nameof(Status)}:({Status}). Valid values are 1,2,3 or 4.");
             }
