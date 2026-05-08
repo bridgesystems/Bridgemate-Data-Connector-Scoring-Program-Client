@@ -66,6 +66,9 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// </summary>
         public int LastTdCallQueueItemId => _lastTdCallQueueItemId;
 
+        /// <summary>
+        /// Backing field for the IsSending property. Indicates whether a request is currently being sent.
+        /// </summary>
         private bool _isSending;
         /// <summary>
         /// Only one request can be sent at the same time. So let asynchronous code always check, set and reset this
@@ -80,7 +83,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// Logs an exception.
         /// </summary>
-        /// <param name="ex"></param>
+        /// <param name="ex">The exception to log.</param>
         protected override void LogError(Exception ex)
         {
             ScoringProgramClientLogger.LogError(ex, ex.Message);
@@ -89,7 +92,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// Logs the entry to a method with its parameters (if any).
         /// </summary>
-        /// <param name="entry"></param>
+        /// <param name="entry">The log entry text.</param>
         protected override void LogMethodEntry(string entry)
         {
             ScoringProgramClientLogger.LogDebug(entry);
@@ -225,8 +228,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// Sends boardresults asynchronously to the BCS queue
         /// </summary>
-        /// <param name="dtos"></param>
-        /// <param name="sessionGuid"></param>
+        /// <param name="dtos">The board result data transfer objects to send.</param>
+        /// <param name="sessionGuid">The guid of the session to send results for.</param>
         /// <returns></returns>
         public async Task<ScoringProgramResponse> SendResultsAsync(string sessionGuid, ResultDTO[] dtos)
         {
@@ -240,8 +243,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// Sends boardresults synchronously to the BCS queue
         /// </summary>
-        /// <param name="dtos"></param>
-        /// <param name="sessionGuid"></param>
+        /// <param name="dtos">The board result data transfer objects to send.</param>
+        /// <param name="sessionGuid">The guid of the session to send results for.</param>
         /// <returns></returns>
         public ScoringProgramResponse SendResults(string sessionGuid, ResultDTO[] dtos)
         {
@@ -285,8 +288,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// Sends handrecords asynchronously to the BCS queue.
         /// </summary>
-        /// <param name="sessionGuid"></param>
-        /// <param name="dtos"></param>
+        /// <param name="sessionGuid">The guid of the session to send handrecords for.</param>
+        /// <param name="dtos">The handrecord data transfer objects to send.</param>
         /// <returns></returns>
         public Task<ScoringProgramResponse> SendHandrecordsAsync(string sessionGuid, HandrecordDTO[] dtos)
         {
@@ -300,8 +303,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// Sends handrecords synchronously to the BCS queue.
         /// </summary>
-        /// <param name="sessionGuid"></param>
-        /// <param name="dtos"></param>
+        /// <param name="sessionGuid">The guid of the session to send handrecords for.</param>
+        /// <param name="dtos">The handrecord data transfer objects to send.</param>
         /// <returns></returns>
         public ScoringProgramResponse SendHandrecords(string sessionGuid, HandrecordDTO[] dtos)
         {
@@ -367,7 +370,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// Sends participations asynchronously to the BCS queue.
         /// </summary>
-        /// <param name="dtos"></param>
+        /// <param name="dtos">The participation data transfer objects to send.</param>
         /// <param name="sessionGuid">The guid of the session that all participations must belong to.</param>
         /// <returns></returns>
         /// <remarks>
@@ -398,9 +401,9 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         }
 
         /// <summary>
-        /// Sends participations asynchronously to the BCS queue.
+        /// Sends participations synchronously to the BCS queue.
         /// </summary>
-        /// <param name="dtos"></param>
+        /// <param name="dtos">The participation data transfer objects to send.</param>
         /// <param name="sessionGuid">The guid of the session that all participations must belong to.</param>
         /// <returns></returns>
         /// <remarks>
@@ -434,8 +437,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// Adds or updates the Bridgemate 2 settings for the given sections asynchronously. There can and must be one dto per section. 
         /// The section letters cannot be left out.
         /// </summary>
-        /// <param name="sessionGuid"></param>
-        /// <param name="bridgemate2Settings"></param>
+        /// <param name="sessionGuid">The guid of the session to send Bridgemate 2 settings for.</param>
+        /// <param name="bridgemate2Settings">The Bridgemate 2 settings data transfer objects, one per section.</param>
         /// <returns></returns>
         public async Task<ScoringProgramResponse> SendBridgemate2SettingsAsync(string sessionGuid, Bridgemate2SettingsDTO[] bridgemate2Settings)
         {
@@ -450,8 +453,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// Adds or updates the Bridgemate 2 settings for the given sections synchronously. There can and must be one dto per section. 
         /// The section letters cannot be left out!
         /// </summary>
-        /// <param name="sessionGuid"></param>
-        /// <param name="bridgemate2Settings"></param>
+        /// <param name="sessionGuid">The guid of the session to send Bridgemate 2 settings for.</param>
+        /// <param name="bridgemate2Settings">The Bridgemate 2 settings data transfer objects, one per section.</param>
         /// <returns></returns>
         public ScoringProgramResponse SendBridgemate2Settings(string sessionGuid, Bridgemate2SettingsDTO[] bridgemate2Settings)
         {
@@ -466,8 +469,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// Adds or updates the Bridgemate 3 settings for the given sections asynchronously. There can and must be one dto per section. 
         /// The section letters cannot be left out!
         /// </summary>
-        /// <param name="sessionGuid"></param>
-        /// <param name="bridgemate3Settings"></param>
+        /// <param name="sessionGuid">The guid of the session to send Bridgemate 3 settings for.</param>
+        /// <param name="bridgemate3Settings">The Bridgemate 3 settings data transfer objects, one per section.</param>
         /// <returns></returns>
         public async Task<ScoringProgramResponse> SendBridgemate3SettingsAsync(string sessionGuid, Bridgemate3SettingsDTO[] bridgemate3Settings)
         {
@@ -482,8 +485,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// Adds or updates the Bridgemate 3 settings for the given sections synchronously. There can and must be one dto per section. 
         /// The section letters cannot be left out!
         /// </summary>
-        /// <param name="sessionGuid"></param>
-        /// <param name="bridgemate3Settings"></param>
+        /// <param name="sessionGuid">The guid of the session to send Bridgemate 3 settings for.</param>
+        /// <param name="bridgemate3Settings">The Bridgemate 3 settings data transfer objects, one per section.</param>
         /// <returns></returns>
         public ScoringProgramResponse SendBridgemate3Settings(string sessionGuid, Bridgemate3SettingsDTO[] bridgemate3Settings)
         {
@@ -500,6 +503,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <param name="sessionGuid">Specifies which session the request targets (if any)</param>
         /// <param name="command">The command to the Data Connector</param>
         /// <param name="serializedData">The data to send to the Data Connector as json data. (If any)</param>
+        /// <param name="caller">The name of the calling method for logging purposes.</param>
         /// <returns></returns>
         protected abstract Task<ScoringProgramResponse> SendDataAsync(string sessionGuid,
             ScoringProgramDataConnectorCommands command, string serializedData,string caller = "");
@@ -511,6 +515,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <param name="sessionGuid">Specifies which session the request targets (if any)</param>
         /// <param name="command">The command to the Data Connector</param>
         /// <param name="serializedData">The data to send to the Data Connector as json data. (If any)</param>
+        /// <param name="caller">The name of the calling method for logging purposes.</param>
         /// <returns></returns>
         protected abstract ScoringProgramResponse SendData(string sessionGuid,
             ScoringProgramDataConnectorCommands command, string serializedData,string caller="");
@@ -860,7 +865,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// Determines which command to sent to the Data Connector and which last queue item id to use.
         /// </summary>
-        /// <param name="dataType"></param>
+        /// <param name="dataType">The type of eventqueue data to determine the acceptance parameters for.</param>
         /// <returns></returns>
         private (ScoringProgramDataConnectorCommands command, int lastQueueItemId) DetermineParametersForQueuAcceptance(DataConnectorResponseData dataType)
         {
@@ -1148,7 +1153,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// Adds the given session to a known event asynchronously.
         /// This event must have been sent to the Data Connector previously using an <see cref="InitDTO">InitDTO</see>.
         /// </summary>
-        /// <param name="addedSession"></param>
+        /// <param name="addedSession">The DTO containing the session data to add to the event.</param>
         /// <returns></returns>
         public async Task<ScoringProgramResponse> AddSessionAsync(AddSessionDTO addedSession)
         {
@@ -1162,7 +1167,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// Adds the given session to a known event synchronously.
         /// This event must have been sent to the Data Connector previously using an <see cref="InitDTO">InitDTO</see>.
         /// </summary>
-        /// <param name="addedSession"></param>
+        /// <param name="addedSession">The DTO containing the session data to add to the event.</param>
         /// <returns></returns>
         public ScoringProgramResponse AddSession(AddSessionDTO addedSession)
         {
@@ -1227,7 +1232,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         /// <summary>
         /// Does an asynchronous check on if the session with the given guid exists.
         /// </summary>
-        /// <param name="sessionGuid"></param>
+        /// <param name="sessionGuid">The guid of the session to check for existence.</param>
         /// <returns></returns>
         public async Task<bool> DoesSessionExistAsync(string sessionGuid)
         {
@@ -1255,9 +1260,9 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         }
 
         /// <summary>
-        /// Does an synchronous check on if the session with the given guid exists.
+        /// Does a synchronous check on if the session with the given guid exists.
         /// </summary>
-        /// <param name="sessionGuid"></param>
+        /// <param name="sessionGuid">The guid of the session to check for existence.</param>
         /// <returns></returns>
         public bool DoesSessionExist(string sessionGuid)
         {
