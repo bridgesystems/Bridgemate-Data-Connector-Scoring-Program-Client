@@ -874,6 +874,11 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                         lastQueueItemId = _lastResultQueueItemId;
                         command = ScoringProgramDataConnectorCommands.AcceptResultQueueItems; break;
                     }
+                case DataConnectorResponseData.TdCalls:
+                    {
+                        lastQueueItemId = _lastTdCallQueueItemId;
+                        command = ScoringProgramDataConnectorCommands.AcceptTdCallQueueItems; break;
+                    }
                 case DataConnectorResponseData.Participations:
                     {
                         lastQueueItemId = _lastParticipantQueueItemId;
