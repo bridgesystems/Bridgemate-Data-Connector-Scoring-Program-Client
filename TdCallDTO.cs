@@ -60,6 +60,18 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
+        /// The hour at which the td call was generated. Use 24 hours to a day.
+        /// </summary>
+        public int Hour
+        { get; set; }
+
+        /// <summary>
+        /// The minute in which the td call was generated.
+        /// </summary>
+        public int Minute
+        { get; set; }
+
+        /// <summary>
         /// Required. Valid values are:
         /// 1: Launched
         /// 2: InProgress
