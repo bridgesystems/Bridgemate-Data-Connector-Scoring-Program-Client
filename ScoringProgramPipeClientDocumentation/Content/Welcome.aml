@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<topic id="b11ca58b-c149-48f8-af9a-cf6a2c7bfe53" revisionNumber="1">
+	<developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<introduction>
+			<para>These pages explain how to use the Bridgemate ScoringProgramPipeClient to communicate with the Bridgemate Data Connector.</para>
+		</introduction>
+
+		<section>
+			<title>Getting Started</title>
+			<content>
+				<para>Important classses are:</para>
+
+				<list class="bullet">
+
+					<listItem>
+						<para>
+							<externalLink>
+								<linkText>The ScoringProgramDataConnectorPipeClient class</linkText>
+								<linkUri>6d457930-9220-e9ab-cef4-7de529901a7c.htm</linkUri>
+							</externalLink>, used to handle communication with the Bridgemate Data Connector
+						</para>
+					</listItem>
+
+					<listItem>
+						<para>
+							<externalLink>
+								<linkText>The InitDTO class</linkText>
+								<linkUri>cb79e65a-cd27-6ab6-b761-6ba37cae3e8e.htm</linkUri>
+							</externalLink>, used to relay initialization data for an event to the Bridgemate Data Connector
+						</para>
+					</listItem>
+
+					<listItem>
+						<para>
+							<externalLink>
+								<linkText>The ContinueDTO class</linkText>
+								<linkUri>2e01f20d-8f5a-df77-6977-f61c62618eb8.htm</linkUri>
+							</externalLink>
+							, used to relay continuation data for an event to the Bridgemate Data Connector
+						</para>
+					</listItem>
+
+					<listItem>
+						<para>
+							<externalLink>
+								<linkText>The BCSManagementRequestDTO class</linkText>
+								<linkUri>b520358e-b825-72ff-131b-a948a085d3c7.htm</linkUri>
+							</externalLink>
+							, used to query information on the Bridgemate Control Software and to issue a "Shut Down Now" command to it.
+						</para>
+					</listItem>
+				</list>
+			</content>
+		</section>
+
+		<relatedTopics>
+			<link xlink:href="4b9f5273-884e-4bed-8be9-6e428ebafecf" />
+		</relatedTopics>
+	</developerConceptualDocument>
+</topic>

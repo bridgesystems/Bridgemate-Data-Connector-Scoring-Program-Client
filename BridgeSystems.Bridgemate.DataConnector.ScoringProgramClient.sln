@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient", "BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.csproj", "{F3A82233-827A-45C8-B05D-8F6B180817EB}"
 EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B1}") = "ScoringProgramPipeClientDocumentation", "ScoringProgramPipeClientDocumentation\ScoringProgramPipeClientDocumentation.shfbproj", "{E17BCEB1-2ACA-41F0-8D8D-FA1E5D705F09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{F3A82233-827A-45C8-B05D-8F6B180817EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3A82233-827A-45C8-B05D-8F6B180817EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3A82233-827A-45C8-B05D-8F6B180817EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E17BCEB1-2ACA-41F0-8D8D-FA1E5D705F09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E17BCEB1-2ACA-41F0-8D8D-FA1E5D705F09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

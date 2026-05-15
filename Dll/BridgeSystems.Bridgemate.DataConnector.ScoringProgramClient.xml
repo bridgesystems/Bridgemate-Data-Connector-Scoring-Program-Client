@@ -782,6 +782,21 @@
             Players can make themselves known during any stage of the round.
             </summary>
         </member>
+        <member name="T:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm3PlayerNumberMandatoryOption">
+            <summary>
+            Players must identify themselves at the start of the session by entering their playernumber.
+            </summary>
+        </member>
+        <member name="F:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm3PlayerNumberMandatoryOption.Disabled">
+            <summary>
+            Indicates that the feature or functionality is disabled.
+            </summary>
+        </member>
+        <member name="F:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm3PlayerNumberMandatoryOption.Enabled">
+            <summary>
+            Inidcates that the feature is enabled.
+            </summary>
+        </member>
         <member name="T:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.BM3StartingPositionsOption">
             <summary>
             Specifies whether starting positions should be confirmed by players at start of the session
@@ -950,6 +965,26 @@
         <member name="F:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm3ViewResultsOption.OwnResultAndOtherResults">
             <summary>
             Other results, including the own results, on the board can be viewed.
+            </summary>
+        </member>
+        <member name="F:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm3ViewResultsOption.AtEndOfRound">
+            <summary>
+            Results shown at the end of the round in the board overview.
+            </summary>
+        </member>
+        <member name="T:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm3SessionSummaryOption">
+            <summary>
+            Specifies whether session summaries are enabled or disabled.
+            </summary>
+        </member>
+        <member name="F:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm3SessionSummaryOption.Disabled">
+            <summary>
+            Indicates that the feature or functionality is disabled.
+            </summary>
+        </member>
+        <member name="F:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm3SessionSummaryOption.Enabled">
+            <summary>
+            Indicates that the feature or functionality is enabled.
             </summary>
         </member>
         <member name="T:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bm3ScoreColumnOption">
@@ -1156,6 +1191,11 @@
             Specifies if and when the players can make themselves known by entering their playernumber and/or name on the Bridgemate while the round is in progress (i.e.: after a board has been entered).
             </summary>
         </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate3SettingsDTO.BM3PlayerNumberMandatory">
+            <summary>
+            Specifies if players must identify themselves at the start of the session by entering their playernumber.
+            </summary>
+        </member>
         <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate3SettingsDTO.BM3StartingPositions">
             <summary>
             Specifies whether starting positions should be confirmed by players at start of the session
@@ -1184,6 +1224,11 @@
         <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate3SettingsDTO.BM3ViewResults">
             <summary>
             Specifies if the Bridgemate will show the other results for the board that was just entered.
+            </summary>
+        </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate3SettingsDTO.BM3SessionSummary">
+            <summary>
+            Specifies if the Bridgemate will show a session summary with all the scores obtained in the session once the session has ended.
             </summary>
         </member>
         <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate3SettingsDTO.BM3ScoreColum">
@@ -2781,6 +2826,81 @@
             </summary>
             <returns>True if there are no validation errors.</returns>
         </member>
+        <member name="T:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TdCallDTO">
+            <summary>
+            Contains information about a TD call.
+            </summary>
+        </member>
+        <member name="F:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TdCallDTO.TdCallStatus_Launched">
+            <summary>
+            The TD call status has been iniiated.
+            </summary>
+        </member>
+        <member name="F:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TdCallDTO.TdCallStatus_InProgress">
+            <summary>
+            The TD is at the table.
+            </summary>
+        </member>
+        <member name="F:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TdCallDTO.TdCallStatus_Resolved">
+            <summary>
+            The call has been resolved.
+            </summary>
+        </member>
+        <member name="F:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TdCallDTO.TdCallStatus_Deferred">
+            <summary>
+            Resolution of the call has been deferred.
+            </summary>
+        </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TdCallDTO.SessionGuid">
+            <summary>
+            Required. The guid of the session the td call belongs to.
+            </summary>
+        </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TdCallDTO.SectionLetters">
+            <summary>
+            Required, the letters of the section the td call belongs to. The section must exist.
+            </summary>
+        </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TdCallDTO.TableNumber">
+            <summary>
+            Required, the table in the section where the td call originates from.
+            </summary>
+        </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TdCallDTO.RoundNumber">
+            <summary>
+            Required. The round om the table where the td call is generated from.
+            </summary>
+        </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TdCallDTO.Hour">
+            <summary>
+            The hour at which the td call was generated. Use 24 hours to a day.
+            </summary>
+        </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TdCallDTO.Minute">
+            <summary>
+            The minute in which the td call was generated.
+            </summary>
+        </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TdCallDTO.Status">
+            <summary>
+            Required. Valid values are:
+            1: Launched
+            2: InProgress
+            3. Resolved
+            4: Deferred
+            </summary>
+        </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TdCallDTO.ValidationMessages">
+            <summary>
+            An array of messages describing problems in data integrity and invalid values.
+            </summary>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TdCallDTO.Validate">
+            <summary>
+            Validates the DTO. Produces validation messages if there are problems. 
+            </summary>
+            <returns>True if there are no validation errors.</returns>
+        </member>
         <member name="T:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnectorClientCommandManager`1">
             <summary>
             Defines shared code for client classes for the dataconnector. Clients for the scoringprogram and BCS both inherit from this class.
@@ -3290,6 +3410,11 @@
             Embedded in a <see cref="T:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.BCSManagementRequestDTO">BCSManagementRequesetDTO</see>.
             </summary>
         </member>
+        <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnectorResponseData.TdCalls">
+            <summary>
+            A collection of td calls. <see cref="T:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TdCallDTO">TdCallDTO</see>/>
+            </summary>
+        </member>
         <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnectorResponseData.TestData">
             <summary>
             Currently not supported.
@@ -3423,6 +3548,11 @@
             The id of last board result queueitem that was retrieved.
             </summary>
         </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.LastTdCallQueueItemId">
+            <summary>
+            The id of last td call queueitem that was retrieved.
+            </summary>
+        </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.AcceptQueueData(System.String,BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnectorResponseData)">
             <summary>
             Synchronously accepts the eventqueue data of the given data type.
@@ -3491,6 +3621,322 @@
             <param name="continueDTO"></param>
             <returns></returns>
         </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.Disconnect">
+            <summary>
+            Synchronously disconnects the scoringprogram client from the data connector. Enabling a new connection as only one connection can exist at a time.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.DisconnectAsync">
+            <summary>
+            Asynchronously disconnects the scoringprogram client from the data connector. Enabling a new connection as only one connection can exist at a time.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.DoesSessionExist(System.String)">
+            <summary>
+            Synchronously checks if the session with the given guid exists.
+            </summary>
+            <param name="sessionGuid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.DoesSessionExistAsync(System.String)">
+            <summary>
+            Asynchronously checks if the session with the given guid exists.
+            </summary>
+            <param name="sessionGuid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.GetAllMovements(System.String)">
+            <summary>
+            Synchronously retrieves all movements for the session with the given guid.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <returns>An array of section data transfer objects containing movement information.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.GetAllMovementsAsync(System.String)">
+            <summary>
+            Asynchronously retrieves all movements for the session with the given guid.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains an array of section data transfer objects containing movement information.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.GetMovement(System.String,System.String)">
+            <summary>
+            Synchronously retrieves the movement for a specific section within a session.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="sectionLetters">The section letters identifying the specific section.</param>
+            <returns>A section data transfer object containing movement information.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.GetMovementAsync(System.String,System.String)">
+            <summary>
+            Asynchronously retrieves the movement for a specific section within a session.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="sectionLetters">The section letters identifying the specific section.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains a section data transfer object containing movement information.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.Initialize(BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.InitDTO)">
+            <summary>
+            Synchronously initializes a new event with the given initialization data.
+            </summary>
+            <param name="initDTO">The initialization data transfer object containing event setup information.</param>
+            <returns>A response indicating the success or failure of the initialization.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.InitializeAsync(BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.InitDTO)">
+            <summary>
+            Asynchronously initializes a new event with the given initialization data.
+            </summary>
+            <param name="initDTO">The initialization data transfer object containing event setup information.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains a response indicating the success or failure of the initialization.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.IssueManagementCommand(BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.BCSManagementRequestDTO)">
+            <summary>
+            Synchronously issues a management command to BCS.
+            </summary>
+            <param name="managementDTO">The management request data transfer object containing the command details.</param>
+            <returns>A response indicating the success or failure of the management command.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.IssueManagementCommandAsync(BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.BCSManagementRequestDTO)">
+            <summary>
+            Asynchronously issues a management command to BCS.
+            </summary>
+            <param name="managementDTO">The management request data transfer object containing the command details.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains a response indicating the success or failure of the management command.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.Ping">
+            <summary>
+            Synchronously pings the dataconnector to check if it is reachable.
+            </summary>
+            <returns>A response indicating the success or failure of the ping.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.PingAsync">
+            <summary>
+            Asynchronously pings the dataconnector to check if it is reachable.
+            </summary>
+            <returns>A task that represents the asynchronous operation. The task result contains a response indicating the success or failure of the ping.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.PollForHandrecords(System.String,System.Boolean)">
+            <summary>
+            Synchronously polls for new handrecords from the session with the given guid.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="all">If true, retrieves all handrecords; otherwise, retrieves only new handrecords since the last poll.</param>
+            <returns>An array of handrecord data transfer objects.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.PollForHandrecordsAsync(System.String,System.Boolean)">
+            <summary>
+            Asynchronously polls for new handrecords from the session with the given guid.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="all">If true, retrieves all handrecords; otherwise, retrieves only new handrecords since the last poll.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains an array of handrecord data transfer objects.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.PollForParticipations(System.String,System.Boolean)">
+            <summary>
+            Synchronously polls for new participations from the session with the given guid.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="all">If true, retrieves all participations; otherwise, retrieves only new participations since the last poll.</param>
+            <returns>An array of participation data transfer objects.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.PollForParticipationsAsync(System.String,System.Boolean)">
+            <summary>
+            Asynchronously polls for new participations from the session with the given guid.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="all">If true, retrieves all participations; otherwise, retrieves only new participations since the last poll.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains an array of participation data transfer objects.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.PollForPlayerData(System.String,System.Boolean)">
+            <summary>
+            Synchronously polls for new player data from the session with the given guid.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="all">If true, retrieves all player data; otherwise, retrieves only new player data since the last poll.</param>
+            <returns>An array of player data transfer objects.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.PollForPlayerDataAsync(System.String,System.Boolean)">
+            <summary>
+            Asynchronously polls for new player data from the session with the given guid.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="all">If true, retrieves all player data; otherwise, retrieves only new player data since the last poll.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains an array of player data transfer objects.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.PollForResults(System.String,System.Boolean)">
+            <summary>
+            Synchronously polls for new results from the session with the given guid.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="all">If true, retrieves all results; otherwise, retrieves only new results since the last poll.</param>
+            <returns>An array of result data transfer objects.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.PollForResultsAsync(System.String,System.Boolean)">
+            <summary>
+            Asynchronously polls for new results from the session with the given guid.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="all">If true, retrieves all results; otherwise, retrieves only new results since the last poll.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains an array of result data transfer objects.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.PollForTdCalls(System.String,System.Boolean)">
+            <summary>
+            Synchronously polls for new TD calls from the session with the given guid.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="all">If true, retrieves all TD calls; otherwise, retrieves only new TD calls since the last poll.</param>
+            <returns>An array of TD call data transfer objects.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.PollForTdCallsAsync(System.String,System.Boolean)">
+            <summary>
+            Asynchronously polls for new TD calls from the session with the given guid.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="all">If true, retrieves all TD calls; otherwise, retrieves only new TD calls since the last poll.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains an array of TD call data transfer objects.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.SendBridgemate2Settings(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate2SettingsDTO[])">
+            <summary>
+            Synchronously sends Bridgemate 2 settings to the dataconnector for the given session.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="bridgemate2Settings">An array of Bridgemate 2 settings data transfer objects.</param>
+            <returns>A response indicating the success or failure of the operation.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.SendBridgemate2SettingsAsync(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate2SettingsDTO[])">
+            <summary>
+            Asynchronously sends Bridgemate 2 settings to the dataconnector for the given session.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="bridgemate2Settings">An array of Bridgemate 2 settings data transfer objects.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains a response indicating the success or failure of the operation.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.SendBridgemate3Settings(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate3SettingsDTO[])">
+            <summary>
+            Synchronously sends Bridgemate 3 settings to the dataconnector for the given session.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="bridgemate3Settings">An array of Bridgemate 3 settings data transfer objects.</param>
+            <returns>A response indicating the success or failure of the operation.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.SendBridgemate3SettingsAsync(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate3SettingsDTO[])">
+            <summary>
+            Asynchronously sends Bridgemate 3 settings to the dataconnector for the given session.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="bridgemate3Settings">An array of Bridgemate 3 settings data transfer objects.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains a response indicating the success or failure of the operation.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.SendHandrecords(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.HandrecordDTO[])">
+            <summary>
+            Synchronously sends handrecords to the dataconnector for the given session.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="dtos">An array of handrecord data transfer objects.</param>
+            <returns>A response indicating the success or failure of the operation.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.SendHandrecordsAsync(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.HandrecordDTO[])">
+            <summary>
+            Asynchronously sends handrecords to the dataconnector for the given session.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="dtos">An array of handrecord data transfer objects.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains a response indicating the success or failure of the operation.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.SendParticipations(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.ParticipationDTO[])">
+            <summary>
+            Synchronously sends participations to the dataconnector for the given session.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="dtos">An array of participation data transfer objects.</param>
+            <returns>A response indicating the success or failure of the operation.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.SendParticipationsAsync(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.ParticipationDTO[])">
+            <summary>
+            Asynchronously sends participations to the dataconnector for the given session.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="dtos">An array of participation data transfer objects.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains a response indicating the success or failure of the operation.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.SendPlayerData(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.PlayerDataDTO[])">
+            <summary>
+            Synchronously sends player data to the dataconnector for the given session.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="playerData">An array of player data transfer objects.</param>
+            <returns>A response indicating the success or failure of the operation.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.SendPlayerDataAsync(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.PlayerDataDTO[])">
+            <summary>
+            Asynchronously sends player data to the dataconnector for the given session.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="playerData">An array of player data transfer objects.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains a response indicating the success or failure of the operation.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.SendResults(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.ResultDTO[])">
+            <summary>
+            Synchronously sends results to the dataconnector for the given session.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="dtos">An array of result data transfer objects.</param>
+            <returns>A response indicating the success or failure of the operation.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.SendTdCalls(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TdCallDTO[])">
+            <summary>
+            Synchronously sends TD calls to the dataconnector for the given session.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="dtos">An array of TD call data transfer objects.</param>
+            <returns>A response indicating the success or failure of the operation.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.SendTdCallsAsync(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TdCallDTO[])">
+            <summary>
+            Asynchronously sends TD calls to the dataconnector for the given session.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="dtos">An array of TD call data transfer objects.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains a response indicating the success or failure of the operation.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.SendResultsAsync(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.ResultDTO[])">
+            <summary>
+            Asynchronously sends results to the dataconnector for the given session.
+            </summary>
+            <param name="sessionGuid">The unique identifier of the session.</param>
+            <param name="dtos">An array of result data transfer objects.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains a response indicating the success or failure of the operation.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.UpdateMovement(BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.SectionUpdateDTO)">
+            <summary>
+            Synchronously updates the movement for a specific section.
+            </summary>
+            <param name="updatedSection">The section update data transfer object containing the updated movement information.</param>
+            <returns>A response indicating the success or failure of the update operation.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.UpdateMovementAsync(BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.SectionUpdateDTO)">
+            <summary>
+            Asynchronously updates the movement for a specific section.
+            </summary>
+            <param name="updatedSection">The section update data transfer object containing the updated movement information.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains a response indicating the success or failure of the update operation.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.UpdateScoringGroups(System.Collections.Generic.IEnumerable{BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.ScoringGroupDTO})">
+            <summary>
+            Synchronously updates the scoring groups for the current event.
+            </summary>
+            <param name="scoringGroups">A collection of scoring group data transfer objects.</param>
+            <returns>A response indicating the success or failure of the update operation.</returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.IScoringProgramClient.UpdateScoringGroupsAsync(System.Collections.Generic.IEnumerable{BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.ScoringGroupDTO})">
+            <summary>
+            Asynchronously updates the scoring groups for the current event.
+            </summary>
+            <param name="scoringGroups">A collection of scoring group data transfer objects.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains a response indicating the success or failure of the update operation.</returns>
+        </member>
         <member name="T:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager">
             <summary>
             The client that communicates with the dataconnector used by the scoring program.
@@ -3537,6 +3983,17 @@
             You can use this to internally accept this item (and all before of the same type).
             </summary>
         </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.LastTdCallQueueItemId">
+            <summary>
+            The id of the last TD call queue item downloaded from the Data Connector.
+            You can use this to internally accept this item (and all before of the same type).
+            </summary>
+        </member>
+        <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager._isSending">
+            <summary>
+            Backing field for the IsSending property. Indicates whether a request is currently being sent.
+            </summary>
+        </member>
         <member name="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.IsSending">
             <summary>
             Only one request can be sent at the same time. So let asynchronous code always check, set and reset this
@@ -3547,13 +4004,13 @@
             <summary>
             Logs an exception.
             </summary>
-            <param name="ex"></param>
+            <param name="ex">The exception to log.</param>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.LogMethodEntry(System.String)">
             <summary>
             Logs the entry to a method with its parameters (if any).
             </summary>
-            <param name="entry"></param>
+            <param name="entry">The log entry text.</param>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.PingAsync">
             <summary>
@@ -3603,32 +4060,48 @@
             <summary>
             Sends boardresults asynchronously to the BCS queue
             </summary>
-            <param name="dtos"></param>
-            <param name="sessionGuid"></param>
+            <param name="dtos">The board result data transfer objects to send.</param>
+            <param name="sessionGuid">The guid of the session to send results for.</param>
             <returns></returns>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.SendResults(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.ResultDTO[])">
             <summary>
             Sends boardresults synchronously to the BCS queue
             </summary>
-            <param name="dtos"></param>
-            <param name="sessionGuid"></param>
+            <param name="dtos">The board result data transfer objects to send.</param>
+            <param name="sessionGuid">The guid of the session to send results for.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.SendTdCallsAsync(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TdCallDTO[])">
+            <summary>
+            Sends TD calls asynchronously to the BCS queue.
+            </summary>
+            <param name="sessionGuid">The guid of the session to send TD calls for.</param>
+            <param name="dtos">The TD call data transfer objects to send.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.SendTdCalls(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TdCallDTO[])">
+            <summary>
+            Sends TD calls synchronously to the BCS queue.
+            </summary>
+            <param name="sessionGuid">The guid of the session to send TD calls for.</param>
+            <param name="dtos">The TD call data transfer objects to send.</param>
             <returns></returns>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.SendHandrecordsAsync(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.HandrecordDTO[])">
             <summary>
             Sends handrecords asynchronously to the BCS queue.
             </summary>
-            <param name="sessionGuid"></param>
-            <param name="dtos"></param>
+            <param name="sessionGuid">The guid of the session to send handrecords for.</param>
+            <param name="dtos">The handrecord data transfer objects to send.</param>
             <returns></returns>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.SendHandrecords(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.HandrecordDTO[])">
             <summary>
             Sends handrecords synchronously to the BCS queue.
             </summary>
-            <param name="sessionGuid"></param>
-            <param name="dtos"></param>
+            <param name="sessionGuid">The guid of the session to send handrecords for.</param>
+            <param name="dtos">The handrecord data transfer objects to send.</param>
             <returns></returns>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.SendPlayerDataAsync(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.PlayerDataDTO[])">
@@ -3667,7 +4140,7 @@
             <summary>
             Sends participations asynchronously to the BCS queue.
             </summary>
-            <param name="dtos"></param>
+            <param name="dtos">The participation data transfer objects to send.</param>
             <param name="sessionGuid">The guid of the session that all participations must belong to.</param>
             <returns></returns>
             <remarks>
@@ -3680,9 +4153,9 @@
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.SendParticipations(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.ParticipationDTO[])">
             <summary>
-            Sends participations asynchronously to the BCS queue.
+            Sends participations synchronously to the BCS queue.
             </summary>
-            <param name="dtos"></param>
+            <param name="dtos">The participation data transfer objects to send.</param>
             <param name="sessionGuid">The guid of the session that all participations must belong to.</param>
             <returns></returns>
             <remarks>
@@ -3698,8 +4171,8 @@
             Adds or updates the Bridgemate 2 settings for the given sections asynchronously. There can and must be one dto per section. 
             The section letters cannot be left out.
             </summary>
-            <param name="sessionGuid"></param>
-            <param name="bridgemate2Settings"></param>
+            <param name="sessionGuid">The guid of the session to send Bridgemate 2 settings for.</param>
+            <param name="bridgemate2Settings">The Bridgemate 2 settings data transfer objects, one per section.</param>
             <returns></returns>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.SendBridgemate2Settings(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate2SettingsDTO[])">
@@ -3707,8 +4180,8 @@
             Adds or updates the Bridgemate 2 settings for the given sections synchronously. There can and must be one dto per section. 
             The section letters cannot be left out!
             </summary>
-            <param name="sessionGuid"></param>
-            <param name="bridgemate2Settings"></param>
+            <param name="sessionGuid">The guid of the session to send Bridgemate 2 settings for.</param>
+            <param name="bridgemate2Settings">The Bridgemate 2 settings data transfer objects, one per section.</param>
             <returns></returns>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.SendBridgemate3SettingsAsync(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate3SettingsDTO[])">
@@ -3716,8 +4189,8 @@
             Adds or updates the Bridgemate 3 settings for the given sections asynchronously. There can and must be one dto per section. 
             The section letters cannot be left out!
             </summary>
-            <param name="sessionGuid"></param>
-            <param name="bridgemate3Settings"></param>
+            <param name="sessionGuid">The guid of the session to send Bridgemate 3 settings for.</param>
+            <param name="bridgemate3Settings">The Bridgemate 3 settings data transfer objects, one per section.</param>
             <returns></returns>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.SendBridgemate3Settings(System.String,BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.Bridgemate3SettingsDTO[])">
@@ -3725,8 +4198,8 @@
             Adds or updates the Bridgemate 3 settings for the given sections synchronously. There can and must be one dto per section. 
             The section letters cannot be left out!
             </summary>
-            <param name="sessionGuid"></param>
-            <param name="bridgemate3Settings"></param>
+            <param name="sessionGuid">The guid of the session to send Bridgemate 3 settings for.</param>
+            <param name="bridgemate3Settings">The Bridgemate 3 settings data transfer objects, one per section.</param>
             <returns></returns>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.SendDataAsync(System.String,BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorCommands,System.String,System.String)">
@@ -3736,6 +4209,7 @@
             <param name="sessionGuid">Specifies which session the request targets (if any)</param>
             <param name="command">The command to the Data Connector</param>
             <param name="serializedData">The data to send to the Data Connector as json data. (If any)</param>
+            <param name="caller">The name of the calling method for logging purposes.</param>
             <returns></returns>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.SendData(System.String,BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorCommands,System.String,System.String)">
@@ -3745,6 +4219,7 @@
             <param name="sessionGuid">Specifies which session the request targets (if any)</param>
             <param name="command">The command to the Data Connector</param>
             <param name="serializedData">The data to send to the Data Connector as json data. (If any)</param>
+            <param name="caller">The name of the calling method for logging purposes.</param>
             <returns></returns>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.PollForResultsAsync(System.String,System.Boolean)">
@@ -3761,6 +4236,22 @@
             <param name="sessionGuid">Required. The guid of the session to poll participations for.</param>
             <param name="all">Poll all results for the session, included ones polled before.</param>
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.PollForTdCalls(System.String,System.Boolean)">
+            <summary>
+            Polls the client queue synchronously for new TD calls for the specified session.
+            </summary>
+            <param name="sessionGuid">Required. The guid of the session to poll TD calls for.</param>
+            <param name="all">Poll all TD calls for the session, included ones polled before.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.PollForTdCallsAsync(System.String,System.Boolean)">
+            <summary>
+            Polls the client queue asynchronously for new TD calls for the specified session.
+            </summary>
+            <param name="sessionGuid">Required. The guid of the session to poll TD calls for.</param>
+            <param name="all">Poll all TD calls for the session, included ones polled before.</param>
             <returns></returns>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.PollForPlayerDataAsync(System.String,System.Boolean)">
@@ -3839,7 +4330,7 @@
             <summary>
             Determines which command to sent to the Data Connector and which last queue item id to use.
             </summary>
-            <param name="dataType"></param>
+            <param name="dataType">The type of eventqueue data to determine the acceptance parameters for.</param>
             <returns></returns>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.GetMovementAsync(System.String,System.String)">
@@ -3913,7 +4404,7 @@
             Adds the given session to a known event asynchronously.
             This event must have been sent to the Data Connector previously using an <see cref="T:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.InitDTO">InitDTO</see>.
             </summary>
-            <param name="addedSession"></param>
+            <param name="addedSession">The DTO containing the session data to add to the event.</param>
             <returns></returns>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.AddSession(BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.AddSessionDTO)">
@@ -3921,7 +4412,7 @@
             Adds the given session to a known event synchronously.
             This event must have been sent to the Data Connector previously using an <see cref="T:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.InitDTO">InitDTO</see>.
             </summary>
-            <param name="addedSession"></param>
+            <param name="addedSession">The DTO containing the session data to add to the event.</param>
             <returns></returns>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.IssueManagementCommandAsync(BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.BCSManagementRequestDTO)">
@@ -3944,14 +4435,14 @@
             <summary>
             Does an asynchronous check on if the session with the given guid exists.
             </summary>
-            <param name="sessionGuid"></param>
+            <param name="sessionGuid">The guid of the session to check for existence.</param>
             <returns></returns>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.DoesSessionExist(System.String)">
             <summary>
-            Does an synchronous check on if the session with the given guid exists.
+            Does a synchronous check on if the session with the given guid exists.
             </summary>
-            <param name="sessionGuid"></param>
+            <param name="sessionGuid">The guid of the session to check for existence.</param>
             <returns></returns>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.ClearDataAsync">
@@ -4152,6 +4643,26 @@
         <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorCommands.ClearData">
             <summary>
             Instructs the DataConnector to clear all incoming and outgoing queue data.
+            </summary>
+        </member>
+        <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorCommands.PollQueueForNewTdCalls">
+            <summary>
+            Query the Data Connector for new td calls.
+            </summary>
+        </member>
+        <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorCommands.PollQueueForAllTdCalls">
+            <summary>
+            Query the Data Connector for all td calls.
+            </summary>
+        </member>
+        <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorCommands.AcceptTdCallQueueItems">
+            <summary>
+            Accept the new td calls: the Data Connector will not send them again, unless the PollQueueForAllTdCalls command is used.
+            </summary>
+        </member>
+        <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorCommands.PutTdCalls">
+            <summary>
+            Upload td calls to the Data Connector
             </summary>
         </member>
         <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorCommands.TestData">
