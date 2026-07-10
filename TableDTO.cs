@@ -43,6 +43,12 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         public Bm3ConnectionModeOption ConnectionMode{ get; set; }
 
         /// <summary>
+        /// If set to "True" the Bridgemates will await new rounddata after all results have been entered for the existing rounds on the tables.
+        /// Otherwise, by default, the Bridgemate will signal end of session when all the results its expects have been entered.
+        /// </summary>
+        public bool KeepBridgematesAlive { get; set; }
+
+        /// <summary>
         /// Required. An array of RoundDTOs describing which pairs will meet on this table and which boards they will play.
         /// </summary>
         public RoundDTO[] Rounds
