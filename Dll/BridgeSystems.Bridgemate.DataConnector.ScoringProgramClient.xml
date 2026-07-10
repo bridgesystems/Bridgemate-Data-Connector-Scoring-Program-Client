@@ -2810,6 +2810,12 @@
             Once a Bridgemate has been initialized with movement data the ConnectionMode cannot be changed until the Bridgemate is restarted.
             </summary>
         </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TableDTO.KeepBridgematesAlive">
+            <summary>
+            If set to "True" the Bridgemates will await new rounddata after all results have been entered for the existing rounds on the tables.
+            Otherwise, by default, the Bridgemate will signal end of session when all the results its expects have been entered.
+            </summary>
+        </member>
         <member name="P:BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO.TableDTO.Rounds">
             <summary>
             Required. An array of RoundDTOs describing which pairs will meet on this table and which boards they will play.
@@ -3998,6 +4004,31 @@
             <summary>
             Only one request can be sent at the same time. So let asynchronous code always check, set and reset this
             property before, while and after sending a request. Feel free to make more nifty implementations.
+            </summary>
+        </member>
+        <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.SendGate">
+            <summary>
+            Serializes concurrent requests: only one request can be in flight at a time. A request that cannot
+            acquire the gate within the applicable timeout gets a <see cref="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ErrorType.Busy"/> response instead
+            of being rejected instantly.
+            </summary>
+        </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.AsyncSendGateTimeoutMs">
+            <summary>
+            Maximum time in milliseconds an asynchronous request queues behind an in-flight request before
+            reporting <see cref="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ErrorType.Busy"/>. Waiting does not block the calling thread.
+            </summary>
+        </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.SyncSendGateTimeoutMs">
+            <summary>
+            Maximum time in milliseconds a synchronous request queues behind an in-flight request before
+            reporting <see cref="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ErrorType.Busy"/>. Kept short because synchronous callers block their thread
+            (possibly the UI thread) while waiting.
+            </summary>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.CreateBusyResponse(BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorCommands,System.String)">
+            <summary>
+            The response returned when a request could not acquire the send gate within the applicable timeout.
             </summary>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorClientCommandManager.LogError(System.Exception)">

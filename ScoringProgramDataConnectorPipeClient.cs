@@ -188,16 +188,10 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         {
             LogMethodEntry(nameof(DisconnectAsync));
 
-            //The pipe only supports one request being sent at the same time.
-            if (IsSending)
+            //The pipe only supports one request being sent at the same time; do not tear it down mid-request.
+            if (!await SendGate.WaitAsync(SyncSendGateTimeoutMs).ConfigureAwait(false))
             {
-                return new ScoringProgramResponse
-                {
-                    RequestCommand = ScoringProgramDataConnectorCommands.Disconnect,
-                    DataType = DataConnectorResponseData.Error,
-                    ErrorType = ErrorType.Busy,
-                    SerializedData = JsonSerializer.Serialize("Data is being sent from another command. Try again later.")
-                };
+                return CreateBusyResponse(ScoringProgramDataConnectorCommands.Disconnect, sessionGuid: "");
             }
             try
             {
@@ -205,7 +199,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 {
                     var request = new ScoringProgramRequest { Command = ScoringProgramDataConnectorCommands.Disconnect };
                     var requestSerialized = JsonSerializer.Serialize(request);
-                    await DataConnectorWriter.WriteLineAsync(requestSerialized);
+                    await DataConnectorWriter.WriteLineAsync(requestSerialized).ConfigureAwait(false);
                     CloseWriter();
                 }
                 if (DataConnectorReader != null)
@@ -214,7 +208,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                     {
                         //Usually the code crashses on the line below because the connection has died. So that is expected behaviour.
                         //If an answer comes it will be an error message.
-                        var response = await DataConnectorReader.ReadLineAsync();
+                        var response = await DataConnectorReader.ReadLineAsync().ConfigureAwait(false);
                         if (response != null)
                         {
                             var responseDeserialized = JsonSerializer.Deserialize<ScoringProgramResponse>(response);
@@ -243,7 +237,11 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                     SerializedData = ex.ToString()
                 };
             }
-            finally { CloseWriter(); }
+            finally
+            {
+                CloseWriter();
+                SendGate.Release();
+            }
         }
 
         /// <summary>
@@ -254,16 +252,10 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         {
             LogMethodEntry(nameof(Disconnect));
 
-            //Do not proceed if sending is already in progress (for an other request). There can be only on request be sent at the same time.
-            if (IsSending)
+            //The pipe only supports one request being sent at the same time; do not tear it down mid-request.
+            if (!SendGate.Wait(SyncSendGateTimeoutMs))
             {
-                return new ScoringProgramResponse
-                {
-                    RequestCommand = ScoringProgramDataConnectorCommands.Disconnect,
-                    DataType = DataConnectorResponseData.Error,
-                    ErrorType = ErrorType.Busy,
-                    SerializedData = JsonSerializer.Serialize("Data is being sent from another command. Try again later.")
-                };
+                return CreateBusyResponse(ScoringProgramDataConnectorCommands.Disconnect, sessionGuid: "");
             }
             try
             {
@@ -309,7 +301,11 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                     SerializedData = ex.ToString()
                 };
             }
-            finally { CloseWriter(); }
+            finally
+            {
+                CloseWriter();
+                SendGate.Release();
+            }
         }
 
         /// <summary>
@@ -336,17 +332,11 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             //Serialize it.
             var requestSerialized = JsonSerializer.Serialize(request);
 
-            //Do not proceed if sending is already in progress (for an other request). There can be only on request be sent at the same time.
-            if (IsSending)
+            //One request at a time: wait for any in-flight request to finish. The wait does not block the
+            //calling thread; only after the timeout the request is rejected with Busy.
+            if (!await SendGate.WaitAsync(AsyncSendGateTimeoutMs).ConfigureAwait(false))
             {
-                return new ScoringProgramResponse
-                {
-                    RequestCommand = command,
-                    SessionGuid = sessionGuid,
-                    DataType = DataConnectorResponseData.Error,
-                    ErrorType = ErrorType.Busy,
-                    SerializedData = JsonSerializer.Serialize($"Client is busy, please retry later.")
-                };
+                return CreateBusyResponse(command, sessionGuid);
             }
             try
             {
@@ -362,17 +352,17 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 //Reconnect to the Data Connector if needed.
                 if (!DataConnectorStream.IsConnected)
                 {
-                    await DataConnectorStream.ConnectAsync(5000);
+                    await DataConnectorStream.ConnectAsync(5000).ConfigureAwait(false);
                 }
 
                 //Send the request to the Data Connector. Mind: as it is written now this a blocking call.
                 //However, in .Net an exception will be thrown if the connection has gone dead for whatever reason.
                 //Mind: the Data ConnectorWriter is defined in the base class.
-                await DataConnectorWriter.WriteLineAsync(requestSerialized);
+                await DataConnectorWriter.WriteLineAsync(requestSerialized).ConfigureAwait(false);
 
                 //Wait for the responses. This too is a blocking call. But in .Net a broken connection will throw an exception.
                 //Mind: the Data ConnectorReader is defined in the base class.
-                var response = await DataConnectorReader.ReadLineAsync();
+                var response = await DataConnectorReader.ReadLineAsync().ConfigureAwait(false);
                 if (response != null)
                 {
                     var responseDeserialized = JsonSerializer.Deserialize<ScoringProgramResponse>(response);
@@ -424,6 +414,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 //Always signal that the client is free for the next items to send.
                 //Otherwise after an exception further communication will be blocked.
                 IsSending = false;
+                SendGate.Release();
             }
         }
 
@@ -501,17 +492,11 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             //Serialize it.
             var requestSerialized = JsonSerializer.Serialize(request);
 
-            //Do not proceed if sending is already in progress (for an other request). There can be only on request be sent at the same time.
-            if (IsSending)
+            //One request at a time: wait briefly for any in-flight request to finish. The wait blocks the
+            //calling thread (possibly the UI thread), hence the short synchronous timeout before rejecting with Busy.
+            if (!SendGate.Wait(SyncSendGateTimeoutMs))
             {
-                return new ScoringProgramResponse
-                {
-                    RequestCommand = command,
-                    SessionGuid = sessionGuid,
-                    DataType = DataConnectorResponseData.Error,
-                    ErrorType = ErrorType.Busy,
-                    SerializedData = JsonSerializer.Serialize($"Client is busy, please retry later.")
-                };
+                return CreateBusyResponse(command, sessionGuid);
             }
             try
             {
@@ -590,6 +575,7 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
                 //Always signal that the client is free for the next items to send.
                 //Otherwise after an exception further communication will be blocked.
                 IsSending = false;
+                SendGate.Release();
             }
         }
 

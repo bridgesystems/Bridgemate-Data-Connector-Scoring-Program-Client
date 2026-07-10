@@ -244,17 +244,11 @@ public (string clubId, string licenceKey) Credentials { get; set; }
                 LicenceKey = Credentials.licenceKey
             };
 
-            //Do not proceed if sending is already in progress (for an other request). There can be only on request be sent at the same time.
-            if (IsSending)
+            //One request at a time: wait for any in-flight request to finish. The wait does not block the
+            //calling thread; only after the timeout the request is rejected with Busy.
+            if (!await SendGate.WaitAsync(AsyncSendGateTimeoutMs).ConfigureAwait(false))
             {
-                return new ScoringProgramResponse
-                {
-                    RequestCommand = command,
-                    SessionGuid = sessionGuid,
-                    DataType = DataConnectorResponseData.Error,
-                    ErrorType = ErrorType.Busy,
-                    SerializedData = JsonSerializer.Serialize($"Client is busy, please retry later.")
-                };
+                return CreateBusyResponse(command, sessionGuid);
             }
             try
             {
@@ -274,19 +268,19 @@ public (string clubId, string licenceKey) Credentials { get; set; }
                         HttpResponseMessage httpResponse = null;
                         try
                         {
-                            httpResponse = await httpClient.SendAsync(requestMessage);
+                            httpResponse = await httpClient.SendAsync(requestMessage).ConfigureAwait(false);
                         }
                         catch (Exception ex)
                         {
                             Logger.LogError(ex, ex.Message);
                             retryCounter--;
-                            await Task.Delay(1000 - retryCounter * 200);
+                            await Task.Delay(1000 - retryCounter * 200).ConfigureAwait(false);
                         }
                         if (httpResponse != null)
                         {
                             if (httpResponse.IsSuccessStatusCode)
                             {
-                                var json = await httpResponse.Content.ReadAsStringAsync();
+                                var json = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                                 retryCounter = 0;
                                 var clientResponse = JsonSerializer.Deserialize<ScoringProgramResponse>(json);
                                 return clientResponse ??
@@ -303,7 +297,7 @@ public (string clubId, string licenceKey) Credentials { get; set; }
                                 retryCounter--;
                                 var errorMessage = httpResponse.ReasonPhrase;
                                 Logger.LogError(errorMessage);
-                                await Task.Delay(1000 - retryCounter * 200);
+                                await Task.Delay(1000 - retryCounter * 200).ConfigureAwait(false);
                             }
                         }
                     }
@@ -333,6 +327,7 @@ public (string clubId, string licenceKey) Credentials { get; set; }
                 //Always signal that the client is free for the next items to send.
                 //Otherwise after an exception further communication will be blocked.
                 IsSending = false;
+                SendGate.Release();
             }
         }
 
@@ -360,17 +355,11 @@ public (string clubId, string licenceKey) Credentials { get; set; }
 
 
 
-            //Do not proceed if sending is already in progress (for an other request). There can be only on request be sent at the same time.
-            if (IsSending)
+            //One request at a time: wait briefly for any in-flight request to finish. The wait blocks the
+            //calling thread (possibly the UI thread), hence the short synchronous timeout before rejecting with Busy.
+            if (!SendGate.Wait(SyncSendGateTimeoutMs))
             {
-                return new ScoringProgramResponse
-                {
-                    RequestCommand = command,
-                    SessionGuid = sessionGuid,
-                    DataType = DataConnectorResponseData.Error,
-                    ErrorType = ErrorType.Busy,
-                    SerializedData = JsonSerializer.Serialize($"Client is busy, please retry later.")
-                };
+                return CreateBusyResponse(command, sessionGuid);
             }
             try
             {
@@ -449,6 +438,7 @@ public (string clubId, string licenceKey) Credentials { get; set; }
                 //Always signal that the client is free for the next items to send.
                 //Otherwise after an exception further communication will be blocked.
                 IsSending = false;
+                SendGate.Release();
             }
         }
 

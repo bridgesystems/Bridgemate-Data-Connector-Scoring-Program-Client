@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
@@ -78,6 +79,41 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         {
             get => _isSending;
             set => _isSending = value;
+        }
+
+        /// <summary>
+        /// Serializes concurrent requests: only one request can be in flight at a time. A request that cannot
+        /// acquire the gate within the applicable timeout gets a <see cref="ErrorType.Busy"/> response instead
+        /// of being rejected instantly.
+        /// </summary>
+        protected readonly SemaphoreSlim SendGate = new SemaphoreSlim(1, 1);
+
+        /// <summary>
+        /// Maximum time in milliseconds an asynchronous request queues behind an in-flight request before
+        /// reporting <see cref="ErrorType.Busy"/>. Waiting does not block the calling thread.
+        /// </summary>
+        public int AsyncSendGateTimeoutMs { get; set; } = 15_000;
+
+        /// <summary>
+        /// Maximum time in milliseconds a synchronous request queues behind an in-flight request before
+        /// reporting <see cref="ErrorType.Busy"/>. Kept short because synchronous callers block their thread
+        /// (possibly the UI thread) while waiting.
+        /// </summary>
+        public int SyncSendGateTimeoutMs { get; set; } = 2_000;
+
+        /// <summary>
+        /// The response returned when a request could not acquire the send gate within the applicable timeout.
+        /// </summary>
+        protected static ScoringProgramResponse CreateBusyResponse(ScoringProgramDataConnectorCommands command, string sessionGuid)
+        {
+            return new ScoringProgramResponse
+            {
+                RequestCommand = command,
+                SessionGuid = sessionGuid,
+                DataType = DataConnectorResponseData.Error,
+                ErrorType = ErrorType.Busy,
+                SerializedData = JsonSerializer.Serialize("Client is busy, please retry later.")
+            };
         }
 
         /// <summary>
