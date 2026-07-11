@@ -4708,30 +4708,27 @@
         </member>
         <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.ProductionUrlWithouProtocol">
             <summary>
-            The url for the webservice without the http:// prefix.
+            The url for the retired cloud hosted webservice without the https:// prefix.
             </summary>
         </member>
         <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.ProductionUrl">
             <summary>
-            The full url for the webservice.
+            The full url for the retired cloud hosted webservice.
             </summary>
         </member>
         <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.LocalHostUrlWithoutProtocol">
             <summary>
-            The url for the local host hosted webservice without the http:// prefix.
-            Used for debugging only.
+            The url for the data connector on the local computer without the http:// prefix.
             </summary>
         </member>
         <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.LocalHostUrl">
             <summary>
-            The full url for the local host hosted webservice.
-            Used for debugging only.
+            The full url for the data connector on the local computer. This is the default when <see cref="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.BaseAddress"/> has not been set.
             </summary>
         </member>
         <member name="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.UseLocalHost">
             <summary>
             If set to true will make the client communicate with the local host hosted webservice.
-            Used for debugging only.
             </summary>
         </member>
         <member name="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.ApiUrlRoot">
@@ -4739,9 +4736,29 @@
             Constructs the full url for the webservice based on whether it is hosted in local host or in the cloud.
             </summary>
         </member>
-        <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.ApiUrlRootWihtoutProtocol">
+        <member name="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.ApiUrlRootWihtoutProtocol">
             <summary>
             Constructs the url for the webservice without the http:// prefix based on whether it is hosted in local host or in the cloud.
+            </summary>
+        </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.BaseAddress">
+            <summary>
+            The base address of the data connector host to communicate with, e.g. "http://192.168.1.50:5079".
+            Must be an absolute http or https url. A trailing slash is removed.
+            When not set the client targets the data connector on the local computer (<see cref="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.LocalHostUrl"/>).
+            </summary>
+            <exception cref="T:System.ArgumentException">Thrown when the value is not an absolute http or https url.</exception>
+        </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.UrlRoot">
+            <summary>
+            The url root used for all communication: <see cref="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.BaseAddress"/> when set, otherwise <see cref="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.LocalHostUrl"/>.
+            </summary>
+        </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.EnsureLocalDataConnectorIsRunning">
+            <summary>
+            When set to true and the data connector host is the local computer, <see cref="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.Connect"/> and <see cref="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.ConnectAsync"/>
+            will start the local data connector service if it is not running before pinging it.
+            Has no effect when <see cref="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.BaseAddress"/> points to a different computer: a remote process cannot be started from here.
             </summary>
         </member>
         <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.ApiCall">
@@ -4767,10 +4784,32 @@
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.Instance(System.String,System.String)">
             <summary>
             Returns the singleton instance of the client with its ClubdId and LicenceKey properties set to the values of the parameters.
+            The client targets the data connector on the local computer unless <see cref="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.BaseAddress"/> is set.
             </summary>
             <param name="clubId">The id of the club that is using the client</param>
             <param name="licenceKey">The licence key for the club using the client</param>
             <returns></returns>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.Instance(System.String,System.String,System.String)">
+            <summary>
+            Returns the singleton instance of the client with its ClubdId, LicenceKey and BaseAddress properties set to the values of the parameters.
+            </summary>
+            <param name="clubId">The id of the club that is using the client</param>
+            <param name="licenceKey">The licence key for the club using the client</param>
+            <param name="baseAddress">The base address of the data connector host, e.g. "http://192.168.1.50:5079"</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException">Thrown when <paramref name="baseAddress"/> is not an absolute http or https url.</exception>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.IsServiceAlive">
+            <summary>
+            Checks if the webservice on the static <see cref="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.ApiUrlRoot"/> url can be reached.
+            </summary>
+        </member>
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.IsServiceAliveAsync">
+            <summary>
+            Checks if the data connector host on <see cref="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.UrlRoot"/> can be reached by sending a Get request to it.
+            The returned message contains <see cref="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.ApiPingResponse"/> when it can.
+            </summary>
         </member>
         <member name="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.Credentials">
             <summary>
@@ -4791,8 +4830,15 @@
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.ConnectAsync">
             <summary>
             Checks if the endpoint can be reached by sending a ping request to it.
+            When <see cref="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.EnsureLocalDataConnectorIsRunning"/> is true and the endpoint is on the local computer,
+            starts the local data connector service first if it is not running.
             </summary>
             <returns></returns>
+        </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.TargetsLocalComputer">
+            <summary>
+            True when <see cref="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.UrlRoot"/> points to the local computer.
+            </summary>
         </member>
         <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.Connect(System.String)">
             <summary>

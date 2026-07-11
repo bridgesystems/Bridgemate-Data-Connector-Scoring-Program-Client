@@ -1,4 +1,5 @@
 ﻿using BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient;
+using BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnector;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Net.Http;
@@ -16,42 +17,83 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
     public class ScoringProgramDataConnectorHttpClient : ScoringProgramDataConnectorClientCommandManager, IScoringProgramClient
     {
         /// <summary>
-        /// The url for the webservice without the http:// prefix.
+        /// The url for the retired cloud hosted webservice without the https:// prefix.
         /// </summary>
+        [Obsolete("The cloud hosted data connector has been retired. Use the BaseAddress property to target a data connector host.")]
         public const string ProductionUrlWithouProtocol = "bridgematedataconnector-a6bndyc3gwgmhydq.germanywestcentral-01.azurewebsites.net";
 
         /// <summary>
-        /// The full url for the webservice.
+        /// The full url for the retired cloud hosted webservice.
         /// </summary>
+        [Obsolete("The cloud hosted data connector has been retired. Use the BaseAddress property to target a data connector host.")]
         public const string ProductionUrl = "https://" + ProductionUrlWithouProtocol;
 
         /// <summary>
-        /// The url for the local host hosted webservice without the http:// prefix.
-        /// Used for debugging only.
+        /// The url for the data connector on the local computer without the http:// prefix.
         /// </summary>
         public const string LocalHostUrlWithoutProtocol = "localhost:5079";
 
         /// <summary>
-        /// The full url for the local host hosted webservice.
-        /// Used for debugging only.
+        /// The full url for the data connector on the local computer. This is the default when <see cref="BaseAddress"/> has not been set.
         /// </summary>
         public const string LocalHostUrl = "http://" + LocalHostUrlWithoutProtocol;
 
         /// <summary>
         /// If set to true will make the client communicate with the local host hosted webservice.
-        /// Used for debugging only.
         /// </summary>
+        [Obsolete("The cloud hosted data connector has been retired and the local host url is the default. Use the BaseAddress property to target a different data connector host.")]
         public static bool UseLocalHost { get; set; }
 
         /// <summary>
         /// Constructs the full url for the webservice based on whether it is hosted in local host or in the cloud.
         /// </summary>
+        [Obsolete("The cloud hosted data connector has been retired. Use the UrlRoot property, which honours BaseAddress and defaults to LocalHostUrl.")]
         public static string ApiUrlRoot => UseLocalHost ? LocalHostUrl : ProductionUrl;
 
         /// <summary>
         /// Constructs the url for the webservice without the http:// prefix based on whether it is hosted in local host or in the cloud.
         /// </summary>
-        public static string ApiUrlRootWihtoutProtocol = UseLocalHost ? LocalHostUrlWithoutProtocol : ProductionUrlWithouProtocol;
+        [Obsolete("The cloud hosted data connector has been retired. Use the UrlRoot property, which honours BaseAddress and defaults to LocalHostUrl.")]
+        public static string ApiUrlRootWihtoutProtocol => UseLocalHost ? LocalHostUrlWithoutProtocol : ProductionUrlWithouProtocol;
+
+        private string _baseAddress;
+
+        /// <summary>
+        /// The base address of the data connector host to communicate with, e.g. "http://192.168.1.50:5079".
+        /// Must be an absolute http or https url. A trailing slash is removed.
+        /// When not set the client targets the data connector on the local computer (<see cref="LocalHostUrl"/>).
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown when the value is not an absolute http or https url.</exception>
+        public string BaseAddress
+        {
+            get => _baseAddress;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    _baseAddress = null;
+                    return;
+                }
+                if (!Uri.TryCreate(value, UriKind.Absolute, out var uri) ||
+                    (uri.Scheme != Uri.UriSchemeHttp && uri.Scheme != Uri.UriSchemeHttps))
+                {
+                    throw new ArgumentException($"'{value}' is not an absolute http or https url.", nameof(BaseAddress));
+                }
+                _baseAddress = value.TrimEnd('/');
+            }
+        }
+
+        /// <summary>
+        /// The url root used for all communication: <see cref="BaseAddress"/> when set, otherwise <see cref="LocalHostUrl"/>.
+        /// </summary>
+        public string UrlRoot => !string.IsNullOrWhiteSpace(_baseAddress) ? _baseAddress : LocalHostUrl;
+
+        /// <summary>
+        /// When set to true and the data connector host is the local computer, <see cref="Connect()"/> and <see cref="ConnectAsync()"/>
+        /// will start the local data connector service if it is not running before pinging it.
+        /// Has no effect when <see cref="BaseAddress"/> points to a different computer: a remote process cannot be started from here.
+        /// </summary>
+        public bool EnsureLocalDataConnectorIsRunning { get; set; }
 
         /// <summary>
         /// The url to call when the scoring program communicates with the data connector.
@@ -75,9 +117,13 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         private static readonly ILogger Logger = DataConnectorLogging.LoggerFactory.CreateLogger(nameof(ScoringProgramDataConnectorHttpClient));
 
         private static ScoringProgramDataConnectorHttpClient _instance;
-        
+
+        //A single HttpClient for all requests: creating one per request exhausts sockets under load.
+        private static readonly HttpClient SharedHttpClient = new HttpClient();
+
         /// <summary>
         /// Returns the singleton instance of the client with its ClubdId and LicenceKey properties set to the values of the parameters.
+        /// The client targets the data connector on the local computer unless <see cref="BaseAddress"/> is set.
         /// </summary>
         /// <param name="clubId">The id of the club that is using the client</param>
         /// <param name="licenceKey">The licence key for the club using the client</param>
@@ -90,35 +136,62 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
             return _instance;
         }
 
+        /// <summary>
+        /// Returns the singleton instance of the client with its ClubdId, LicenceKey and BaseAddress properties set to the values of the parameters.
+        /// </summary>
+        /// <param name="clubId">The id of the club that is using the client</param>
+        /// <param name="licenceKey">The licence key for the club using the client</param>
+        /// <param name="baseAddress">The base address of the data connector host, e.g. "http://192.168.1.50:5079"</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="baseAddress"/> is not an absolute http or https url.</exception>
+        public static ScoringProgramDataConnectorHttpClient Instance(string clubId, string licenceKey, string baseAddress)
+        {
+            var instance = Instance(clubId, licenceKey);
+            instance.BaseAddress = baseAddress;
+            return instance;
+        }
+
         private ScoringProgramDataConnectorHttpClient(string clubdId, string licenceKey)
         {
             Credentials = (clubdId, licenceKey);
         }
 
-        public static async Task<string> IsServiceAlive()
+        /// <summary>
+        /// Checks if the webservice on the static <see cref="ApiUrlRoot"/> url can be reached.
+        /// </summary>
+        [Obsolete("Use the IsServiceAliveAsync instance method, which honours BaseAddress.")]
+        public static Task<string> IsServiceAlive()
         {
-            using (HttpClient client = new HttpClient())
-            {
-                var success = false;
-                var responseMessage = "";
-                try
-                {
-                    var url = ApiUrlRoot;
-                    HttpResponseMessage response = await client.GetAsync(url).ConfigureAwait(false);
-                    response.EnsureSuccessStatusCode(); // Throw if not 200–299
+#pragma warning disable CS0618 //Both members are obsolete for the same reason.
+            return PingService(ApiUrlRoot);
+#pragma warning restore CS0618
+        }
 
-                    var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    success = responseBody.Contains(ApiPingResponse);
-                    responseMessage = responseBody;
-                }
-                catch (HttpRequestException ex)
-                {
-                    Logger.LogError(ex, ex.Message);
-                    success = false;
-                    responseMessage = ex.Message;
-                }
-                return responseMessage;
+        /// <summary>
+        /// Checks if the data connector host on <see cref="UrlRoot"/> can be reached by sending a Get request to it.
+        /// The returned message contains <see cref="ApiPingResponse"/> when it can.
+        /// </summary>
+        public Task<string> IsServiceAliveAsync()
+        {
+            return PingService(UrlRoot);
+        }
+
+        private static async Task<string> PingService(string url)
+        {
+            var responseMessage = "";
+            try
+            {
+                HttpResponseMessage response = await SharedHttpClient.GetAsync(url).ConfigureAwait(false);
+                response.EnsureSuccessStatusCode(); // Throw if not 200–299
+
+                responseMessage = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             }
+            catch (HttpRequestException ex)
+            {
+                Logger.LogError(ex, ex.Message);
+                responseMessage = ex.Message;
+            }
+            return responseMessage;
         }
 /// <summary>
 /// The information needed to get access to the http channel for the data communicator.
@@ -139,24 +212,22 @@ public (string clubId, string licenceKey) Credentials { get; set; }
         /// <returns></returns>
         public ScoringProgramResponse Connect()
         {
-            var responseMessage = IsServiceAlive().ConfigureAwait(false).GetAwaiter().GetResult();
-            var success = responseMessage.Contains(ApiPingResponse);
-            return new ScoringProgramResponse
-            {
-                RequestCommand = ScoringProgramDataConnectorCommands.Connect,
-                DataType = success ? DataConnectorResponseData.OK : DataConnectorResponseData.Error,
-                ErrorType = success ? ErrorType.None : ErrorType.NoConnection,
-                SerializedData = JsonSerializer.Serialize(responseMessage)
-            };
+            return ConnectAsync().ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Checks if the endpoint can be reached by sending a ping request to it.
+        /// When <see cref="EnsureLocalDataConnectorIsRunning"/> is true and the endpoint is on the local computer,
+        /// starts the local data connector service first if it is not running.
         /// </summary>
         /// <returns></returns>
         public async Task<ScoringProgramResponse> ConnectAsync()
         {
-            var responseMessage = await IsServiceAlive();
+            if (EnsureLocalDataConnectorIsRunning && TargetsLocalComputer)
+            {
+                BridgemateDataConnectorManager.EnsureDataConnectorServiceIsRunning(forceRestart: false);
+            }
+            var responseMessage = await IsServiceAliveAsync().ConfigureAwait(false);
             var success = responseMessage.Contains(ApiPingResponse);
             return new ScoringProgramResponse
             {
@@ -166,6 +237,12 @@ public (string clubId, string licenceKey) Credentials { get; set; }
                 SerializedData = JsonSerializer.Serialize(responseMessage)
             };
         }
+
+        /// <summary>
+        /// True when <see cref="UrlRoot"/> points to the local computer.
+        /// </summary>
+        private bool TargetsLocalComputer =>
+            Uri.TryCreate(UrlRoot, UriKind.Absolute, out var uri) && uri.IsLoopback;
 
         /// <summary>
         /// Not implemented for http.
@@ -256,19 +333,18 @@ public (string clubId, string licenceKey) Credentials { get; set; }
 
                 //Serialize
                 var requestSerialized = JsonSerializer.Serialize(request);
-                using (var httpClient = new HttpClient())
                 {
                     var retryCounter = 5;
                     while (retryCounter > 0)
                     {
                         //Send the request to the Data Connector and await the response.
-                        var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{ApiUrlRoot}/{ApiCall}");
+                        var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{UrlRoot}/{ApiCall}");
                         var content = new StringContent(requestSerialized, Encoding.UTF8, "application/json");
                         requestMessage.Content = content;
                         HttpResponseMessage httpResponse = null;
                         try
                         {
-                            httpResponse = await httpClient.SendAsync(requestMessage).ConfigureAwait(false);
+                            httpResponse = await SharedHttpClient.SendAsync(requestMessage).ConfigureAwait(false);
                         }
                         catch (Exception ex)
                         {
@@ -367,25 +443,24 @@ public (string clubId, string licenceKey) Credentials { get; set; }
 
                 //Serialize
                 var requestSerialized = JsonSerializer.Serialize(request);
-                using (var httpClient = new HttpClient())
                 {
                     var retryCounter = 5;
                     while (retryCounter > 0)
                     {
                         //Send the request to the Data Connector and await the response.
-                        var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{ApiUrlRoot}/{ApiCall}");
+                        var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{UrlRoot}/{ApiCall}");
                         var content = new StringContent(requestSerialized, Encoding.UTF8, "application/json");
                         requestMessage.Content = content;
                         HttpResponseMessage httpResponse = null;
                         try
                         {
-                            httpResponse = httpClient.SendAsync(requestMessage).ConfigureAwait(false).GetAwaiter().GetResult();
+                            httpResponse = SharedHttpClient.SendAsync(requestMessage).ConfigureAwait(false).GetAwaiter().GetResult();
                         }
                         catch (Exception ex)
                         {
                             Logger.LogError(ex, ex.Message);
                             retryCounter--;
-                            Thread.Sleep(10000 - retryCounter * 200);
+                            Thread.Sleep(1000 - retryCounter * 200);
                         }
                         if (httpResponse != null)
                         {
@@ -408,7 +483,7 @@ public (string clubId, string licenceKey) Credentials { get; set; }
                                 retryCounter--;
                                 var errorMessage = httpResponse.ReasonPhrase;
                                 Logger.LogError(errorMessage);
-                                Thread.Sleep(10000 - retryCounter * 200);
+                                Thread.Sleep(1000 - retryCounter * 200);
                             }
                         }
                     }

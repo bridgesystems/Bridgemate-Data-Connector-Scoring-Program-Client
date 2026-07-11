@@ -6,6 +6,7 @@
 - [General](<General.md>)
 - [Data exchange](<Dataexchange.md>)
   - [Named Pipes](<NamedPipes.md>)
+  - [Http](<Http.md>)
   - [Overview of communication](<Overviewofcommunication.md>)
 - [Data Transfer Objects](<DataTransferObjects.md>)
   - [Overview](<Overview.md>)

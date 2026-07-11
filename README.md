@@ -15,6 +15,15 @@ A symbol package (.snupkg) is included for debugging support.
 
 Alternatively, the compiled libraries can be found in the Dll folder. Make sure to copy all *.dll files. The .pdb file can be useful when debugging. The .deps file may make it possible that the dlls other than the main one do not need to be copied. This may be the case when the programming environment can parse it and knows where to find the dependencies.
 
+### Transports
+The client supports two transports, both implementing the same `IScoringProgramClient` interface:
+- **Named pipes** (`ScoringProgramDataConnectorPipeClient`) — the default; requires the scoring program to run on the same computer as BCS.
+- **Http** (`ScoringProgramDataConnectorHttpClient`) — for scoring programs on the same computer or on another computer on the local network. Pass the club credentials and, for a remote Data Connector, its base address:
+```csharp
+var client = ScoringProgramDataConnectorHttpClient.Instance(clubId, licenceKey, "http://192.168.1.50:5079");
+```
+When no base address is set the client targets `http://localhost:5079`. See [Http](Documentation/MD/Http.md) for details.
+
 ### Logging
 The library uses `Microsoft.Extensions.Logging.Abstractions` so you can plug in any logging framework (NLog, Serilog, etc.). To enable logging, set the logger factory before using the client:
 ```csharp
