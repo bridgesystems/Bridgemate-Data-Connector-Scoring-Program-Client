@@ -3431,11 +3431,14 @@
             The name of the executable of the Bridgemate DataConnectorService
             </summary>
         </member>
-        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnector.BridgemateDataConnectorManager.EnsureDataConnectorServiceIsRunning(System.Boolean)">
+        <member name="M:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnector.BridgemateDataConnectorManager.EnsureDataConnectorServiceIsRunning(System.Boolean,System.Nullable{System.Int32})">
             <summary>
-            Restarts the Bridgemate Data Connector if it is not running.
+            Restarts the Bridgemate Data Connector if it is not running in the current Windows session.
+            Every Windows user runs their own data connector instance, so only processes in the caller's session count.
             </summary>
             <param name="forceRestart">If "true" restart even if it is running.</param>
+            <param name="httpPort">When given, the started service is told to bind this http port (--httpport).
+            When null the service chooses its port itself and publishes it in the registry.</param>
             <returns></returns>
         </member>
         <member name="T:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ErrorType">
@@ -4723,7 +4726,29 @@
         </member>
         <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.LocalHostUrl">
             <summary>
-            The full url for the data connector on the local computer. This is the default when <see cref="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.BaseAddress"/> has not been set.
+            The full url for the data connector on the local computer on the default port (5079). This is the fallback when
+            <see cref="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.BaseAddress"/> has not been set and the data connector service has not published its port
+            (<see cref="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.PublishedLocalHttpPort"/>).
+            </summary>
+        </member>
+        <member name="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.DataConnectorPublicationRegistryKey">
+            <summary>
+            The registry key under HKEY_CURRENT_USER where the data connector service publishes the http port it actually
+            bound (value "HttpPort", DWORD) and its binding ("HttpBinding": "lan", "local" or "off"). Each Windows user runs
+            their own data connector instance, hence the per-user hive.
+            </summary>
+        </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.PublishedLocalHttpPort">
+            <summary>
+            The http port the data connector service of the current Windows user has published, or null when it has not
+            published one (service never ran, or a version that predates port publication).
+            Mind: the value can be stale when the service is not running; a failing ping tells.
+            </summary>
+        </member>
+        <member name="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.LocalHostDiscoveredUrl">
+            <summary>
+            The url of the data connector on the local computer: the published port when available
+            (<see cref="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.PublishedLocalHttpPort"/>), otherwise the default port (<see cref="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.LocalHostUrl"/>).
             </summary>
         </member>
         <member name="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.UseLocalHost">
@@ -4751,7 +4776,9 @@
         </member>
         <member name="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.UrlRoot">
             <summary>
-            The url root used for all communication: <see cref="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.BaseAddress"/> when set, otherwise <see cref="F:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.LocalHostUrl"/>.
+            The url root used for all communication: <see cref="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.BaseAddress"/> when set, otherwise the data connector on the
+            local computer (<see cref="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.LocalHostDiscoveredUrl"/>: the port the service published for this Windows user,
+            or 5079 when none is published).
             </summary>
         </member>
         <member name="P:BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.ScoringProgramDataConnectorHttpClient.EnsureLocalDataConnectorIsRunning">

@@ -22,7 +22,7 @@ The client supports two transports, both implementing the same `IScoringProgramC
 ```csharp
 var client = ScoringProgramDataConnectorHttpClient.Instance(clubId, licenceKey, "http://192.168.1.50:5079");
 ```
-When no base address is set the client targets `http://localhost:5079`. See [Http](Documentation/MD/Http.md) for details.
+When no base address is set the client targets the Data Connector on the local computer, discovering its port through the registry (default 5079). See [Http](Documentation/MD/Http.md) for details.
 
 ### Logging
 The library uses `Microsoft.Extensions.Logging.Abstractions` so you can plug in any logging framework (NLog, Serilog, etc.). To enable logging, set the logger factory before using the client:

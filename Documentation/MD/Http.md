@@ -1,6 +1,6 @@
 # Communication over http
 
-As an alternative to [named pipes](<NamedPipes.md>) the scoring program can communicate with the Bridgemate Data Connector over http. This is the recommended transport when the scoring program does not run on the same computer as BCS: the Data Connector runs on the BCS computer and listens on a http port (5079 by default) that is reachable from other computers on the local network.
+As an alternative to [named pipes](<NamedPipes.md>) the scoring program can communicate with the Bridgemate Data Connector over http. This is the recommended transport when the scoring program does not run on the same computer as BCS: the Data Connector runs on the BCS computer and can listen on a http port (5079 by default) that is reachable from other computers on the local network. Mind that listening on the local network is off by default and must be enabled in BCS on the computer that hosts the Data Connector.
 
 The requests and responses are identical to those used over named pipes: a [ScoringProgramRequest](<Overviewofcommunication.md>) serialized as JSON, posted to the `dc-scoringprogram` endpoint, answered with a JSON serialized ScoringProgramResponse. Two extra properties on the request are mandatory for http communication:
 
@@ -27,7 +27,9 @@ Because http is stateless there is no persistent connection: the Connect command
 The `ScoringProgramDataConnectorHttpClient` class implements the same `IScoringProgramClient` interface as the named pipes client. Obtain it with its club credentials and, when the Data Connector runs on a different computer, the base address:
 
 ```csharp
-//Data Connector on the same computer (default base address http://localhost:5079):
+//Data Connector on the same computer. The client finds the port automatically: the Data Connector service
+//publishes the port it listens on in the registry (HKEY_CURRENT_USER\Software\Bridge Systems BV\BridgemateDataConnector,
+//value HttpPort). When nothing is published the default port 5079 is assumed.
 var client = ScoringProgramDataConnectorHttpClient.Instance(clubId, licenceKey);
 
 //Optionally start the local Data Connector service if it is not running before pinging:

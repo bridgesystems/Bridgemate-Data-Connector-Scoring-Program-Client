@@ -23,11 +23,14 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnec
         public const string FullDataConnectorName = "BridgeSystems.Bridgemate.DataConnectorService.exe";
 
         /// <summary>
-        /// Restarts the Bridgemate Data Connector if it is not running.
+        /// Restarts the Bridgemate Data Connector if it is not running in the current Windows session.
+        /// Every Windows user runs their own data connector instance, so only processes in the caller's session count.
         /// </summary>
         /// <param name="forceRestart">If "true" restart even if it is running.</param>
+        /// <param name="httpPort">When given, the started service is told to bind this http port (--httpport).
+        /// When null the service chooses its port itself and publishes it in the registry.</param>
         /// <returns></returns>
-        public static bool EnsureDataConnectorServiceIsRunning(bool forceRestart)
+        public static bool EnsureDataConnectorServiceIsRunning(bool forceRestart, int? httpPort = null)
         {
             try
             {
@@ -39,8 +42,8 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnec
                     return Restart(dataconnectorExePath, force: true);
                 else
                 {
-                    Process process = GetProcess(Path.GetFileNameWithoutExtension(dataconnectorExePath));
-                    if (process != null) return true;
+                    if (IsRunningInCurrentSession(Path.GetFileNameWithoutExtension(dataconnectorExePath)))
+                        return true;
 
                     return Restart(dataconnectorExePath);
                 }
@@ -52,8 +55,26 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnec
 
             bool Restart(string path, bool force = false)
             {
-                return StartProcess(path, $"-i{FullDataConnectorName} {(force ? "-c" : "")}");
+                var portArgument = httpPort.HasValue ? $" --httpport {httpPort.Value}" : "";
+                return StartProcess(path, $"-i{FullDataConnectorName} {(force ? "-c" : "")}{portArgument}");
             }
+        }
+
+        private static bool IsRunningInCurrentSession(string processName)
+        {
+            var currentSessionId = Process.GetCurrentProcess().SessionId;
+            return Process.GetProcessesByName(processName).Any(process =>
+            {
+                try
+                {
+                    return process.SessionId == currentSessionId;
+                }
+                catch
+                {
+                    //Another user's process may refuse the query; it is not ours then.
+                    return false;
+                }
+            });
         }
 
         public static bool StartProcess(string path, string parameters = "", string workingDirectory = null)

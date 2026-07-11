@@ -1,6 +1,7 @@
 ﻿using BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient;
 using BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.DataConnector;
 using Microsoft.Extensions.Logging;
+using Microsoft.Win32;
 using System;
 using System.Net.Http;
 using System.Net.NetworkInformation;
@@ -34,9 +35,56 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         public const string LocalHostUrlWithoutProtocol = "localhost:5079";
 
         /// <summary>
-        /// The full url for the data connector on the local computer. This is the default when <see cref="BaseAddress"/> has not been set.
+        /// The full url for the data connector on the local computer on the default port (5079). This is the fallback when
+        /// <see cref="BaseAddress"/> has not been set and the data connector service has not published its port
+        /// (<see cref="PublishedLocalHttpPort"/>).
         /// </summary>
         public const string LocalHostUrl = "http://" + LocalHostUrlWithoutProtocol;
+
+        /// <summary>
+        /// The registry key under HKEY_CURRENT_USER where the data connector service publishes the http port it actually
+        /// bound (value "HttpPort", DWORD) and its binding ("HttpBinding": "lan", "local" or "off"). Each Windows user runs
+        /// their own data connector instance, hence the per-user hive.
+        /// </summary>
+        public const string DataConnectorPublicationRegistryKey = @"Software\Bridge Systems BV\BridgemateDataConnector";
+
+        /// <summary>
+        /// The http port the data connector service of the current Windows user has published, or null when it has not
+        /// published one (service never ran, or a version that predates port publication).
+        /// Mind: the value can be stale when the service is not running; a failing ping tells.
+        /// </summary>
+        public static int? PublishedLocalHttpPort
+        {
+            get
+            {
+                try
+                {
+                    using (var key = Registry.CurrentUser.OpenSubKey(DataConnectorPublicationRegistryKey))
+                    {
+                        if (key?.GetValue("HttpPort") is int port && port > 0 && port <= 65535)
+                            return port;
+                    }
+                }
+                catch
+                {
+                    //Non-Windows platform or no registry access: fall back to the default port.
+                }
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// The url of the data connector on the local computer: the published port when available
+        /// (<see cref="PublishedLocalHttpPort"/>), otherwise the default port (<see cref="LocalHostUrl"/>).
+        /// </summary>
+        public static string LocalHostDiscoveredUrl
+        {
+            get
+            {
+                var publishedPort = PublishedLocalHttpPort;
+                return publishedPort.HasValue ? $"http://localhost:{publishedPort.Value}" : LocalHostUrl;
+            }
+        }
 
         /// <summary>
         /// If set to true will make the client communicate with the local host hosted webservice.
@@ -84,9 +132,11 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         }
 
         /// <summary>
-        /// The url root used for all communication: <see cref="BaseAddress"/> when set, otherwise <see cref="LocalHostUrl"/>.
+        /// The url root used for all communication: <see cref="BaseAddress"/> when set, otherwise the data connector on the
+        /// local computer (<see cref="LocalHostDiscoveredUrl"/>: the port the service published for this Windows user,
+        /// or 5079 when none is published).
         /// </summary>
-        public string UrlRoot => !string.IsNullOrWhiteSpace(_baseAddress) ? _baseAddress : LocalHostUrl;
+        public string UrlRoot => !string.IsNullOrWhiteSpace(_baseAddress) ? _baseAddress : LocalHostDiscoveredUrl;
 
         /// <summary>
         /// When set to true and the data connector host is the local computer, <see cref="Connect()"/> and <see cref="ConnectAsync()"/>
@@ -223,12 +273,29 @@ public (string clubId, string licenceKey) Credentials { get; set; }
         /// <returns></returns>
         public async Task<ScoringProgramResponse> ConnectAsync()
         {
+            var startedLocally = false;
             if (EnsureLocalDataConnectorIsRunning && TargetsLocalComputer)
             {
-                BridgemateDataConnectorManager.EnsureDataConnectorServiceIsRunning(forceRestart: false);
+                //When the base address explicitly names a localhost port, the started service is told to bind it.
+                //Without a base address the service chooses its own port and publishes it, which UrlRoot picks up.
+                int? explicitPort = null;
+                if (!string.IsNullOrWhiteSpace(_baseAddress) && Uri.TryCreate(_baseAddress, UriKind.Absolute, out var baseUri))
+                    explicitPort = baseUri.Port;
+                startedLocally = BridgemateDataConnectorManager.EnsureDataConnectorServiceIsRunning(forceRestart: false, explicitPort);
             }
             var responseMessage = await IsServiceAliveAsync().ConfigureAwait(false);
             var success = responseMessage.Contains(ApiPingResponse);
+            if (!success && startedLocally)
+            {
+                //A freshly started service needs a moment to migrate its database, bind its port and publish it.
+                //UrlRoot is re-evaluated on every attempt, so a newly published port is picked up.
+                for (var attempt = 0; attempt < 20 && !success; attempt++)
+                {
+                    await Task.Delay(500).ConfigureAwait(false);
+                    responseMessage = await IsServiceAliveAsync().ConfigureAwait(false);
+                    success = responseMessage.Contains(ApiPingResponse);
+                }
+            }
             return new ScoringProgramResponse
             {
                 RequestCommand = ScoringProgramDataConnectorCommands.Connect ,
