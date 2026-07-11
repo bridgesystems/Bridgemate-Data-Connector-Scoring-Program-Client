@@ -9,7 +9,7 @@ The requests and responses are identical to those used over named pipes: a [Scor
 | ClubId | The id of the club that is using the client |
 | LicenceKey | The licence key for the club using the client |
 
-Requests with missing or non-matching credentials are answered with an Error response with ErrorType Validation.
+Always send the correct club credentials. In the current version they are not yet enforced (a request with missing or non-matching credentials is still processed), but a future version will reject such requests with an Error response with ErrorType Validation.
 
 ## Endpoints
 
