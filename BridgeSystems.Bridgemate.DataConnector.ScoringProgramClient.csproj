@@ -30,6 +30,9 @@
     <Compile Remove="Scoring Program Client Documentation\**" />
     <EmbeddedResource Remove="Scoring Program Client Documentation\**" />
     <None Remove="Scoring Program Client Documentation\**" />
+    <Compile Remove="tools\**" />
+    <EmbeddedResource Remove="tools\**" />
+    <None Remove="tools\**" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
