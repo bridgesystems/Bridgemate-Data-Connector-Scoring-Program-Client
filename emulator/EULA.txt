@@ -1,0 +1,22 @@
+Scoring Program Emulator - licence terms
+=========================================
+
+Copyright (c) Bridge Systems BV. All rights reserved.
+
+The Scoring Program Emulator (the source code and any compiled builds in this
+emulator folder and in the release downloads of this repository) is provided
+as reference material for developers who write scoring programs that
+communicate with the Bridgemate Data Connector.
+
+You may:
+- use and run the emulator to learn and to test communication with the
+  Bridgemate Data Connector;
+- read, build and adapt the source code for those purposes.
+
+You may not:
+- redistribute the emulator, in source or compiled form, adapted or not,
+  outside this repository and its official release downloads.
+
+The emulator is provided "as is", without warranty of any kind. It is not
+covered by the LGPL-3.0 licence of the client library in the root of this
+repository; these terms apply to the emulator folder only.

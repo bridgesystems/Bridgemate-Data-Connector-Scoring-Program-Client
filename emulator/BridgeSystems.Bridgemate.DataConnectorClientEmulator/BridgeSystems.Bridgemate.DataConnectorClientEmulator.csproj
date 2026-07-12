@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Version>1.0.1027.0</Version>
+    <FileVersion>1.0.1027.0</FileVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="DTOs\FullInitDTO.json" />
+    <None Remove="DTOs\MinimalInitDTO.json" />
+    <None Remove="DTOs\PlayerData.csv" />
+    <None Remove="DTOs\ResultDTO.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="DTOs\FullInitDTO.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DTOs\MinimalInitDTO.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DTOs\PlayerData.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DTOs\ResultDTO.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\cross.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\tick.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The emulator builds against the client source of the same commit, so it can never lag
+         behind the published package. -->
+    <ProjectReference Include="..\..\BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.csproj" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageReference Include="CsvHelper" Version="33.1.0" />
+    <PackageReference Include="NLog" Version="6.1.3" />
+  </ItemGroup>
+
+</Project>

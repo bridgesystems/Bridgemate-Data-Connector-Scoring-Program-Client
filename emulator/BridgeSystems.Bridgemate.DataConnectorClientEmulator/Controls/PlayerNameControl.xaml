@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="BridgeSystems.Bridgemate.DataConnectorClientEmulator.Controls.PlayerNameControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BridgeSystems.Bridgemate.DataConnectorClientEmulator.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel>
+        <CheckBox IsChecked="{Binding AddNewPlayer,Mode=TwoWay}" Content="Add new player "/>
+        <UniformGrid Columns="2">
+            <TextBlock Text="Section:"/>
+            <ComboBox ItemsSource="{Binding Sections}" SelectedItem="{Binding SelectedSection,Mode=TwoWay}"/>
+            <TextBlock Text="Table:"/>
+            <ComboBox ItemsSource="{Binding TableNumbers}" SelectedItem="{Binding SelectedTableNumber}"/>
+            <TextBlock Text="Position:"/>
+            <ComboBox ItemsSource="{Binding Directions}" 
+            SelectedItem="{Binding SelectedDirection,Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Description}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock Text="PlayerNumber:"/>
+            <TextBox Text="{Binding NewPlayerNumber}"/>
+            <TextBlock Text="First name:" IsEnabled="{Binding AddNewPlayer}">
+                <TextBlock.Foreground>
+                    <SolidColorBrush Color="Black" Opacity="{Binding AddNewPlayer, Converter={StaticResource BOC}}"/>
+                </TextBlock.Foreground>
+            </TextBlock>
+            <TextBox Text="{Binding NewPlayerFirstName}" IsEnabled="{Binding AddNewPlayer}"/>
+            <TextBlock Text="Last name:" IsEnabled="{Binding AddNewPlayer}">
+                <TextBlock.Foreground>
+                    <SolidColorBrush Color="Black" Opacity="{Binding AddNewPlayer, Converter={StaticResource BOC}}"/>
+                </TextBlock.Foreground>
+            </TextBlock>
+            <TextBox Text="{Binding NewPlayerLastName}" IsEnabled="{Binding AddNewPlayer}"/>
+        </UniformGrid>
+        <Button Content="Update" Command="{Binding UpdateNameAdvancedCommand}"
+                IsEnabled="{Binding EventHasLaunched}"
+                ToolTip="{Binding UpdateNameAdvancedCommandDescription }"/>
+    </StackPanel>
+</UserControl>

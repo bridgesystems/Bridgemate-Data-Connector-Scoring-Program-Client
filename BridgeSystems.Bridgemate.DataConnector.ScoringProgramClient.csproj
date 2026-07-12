@@ -36,6 +36,11 @@
     <Compile Remove="samples\**" />
     <EmbeddedResource Remove="samples\**" />
     <None Remove="samples\**" />
+    <Compile Remove="emulator\**" />
+    <EmbeddedResource Remove="emulator\**" />
+    <None Remove="emulator\**" />
+    <Page Remove="emulator\**" />
+    <ApplicationDefinition Remove="emulator\**" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />

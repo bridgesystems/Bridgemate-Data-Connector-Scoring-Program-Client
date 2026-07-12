@@ -9,6 +9,8 @@ jobs:
     runs-on: windows-latest
     # Skip runs triggered by the version bump commit itself
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -21,6 +23,7 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Bump version
+        id: bump
         shell: pwsh
         run: |
           $csproj = "BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.csproj"
@@ -34,6 +37,7 @@ jobs:
             $content = $content -replace "<FileVersion>$oldVersion</FileVersion>", "<FileVersion>$newVersion</FileVersion>"
             Set-Content $csproj $content -NoNewline
             Write-Host "Version bumped from $oldVersion to $newVersion"
+            "version=$newVersion" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
           } else {
             Write-Error "Could not find Version element in csproj"
             exit 1
@@ -62,3 +66,22 @@ jobs:
           foreach ($pkg in Get-ChildItem -Path nupkg -Filter *.nupkg) {
             dotnet nuget push $pkg.FullName --source "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
           }
+
+      - name: Publish emulator (self-contained)
+        run: dotnet publish emulator/BridgeSystems.Bridgemate.DataConnectorClientEmulator/BridgeSystems.Bridgemate.DataConnectorClientEmulator.csproj -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o emulator-publish
+
+      - name: Zip emulator
+        shell: pwsh
+        run: Compress-Archive -Path emulator-publish/* -DestinationPath "ScoringProgramEmulator-${{ steps.bump.outputs.version }}-win-x64.zip"
+
+      - name: Create GitHub release with the emulator
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $bumpCommit = git rev-parse HEAD
+          gh release create "v${{ steps.bump.outputs.version }}" `
+            "ScoringProgramEmulator-${{ steps.bump.outputs.version }}-win-x64.zip" `
+            --target $bumpCommit `
+            --title "v${{ steps.bump.outputs.version }}" `
+            --notes "NuGet package BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient ${{ steps.bump.outputs.version }} and the matching ready-to-run scoring program emulator (win-x64, no .NET installation required). See emulator/EULA.txt for the emulator licence."

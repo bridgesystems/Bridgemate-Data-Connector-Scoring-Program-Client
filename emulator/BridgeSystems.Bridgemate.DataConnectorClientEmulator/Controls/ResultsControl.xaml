@@ -1,0 +1,115 @@
+﻿<UserControl x:Class="BridgeSystems.Bridgemate.DataConnectorClientEmulator.Controls.ResultsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BridgeSystems.Bridgemate.DataConnectorClientEmulator.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel>
+        <Border BorderThickness="1" BorderBrush="SlateGray" Padding="2">
+            <StackPanel>
+                <UniformGrid Columns="2">
+                    <TextBlock Text="Scoring side:"/>
+                    <ComboBox ItemsSource="{Binding ScoringSides}" SelectedItem="{Binding SelectedScoringSide}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Description}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Tbl:"/>
+                        <ComboBox ItemsSource="{Binding ContractSections}"
+                                  SelectedItem="{Binding SelectedContractSection}"/>
+                        <ComboBox ItemsSource="{Binding ContractTables}"
+                                  SelectedItem="{Binding SelectedContractTable}"/>
+                        <TextBlock Text="Rnd:"/>
+                        <ComboBox ItemsSource="{Binding ContractRounds}"
+                                  SelectedItem="{Binding SelectedContractRound}"/>
+                        <TextBlock Text="Brd:"/>
+                        <ComboBox ItemsSource="{Binding ContractBoards}"
+                                   SelectedItem="{Binding SelectedContractBoard}"/>
+                        <Button Command="{Binding DeleteResultCommand}" Content="Delete result"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="NS:"/>
+                        <ComboBox ItemsSource="{Binding NsPairNumbers}" 
+                                  SelectedItem="{Binding SelectedNsPairNumber}"/>
+                        <TextBlock Text="EW:"/>
+                        <ComboBox ItemsSource="{Binding EwPairNumbers}" 
+                                  SelectedItem="{Binding SelectedEwPairNumber}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Declaring pair:"/>
+                        <ComboBox ItemsSource="{Binding DeclaringPairNumbers}"
+                                  SelectedItem="{Binding SelectedDeclaringPairNumber}"/>
+                        <TextBlock Text="Declarer:"/>
+                        <ComboBox ItemsSource="{Binding ContractDirectionSelections}" 
+                                  SelectedItem="{Binding SelectedContractDirectionSelection}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Description}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <TextBlock Text="!!" FontWeight="Bold" Foreground="Red" FontSize="16"
+                                   Visibility="{Binding IsSwitched,Converter={StaticResource BVP}}"
+                                   ToolTip="Switched seating"/>
+                    </StackPanel>
+                    <CheckBox IsChecked="{Binding EnterSpecialResult}" Content="Enter special result"
+                              VerticalAlignment="Center"/>
+                    <TextBlock Text=""/>
+                    <StackPanel Orientation="Horizontal" 
+                                Visibility="{Binding EnterSpecialResult,
+                                                     Converter={StaticResource BVP},ConverterParameter=collapse}">
+                        <TextBlock Text="Result:"/>
+                        <ComboBox ItemsSource="{Binding SpecialResultValues}" 
+                                  SelectedItem="{Binding SelectedSpecialResultValue}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Description}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" 
+                                Visibility="{Binding EnterSpecialResult, Converter={StaticResource BVP},
+                                                     ConverterParameter=collapseinverted}">
+                        <TextBlock Text="Contr:"/>
+                        <ComboBox ItemsSource="{Binding ContractLevels}"
+                                  SelectedItem="{Binding SelectedContractLevel}"/>
+                        <ComboBox ItemsSource="{Binding Denominations}" SelectedItem="{Binding SelectedDenomination}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Description}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <ComboBox ItemsSource="{Binding Stakes}" SelectedItem="{Binding SelectedStake}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Description}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <TextBlock Text="Tricks:"/>
+                        <ComboBox ItemsSource="{Binding TotalTricksMade}"
+                                  SelectedItem="{Binding SelectedTotalTricksMade}"/>
+                    </StackPanel>
+
+                </UniformGrid>
+                <TextBlock Grid.ColumnSpan="2" TextWrapping="Wrap" 
+                           FontSize="14" Foreground="Red" Text="{Binding ValidationMessage}"/>
+            </StackPanel>
+        </Border>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Add result" Command="{Binding AddResultCommand}"
+                    ToolTip="{Binding AddResultCommandDescription}"/>
+            <Button Command="{Binding SendResultsAdvancedCommand}"
+                    ToolTip="{Binding SendResultsAdvancedCommandDescription}">
+                <TextBlock Text="{Binding NumberOfResults,StringFormat=Send results ({0})}"/>
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

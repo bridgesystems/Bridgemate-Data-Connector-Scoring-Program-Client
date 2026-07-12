@@ -1,0 +1,22 @@
+[
+  {
+    "SessionGuid": "6748B093CC484FF29204C9E86FBF302F",
+    "SectionLetters": "A",
+    "TableNumber": 1,
+    "RoundNumber": 1,
+    "BoardNumber": 1,
+    "ScoringDirection": 3,
+    "IsDeleted": false,
+    "PairNorthSouth": 1,
+    "PairEastWest": 2,
+    "DeclaringPair": 1,
+    "DeclarerDirection": 1,
+    "Level": 1,
+    "Denomination": 1,
+    "Stake": 0,
+    "TotalTricks": 7,
+    "LeadCardRank": 14,
+    "LeadCardSuit": 1,
+    "ValidationMessages": null
+  }
+] 

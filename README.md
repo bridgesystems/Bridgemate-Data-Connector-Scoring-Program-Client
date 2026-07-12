@@ -3,6 +3,13 @@ Welcome to the source code for the scoring program client to the Bridgemate Data
 Communication through the Bridgemate Data Connector is the preferred way for communication between bridge scoring programs and the Bridgemate 3, the Bridgemate 2 and the Bridgemate App back end. Bridgemate Control Software 5 is needed to receive, process and return data from the Data Connector.
 In this repository you will find the documentation on how to write a client yourself as well as the source code for a scoring program client, written in C# for .Net Standard 2.0, provided by Bridge Systems BV. This client takes care of connecting, reconnecting and communication with the Data Connector. You can either use the source code as a reference to write your own code, or you can interface with the compiled BridgeSystems.Bridgemate.DataConnector.ScoringProgram.dll.
 
+# Clients for other platforms
+The scoring program client is also available for PHP and Java. Both speak a wire format generated from this repository and verified against golden fixtures, so the three clients behave identically:
+- **PHP**: [Bridgemate-Data-Connector-Scoring-Program-Client-PHP](https://github.com/BridgeSystems/Bridgemate-Data-Connector-Scoring-Program-Client-PHP) — Composer package `bridgemate/dataconnector-client`
+- **Java**: [Bridgemate-Data-Connector-Scoring-Program-Client-Java](https://github.com/BridgeSystems/Bridgemate-Data-Connector-Scoring-Program-Client-Java) — Maven coordinates `nl.bridgemate:bridgemate-dataconnector-client`
+
+Questions about any client are welcome in the [Discussions](https://github.com/BridgeSystems/Bridgemate-Data-Connector-Scoring-Program-Client/discussions) of this repository; see [SUPPORT.md](SUPPORT.md).
+
 # The getting-started console sample
 [samples/GettingStarted](samples/GettingStarted/) is a small console application that exercises the core workflow over http against a live Data Connector: connect/ping, initialize or continue an event, send player data and results, poll and accept the queues. Run it interactively or as an unattended scenario:
 ```
@@ -12,7 +19,12 @@ dotnet run --project samples/GettingStarted -- --scenario
 Mind that "Initialize event" starts Bridgemate Control Software and creates a small test event. Visual Studio Code launch configurations are included (`.vscode/launch.json`); the project is deliberately not part of the solution, so the NuGet package build is unaffected.
 
 # The scoring program emulator (BridgeSystems.Bridgemate.DataConnectorClientEmulator)
-In the [Scoring Program Emulator folder](https://github.com/bridgesystems/Bridgemate-Data-Connector-Scoring-Program-Client/tree/master/Scoring%20Program%20Emulator) you will find a zipped Visual Studio 2022 project that demonstrates how to use the ScoringProgramClient. Be free to use and adapt this to learn and test how to use the ScoringProgramClient for communication with the Bridgemate Data Connector. Redistribution of this code is not allowed.
+The [emulator folder](emulator/) contains the full WPF scoring program emulator that demonstrates how to use the ScoringProgramClient: it initializes events, sends players and results and polls the queues through the same client library this repository publishes. The emulator builds against the client source of the same commit (a project reference), so it always matches the released package — including the http transport.
+
+- **Run it without building:** download the ready-to-run emulator from the [Releases page](../../releases); every package release includes a matching emulator build.
+- **Open the source:** `emulator/BridgeSystems.Bridgemate.DataConnectorClientEmulator` (Visual Studio or `dotnet build`; requires the .NET 10 SDK on Windows).
+
+Be free to use and adapt this code to learn and test how to communicate with the Bridgemate Data Connector. Mind that the emulator has its own licence: see [emulator/EULA.txt](emulator/EULA.txt) — unlike the client library it may not be redistributed.
 
 ## The compiled libraries
 The client is available as a NuGet package on [nuget.org](https://www.nuget.org/packages/BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient). To install:
