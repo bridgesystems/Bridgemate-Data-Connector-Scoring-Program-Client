@@ -19,7 +19,7 @@ namespace DtoGenerator
         private static int Main(string[] args)
         {
             var toolDir = AppContext.BaseDirectory;
-            //When run via "dotnet run" the base directory is bin/Debug/net8.0; the project dir is three up.
+            //When run via "dotnet run" the base directory is bin/Debug/<tfm>; the project dir is three up.
             var projectDir = Path.GetFullPath(Path.Combine(toolDir, "..", "..", ".."));
             var phpOut = Path.Combine(projectDir, "out", "php");
             var javaOut = Path.Combine(projectDir, "out", "java");
