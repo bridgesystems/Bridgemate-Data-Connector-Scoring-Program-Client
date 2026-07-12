@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.Samples</RootNamespace>
+    <AssemblyName>GettingStarted</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\*.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

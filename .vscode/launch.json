@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C#: getting started (interactive)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build getting-started sample",
+            "program": "${workspaceFolder}/samples/GettingStarted/bin/Debug/net10.0/GettingStarted.dll",
+            "cwd": "${workspaceFolder}/samples/GettingStarted",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "C#: getting started (--scenario)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build getting-started sample",
+            "program": "${workspaceFolder}/samples/GettingStarted/bin/Debug/net10.0/GettingStarted.dll",
+            "args": ["--scenario"],
+            "cwd": "${workspaceFolder}/samples/GettingStarted",
+            "console": "integratedTerminal"
+        }
+    ]
+}

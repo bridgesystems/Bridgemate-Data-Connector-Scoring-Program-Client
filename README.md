@@ -3,6 +3,14 @@ Welcome to the source code for the scoring program client to the Bridgemate Data
 Communication through the Bridgemate Data Connector is the preferred way for communication between bridge scoring programs and the Bridgemate 3, the Bridgemate 2 and the Bridgemate App back end. Bridgemate Control Software 5 is needed to receive, process and return data from the Data Connector.
 In this repository you will find the documentation on how to write a client yourself as well as the source code for a scoring program client, written in C# for .Net Standard 2.0, provided by Bridge Systems BV. This client takes care of connecting, reconnecting and communication with the Data Connector. You can either use the source code as a reference to write your own code, or you can interface with the compiled BridgeSystems.Bridgemate.DataConnector.ScoringProgram.dll.
 
+# The getting-started console sample
+[samples/GettingStarted](samples/GettingStarted/) is a small console application that exercises the core workflow over http against a live Data Connector: connect/ping, initialize or continue an event, send player data and results, poll and accept the queues. Run it interactively or as an unattended scenario:
+```
+dotnet run --project samples/GettingStarted
+dotnet run --project samples/GettingStarted -- --scenario
+```
+Mind that "Initialize event" starts Bridgemate Control Software and creates a small test event. Visual Studio Code launch configurations are included (`.vscode/launch.json`); the project is deliberately not part of the solution, so the NuGet package build is unaffected.
+
 # The scoring program emulator (BridgeSystems.Bridgemate.DataConnectorClientEmulator)
 In the [Scoring Program Emulator folder](https://github.com/bridgesystems/Bridgemate-Data-Connector-Scoring-Program-Client/tree/master/Scoring%20Program%20Emulator) you will find a zipped Visual Studio 2022 project that demonstrates how to use the ScoringProgramClient. Be free to use and adapt this to learn and test how to use the ScoringProgramClient for communication with the Bridgemate Data Connector. Redistribution of this code is not allowed.
 

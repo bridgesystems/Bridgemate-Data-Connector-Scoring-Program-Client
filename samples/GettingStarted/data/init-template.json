@@ -1,0 +1,55 @@
+{
+  "Commands": 7,
+  "EventGuid": "REPLACED-AT-RUNTIME",
+  "ClubId": "",
+  "AlternativeDataFolder": null,
+  "Sessions": [
+    {
+      "SessionGuid": "REPLACED-AT-RUNTIME",
+      "EventGuid": "REPLACED-AT-RUNTIME",
+      "Name": "Getting started sample session",
+      "ScoringGroups": [
+        {
+          "SessionGuid": "REPLACED-AT-RUNTIME",
+          "ScoringGroupNumber": 1,
+          "Name": "Scoring group 1",
+          "ScoringMethod": 10,
+          "Sections": [
+            {
+              "SessionGuid": "REPLACED-AT-RUNTIME",
+              "ScoringGroupNumber": 1,
+              "Letters": "A",
+              "Name": "Section A",
+              "Winners": 1,
+              "GameType": 10,
+              "EWMoveBeforePlay": 0,
+              "MissingPair": 0,
+              "Tables": [
+                {
+                  "SessionGuid": "REPLACED-AT-RUNTIME",
+                  "SectionLetters": "A",
+                  "TableNumber": 1,
+                  "Rounds": [
+                    { "SessionGuid": "REPLACED-AT-RUNTIME", "SectionLetters": "A", "TableNumber": 1, "RoundNumber": 1, "LowBoardNumber": 1, "HighBoardNumber": 2, "PairNS": 1, "PairEW": 2 },
+                    { "SessionGuid": "REPLACED-AT-RUNTIME", "SectionLetters": "A", "TableNumber": 1, "RoundNumber": 2, "LowBoardNumber": 3, "HighBoardNumber": 4, "PairNS": 1, "PairEW": 3 },
+                    { "SessionGuid": "REPLACED-AT-RUNTIME", "SectionLetters": "A", "TableNumber": 1, "RoundNumber": 3, "LowBoardNumber": 5, "HighBoardNumber": 6, "PairNS": 1, "PairEW": 4 }
+                  ]
+                },
+                {
+                  "SessionGuid": "REPLACED-AT-RUNTIME",
+                  "SectionLetters": "A",
+                  "TableNumber": 2,
+                  "Rounds": [
+                    { "SessionGuid": "REPLACED-AT-RUNTIME", "SectionLetters": "A", "TableNumber": 2, "RoundNumber": 1, "LowBoardNumber": 7, "HighBoardNumber": 8, "PairNS": 3, "PairEW": 4 },
+                    { "SessionGuid": "REPLACED-AT-RUNTIME", "SectionLetters": "A", "TableNumber": 2, "RoundNumber": 2, "LowBoardNumber": 9, "HighBoardNumber": 10, "PairNS": 4, "PairEW": 2 },
+                    { "SessionGuid": "REPLACED-AT-RUNTIME", "SectionLetters": "A", "TableNumber": 2, "RoundNumber": 3, "LowBoardNumber": 11, "HighBoardNumber": 12, "PairNS": 2, "PairEW": 3 }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

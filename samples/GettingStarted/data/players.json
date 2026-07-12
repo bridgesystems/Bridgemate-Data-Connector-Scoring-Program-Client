@@ -1,0 +1,10 @@
+[
+  { "PlayerNumber": "990001", "FirstName": "John", "LastName": "Doe", "CountryCode": "NL", "SectionLetters": "A", "TableNumber": 1, "Direction": 1 },
+  { "PlayerNumber": "990002", "FirstName": "Jane", "LastName": "Doe", "CountryCode": "NL", "SectionLetters": "A", "TableNumber": 1, "Direction": 3 },
+  { "PlayerNumber": "990003", "FirstName": "Bilbo", "LastName": "Baggins", "CountryCode": "NL", "SectionLetters": "A", "TableNumber": 1, "Direction": 2 },
+  { "PlayerNumber": "990004", "FirstName": "Frodo", "LastName": "Baggins", "CountryCode": "NL", "SectionLetters": "A", "TableNumber": 1, "Direction": 4 },
+  { "PlayerNumber": "990005", "FirstName": "Anne", "LastName": "Smith", "CountryCode": "NL", "SectionLetters": "A", "TableNumber": 2, "Direction": 1 },
+  { "PlayerNumber": "990006", "FirstName": "Peter", "LastName": "Smith", "CountryCode": "NL", "SectionLetters": "A", "TableNumber": 2, "Direction": 3 },
+  { "PlayerNumber": "990007", "FirstName": "Mary", "LastName": "Jones", "CountryCode": "NL", "SectionLetters": "A", "TableNumber": 2, "Direction": 2 },
+  { "PlayerNumber": "990008", "FirstName": "David", "LastName": "Jones", "CountryCode": "NL", "SectionLetters": "A", "TableNumber": 2, "Direction": 4 }
+]

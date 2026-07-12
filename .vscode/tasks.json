@@ -1,0 +1,12 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build getting-started sample",
+            "type": "shell",
+            "command": "dotnet build samples/GettingStarted/GettingStarted.csproj",
+            "problemMatcher": "$msCompile",
+            "group": { "kind": "build", "isDefault": true }
+        }
+    ]
+}
