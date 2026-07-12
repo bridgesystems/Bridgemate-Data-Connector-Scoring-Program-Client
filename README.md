@@ -64,3 +64,9 @@ A help file that describes the methods and properties of the scoring program cli
 1. Html: [Data Connector context sensitive help ](https://bridgesystems.github.io/Bridgemate-Data-Connector-Scoring-Program-Client/html/b11ca58b-c149-48f8-af9a-cf6a2c7bfe53.htm)
 
 As of March 10th 2026, this repository has been moved from "bridgesystemsbv" to "BridgeSystems"
+
+## License
+
+Copyright © Bridge Systems BV. The client library and its source code are free software, licensed under the **GNU Lesser General Public License v3.0 only** (LGPL-3.0-only) — see [LICENSE](LICENSE).
+
+Exception: the Scoring Program Emulator in [emulator/](emulator/) is covered by its own end-user licence agreement ([emulator/EULA.txt](emulator/EULA.txt)) and may not be redistributed.
