@@ -4,15 +4,15 @@ using BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient;
 namespace DtoGenerator
 {
     /// <summary>
-    /// Generates the PHP and Java DTO layers and the golden JSON fixtures from the compiled
+    /// Generates the PHP, Java and Python DTO layers and the golden JSON fixtures from the compiled
     /// .NET client assembly, which stays the single source of truth for the wire format.
     ///
     /// Usage:
-    ///   dotnet run --project tools/DtoGenerator -- [--php-out DIR] [--java-out DIR] [--fixtures-out DIR]
+    ///   dotnet run --project tools/DtoGenerator -- [--php-out DIR] [--java-out DIR] [--python-out DIR] [--fixtures-out DIR]
     ///
-    /// Defaults emit next to the tool: tools/DtoGenerator/out/php, out/java and fixtures/.
-    /// Point --php-out/--java-out at the src/Dto respectively dto directories of the port repos
-    /// to regenerate them in place.
+    /// Defaults emit next to the tool: tools/DtoGenerator/out/php, out/java, out/python and fixtures/.
+    /// Point --php-out/--java-out/--python-out at the src/Dto respectively dto directories of the
+    /// port repos to regenerate them in place.
     /// </summary>
     internal static class Program
     {
@@ -23,6 +23,7 @@ namespace DtoGenerator
             var projectDir = Path.GetFullPath(Path.Combine(toolDir, "..", "..", ".."));
             var phpOut = Path.Combine(projectDir, "out", "php");
             var javaOut = Path.Combine(projectDir, "out", "java");
+            var pythonOut = Path.Combine(projectDir, "out", "python");
             var fixturesOut = Path.Combine(projectDir, "fixtures");
 
             for (var i = 0; i < args.Length - 1; i++)
@@ -31,6 +32,7 @@ namespace DtoGenerator
                 {
                     case "--php-out": phpOut = args[++i]; break;
                     case "--java-out": javaOut = args[++i]; break;
+                    case "--python-out": pythonOut = args[++i]; break;
                     case "--fixtures-out": fixturesOut = args[++i]; break;
                 }
             }
@@ -56,6 +58,9 @@ namespace DtoGenerator
 
             new JavaEmitter(docs, header).Emit(types, javaOut);
             Console.WriteLine($"Java DTOs written to {javaOut}");
+
+            new PythonEmitter(docs, header).Emit(types, pythonOut);
+            Console.WriteLine($"Python DTOs written to {pythonOut}");
 
             new FixtureWriter().Write(fixturesOut);
             Console.WriteLine($"Fixtures written to {fixturesOut}");

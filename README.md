@@ -4,9 +4,10 @@ Communication through the Bridgemate Data Connector is the preferred way for com
 In this repository you will find the documentation on how to write a client yourself as well as the source code for a scoring program client, written in C# for .Net Standard 2.0, provided by Bridge Systems BV. This client takes care of connecting, reconnecting and communication with the Data Connector. You can either use the source code as a reference to write your own code, or you can interface with the compiled BridgeSystems.Bridgemate.DataConnector.ScoringProgram.dll.
 
 # Clients for other platforms
-The scoring program client is also available for PHP and Java. Both speak a wire format generated from this repository and verified against golden fixtures, so the three clients behave identically:
+The scoring program client is also available for PHP, Java and Python. All speak a wire format generated from this repository and verified against golden fixtures, so the four clients behave identically:
 - **PHP**: [Bridgemate-Data-Connector-Scoring-Program-Client-PHP](https://github.com/BridgeSystems/Bridgemate-Data-Connector-Scoring-Program-Client-PHP) — Composer package `bridgemate/dataconnector-client`
 - **Java**: [Bridgemate-Data-Connector-Scoring-Program-Client-Java](https://github.com/BridgeSystems/Bridgemate-Data-Connector-Scoring-Program-Client-Java) — Maven coordinates `nl.bridgemate:bridgemate-dataconnector-client`
+- **Python**: [Bridgemate-Data-Connector-Scoring-Program-Client-Python](https://github.com/BridgeSystems/Bridgemate-Data-Connector-Scoring-Program-Client-Python) — PyPI package `bridgemate-dataconnector-client`
 
 Questions about any client are welcome in the [Discussions](https://github.com/BridgeSystems/Bridgemate-Data-Connector-Scoring-Program-Client/discussions) of this repository; see [SUPPORT.md](SUPPORT.md).
 

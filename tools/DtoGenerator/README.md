@@ -1,6 +1,6 @@
 # DtoGenerator
 
-Generates the DTO layers of the PHP and Java clients and the golden JSON fixtures from this
+Generates the DTO layers of the PHP, Java and Python clients and the golden JSON fixtures from this
 repository's compiled assembly, which is the single source of truth for the wire format.
 
 This project is intentionally **not** part of the solution: the NuGet publish pipeline builds the
@@ -14,18 +14,20 @@ Default output (all git-ignored except `fixtures/`):
 
 - `tools/DtoGenerator/out/php` — PHP 8.1 DTO classes and backed enums, namespace `Bridgemate\DataConnector\Dto`
 - `tools/DtoGenerator/out/java` — Java 11 POJOs and enums, package `nl.bridgemate.dataconnector.dto` (Jackson annotations)
+- `tools/DtoGenerator/out/python` — Python 3.10 dataclasses and IntEnums, package `bridgemate_dataconnector.dto` (snake_case fields, explicit `to_dict`/`from_dict` with PascalCase wire names)
 - `tools/DtoGenerator/fixtures` — golden request/response JSON, committed as the compatibility contract
 
 To regenerate directly into local clones of the port repositories:
 
 ```
 dotnet run --project tools/DtoGenerator -- ^
-  --php-out  ..\Bridgemate-Data-Connector-Scoring-Program-Client-PHP\src\Dto ^
-  --java-out ..\Bridgemate-Data-Connector-Scoring-Program-Client-Java\src\main\java\nl\bridgemate\dataconnector\dto
+  --php-out    ..\Bridgemate-Data-Connector-Scoring-Program-Client-PHP\src\Dto ^
+  --java-out   ..\Bridgemate-Data-Connector-Scoring-Program-Client-Java\src\main\java\nl\bridgemate\dataconnector\dto ^
+  --python-out ..\Bridgemate-Data-Connector-Scoring-Program-Client-Python\src\bridgemate_dataconnector\dto
 ```
 
-Copy `fixtures/` to `tests/fixtures` (PHP) and `src/test/resources/fixtures` (Java) afterwards; the
-port test suites assert structural JSON equality against these files.
+Copy `fixtures/` to `tests/fixtures` (PHP and Python) and `src/test/resources/fixtures` (Java)
+afterwards; the port test suites assert structural JSON equality against these files.
 
 ## When to run it
 
