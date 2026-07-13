@@ -169,7 +169,9 @@ namespace BridgeSystems.Bridgemate.DataConnector.ScoringProgramClient
         private static ScoringProgramDataConnectorHttpClient _instance;
 
         //A single HttpClient for all requests: creating one per request exhausts sockets under load.
-        private static readonly HttpClient SharedHttpClient = new HttpClient();
+        //The data connector lives on localhost or the LAN: a corporate proxy without a localhost bypass
+        //hijacks the request and answers 503, so the system proxy must never be used.
+        private static readonly HttpClient SharedHttpClient = new HttpClient(new HttpClientHandler { UseProxy = false });
 
         /// <summary>
         /// Returns the singleton instance of the client with its ClubdId and LicenceKey properties set to the values of the parameters.
