@@ -80,7 +80,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             }
 
             ValidationMessages = validationMessages.ToArray();
-            return validationMessages.Any();
+            return !validationMessages.Any();
         }
     }
 }

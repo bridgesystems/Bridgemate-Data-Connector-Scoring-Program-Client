@@ -1,0 +1,24 @@
+{
+  "Dto": "ParticipationDTO",
+  "Case": "invalid-sessionguid",
+  "Args": {
+    "allowPlayerNumberAndName": false
+  },
+  "Payload": {
+    "SessionGuid": "ABC",
+    "SectionLetters": "A",
+    "TableNumber": 1,
+    "Direction": 1,
+    "RoundNumber": 1,
+    "PlayerNumber": "1001",
+    "IsPlayerSwap": false,
+    "FirstName": null,
+    "LastName": null,
+    "CountryCode": null,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "Invalid SessionGuid (ABC). The value must be in capitals and be exactly 32 characters long."
+  ]
+}

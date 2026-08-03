@@ -1,0 +1,29 @@
+{
+  "Dto": "SectionUpdateDTO",
+  "Case": "valid-deleted",
+  "Args": {},
+  "Payload": {
+    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "ClubId": null,
+    "ScoringGroupNumber": 1,
+    "ScoringGroupScoringMethod": 10,
+    "Letters": "A",
+    "Name": "Section A",
+    "Winners": 1,
+    "GameType": 10,
+    "EWMoveBeforePlay": 0,
+    "MissingPair": 0,
+    "KeepBridgematesAlive": false,
+    "IsCombiSection": false,
+    "NorthSouthPairSectionLetters": null,
+    "EastWestPairSectionLetters": null,
+    "IsDeleted": true,
+    "AddedPlayers": null,
+    "HasExplicitParticipations": false,
+    "Participations": null,
+    "Tables": null,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": true,
+  "ExpectedMessages": []
+}

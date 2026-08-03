@@ -1,0 +1,16 @@
+{
+  "Dto": "ContinueDTO",
+  "Case": "invalid-commands",
+  "Args": {},
+  "Payload": {
+    "EventGuid": "C1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "ClubId": null,
+    "Commands": 2,
+    "AlternativeDataFolder": null,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "Invalid value for Commands (2). Valid values are a sum of 0 and/or 1 and/or 4 and/or 128."
+  ]
+}

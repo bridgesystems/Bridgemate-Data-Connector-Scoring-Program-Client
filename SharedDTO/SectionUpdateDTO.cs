@@ -162,7 +162,22 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Optional. The players as they are seated in the first round. Be sure to include players as well that do not play in the first round.
+        /// Required, must match the value the section was created with. When true the update must carry
+        /// the complete seating for all rounds in <see cref="Participations"/>: BCS replaces the stored
+        /// participations for the section with the ones in this update and does not calculate seatings
+        /// from the movement. See <see cref="SectionDTO.HasExplicitParticipations"/>.
+        /// </summary>
+        public bool HasExplicitParticipations
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Optional for a section without explicit participations: the players as they are seated in the
+        /// first round. Be sure to include players as well that do not play in the first round.
+        /// Required for a section with <see cref="HasExplicitParticipations"/> set: the complete seating
+        /// for all rounds, one <see cref="ParticipationDTO"/> per (table, round, position). BCS replaces
+        /// the section's stored participations with this set.
         /// </summary>
         public ParticipationDTO[] Participations
         {
@@ -199,6 +214,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                 IsCombiSection = section.IsCombiSection,
                 NorthSouthPairSectionLetters = section.NorthSouthPairSectionLetters,
                 EastWestPairSectionLetters = section.EastWestPairSectionLetters,
+                HasExplicitParticipations = section.HasExplicitParticipations,
                 Tables = section.Tables,
                 Participations = new ParticipationDTO[] { }
             };
@@ -236,6 +252,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                 {
                     validationMessages.Add("A deleted section cannot contain tables.");
                 }
+                ValidationMessages = validationMessages.ToArray();
                 return !validationMessages.Any();
             }
             if (ScoringGroupNumber <= 0)
@@ -275,13 +292,14 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                     validationMessages.Add($"Invalid {nameof(EastWestPairSectionLetters)} ({EastWestPairSectionLetters}). Valid values are: 'A-Z', 'AA-ZZ' or 'AAA','ZZZ'");
                 }
             }
-            if (Math.Abs(EWMoveBeforePlay) > Tables.Count())
+            var tables = Tables ?? Array.Empty<TableDTO>();
+            if (Math.Abs(EWMoveBeforePlay) > tables.Count())
             {
                 validationMessages.Add($"The absolute value of {nameof(EWMoveBeforePlay)} ({EWMoveBeforePlay}) " +
-                                       $"cannot be higher than the number of tables ({Tables.Count()}).");
+                                       $"cannot be higher than the number of tables ({tables.Count()}).");
             }
 
-            foreach (TableDTO table in Tables)
+            foreach (TableDTO table in tables)
             {
                 if (table.SessionGuid != SessionGuid)
                 {
@@ -299,12 +317,42 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                     validationMessages.Add($"Table '{table.SectionLetters}{table.TableNumber}' has validation errrors: {errorMessage}.");
                 }
             }
-            var tableNumbers = Tables.Select(t => t.TableNumber).OrderBy(nr => nr).ToList();
+            var tableNumbers = tables.Select(t => t.TableNumber).OrderBy(nr => nr).ToList();
             var groupedTableNumbers = tableNumbers.GroupBy(nr => nr);
 
             foreach (var numberGroup in groupedTableNumbers.Where(g => g.Count() > 1))
             {
                 validationMessages.Add($"Tablenumber {numberGroup.Key} occurs {numberGroup.Count()} times. ");
+            }
+            var participations = Participations ?? new ParticipationDTO[] { };
+            if (HasExplicitParticipations && !participations.Any())
+            {
+                validationMessages.Add($"{nameof(HasExplicitParticipations)} is set for section '{Letters}', but the update does not carry any {nameof(Participations)}. " +
+                                       $"An update for such a section must include the complete seating for all rounds.");
+            }
+            foreach (var participation in participations)
+            {
+                if (!participation.Validate(allowPlayerNumberAndName: false))
+                {
+                    var errorMessage = string.Join("; ", participation.ValidationMessages);
+                    validationMessages.Add($"Participation '{participation}' has validation errors: {errorMessage}.");
+                }
+                if (participation.SessionGuid != SessionGuid)
+                {
+                    validationMessages.Add($"Participation '{participation}' must have {nameof(SessionGuid)} '{SessionGuid}' " +
+                                           $"but it is '{participation.SessionGuid}'.");
+                }
+                if (participation.SectionLetters != Letters)
+                {
+                    validationMessages.Add($"Participation '{participation}' must have {nameof(ParticipationDTO.SectionLetters)} '{Letters}' " +
+                                           $"but it is '{participation.SectionLetters}'.");
+                }
+                if (participation.RoundNumber > 1 && !HasExplicitParticipations)
+                {
+                    validationMessages.Add($"Participation '{participation}' has {nameof(ParticipationDTO.RoundNumber)} {participation.RoundNumber}, " +
+                                           $"but section '{Letters}' does not have {nameof(HasExplicitParticipations)} set. " +
+                                           $"Round numbers greater than one are only valid for sections with explicit participations.");
+                }
             }
             ValidationMessages = validationMessages.ToArray();
             return !ValidationMessages.Any();

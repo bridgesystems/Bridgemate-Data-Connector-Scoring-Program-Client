@@ -9,11 +9,17 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
 {
     /// <summary>
     /// This class can be used:
-    /// 1. To give names for the players in the first round by only specifying their player numbers. 
+    /// 1. To give names for the players in the first round by only specifying their player numbers.
     ///    For this to work the names belonging to the playernumber must have been passed first using
     ///    PlayerDTO's.
     /// 2. To give names for the players in the first round by omitting their playernumber. In this case the
     ///    players will be registerd for this session only.
+    /// 3. To specify the seating for every round explicitly, one DTO per (table, round, position). This
+    ///    requires the section to have been created with
+    ///    <see cref="SectionDTO.HasExplicitParticipations"/> set to true. BCS then stores each
+    ///    participation for its own round exactly as sent and does not calculate seatings from the
+    ///    movement. Use this for individual sessions and other formats where partnerships change
+    ///    between rounds.
     /// The combination of both playernumber and name details is not supported.
     /// </summary>
     public class ParticipationDTO
@@ -57,9 +63,14 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
-        /// Currently only the values zero and one are supported. They are treated the same as the table where the player sits in the first round.
-        /// Optional, specifying a number higher than 1 indicates that the name of the player has become known
-        /// in a latter round. BCS will use the known movement to calculate the player's positions in other rounds.
+        /// Optional. The round the participation applies to. The values zero and one are equivalent: they
+        /// denote the table where the player sits in the first round, and BCS will use the known movement
+        /// to calculate the player's positions in the other rounds.
+        /// Values higher than one are only valid for sections that were created with
+        /// <see cref="SectionDTO.HasExplicitParticipations"/> set to true. For such sections BCS stores
+        /// every participation for its own round exactly as sent and performs no movement-based
+        /// calculation. Sending a round number higher than one for any other section is a validation
+        /// error.
         /// </summary>
         public int RoundNumber
         {
@@ -141,9 +152,9 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             {
                 validationMessages.Add($"Invalid {nameof(TableNumber)} ({TableNumber}). The value must be greater than zero.");
             }
-            if (RoundNumber < 0 || RoundNumber > 1)
+            if (RoundNumber < 0)
             {
-                validationMessages.Add($"Invalid {nameof(RoundNumber)} ({RoundNumber}). Currently only the values zero and one are supported..");
+                validationMessages.Add($"Invalid {nameof(RoundNumber)} ({RoundNumber}). The value cannot be negative.");
             }
             if (string.IsNullOrWhiteSpace(LastName) && string.IsNullOrWhiteSpace(PlayerNumber))
             {

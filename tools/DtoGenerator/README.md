@@ -16,6 +16,7 @@ Default output (all git-ignored except `fixtures/`):
 - `tools/DtoGenerator/out/java` — Java 11 POJOs and enums, package `nl.bridgemate.dataconnector.dto` (Jackson annotations)
 - `tools/DtoGenerator/out/python` — Python 3.10 dataclasses and IntEnums, package `bridgemate_dataconnector.dto` (snake_case fields, explicit `to_dict`/`from_dict` with PascalCase wire names)
 - `tools/DtoGenerator/fixtures` — golden request/response JSON, committed as the compatibility contract
+- `tools/DtoGenerator/fixtures/validation` — golden validation fixtures, committed; see below
 
 To regenerate directly into local clones of the port repositories:
 
@@ -51,3 +52,17 @@ DTOs and the poll/accept commands. Management DTOs (`BCSManagementRequestDTO`,
 - `responses/*.json` are representative Data Connector answers for deserialization tests,
   including an `Error.json`.
 - The sample values exercise the serialization shape; they are not a playable bridge event.
+
+## Validation fixtures
+
+`fixtures/validation/<Dto>.<case>.json` freezes the behaviour of the C# `Validate()` methods:
+each file holds a `Payload` (the DTO as a client would send it), `Args` (the validator's
+parameters, e.g. `allowPlayerNumberAndName` or `forAdding`), and the `ExpectedValid` flag plus
+`ExpectedMessages` list that the .NET validator produced **live at generation time**. The port
+test suites construct the DTO from `Payload`, run their hand-written validator, and assert the
+result and message list verbatim, including order. This keeps the C# validators the single
+source of truth: any rule change shows up as a fixture diff at the next regeneration.
+
+Not covered by fixtures (environment-dependent, implemented natively per port and tested
+locally): the `Directory.Exists` checks on `InitDTO.AlternativeDataFolder` and
+`ContinueDTO.AlternativeDataFolder`.

@@ -1,0 +1,14 @@
+{
+  "Dto": "ContinueDTO",
+  "Case": "valid",
+  "Args": {},
+  "Payload": {
+    "EventGuid": "C1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "ClubId": null,
+    "Commands": 1,
+    "AlternativeDataFolder": null,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": true,
+  "ExpectedMessages": []
+}

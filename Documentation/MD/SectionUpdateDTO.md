@@ -14,7 +14,15 @@ Optional.An array of [PlayerDataDTOs](<PlayerDataDTO.md>). Should at least conta
 
 ##### Participations
 
-Optional. An array of [ParticipationDTOs](<ParticipationDTO.md>).&nbsp;
+An array of [ParticipationDTOs](<ParticipationDTO.md>).&nbsp;
+
+Optional for a section without explicit participations: the players as they are seated in the first round.
+
+Required for a section with HasExplicitParticipations set to "true": the complete seating for all rounds, one ParticipationDTO per (table, round, position). BCS replaces the section's stored participations with this set. An update for such a section without participations is a validation error.
+
+##### HasExplicitParticipations property
+
+Required, must match the value the section was created with; a different value is a validation error. See the [SectionDTO](<SectionDTO.md>) for the meaning of this property.
 
 ##### ScoringGroupNumber
 

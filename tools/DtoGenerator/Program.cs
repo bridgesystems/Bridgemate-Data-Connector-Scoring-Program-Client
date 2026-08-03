@@ -25,6 +25,7 @@ namespace DtoGenerator
             var javaOut = Path.Combine(projectDir, "out", "java");
             var pythonOut = Path.Combine(projectDir, "out", "python");
             var fixturesOut = Path.Combine(projectDir, "fixtures");
+            string? validationFixturesOut = null;
 
             for (var i = 0; i < args.Length - 1; i++)
             {
@@ -34,8 +35,10 @@ namespace DtoGenerator
                     case "--java-out": javaOut = args[++i]; break;
                     case "--python-out": pythonOut = args[++i]; break;
                     case "--fixtures-out": fixturesOut = args[++i]; break;
+                    case "--validation-fixtures-out": validationFixturesOut = args[++i]; break;
                 }
             }
+            validationFixturesOut ??= Path.Combine(fixturesOut, "validation");
 
             var assembly = typeof(ScoringProgramRequest).Assembly;
             var version = assembly.GetName().Version?.ToString() ?? "unknown";
@@ -64,6 +67,9 @@ namespace DtoGenerator
 
             new FixtureWriter().Write(fixturesOut);
             Console.WriteLine($"Fixtures written to {fixturesOut}");
+
+            new ValidationFixtureWriter().Write(validationFixturesOut);
+            Console.WriteLine($"Validation fixtures written to {validationFixturesOut}");
             return 0;
         }
     }

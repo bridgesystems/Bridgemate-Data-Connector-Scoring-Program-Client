@@ -1,0 +1,117 @@
+{
+  "Dto": "SectionDTO",
+  "Case": "invalid-sessionguid",
+  "Args": {},
+  "Payload": {
+    "SessionGuid": "abc",
+    "ScoringGroupNumber": 1,
+    "Letters": "A",
+    "Name": "Section A",
+    "Winners": 1,
+    "GameType": 10,
+    "EWMoveBeforePlay": 0,
+    "MissingPair": 0,
+    "KeepBridgematesAlive": false,
+    "IsCombiSection": false,
+    "NorthSouthPairSectionLetters": null,
+    "EastWestPairSectionLetters": null,
+    "HasExplicitParticipations": false,
+    "Tables": [
+      {
+        "SessionGuid": "abc",
+        "SectionLetters": "A",
+        "TableNumber": 1,
+        "ConnectionMode": 0,
+        "KeepBridgematesAlive": false,
+        "Rounds": [
+          {
+            "SessionGuid": "abc",
+            "SectionLetters": "A",
+            "TableNumber": 1,
+            "RoundNumber": 1,
+            "LowBoardNumber": 1,
+            "HighBoardNumber": 4,
+            "PairNS": 1,
+            "PairEW": 2,
+            "TeamNS": 0,
+            "TeamEW": 0,
+            "MatesTableSectionLetters": null,
+            "MatesTableTableNumber": 0,
+            "MatesTableRoundNumber": 0,
+            "Updated": false,
+            "ValidationMessages": null
+          },
+          {
+            "SessionGuid": "abc",
+            "SectionLetters": "A",
+            "TableNumber": 1,
+            "RoundNumber": 2,
+            "LowBoardNumber": 5,
+            "HighBoardNumber": 8,
+            "PairNS": 1,
+            "PairEW": 2,
+            "TeamNS": 0,
+            "TeamEW": 0,
+            "MatesTableSectionLetters": null,
+            "MatesTableTableNumber": 0,
+            "MatesTableRoundNumber": 0,
+            "Updated": false,
+            "ValidationMessages": null
+          }
+        ],
+        "ValidationMessages": null
+      },
+      {
+        "SessionGuid": "abc",
+        "SectionLetters": "A",
+        "TableNumber": 2,
+        "ConnectionMode": 0,
+        "KeepBridgematesAlive": false,
+        "Rounds": [
+          {
+            "SessionGuid": "abc",
+            "SectionLetters": "A",
+            "TableNumber": 2,
+            "RoundNumber": 1,
+            "LowBoardNumber": 1,
+            "HighBoardNumber": 4,
+            "PairNS": 3,
+            "PairEW": 4,
+            "TeamNS": 0,
+            "TeamEW": 0,
+            "MatesTableSectionLetters": null,
+            "MatesTableTableNumber": 0,
+            "MatesTableRoundNumber": 0,
+            "Updated": false,
+            "ValidationMessages": null
+          },
+          {
+            "SessionGuid": "abc",
+            "SectionLetters": "A",
+            "TableNumber": 2,
+            "RoundNumber": 2,
+            "LowBoardNumber": 5,
+            "HighBoardNumber": 8,
+            "PairNS": 3,
+            "PairEW": 4,
+            "TeamNS": 0,
+            "TeamEW": 0,
+            "MatesTableSectionLetters": null,
+            "MatesTableTableNumber": 0,
+            "MatesTableRoundNumber": 0,
+            "Updated": false,
+            "ValidationMessages": null
+          }
+        ],
+        "ValidationMessages": null
+      }
+    ],
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "The guid must be exactly 32 character long and can only contain capital A to F or digits 0 to 9.",
+    "Table \u0027A1\u0027 has validation errrors: The guid must be exactly 32 character long and can only contain capital A to F or digits 0 to 9.; Round 1 on \u0027A1\u0027 has validation errrors: The guid must be exactly 32 character long and can only contain capital A to F or digits 0 to 9..; Round 2 on \u0027A1\u0027 has validation errrors: The guid must be exactly 32 character long and can only contain capital A to F or digits 0 to 9...",
+    "Table \u0027A2\u0027 has validation errrors: The guid must be exactly 32 character long and can only contain capital A to F or digits 0 to 9.; Round 1 on \u0027A2\u0027 has validation errrors: The guid must be exactly 32 character long and can only contain capital A to F or digits 0 to 9..; Round 2 on \u0027A2\u0027 has validation errrors: The guid must be exactly 32 character long and can only contain capital A to F or digits 0 to 9..."
+  ]
+}

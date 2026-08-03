@@ -1,0 +1,29 @@
+{
+  "Dto": "ResultDTO",
+  "Case": "invalid-paireastwest",
+  "Args": {},
+  "Payload": {
+    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "SectionLetters": "A",
+    "TableNumber": 1,
+    "RoundNumber": 1,
+    "BoardNumber": 1,
+    "ScoringDirection": 1,
+    "IsDeleted": false,
+    "PairNorthSouth": 1,
+    "PairEastWest": 0,
+    "DeclaringPair": 1,
+    "DeclarerDirection": 1,
+    "Level": 3,
+    "Denomination": 1,
+    "Stake": 0,
+    "TotalTricks": 9,
+    "LeadCardRank": 0,
+    "LeadCardSuit": 0,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "Invalid PairEastWest (0). The value must be greater than zero."
+  ]
+}

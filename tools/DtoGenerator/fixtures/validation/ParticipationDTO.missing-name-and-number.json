@@ -1,0 +1,24 @@
+{
+  "Dto": "ParticipationDTO",
+  "Case": "missing-name-and-number",
+  "Args": {
+    "allowPlayerNumberAndName": false
+  },
+  "Payload": {
+    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "SectionLetters": "A",
+    "TableNumber": 1,
+    "Direction": 1,
+    "RoundNumber": 1,
+    "PlayerNumber": null,
+    "IsPlayerSwap": false,
+    "FirstName": null,
+    "LastName": null,
+    "CountryCode": null,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "Either the LastName or the PlayerNumber must be specified."
+  ]
+}

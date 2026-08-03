@@ -12,7 +12,9 @@ The ParticipationDTO can be used in three ways:
 
 &nbsp;
 
-In theory you could send all participations for all rounds. However, currently this is not supported.Bridgemate Control Software will determine the participations for round two and higher from the movement as sent with the [SectionDTO](<SectionDTO.md>). So leave the RoundNumber at zero, or set it to 1.
+For a section that was created with the HasExplicitParticipations property of its [SectionDTO](<SectionDTO.md>) set to "true", the scoring program specifies the seating for every round explicitly: one ParticipationDTO per (table, round, position), with the RoundNumber property set. BCS stores these participations exactly as sent and does not calculate seatings from the movement. Use this for individual sessions and other formats where partnerships change between rounds.
+
+For all other sections Bridgemate Control Software will determine the participations for round two and higher from the movement as sent with the [SectionDTO](<SectionDTO.md>). So leave the RoundNumber at zero, or set it to 1: a RoundNumber greater than one is a validation error for these sections, and the whole batch that contains it is rejected.
 
 &nbsp;
 
@@ -32,7 +34,7 @@ Required. Specifies the table for the participation.
 
 ##### RoundNumber property
 
-Currently not supported.
+Optional. The values zero and one are equivalent: they denote the table where the player sits in the first round, and BCS will calculate the player's positions in the other rounds from the movement. Values greater than one are only valid for sections that were created with HasExplicitParticipations set to "true" on their [SectionDTO](<SectionDTO.md>); for such sections BCS stores every participation for its own round exactly as sent. Sending a RoundNumber greater than one for any other section is a validation error.
 
 ##### Direction property
 

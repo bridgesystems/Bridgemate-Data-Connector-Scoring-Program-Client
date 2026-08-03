@@ -1,0 +1,18 @@
+{
+  "Dto": "PlayerDataDTO",
+  "Case": "invalid-sessionguid",
+  "Args": {},
+  "Payload": {
+    "SessionGuid": "not-a-guid",
+    "ClubId": null,
+    "PlayerNumber": "1001",
+    "FirstName": "First1001",
+    "LastName": "Last1001",
+    "CountryCode": null,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "The guid must be exactly 32 character long and can only contain capital A to F or digits 0 to 9."
+  ]
+}

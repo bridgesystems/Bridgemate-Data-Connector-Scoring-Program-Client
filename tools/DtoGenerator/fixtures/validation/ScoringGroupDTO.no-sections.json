@@ -1,0 +1,19 @@
+{
+  "Dto": "ScoringGroupDTO",
+  "Case": "no-sections",
+  "Args": {},
+  "Payload": {
+    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "ClubId": null,
+    "Sections": [],
+    "ScoringGroupNumber": 1,
+    "ScoringMethod": 10,
+    "Name": "Group 1",
+    "IsDeleted": false,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "The scoringgroup must have at least one section."
+  ]
+}

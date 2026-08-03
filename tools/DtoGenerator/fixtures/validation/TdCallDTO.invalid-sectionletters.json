@@ -1,0 +1,19 @@
+{
+  "Dto": "TdCallDTO",
+  "Case": "invalid-sectionletters",
+  "Args": {},
+  "Payload": {
+    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "SectionLetters": "aa",
+    "TableNumber": 1,
+    "RoundNumber": 1,
+    "Hour": 0,
+    "Minute": 0,
+    "Status": 1,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "Invalid SectionLetters (aa). Valid values are: \u0027A-Z\u0027, \u0027AA-ZZ\u0027 or \u0027AAA\u0027,\u0027ZZZ\u0027"
+  ]
+}

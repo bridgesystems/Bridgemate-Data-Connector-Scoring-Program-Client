@@ -26,6 +26,12 @@ Required. Values can be 1 or 2. In the case of 2 winners the pair numbers in the
 
 Required. Values can be 10 for "Pairs", 20 for "Individual" and 30 for "Teams".
 
+##### HasExplicitParticipations property
+
+Optional, defaults to "false". When "true" the scoring program specifies the seating for every round of this section explicitly through [ParticipationDTOs](<ParticipationDTO.md>) with their RoundNumber property set. BCS stores these participations exactly as sent and does not calculate seatings from the movement. Use this for individual sessions and other formats where partnerships change between rounds. When "false" participations may only carry round number zero or one and BCS calculates the other rounds from the movement.
+
+The value is fixed when the section is created: a later [SectionUpdateDTO](<SectionUpdateDTO.md>) must carry the same value.
+
 ##### Name property
 
 Optional.

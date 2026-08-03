@@ -56,7 +56,10 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         /// <summary>
         /// An array of messages describing problems in data integrity and invalid values.
         /// </summary>
-        public string[] ValidationMessages;
+        public string[] ValidationMessages
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Validates the DTO. Produces validation messages if there are problems. 

@@ -170,7 +170,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
 
             if (Commands < 0 || Commands > 255)
             {
-                validationMessages.Add($"The Commands ({Commands}) must be between 0 and 63.");
+                validationMessages.Add($"The Commands ({Commands}) must be between 0 and 255.");
             }
             if (!string.IsNullOrWhiteSpace(AlternativeDataFolder))
             {
@@ -182,6 +182,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             if (Sessions == null || Sessions.Length == 0)
             {
                 validationMessages.Add("At least one session is required.");
+                ValidationMessages = validationMessages.ToArray();
                 return false;
             }
 
@@ -281,10 +282,31 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                     var id = (participation.SessionGuid ?? "") + (participation.PlayerNumber ?? "");
                     if (string.IsNullOrEmpty(id) || id == (participation.SessionGuid ?? ""))
                         continue;
-                    if (PlayerData.Any(data => ((data.SessionGuid ?? "") + (data.PlayerNumber ?? "")) == id))
+                    if (PlayerData != null && PlayerData.Any(data => ((data.SessionGuid ?? "") + (data.PlayerNumber ?? "")) == id))
                         continue;
                     validationMessages.Add($"{nameof(ParticipationDTO)} '{participation.SessionGuid}-{participation.PlayerNumber}' " +
                                            $"has no corresponding {nameof(PlayerDataDTO)}");
+                }
+                var explicitSectionKeys = new HashSet<string>();
+                foreach (var session in Sessions ?? new SessionDTO[] { })
+                {
+                    foreach (var scoringGroup in session.ScoringGroups ?? new ScoringGroupDTO[] { })
+                    {
+                        foreach (var section in scoringGroup.Sections ?? new SectionDTO[] { })
+                        {
+                            if (section.HasExplicitParticipations)
+                                explicitSectionKeys.Add($"{section.SessionGuid}-{section.Letters}");
+                        }
+                    }
+                }
+                foreach (var participation in Participations.Where(p => p.RoundNumber > 1))
+                {
+                    if (!explicitSectionKeys.Contains($"{participation.SessionGuid}-{participation.SectionLetters}"))
+                    {
+                        validationMessages.Add($"{nameof(ParticipationDTO)} '{participation}' has {nameof(ParticipationDTO.RoundNumber)} {participation.RoundNumber}, " +
+                                               $"but section '{participation.SectionLetters}' does not have {nameof(SectionDTO.HasExplicitParticipations)} set. " +
+                                               $"Round numbers greater than one are only valid for sections with explicit participations.");
+                    }
                 }
             }
             if (Handrecords != null && Handrecords.Any())

@@ -102,6 +102,9 @@ partial class MainViewmodel : ObservableObject
         TableNumbers = Enumerable.Range(1, 10).ToList();
         SelectedTableNumber = TableNumbers.First();
 
+        ParticipationRounds = Enumerable.Range(1, 12).ToList();
+        SelectedParticipationRound = ParticipationRounds.First();
+
         ValidationMessages = new ObservableCollection<string>();
 
         UpdatableSections = new List<string> { "A", "B", "C", "D", "E" };
@@ -122,6 +125,15 @@ partial class MainViewmodel : ObservableObject
                                  int numberOfBoardsPerRound,
                                  bool useFixedBoards, bool useConsecutiveNumbering,
                                  int ewOffset)> SectionProperties => _sectionProperties;
+
+    /// <summary>
+    /// The generated all-round participations and player data per (sessionGuid, sectionLetters) for
+    /// sections with explicit participations (individual sections, BRID-2037). Sent with the
+    /// InitDTO at launch, with movement updates, and by <see cref="SendAllParticipationsCommand"/>.
+    /// </summary>
+    internal Dictionary<(string sessionGuid, string sectionLetters),
+                        (List<ParticipationDTO> participations, List<PlayerDataDTO> players)> ExplicitSectionData
+    { get; } = new();
 
 
     internal IScoringProgramClient Client => _client;
@@ -175,6 +187,16 @@ partial class MainViewmodel : ObservableObject
 
     [ObservableProperty]
     private int selectedTableNumber;
+
+    /// <summary>
+    /// The round a participation applies to. Rounds greater than one are only valid for sections
+    /// with explicit participations (BRID-2037).
+    /// </summary>
+    [ObservableProperty]
+    private List<int> participationRounds;
+
+    [ObservableProperty]
+    private int selectedParticipationRound;
 
     #region result construction
 
@@ -636,7 +658,7 @@ partial class MainViewmodel : ObservableObject
                 PlayerNumber = NewPlayerNumber,
                 SectionLetters = "A",
                 TableNumber = SelectedTableNumber,
-                RoundNumber = 1,
+                RoundNumber = SelectedParticipationRound,
                 Direction = SelectedDirection?.Direction ?? TableDirection.None
             };
 
@@ -648,6 +670,46 @@ partial class MainViewmodel : ObservableObject
             CommunicationResults.Add(new CommunicationResult
             {
                 RequestDescription = $"{currentCommand}",
+                ResponseMessage = ex.Message
+            });
+            Logger.Error(ex);
+        }
+    }
+
+    public string SendAllParticipationsCommandDescription => nameof(SendAllParticipationsCommand);
+
+    /// <summary>
+    /// Re-sends the complete stored seating for all rounds of the current session's sections with
+    /// explicit participations (BRID-2037). The operation is idempotent on the BCS side.
+    /// </summary>
+    [RelayCommand]
+    private void SendAllParticipations()
+    {
+        try
+        {
+            var sectionSets = ExplicitSectionData.Where(entry => entry.Key.sessionGuid == CurrentSessionGuid)
+                                                 .ToList();
+            if (!sectionSets.Any())
+            {
+                CommunicationResults.Add(new CommunicationResult
+                {
+                    RequestDescription = $"{ScoringProgramDataConnectorCommands.PutParticipations}",
+                    ResponseMessage = "The current session has no sections with explicit participations."
+                });
+                return;
+            }
+            foreach (var sectionSet in sectionSets)
+            {
+                ScoringProgramResponse result = _client.SendParticipations(CurrentSessionGuid,
+                    sectionSet.Value.participations.ToArray());
+                AddCommunicationResponse(result);
+            }
+        }
+        catch (Exception ex)
+        {
+            CommunicationResults.Add(new CommunicationResult
+            {
+                RequestDescription = $"{ScoringProgramDataConnectorCommands.PutParticipations}",
                 ResponseMessage = ex.Message
             });
             Logger.Error(ex);
@@ -1130,7 +1192,7 @@ partial class MainViewmodel : ObservableObject
                 PlayerNumber = NewPlayerNumber,
                 SectionLetters = SelectedSection ?? "A",
                 TableNumber = SelectedTableNumber,
-                RoundNumber = 1,
+                RoundNumber = SelectedParticipationRound,
                 Direction = SelectedDirection?.Direction ?? TableDirection.None
             };
 
@@ -1279,6 +1341,20 @@ partial class MainViewmodel : ObservableObject
                 EventGuid = CurrentEvent.EventGuid,
                 Sessions = CurrentEvent.Sessions.Select(session => session.Session).ToArray()
             };
+
+            //Sections with explicit participations (individual sections) launch with their player
+            //data and the complete seating for all rounds.
+            var launchedGuids = CurrentEvent.Sessions.Select(session => session.SessionGuid).ToHashSet();
+            var explicitData = ExplicitSectionData.Where(entry => launchedGuids.Contains(entry.Key.sessionGuid))
+                                                  .Select(entry => entry.Value)
+                                                  .ToList();
+            if (explicitData.Any())
+            {
+                initDto.PlayerData = explicitData.SelectMany(data => data.players)
+                                                 .DistinctBy(player => (player.SessionGuid, player.PlayerNumber))
+                                                 .ToArray();
+                initDto.Participations = explicitData.SelectMany(data => data.participations).ToArray();
+            }
 
             if (!initDto.Validate())
             {

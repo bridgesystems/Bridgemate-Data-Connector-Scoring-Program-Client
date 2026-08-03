@@ -1,0 +1,22 @@
+{
+  "Dto": "InitDTO",
+  "Case": "no-sessions",
+  "Args": {},
+  "Payload": {
+    "Commands": 1,
+    "EventGuid": null,
+    "ClubId": "",
+    "AlternativeDataFolder": null,
+    "Sessions": null,
+    "PlayerData": null,
+    "Participations": null,
+    "Handrecords": null,
+    "Bridgemate2Settings": null,
+    "Bridgemate3Settings": null,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "At least one session is required."
+  ]
+}

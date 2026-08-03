@@ -144,6 +144,22 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
         }
 
         /// <summary>
+        /// Optional, defaults to false. When true the scoring program specifies the seating for every
+        /// round of this section explicitly through <see cref="ParticipationDTO"/>s with their
+        /// <see cref="ParticipationDTO.RoundNumber"/> set, and BCS will store these participations
+        /// exactly as sent, without calculating seatings from the movement. Use this for individual
+        /// sessions and other formats where partnerships change between rounds.
+        /// When false (the default) participations may only carry round number zero or one and BCS
+        /// calculates the other rounds from the movement.
+        /// The value is fixed when the section is created: a later
+        /// <see cref="SectionUpdateDTO"/> must carry the same value.
+        /// </summary>
+        public bool HasExplicitParticipations
+        {
+            get; set;
+        }
+
+        /// <summary>
         /// An array of TableDTOs. All tables for the section must be specified.
         /// </summary>
         public TableDTO[] Tables
@@ -169,6 +185,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                 IsCombiSection = updatedSection.IsCombiSection,
                 NorthSouthPairSectionLetters = updatedSection.NorthSouthPairSectionLetters,
                 EastWestPairSectionLetters = updatedSection.EastWestPairSectionLetters,
+                HasExplicitParticipations = updatedSection.HasExplicitParticipations,
                 Tables = updatedSection.Tables,
             };
             return section;
@@ -224,13 +241,14 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                     validationMessages.Add($"Invalid {nameof(EastWestPairSectionLetters)} ({EastWestPairSectionLetters}). Valid values are: 'A-Z', 'AA-ZZ' or 'AAA','ZZZ'");
                 }
             }
-            if (Math.Abs(EWMoveBeforePlay) > Tables.Count())
+            var tables = Tables ?? Array.Empty<TableDTO>();
+            if (Math.Abs(EWMoveBeforePlay) > tables.Count())
             {
                 validationMessages.Add($"The absolute value of {nameof(EWMoveBeforePlay)} ({EWMoveBeforePlay}) " +
-                                       $"cannot be higher than the number of tables ({Tables.Count()}).");
+                                       $"cannot be higher than the number of tables ({tables.Count()}).");
             }
 
-            foreach (TableDTO table in Tables)
+            foreach (TableDTO table in tables)
             {
                 if (table.SessionGuid != SessionGuid)
                 {
@@ -248,7 +266,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                     validationMessages.Add($"Table '{table.SectionLetters}{table.TableNumber}' has validation errrors: {errorMessage}.");
                 }
             }
-            var tableNumbers = Tables.Select(t => t.TableNumber).OrderBy(nr => nr).ToList();
+            var tableNumbers = tables.Select(t => t.TableNumber).OrderBy(nr => nr).ToList();
             var groupedTableNumbers = tableNumbers.GroupBy(nr => nr);
 
             foreach (var numberGroup in groupedTableNumbers.Where(g => g.Count() > 1))

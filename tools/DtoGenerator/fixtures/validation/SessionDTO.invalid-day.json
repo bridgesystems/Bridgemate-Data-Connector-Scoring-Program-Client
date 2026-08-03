@@ -1,0 +1,145 @@
+{
+  "Dto": "SessionDTO",
+  "Case": "invalid-day",
+  "Args": {
+    "forAdding": false
+  },
+  "Payload": {
+    "ScoringGroups": [
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "ClubId": null,
+        "Sections": [
+          {
+            "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+            "ScoringGroupNumber": 1,
+            "Letters": "A",
+            "Name": "Section A",
+            "Winners": 1,
+            "GameType": 10,
+            "EWMoveBeforePlay": 0,
+            "MissingPair": 0,
+            "KeepBridgematesAlive": false,
+            "IsCombiSection": false,
+            "NorthSouthPairSectionLetters": null,
+            "EastWestPairSectionLetters": null,
+            "HasExplicitParticipations": false,
+            "Tables": [
+              {
+                "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+                "SectionLetters": "A",
+                "TableNumber": 1,
+                "ConnectionMode": 0,
+                "KeepBridgematesAlive": false,
+                "Rounds": [
+                  {
+                    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+                    "SectionLetters": "A",
+                    "TableNumber": 1,
+                    "RoundNumber": 1,
+                    "LowBoardNumber": 1,
+                    "HighBoardNumber": 4,
+                    "PairNS": 1,
+                    "PairEW": 2,
+                    "TeamNS": 0,
+                    "TeamEW": 0,
+                    "MatesTableSectionLetters": null,
+                    "MatesTableTableNumber": 0,
+                    "MatesTableRoundNumber": 0,
+                    "Updated": false,
+                    "ValidationMessages": null
+                  },
+                  {
+                    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+                    "SectionLetters": "A",
+                    "TableNumber": 1,
+                    "RoundNumber": 2,
+                    "LowBoardNumber": 5,
+                    "HighBoardNumber": 8,
+                    "PairNS": 1,
+                    "PairEW": 2,
+                    "TeamNS": 0,
+                    "TeamEW": 0,
+                    "MatesTableSectionLetters": null,
+                    "MatesTableTableNumber": 0,
+                    "MatesTableRoundNumber": 0,
+                    "Updated": false,
+                    "ValidationMessages": null
+                  }
+                ],
+                "ValidationMessages": null
+              },
+              {
+                "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+                "SectionLetters": "A",
+                "TableNumber": 2,
+                "ConnectionMode": 0,
+                "KeepBridgematesAlive": false,
+                "Rounds": [
+                  {
+                    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+                    "SectionLetters": "A",
+                    "TableNumber": 2,
+                    "RoundNumber": 1,
+                    "LowBoardNumber": 1,
+                    "HighBoardNumber": 4,
+                    "PairNS": 3,
+                    "PairEW": 4,
+                    "TeamNS": 0,
+                    "TeamEW": 0,
+                    "MatesTableSectionLetters": null,
+                    "MatesTableTableNumber": 0,
+                    "MatesTableRoundNumber": 0,
+                    "Updated": false,
+                    "ValidationMessages": null
+                  },
+                  {
+                    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+                    "SectionLetters": "A",
+                    "TableNumber": 2,
+                    "RoundNumber": 2,
+                    "LowBoardNumber": 5,
+                    "HighBoardNumber": 8,
+                    "PairNS": 3,
+                    "PairEW": 4,
+                    "TeamNS": 0,
+                    "TeamEW": 0,
+                    "MatesTableSectionLetters": null,
+                    "MatesTableTableNumber": 0,
+                    "MatesTableRoundNumber": 0,
+                    "Updated": false,
+                    "ValidationMessages": null
+                  }
+                ],
+                "ValidationMessages": null
+              }
+            ],
+            "ValidationMessages": null
+          }
+        ],
+        "ScoringGroupNumber": 1,
+        "ScoringMethod": 10,
+        "Name": "Group 1",
+        "IsDeleted": false,
+        "ValidationMessages": null
+      }
+    ],
+    "EventGuid": null,
+    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "Name": "Session A",
+    "Year": 2026,
+    "Month": 8,
+    "Day": 0,
+    "Hour": 19,
+    "Minute": 30,
+    "ShowInApp": false,
+    "EWReturnHome": false,
+    "PairsMoveAccrossField": false,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "The day (0) for the session must be between 1 and 31.",
+    "The date 2026-8-0 is invalid."
+  ]
+}

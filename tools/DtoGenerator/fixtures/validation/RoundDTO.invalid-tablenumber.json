@@ -1,0 +1,27 @@
+{
+  "Dto": "RoundDTO",
+  "Case": "invalid-tablenumber",
+  "Args": {},
+  "Payload": {
+    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "SectionLetters": "A",
+    "TableNumber": 0,
+    "RoundNumber": 1,
+    "LowBoardNumber": 1,
+    "HighBoardNumber": 4,
+    "PairNS": -1,
+    "PairEW": 0,
+    "TeamNS": 0,
+    "TeamEW": 0,
+    "MatesTableSectionLetters": null,
+    "MatesTableTableNumber": 0,
+    "MatesTableRoundNumber": 0,
+    "Updated": false,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "TableNumber (0) must be greater than zero.",
+    "No boards may be specified for a sit-out round or an empty round."
+  ]
+}

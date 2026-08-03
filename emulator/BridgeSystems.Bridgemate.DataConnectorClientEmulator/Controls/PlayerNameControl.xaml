@@ -13,8 +13,11 @@
             <ComboBox ItemsSource="{Binding Sections}" SelectedItem="{Binding SelectedSection,Mode=TwoWay}"/>
             <TextBlock Text="Table:"/>
             <ComboBox ItemsSource="{Binding TableNumbers}" SelectedItem="{Binding SelectedTableNumber}"/>
+            <TextBlock Text="Round:"
+                       ToolTip="Rounds above one are only valid for sections with explicit participations (individual sections)."/>
+            <ComboBox ItemsSource="{Binding ParticipationRounds}" SelectedItem="{Binding SelectedParticipationRound,Mode=TwoWay}"/>
             <TextBlock Text="Position:"/>
-            <ComboBox ItemsSource="{Binding Directions}" 
+            <ComboBox ItemsSource="{Binding Directions}"
             SelectedItem="{Binding SelectedDirection,Mode=TwoWay}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -40,5 +43,8 @@
         <Button Content="Update" Command="{Binding UpdateNameAdvancedCommand}"
                 IsEnabled="{Binding EventHasLaunched}"
                 ToolTip="{Binding UpdateNameAdvancedCommandDescription }"/>
+        <Button Content="Send all-round participations" Command="{Binding SendAllParticipationsCommand}"
+                IsEnabled="{Binding EventHasLaunched}"
+                ToolTip="Re-sends the complete seating for all rounds of the current session's individual sections. Idempotent."/>
     </StackPanel>
 </UserControl>

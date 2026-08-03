@@ -1,0 +1,134 @@
+{
+  "Dto": "SectionUpdateDTO",
+  "Case": "round-above-one-without-flag",
+  "Args": {},
+  "Payload": {
+    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "ClubId": null,
+    "ScoringGroupNumber": 1,
+    "ScoringGroupScoringMethod": 10,
+    "Letters": "A",
+    "Name": "Section A",
+    "Winners": 1,
+    "GameType": 10,
+    "EWMoveBeforePlay": 0,
+    "MissingPair": 0,
+    "KeepBridgematesAlive": false,
+    "IsCombiSection": false,
+    "NorthSouthPairSectionLetters": null,
+    "EastWestPairSectionLetters": null,
+    "IsDeleted": false,
+    "AddedPlayers": null,
+    "HasExplicitParticipations": false,
+    "Participations": [
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "SectionLetters": "A",
+        "TableNumber": 1,
+        "Direction": 1,
+        "RoundNumber": 2,
+        "PlayerNumber": "1001",
+        "IsPlayerSwap": false,
+        "FirstName": null,
+        "LastName": null,
+        "CountryCode": null,
+        "ValidationMessages": null
+      }
+    ],
+    "Tables": [
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "SectionLetters": "A",
+        "TableNumber": 1,
+        "ConnectionMode": 0,
+        "KeepBridgematesAlive": false,
+        "Rounds": [
+          {
+            "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+            "SectionLetters": "A",
+            "TableNumber": 1,
+            "RoundNumber": 1,
+            "LowBoardNumber": 1,
+            "HighBoardNumber": 4,
+            "PairNS": 1,
+            "PairEW": 2,
+            "TeamNS": 0,
+            "TeamEW": 0,
+            "MatesTableSectionLetters": null,
+            "MatesTableTableNumber": 0,
+            "MatesTableRoundNumber": 0,
+            "Updated": false,
+            "ValidationMessages": null
+          },
+          {
+            "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+            "SectionLetters": "A",
+            "TableNumber": 1,
+            "RoundNumber": 2,
+            "LowBoardNumber": 5,
+            "HighBoardNumber": 8,
+            "PairNS": 1,
+            "PairEW": 2,
+            "TeamNS": 0,
+            "TeamEW": 0,
+            "MatesTableSectionLetters": null,
+            "MatesTableTableNumber": 0,
+            "MatesTableRoundNumber": 0,
+            "Updated": false,
+            "ValidationMessages": null
+          }
+        ],
+        "ValidationMessages": null
+      },
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "SectionLetters": "A",
+        "TableNumber": 2,
+        "ConnectionMode": 0,
+        "KeepBridgematesAlive": false,
+        "Rounds": [
+          {
+            "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+            "SectionLetters": "A",
+            "TableNumber": 2,
+            "RoundNumber": 1,
+            "LowBoardNumber": 1,
+            "HighBoardNumber": 4,
+            "PairNS": 3,
+            "PairEW": 4,
+            "TeamNS": 0,
+            "TeamEW": 0,
+            "MatesTableSectionLetters": null,
+            "MatesTableTableNumber": 0,
+            "MatesTableRoundNumber": 0,
+            "Updated": false,
+            "ValidationMessages": null
+          },
+          {
+            "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+            "SectionLetters": "A",
+            "TableNumber": 2,
+            "RoundNumber": 2,
+            "LowBoardNumber": 5,
+            "HighBoardNumber": 8,
+            "PairNS": 3,
+            "PairEW": 4,
+            "TeamNS": 0,
+            "TeamEW": 0,
+            "MatesTableSectionLetters": null,
+            "MatesTableTableNumber": 0,
+            "MatesTableRoundNumber": 0,
+            "Updated": false,
+            "ValidationMessages": null
+          }
+        ],
+        "ValidationMessages": null
+      }
+    ],
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "Participation \u0027A1 North round 2: 1001  \u0027 has RoundNumber 2, but section \u0027A\u0027 does not have HasExplicitParticipations set. Round numbers greater than one are only valid for sections with explicit participations."
+  ]
+}

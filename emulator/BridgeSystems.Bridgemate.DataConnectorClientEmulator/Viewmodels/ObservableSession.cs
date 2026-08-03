@@ -259,9 +259,10 @@ partial class ObservableSession : ObservableObject
     [RelayCommand]
     private void ClearSections()
     {
-        foreach (SectionDTO section in ManuallyCreatedSections) 
+        foreach (SectionDTO section in ManuallyCreatedSections)
         {
             _parent.SectionProperties.Remove((SessionGuid, section.Letters));
+            _parent.ExplicitSectionData.Remove((SessionGuid, section.Letters));
         }
 
         ManuallyCreatedSections.Clear();
@@ -295,6 +296,24 @@ partial class ObservableSession : ObservableObject
         SectionCreationValidationMessages.Clear();
         HasSectionCreationValidationErrors = false;
 
+        //An individual section sends its seating for every round explicitly (BRID-2037): the pair
+        //numbers are the odd player numbers, the owner sits North or East, the partner changes per
+        //round. Individuals are always one-winner movements.
+        var isIndividual = gameType == SectionDTO.GameType_Individual;
+        var numberOfPlayers = numberOfPairs * 2;
+        if (isIndividual)
+        {
+            if (numberOfPlayers < 8 || numberOfPlayers % 4 != 0)
+            {
+                SectionCreationValidationMessages.Add(
+                    $"An individual section needs an even number of pairs (at least four): " +
+                    $"{numberOfPairs} pairs = {numberOfPlayers} players, which cannot fill whole tables.");
+                HasSectionCreationValidationErrors = true;
+                return (false, null);
+            }
+            numberOfWinners = 1;
+        }
+
         var newSection = new SectionDTO
         {
             SessionGuid = SessionGuid,
@@ -302,10 +321,13 @@ partial class ObservableSession : ObservableObject
             Letters = sectionLetters,
             Name = $"Section {sectionLetters}",
             Winners = numberOfWinners,
-            GameType = gameType
+            GameType = gameType,
+            HasExplicitParticipations = isIndividual
         };
 
-        List<Seating> seatings = MovementGenerator.GenerateMitchellSeatings(numberOfPairs,SelectedNumberOfRounds, useFixedBoards, numberOfWinners, useConsecutiveNumbering,
+        List<Seating> seatings = isIndividual ?
+            MovementGenerator.GenerateIndividualSeatings(numberOfPlayers, SelectedNumberOfRounds) :
+            MovementGenerator.GenerateMitchellSeatings(numberOfPairs,SelectedNumberOfRounds, useFixedBoards, numberOfWinners, useConsecutiveNumbering,
                                     ewOffset, arrowShiftRound: numberOfWinners == 2 ? 0 : 2);
 
         var seatingsPerTable = seatings.GroupBy(seating => seating.TableNumber);
@@ -328,6 +350,19 @@ partial class ObservableSession : ObservableObject
         }
 
         newSection.Tables = newTables.ToArray();
+
+        if (isIndividual)
+        {
+            //Store the generated all-round participations and player data with the parent: they are
+            //sent with the InitDTO at launch and with every movement update for this section.
+            _parent.ExplicitSectionData[(SessionGuid, sectionLetters)] =
+                (MovementGenerator.CreateIndividualParticipations(seatings, SessionGuid, sectionLetters, numberOfPlayers),
+                 MovementGenerator.CreateIndividualPlayerData(SessionGuid, numberOfPlayers));
+        }
+        else
+        {
+            _parent.ExplicitSectionData.Remove((SessionGuid, sectionLetters));
+        }
 
         if (!newSection.Validate())
         {
@@ -455,8 +490,17 @@ partial class ObservableSession : ObservableObject
                 ScoringGroupScoringMethod = sectionProperties.scoringType,
                 GameType = updatedSection.GameType,
                 Winners = updatedSection.Winners,
-                Tables = updatedSection.Tables
+                Tables = updatedSection.Tables,
+                HasExplicitParticipations = updatedSection.HasExplicitParticipations
             };
+            if (updatedSection.HasExplicitParticipations &&
+                _parent.ExplicitSectionData.TryGetValue((SessionGuid, sectionLetters), out var explicitData))
+            {
+                //The update carries the complete new seating for all rounds; BCS replaces the
+                //stored participations with this set (BRID-2037).
+                updateDTO.Participations = explicitData.participations.ToArray();
+                updateDTO.AddedPlayers = explicitData.players.ToArray();
+            }
 
             var response = _parent.Client.UpdateMovement(updateDTO);
 
