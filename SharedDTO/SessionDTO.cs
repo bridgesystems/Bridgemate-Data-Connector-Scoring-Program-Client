@@ -138,6 +138,8 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             if (ScoringGroups == null || ScoringGroups.Length == 0)
             {
                 validationMessages.Add("At least one scoringroup is required.");
+                ValidationMessages = validationMessages.ToArray();
+                return false;
             }
 
             if (ScoringGroups.Select(sg => sg.ScoringGroupNumber).Distinct().Count() != ScoringGroups.Count())

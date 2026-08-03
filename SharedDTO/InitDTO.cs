@@ -170,7 +170,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
 
             if (Commands < 0 || Commands > 255)
             {
-                validationMessages.Add($"The Commands ({Commands}) must be between 0 and 63.");
+                validationMessages.Add($"The Commands ({Commands}) must be between 0 and 255.");
             }
             if (!string.IsNullOrWhiteSpace(AlternativeDataFolder))
             {
@@ -182,6 +182,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             if (Sessions == null || Sessions.Length == 0)
             {
                 validationMessages.Add("At least one session is required.");
+                ValidationMessages = validationMessages.ToArray();
                 return false;
             }
 

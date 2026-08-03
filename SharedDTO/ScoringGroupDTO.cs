@@ -188,7 +188,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
             }
             if (IsDeleted)
             {
-                if (Sections.Any())
+                if (Sections != null && Sections.Any())
                 {
                     validationMessages.Add($"A scoringgroup marked for deletion must not have any sections defined.");
                 }

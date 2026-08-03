@@ -241,13 +241,14 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                     validationMessages.Add($"Invalid {nameof(EastWestPairSectionLetters)} ({EastWestPairSectionLetters}). Valid values are: 'A-Z', 'AA-ZZ' or 'AAA','ZZZ'");
                 }
             }
-            if (Math.Abs(EWMoveBeforePlay) > Tables.Count())
+            var tables = Tables ?? Array.Empty<TableDTO>();
+            if (Math.Abs(EWMoveBeforePlay) > tables.Count())
             {
                 validationMessages.Add($"The absolute value of {nameof(EWMoveBeforePlay)} ({EWMoveBeforePlay}) " +
-                                       $"cannot be higher than the number of tables ({Tables.Count()}).");
+                                       $"cannot be higher than the number of tables ({tables.Count()}).");
             }
 
-            foreach (TableDTO table in Tables)
+            foreach (TableDTO table in tables)
             {
                 if (table.SessionGuid != SessionGuid)
                 {
@@ -265,7 +266,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                     validationMessages.Add($"Table '{table.SectionLetters}{table.TableNumber}' has validation errrors: {errorMessage}.");
                 }
             }
-            var tableNumbers = Tables.Select(t => t.TableNumber).OrderBy(nr => nr).ToList();
+            var tableNumbers = tables.Select(t => t.TableNumber).OrderBy(nr => nr).ToList();
             var groupedTableNumbers = tableNumbers.GroupBy(nr => nr);
 
             foreach (var numberGroup in groupedTableNumbers.Where(g => g.Count() > 1))
