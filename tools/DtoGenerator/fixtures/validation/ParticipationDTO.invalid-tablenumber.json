@@ -1,0 +1,24 @@
+{
+  "Dto": "ParticipationDTO",
+  "Case": "invalid-tablenumber",
+  "Args": {
+    "allowPlayerNumberAndName": false
+  },
+  "Payload": {
+    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "SectionLetters": "A",
+    "TableNumber": 0,
+    "Direction": 1,
+    "RoundNumber": 1,
+    "PlayerNumber": "1001",
+    "IsPlayerSwap": false,
+    "FirstName": null,
+    "LastName": null,
+    "CountryCode": null,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "Invalid TableNumber (0). The value must be greater than zero."
+  ]
+}

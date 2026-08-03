@@ -1,0 +1,53 @@
+{
+  "Dto": "TableDTO",
+  "Case": "round-sessionguid-mismatch",
+  "Args": {},
+  "Payload": {
+    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "SectionLetters": "A",
+    "TableNumber": 1,
+    "ConnectionMode": 0,
+    "KeepBridgematesAlive": false,
+    "Rounds": [
+      {
+        "SessionGuid": "B1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "SectionLetters": "A",
+        "TableNumber": 1,
+        "RoundNumber": 1,
+        "LowBoardNumber": 1,
+        "HighBoardNumber": 4,
+        "PairNS": 1,
+        "PairEW": 2,
+        "TeamNS": 0,
+        "TeamEW": 0,
+        "MatesTableSectionLetters": null,
+        "MatesTableTableNumber": 0,
+        "MatesTableRoundNumber": 0,
+        "Updated": false,
+        "ValidationMessages": null
+      },
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "SectionLetters": "A",
+        "TableNumber": 1,
+        "RoundNumber": 2,
+        "LowBoardNumber": 5,
+        "HighBoardNumber": 8,
+        "PairNS": 1,
+        "PairEW": 2,
+        "TeamNS": 0,
+        "TeamEW": 0,
+        "MatesTableSectionLetters": null,
+        "MatesTableTableNumber": 0,
+        "MatesTableRoundNumber": 0,
+        "Updated": false,
+        "ValidationMessages": null
+      }
+    ],
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "Round 1 on table \u0027A1\u0027 must have SessionGuid \u0027A1B2C3D4E5F60718293A4B5C6D7E8F90\u0027 but it is \u0027B1B2C3D4E5F60718293A4B5C6D7E8F90\u0027"
+  ]
+}

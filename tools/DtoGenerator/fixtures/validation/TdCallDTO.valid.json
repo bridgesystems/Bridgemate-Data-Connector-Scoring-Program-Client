@@ -1,0 +1,17 @@
+{
+  "Dto": "TdCallDTO",
+  "Case": "valid",
+  "Args": {},
+  "Payload": {
+    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "SectionLetters": "A",
+    "TableNumber": 1,
+    "RoundNumber": 1,
+    "Hour": 0,
+    "Minute": 0,
+    "Status": 1,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": true,
+  "ExpectedMessages": []
+}

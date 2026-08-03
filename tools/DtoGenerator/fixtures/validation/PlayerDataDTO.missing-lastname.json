@@ -1,0 +1,18 @@
+{
+  "Dto": "PlayerDataDTO",
+  "Case": "missing-lastname",
+  "Args": {},
+  "Payload": {
+    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "ClubId": null,
+    "PlayerNumber": "1001",
+    "FirstName": "First1001",
+    "LastName": null,
+    "CountryCode": null,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "The LastName is required."
+  ]
+}

@@ -282,7 +282,7 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                     var id = (participation.SessionGuid ?? "") + (participation.PlayerNumber ?? "");
                     if (string.IsNullOrEmpty(id) || id == (participation.SessionGuid ?? ""))
                         continue;
-                    if (PlayerData.Any(data => ((data.SessionGuid ?? "") + (data.PlayerNumber ?? "")) == id))
+                    if (PlayerData != null && PlayerData.Any(data => ((data.SessionGuid ?? "") + (data.PlayerNumber ?? "")) == id))
                         continue;
                     validationMessages.Add($"{nameof(ParticipationDTO)} '{participation.SessionGuid}-{participation.PlayerNumber}' " +
                                            $"has no corresponding {nameof(PlayerDataDTO)}");

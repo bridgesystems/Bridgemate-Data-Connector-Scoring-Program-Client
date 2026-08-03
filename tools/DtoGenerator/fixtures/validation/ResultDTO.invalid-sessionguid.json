@@ -1,0 +1,29 @@
+{
+  "Dto": "ResultDTO",
+  "Case": "invalid-sessionguid",
+  "Args": {},
+  "Payload": {
+    "SessionGuid": "abc",
+    "SectionLetters": "A",
+    "TableNumber": 1,
+    "RoundNumber": 1,
+    "BoardNumber": 1,
+    "ScoringDirection": 1,
+    "IsDeleted": false,
+    "PairNorthSouth": 1,
+    "PairEastWest": 2,
+    "DeclaringPair": 1,
+    "DeclarerDirection": 1,
+    "Level": 3,
+    "Denomination": 1,
+    "Stake": 0,
+    "TotalTricks": 9,
+    "LeadCardRank": 0,
+    "LeadCardSuit": 0,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "Invalid SessionGuid (abc). The value must be in capitals and be exactly"
+  ]
+}

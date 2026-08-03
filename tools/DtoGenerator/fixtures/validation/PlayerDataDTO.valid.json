@@ -1,0 +1,16 @@
+{
+  "Dto": "PlayerDataDTO",
+  "Case": "valid",
+  "Args": {},
+  "Payload": {
+    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "ClubId": null,
+    "PlayerNumber": "1001",
+    "FirstName": "First1001",
+    "LastName": "Last1001",
+    "CountryCode": null,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": true,
+  "ExpectedMessages": []
+}

@@ -1,0 +1,467 @@
+{
+  "Dto": "InitDTO",
+  "Case": "session-eventguid-mismatch",
+  "Args": {},
+  "Payload": {
+    "Commands": 1,
+    "EventGuid": "C1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "ClubId": "",
+    "AlternativeDataFolder": null,
+    "Sessions": [
+      {
+        "ScoringGroups": [
+          {
+            "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+            "ClubId": null,
+            "Sections": [
+              {
+                "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+                "ScoringGroupNumber": 1,
+                "Letters": "A",
+                "Name": "Section A",
+                "Winners": 1,
+                "GameType": 10,
+                "EWMoveBeforePlay": 0,
+                "MissingPair": 0,
+                "KeepBridgematesAlive": false,
+                "IsCombiSection": false,
+                "NorthSouthPairSectionLetters": null,
+                "EastWestPairSectionLetters": null,
+                "HasExplicitParticipations": false,
+                "Tables": [
+                  {
+                    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+                    "SectionLetters": "A",
+                    "TableNumber": 1,
+                    "ConnectionMode": 0,
+                    "KeepBridgematesAlive": false,
+                    "Rounds": [
+                      {
+                        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+                        "SectionLetters": "A",
+                        "TableNumber": 1,
+                        "RoundNumber": 1,
+                        "LowBoardNumber": 1,
+                        "HighBoardNumber": 4,
+                        "PairNS": 1,
+                        "PairEW": 2,
+                        "TeamNS": 0,
+                        "TeamEW": 0,
+                        "MatesTableSectionLetters": null,
+                        "MatesTableTableNumber": 0,
+                        "MatesTableRoundNumber": 0,
+                        "Updated": false,
+                        "ValidationMessages": null
+                      },
+                      {
+                        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+                        "SectionLetters": "A",
+                        "TableNumber": 1,
+                        "RoundNumber": 2,
+                        "LowBoardNumber": 5,
+                        "HighBoardNumber": 8,
+                        "PairNS": 1,
+                        "PairEW": 2,
+                        "TeamNS": 0,
+                        "TeamEW": 0,
+                        "MatesTableSectionLetters": null,
+                        "MatesTableTableNumber": 0,
+                        "MatesTableRoundNumber": 0,
+                        "Updated": false,
+                        "ValidationMessages": null
+                      }
+                    ],
+                    "ValidationMessages": null
+                  },
+                  {
+                    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+                    "SectionLetters": "A",
+                    "TableNumber": 2,
+                    "ConnectionMode": 0,
+                    "KeepBridgematesAlive": false,
+                    "Rounds": [
+                      {
+                        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+                        "SectionLetters": "A",
+                        "TableNumber": 2,
+                        "RoundNumber": 1,
+                        "LowBoardNumber": 1,
+                        "HighBoardNumber": 4,
+                        "PairNS": 3,
+                        "PairEW": 4,
+                        "TeamNS": 0,
+                        "TeamEW": 0,
+                        "MatesTableSectionLetters": null,
+                        "MatesTableTableNumber": 0,
+                        "MatesTableRoundNumber": 0,
+                        "Updated": false,
+                        "ValidationMessages": null
+                      },
+                      {
+                        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+                        "SectionLetters": "A",
+                        "TableNumber": 2,
+                        "RoundNumber": 2,
+                        "LowBoardNumber": 5,
+                        "HighBoardNumber": 8,
+                        "PairNS": 3,
+                        "PairEW": 4,
+                        "TeamNS": 0,
+                        "TeamEW": 0,
+                        "MatesTableSectionLetters": null,
+                        "MatesTableTableNumber": 0,
+                        "MatesTableRoundNumber": 0,
+                        "Updated": false,
+                        "ValidationMessages": null
+                      }
+                    ],
+                    "ValidationMessages": null
+                  }
+                ],
+                "ValidationMessages": null
+              }
+            ],
+            "ScoringGroupNumber": 1,
+            "ScoringMethod": 10,
+            "Name": "Group 1",
+            "IsDeleted": false,
+            "ValidationMessages": null
+          }
+        ],
+        "EventGuid": "C1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "Name": "Session A",
+        "Year": 2026,
+        "Month": 8,
+        "Day": 4,
+        "Hour": 19,
+        "Minute": 30,
+        "ShowInApp": false,
+        "EWReturnHome": false,
+        "PairsMoveAccrossField": false,
+        "ValidationMessages": null
+      },
+      {
+        "ScoringGroups": [
+          {
+            "SessionGuid": "B1B2C3D4E5F60718293A4B5C6D7E8F90",
+            "ClubId": null,
+            "Sections": [
+              {
+                "SessionGuid": "B1B2C3D4E5F60718293A4B5C6D7E8F90",
+                "ScoringGroupNumber": 2,
+                "Letters": "B",
+                "Name": "Section B",
+                "Winners": 1,
+                "GameType": 10,
+                "EWMoveBeforePlay": 0,
+                "MissingPair": 0,
+                "KeepBridgematesAlive": false,
+                "IsCombiSection": false,
+                "NorthSouthPairSectionLetters": null,
+                "EastWestPairSectionLetters": null,
+                "HasExplicitParticipations": false,
+                "Tables": [
+                  {
+                    "SessionGuid": "B1B2C3D4E5F60718293A4B5C6D7E8F90",
+                    "SectionLetters": "B",
+                    "TableNumber": 1,
+                    "ConnectionMode": 0,
+                    "KeepBridgematesAlive": false,
+                    "Rounds": [
+                      {
+                        "SessionGuid": "B1B2C3D4E5F60718293A4B5C6D7E8F90",
+                        "SectionLetters": "B",
+                        "TableNumber": 1,
+                        "RoundNumber": 1,
+                        "LowBoardNumber": 1,
+                        "HighBoardNumber": 4,
+                        "PairNS": 1,
+                        "PairEW": 2,
+                        "TeamNS": 0,
+                        "TeamEW": 0,
+                        "MatesTableSectionLetters": null,
+                        "MatesTableTableNumber": 0,
+                        "MatesTableRoundNumber": 0,
+                        "Updated": false,
+                        "ValidationMessages": null
+                      },
+                      {
+                        "SessionGuid": "B1B2C3D4E5F60718293A4B5C6D7E8F90",
+                        "SectionLetters": "B",
+                        "TableNumber": 1,
+                        "RoundNumber": 2,
+                        "LowBoardNumber": 5,
+                        "HighBoardNumber": 8,
+                        "PairNS": 1,
+                        "PairEW": 2,
+                        "TeamNS": 0,
+                        "TeamEW": 0,
+                        "MatesTableSectionLetters": null,
+                        "MatesTableTableNumber": 0,
+                        "MatesTableRoundNumber": 0,
+                        "Updated": false,
+                        "ValidationMessages": null
+                      }
+                    ],
+                    "ValidationMessages": null
+                  },
+                  {
+                    "SessionGuid": "B1B2C3D4E5F60718293A4B5C6D7E8F90",
+                    "SectionLetters": "B",
+                    "TableNumber": 2,
+                    "ConnectionMode": 0,
+                    "KeepBridgematesAlive": false,
+                    "Rounds": [
+                      {
+                        "SessionGuid": "B1B2C3D4E5F60718293A4B5C6D7E8F90",
+                        "SectionLetters": "B",
+                        "TableNumber": 2,
+                        "RoundNumber": 1,
+                        "LowBoardNumber": 1,
+                        "HighBoardNumber": 4,
+                        "PairNS": 3,
+                        "PairEW": 4,
+                        "TeamNS": 0,
+                        "TeamEW": 0,
+                        "MatesTableSectionLetters": null,
+                        "MatesTableTableNumber": 0,
+                        "MatesTableRoundNumber": 0,
+                        "Updated": false,
+                        "ValidationMessages": null
+                      },
+                      {
+                        "SessionGuid": "B1B2C3D4E5F60718293A4B5C6D7E8F90",
+                        "SectionLetters": "B",
+                        "TableNumber": 2,
+                        "RoundNumber": 2,
+                        "LowBoardNumber": 5,
+                        "HighBoardNumber": 8,
+                        "PairNS": 3,
+                        "PairEW": 4,
+                        "TeamNS": 0,
+                        "TeamEW": 0,
+                        "MatesTableSectionLetters": null,
+                        "MatesTableTableNumber": 0,
+                        "MatesTableRoundNumber": 0,
+                        "Updated": false,
+                        "ValidationMessages": null
+                      }
+                    ],
+                    "ValidationMessages": null
+                  }
+                ],
+                "ValidationMessages": null
+              }
+            ],
+            "ScoringGroupNumber": 2,
+            "ScoringMethod": 10,
+            "Name": "Group 2",
+            "IsDeleted": false,
+            "ValidationMessages": null
+          }
+        ],
+        "EventGuid": null,
+        "SessionGuid": "B1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "Name": "Session B",
+        "Year": 2026,
+        "Month": 8,
+        "Day": 4,
+        "Hour": 19,
+        "Minute": 30,
+        "ShowInApp": false,
+        "EWReturnHome": false,
+        "PairsMoveAccrossField": false,
+        "ValidationMessages": null
+      }
+    ],
+    "PlayerData": [
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "ClubId": null,
+        "PlayerNumber": "1001",
+        "FirstName": "First1001",
+        "LastName": "Last1001",
+        "CountryCode": null,
+        "ValidationMessages": null
+      },
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "ClubId": null,
+        "PlayerNumber": "1002",
+        "FirstName": "First1002",
+        "LastName": "Last1002",
+        "CountryCode": null,
+        "ValidationMessages": null
+      },
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "ClubId": null,
+        "PlayerNumber": "1003",
+        "FirstName": "First1003",
+        "LastName": "Last1003",
+        "CountryCode": null,
+        "ValidationMessages": null
+      },
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "ClubId": null,
+        "PlayerNumber": "1004",
+        "FirstName": "First1004",
+        "LastName": "Last1004",
+        "CountryCode": null,
+        "ValidationMessages": null
+      },
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "ClubId": null,
+        "PlayerNumber": "1005",
+        "FirstName": "First1005",
+        "LastName": "Last1005",
+        "CountryCode": null,
+        "ValidationMessages": null
+      },
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "ClubId": null,
+        "PlayerNumber": "1006",
+        "FirstName": "First1006",
+        "LastName": "Last1006",
+        "CountryCode": null,
+        "ValidationMessages": null
+      },
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "ClubId": null,
+        "PlayerNumber": "1007",
+        "FirstName": "First1007",
+        "LastName": "Last1007",
+        "CountryCode": null,
+        "ValidationMessages": null
+      },
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "ClubId": null,
+        "PlayerNumber": "1008",
+        "FirstName": "First1008",
+        "LastName": "Last1008",
+        "CountryCode": null,
+        "ValidationMessages": null
+      }
+    ],
+    "Participations": [
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "SectionLetters": "A",
+        "TableNumber": 1,
+        "Direction": 1,
+        "RoundNumber": 1,
+        "PlayerNumber": "1001",
+        "IsPlayerSwap": false,
+        "FirstName": null,
+        "LastName": null,
+        "CountryCode": null,
+        "ValidationMessages": null
+      },
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "SectionLetters": "A",
+        "TableNumber": 1,
+        "Direction": 2,
+        "RoundNumber": 1,
+        "PlayerNumber": "1002",
+        "IsPlayerSwap": false,
+        "FirstName": null,
+        "LastName": null,
+        "CountryCode": null,
+        "ValidationMessages": null
+      },
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "SectionLetters": "A",
+        "TableNumber": 1,
+        "Direction": 3,
+        "RoundNumber": 1,
+        "PlayerNumber": "1003",
+        "IsPlayerSwap": false,
+        "FirstName": null,
+        "LastName": null,
+        "CountryCode": null,
+        "ValidationMessages": null
+      },
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "SectionLetters": "A",
+        "TableNumber": 1,
+        "Direction": 4,
+        "RoundNumber": 1,
+        "PlayerNumber": "1004",
+        "IsPlayerSwap": false,
+        "FirstName": null,
+        "LastName": null,
+        "CountryCode": null,
+        "ValidationMessages": null
+      },
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "SectionLetters": "A",
+        "TableNumber": 2,
+        "Direction": 1,
+        "RoundNumber": 1,
+        "PlayerNumber": "1005",
+        "IsPlayerSwap": false,
+        "FirstName": null,
+        "LastName": null,
+        "CountryCode": null,
+        "ValidationMessages": null
+      },
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "SectionLetters": "A",
+        "TableNumber": 2,
+        "Direction": 2,
+        "RoundNumber": 1,
+        "PlayerNumber": "1006",
+        "IsPlayerSwap": false,
+        "FirstName": null,
+        "LastName": null,
+        "CountryCode": null,
+        "ValidationMessages": null
+      },
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "SectionLetters": "A",
+        "TableNumber": 2,
+        "Direction": 3,
+        "RoundNumber": 1,
+        "PlayerNumber": "1007",
+        "IsPlayerSwap": false,
+        "FirstName": null,
+        "LastName": null,
+        "CountryCode": null,
+        "ValidationMessages": null
+      },
+      {
+        "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "SectionLetters": "A",
+        "TableNumber": 2,
+        "Direction": 4,
+        "RoundNumber": 1,
+        "PlayerNumber": "1008",
+        "IsPlayerSwap": false,
+        "FirstName": null,
+        "LastName": null,
+        "CountryCode": null,
+        "ValidationMessages": null
+      }
+    ],
+    "Handrecords": null,
+    "Bridgemate2Settings": null,
+    "Bridgemate3Settings": null,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "The EventGuid (\u0027\u0027) of session \u0027Session B\u0027 (B1B2C3D4E5F60718293A4B5C6D7E8F90) are not the same."
+  ]
+}

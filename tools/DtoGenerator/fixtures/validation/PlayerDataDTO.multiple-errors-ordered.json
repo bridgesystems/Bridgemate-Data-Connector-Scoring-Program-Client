@@ -1,0 +1,20 @@
+{
+  "Dto": "PlayerDataDTO",
+  "Case": "multiple-errors-ordered",
+  "Args": {},
+  "Payload": {
+    "SessionGuid": "X",
+    "ClubId": null,
+    "PlayerNumber": null,
+    "FirstName": "First1001",
+    "LastName": "",
+    "CountryCode": null,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "The guid must be exactly 32 character long and can only contain capital A to F or digits 0 to 9.",
+    "The PlayerNumber is required.",
+    "The LastName is required."
+  ]
+}

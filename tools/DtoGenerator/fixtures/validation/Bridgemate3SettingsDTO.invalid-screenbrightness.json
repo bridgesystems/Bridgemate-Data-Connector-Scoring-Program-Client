@@ -1,0 +1,40 @@
+{
+  "Dto": "Bridgemate3SettingsDTO",
+  "Case": "invalid-screenbrightness",
+  "Args": {},
+  "Payload": {
+    "BM3ScreenBrightness": 0,
+    "BM3ScreenDimMode": 0,
+    "BM3ScreenOffMode": 0,
+    "BM3SleepMode": 0,
+    "BM3AudioVolume": 0,
+    "BM3Language": 0,
+    "BM3PINcode": "7431",
+    "BM3ConfirmNP": 0,
+    "BM3TDCall": 0,
+    "BM3ResultMethod": 0,
+    "BM3BoardResultReentry": 0,
+    "BM3LeadCardEntry": 0,
+    "BM3PlayerNumberEntry": 0,
+    "BM3PlayerNumberEntryDuringPlay": 0,
+    "BM3PlayerNumberMandatory": 0,
+    "BM3StartingPositions": 0,
+    "BM3PlayerView": 0,
+    "BM3Ranking": 0,
+    "BM3NextSeatings": 0,
+    "BM3ScoreRecap": 0,
+    "BM3ViewResults": 0,
+    "BM3SessionSummary": 0,
+    "BM3ScoreColum": 0,
+    "BMViewPercentages": 0,
+    "BM3ViewHandrecord": 0,
+    "BM3EnterHandrecord": 0,
+    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "SectionLetters": "A",
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "Invalid BM3ScreenBrightness (0). Value must be between 1 and 7"
+  ]
+}

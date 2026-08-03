@@ -1,0 +1,24 @@
+{
+  "Dto": "ParticipationDTO",
+  "Case": "invalid-direction-none",
+  "Args": {
+    "allowPlayerNumberAndName": false
+  },
+  "Payload": {
+    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "SectionLetters": "A",
+    "TableNumber": 1,
+    "Direction": 0,
+    "RoundNumber": 1,
+    "PlayerNumber": "1001",
+    "IsPlayerSwap": false,
+    "FirstName": null,
+    "LastName": null,
+    "CountryCode": null,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "Invalid Direction (None). The value must be between 1 and 4."
+  ]
+}

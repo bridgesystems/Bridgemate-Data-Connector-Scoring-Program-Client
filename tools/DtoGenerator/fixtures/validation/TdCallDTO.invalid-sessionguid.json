@@ -1,0 +1,19 @@
+{
+  "Dto": "TdCallDTO",
+  "Case": "invalid-sessionguid",
+  "Args": {},
+  "Payload": {
+    "SessionGuid": "g",
+    "SectionLetters": "A",
+    "TableNumber": 1,
+    "RoundNumber": 1,
+    "Hour": 0,
+    "Minute": 0,
+    "Status": 1,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "The guid must be exactly 32 character long and can only contain capital A to F or digits 0 to 9."
+  ]
+}

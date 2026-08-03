@@ -1,0 +1,24 @@
+{
+  "Dto": "SectionDTO",
+  "Case": "valid-null-tables",
+  "Args": {},
+  "Payload": {
+    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "ScoringGroupNumber": 1,
+    "Letters": "A",
+    "Name": "Section A",
+    "Winners": 1,
+    "GameType": 10,
+    "EWMoveBeforePlay": 0,
+    "MissingPair": 0,
+    "KeepBridgematesAlive": false,
+    "IsCombiSection": false,
+    "NorthSouthPairSectionLetters": null,
+    "EastWestPairSectionLetters": null,
+    "HasExplicitParticipations": false,
+    "Tables": null,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": true,
+  "ExpectedMessages": []
+}

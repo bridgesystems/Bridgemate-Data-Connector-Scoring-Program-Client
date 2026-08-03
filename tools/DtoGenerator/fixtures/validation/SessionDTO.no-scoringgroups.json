@@ -1,0 +1,26 @@
+{
+  "Dto": "SessionDTO",
+  "Case": "no-scoringgroups",
+  "Args": {
+    "forAdding": false
+  },
+  "Payload": {
+    "ScoringGroups": null,
+    "EventGuid": null,
+    "SessionGuid": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "Name": "Session A",
+    "Year": 2026,
+    "Month": 8,
+    "Day": 4,
+    "Hour": 19,
+    "Minute": 30,
+    "ShowInApp": false,
+    "EWReturnHome": false,
+    "PairsMoveAccrossField": false,
+    "ValidationMessages": null
+  },
+  "ExpectedValid": false,
+  "ExpectedMessages": [
+    "At least one scoringroup is required."
+  ]
+}
