@@ -286,6 +286,27 @@ namespace BridgeSystems.Bridgemate.DataConnectorClasses.SharedDTO
                     validationMessages.Add($"{nameof(ParticipationDTO)} '{participation.SessionGuid}-{participation.PlayerNumber}' " +
                                            $"has no corresponding {nameof(PlayerDataDTO)}");
                 }
+                var explicitSectionKeys = new HashSet<string>();
+                foreach (var session in Sessions ?? new SessionDTO[] { })
+                {
+                    foreach (var scoringGroup in session.ScoringGroups ?? new ScoringGroupDTO[] { })
+                    {
+                        foreach (var section in scoringGroup.Sections ?? new SectionDTO[] { })
+                        {
+                            if (section.HasExplicitParticipations)
+                                explicitSectionKeys.Add($"{section.SessionGuid}-{section.Letters}");
+                        }
+                    }
+                }
+                foreach (var participation in Participations.Where(p => p.RoundNumber > 1))
+                {
+                    if (!explicitSectionKeys.Contains($"{participation.SessionGuid}-{participation.SectionLetters}"))
+                    {
+                        validationMessages.Add($"{nameof(ParticipationDTO)} '{participation}' has {nameof(ParticipationDTO.RoundNumber)} {participation.RoundNumber}, " +
+                                               $"but section '{participation.SectionLetters}' does not have {nameof(SectionDTO.HasExplicitParticipations)} set. " +
+                                               $"Round numbers greater than one are only valid for sections with explicit participations.");
+                    }
+                }
             }
             if (Handrecords != null && Handrecords.Any())
             {
